@@ -1,0 +1,50 @@
+<div class="limiter">
+    <div class="form">
+        <div class="form-title">
+            <h3 class="text-white form-title-text">đăng nhập</h3>
+        </div>
+        <div class="form-content">
+            <form [formGroup]="loginForm" (ngSubmit)="signIn()" novalidate>
+                <h6 class="text-danger">{{msg}}</h6>
+                <div class="form-control custom">
+                    <span class="form-control-label">Tên đăng nhập</span>
+                    <input type="text" formControlName="username" class="form-control-input" placeholder="Enter your username" />
+                    <small class="text-danger" *ngIf="
+              loginForm.get('username')?.hasError('required') &&
+              loginForm.get('username')?.touched
+            ">Username is required</small
+          >
+         
+        </div>
+        <div class="form-control custom">
+          <span class="form-control-label">Mật khẩu</span>
+          <input
+            formControlName="password"
+            class="form-control-input"
+            placeholder="Enter your password"
+            type="password"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              loginForm.get('password')?.hasError('required') &&
+              loginForm.get('password')?.touched
+            "
+            >Password is required</small
+          >
+          
+        </div>
+        <div class="form-under">
+          <div class="form-under-remember">
+            <input class="form-under-remember-checkbox" type="checkbox" />
+            <span>Remember me</span>
+          </div>
+          <div class="form-under-forgot">
+            <span><a href="">Forgot password?</a></span>
+          </div>
+        </div>
+        <button type="submit"  [disabled]='loginForm.invalid'  class="form-button">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

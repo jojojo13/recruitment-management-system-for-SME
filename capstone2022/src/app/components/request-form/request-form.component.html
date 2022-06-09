@@ -1,0 +1,145 @@
+<h5>Tạo yêu cầu tuyển dụng</h5>
+<div class="link">
+  <h2>
+    <app-back-btn [link]="'/yeucautuyendung'"></app-back-btn>
+    Yêu cầu tuyển dụng
+  </h2>
+</div>
+<div class="content">
+  <form
+    novalidate
+    (ngSubmit)="onSubmit()"
+    [formGroup]="requestForm"
+    class="form"
+    action=""
+  >
+    <div class="left">
+      <div class="form-group">
+        <label for="requestID">Request ID</label>
+        <input type="text" class="form-control" value="1" disabled />
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('name')?.hasError('required') &&
+            requestForm.get('name')?.touched
+          "
+          >Please input name</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="name">Request Level</label>
+        <select name="dep" formControlName="requestLevel">
+          <option *ngFor="let level of dep" [ngValue]="level">
+            {{ level }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Dep/Proj Name</label>
+        <input type="text" class="form-control" />
+        <p class="poppup">Choose</p>
+      </div>
+      <div class="form-group">
+        <label for="name">Position</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="name">Quantity</label>
+        <input type="text" class="form-control" formControlName="quantity" />
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('quantity')?.hasError('required') &&
+            requestForm.get('quantity')?.touched
+          "
+          >Please input quantity</small
+        >
+        <small
+          class="text-danger"
+          *ngIf="requestForm.get('quantity')?.hasError('pattern')"
+          >Please input number greater than 0.</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="name">Office</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="name">Deadline</label>
+        <input
+          type="date"
+          [min]="today"
+          class="form-control"
+          formControlName="deadline"
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Roadmap</label>
+        <p><a href="">Popup Roadmap</a></p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="form-group">
+        <label for="name">Experience</label>
+        <input type="text" class="form-control" formControlName="experience" />
+      </div>
+      <div class="form-group">
+        <label for="name">Level</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="name">Budget</label>
+        <input type="text" class="form-control" formControlName="budget" />
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('budget')?.hasError('required') &&
+            requestForm.get('budget')?.touched
+          "
+          >Please input budget</small
+        >
+        <small
+          class="text-danger"
+          *ngIf="requestForm.get('budget')?.hasError('pattern')"
+          >Please input number greater than 0.</small
+        >
+      </div>
+      <div class="form-group">
+        <label for="name">Notes</label>
+        <textarea
+          class="form-control"
+          placeholder="Notes"
+          rows="4"
+          formControlName="notes"
+        ></textarea>
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('notes')?.hasError('required') &&
+            requestForm.get('notes')?.touched
+          "
+          >Please input notes</small
+        >
+      </div>
+      <div class="form-buttons">
+        <button class="form-buttons-items form-buttons-items--clear">
+          Clear all
+        </button>
+        <button class="form-buttons-items form-buttons-items--draft">
+          Save Draft
+        </button>
+        <button
+          type="submit"
+          class="form-buttons-items form-buttons-items--send"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<app-organization-poppup></app-organization-poppup>
