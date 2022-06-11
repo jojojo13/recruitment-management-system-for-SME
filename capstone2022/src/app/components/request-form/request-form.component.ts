@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-request-form',
@@ -10,14 +11,15 @@ export class RequestFormComponent implements OnInit {
   requestForm!: FormGroup;
   today:string=new Date().toISOString().slice(0, 10);
   dep=['Department','Project']
-  constructor(private fb: FormBuilder) {}
+  @ViewChild('orgPicker') orgPicker!: SwalComponent;
+  constructor(private fb: FormBuilder, public readonly swalTargets: SwalPortalTargets) {}
 
   ngOnInit(): void {
     this.requestForm = this.fb.group({
       requestID: [''],
       name: ['', [Validators.required]],
       requestLevel: [this.dep[0]],
-      dep: [],
+      dep: ['',[Validators.required]],
       position: [''],
       quantity: ['', [Validators.pattern('^[1-9][0-9]*$'),Validators.required]],
       office: [''],
@@ -30,5 +32,12 @@ export class RequestFormComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.requestForm.value)
+  }
+  showPopUp(){
+    this.orgPicker.fire();
+  }
+  getDataFromPopup(department:any){
+  
+    this.requestForm.controls['dep']?.setValue(department.name)
   }
 }

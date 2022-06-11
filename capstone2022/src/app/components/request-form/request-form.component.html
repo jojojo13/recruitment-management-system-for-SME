@@ -40,8 +40,16 @@
       </div>
       <div class="form-group">
         <label for="name">Dep/Proj Name</label>
-        <input type="text" class="form-control" />
-        <p class="poppup">Choose</p>
+        <input type="text" class="form-control" formControlName="dep" />
+        <p (click)="showPopUp()" class="poppup">Choose</p>
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('dep')?.hasError('required') &&
+            requestForm.get('dep')?.touched
+          "
+          >Please choose department</small
+        >
       </div>
       <div class="form-group">
         <label for="name">Position</label>
@@ -142,4 +150,10 @@
     </div>
   </form>
 </div>
-<app-organization-poppup></app-organization-poppup>
+<swal #orgPicker title="Choose department" width="500px" tabindex="100">
+  <div *swalPortal="swalTargets.content">
+    <app-pop-up-organizations
+      (department)="getDataFromPopup($event)"
+    ></app-pop-up-organizations>
+  </div>
+</swal>

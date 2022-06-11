@@ -21,7 +21,8 @@ import { GridComponent } from './components/grid/grid.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { OrganizationPoppupComponent } from './components/organization-poppup/organization-poppup.component';
 import { ToStringPipe } from './components/pipes/to-string.pipe';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PopUpOrganizationsComponent } from './components/pop-up-organizations/pop-up-organizations.component';
 
 
 @NgModule({
@@ -43,8 +44,7 @@ import { ToStringPipe } from './components/pipes/to-string.pipe';
     LoaderComponent,
     OrganizationPoppupComponent,
     ToStringPipe,
-    
-
+    PopUpOrganizationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +56,7 @@ import { ToStringPipe } from './components/pipes/to-string.pipe';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    SweetAlert2Module.forRoot(),
     
   ],
   providers: [],
