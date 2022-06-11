@@ -20,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { GridComponent } from './components/grid/grid.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { OrganizationPoppupComponent } from './components/organization-poppup/organization-poppup.component';
+import { ToStringPipe } from './components/pipes/to-string.pipe';
 
 
 
@@ -40,7 +41,9 @@ import { OrganizationPoppupComponent } from './components/organization-poppup/or
     CreateRequestPageComponent,
     GridComponent,
     LoaderComponent,
-    OrganizationPoppupComponent
+    OrganizationPoppupComponent,
+    ToStringPipe,
+    
 
   ],
   imports: [
@@ -53,6 +56,7 @@ import { OrganizationPoppupComponent } from './components/organization-poppup/or
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

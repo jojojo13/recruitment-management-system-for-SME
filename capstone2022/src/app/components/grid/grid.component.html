@@ -29,8 +29,8 @@
                 }
         "
       >
-        <tr #parent>
-          <td>{{ request.requestId }}</td>
+        <tr #clicked level="1">
+          <td>{{ request.code }}</td>
           <td>{{ request.name }}</td>
           <td>{{ request.requestLevel }}</td>
           <td>{{ request.department }}</td>
@@ -50,32 +50,37 @@
             </p>
           </td>
           <td>
-            <i (click)="toggleChildren(parent)" class="fas fa-angle-down"></i>
+            <i
+              (click)="toggleChildren(clicked, request.id, $event)"
+              class="fas fa-angle-down"
+            ></i>
           </td>
         </tr>
 
-        <tr *ngFor="let request of request.children" class="children">
-          <td>{{ request.requestId }}</td>
-          <td>{{ request.name }}</td>
-          <td>{{ request.requestLevel }}</td>
-          <td>{{ request.department }}</td>
-          <td>{{ request.position }}</td>
-          <td>{{ request.quantity }}</td>
-          <td>{{ request.createdOn }}</td>
-          <td>{{ request.deadline }}</td>
-          <td>{{ request.hrInchange }}</td>
-          <td>
-            <p
-              [ngClass]="{
-                pending: request.status === 'pending',
-                approved: request.status === 'approved'
-              }"
-            >
-              {{ request.status }}
-            </p>
-          </td>
-          <td></td>
-        </tr>
+        <!-- <ng-container >
+          <tr *ngFor="let rq of data.children" class="children active">
+            <td>{{ rq.code }}</td>
+            <td>{{ rq.name }}</td>
+            <td>{{ rq.department }}</td>
+            <td>{{ rq.position }}</td>
+            <td>{{ rq.quantity }}</td>
+            <td>{{ rq.createdOn }}</td>
+            <td>{{ rq.deadline }}</td>
+            <td>{{ rq.requestLevel }}</td>
+            <td>{{ rq.hrInchange }}</td>
+            <td>
+              <p
+                [ngClass]="{
+                  pending: rq.status === 'pending',
+                  approved: rq.status === 'approved'
+                }"
+              >
+                {{ rq.status }}
+              </p>
+            </td>
+            <td></td>
+          </tr>
+        </ng-container> -->
       </ng-container>
     </tbody>
   </table>
@@ -84,71 +89,3 @@
     (pageChange)="gty((page = $event))"
   ></pagination-controls>
 </ng-container>
-<!-- <app-loader [isLoaded]="isLoaded"></app-loader> -->
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Request ID</th>
-      <th>Name</th>
-      <th>Request level</th>
-      <th>Department</th>
-      <th>Position</th>
-      <th>Quantity</th>
-      <th>Created on</th>
-      <th>Deadline</th>
-      <th>HR in change</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let request of newList; let i = index">
-      <tr #parent>
-        <td>{{ request.requestId }}</td>
-        <td>{{ request.name }}</td>
-        <td>{{ request.requestLevel }}</td>
-        <td>{{ request.department }}</td>
-        <td>{{ request.position }}</td>
-        <td>{{ request.quantity }}</td>
-        <td>{{ request.createdOn }}</td>
-        <td>{{ request.deadline }}</td>
-        <td>{{ request.hrInchange }}</td>
-        <td>
-          <p
-            [ngClass]="{
-              pending: request.status === 'pending',
-              approved: request.status === 'approved'
-            }"
-          >
-            {{ request.status }}
-          </p>
-        </td>
-        <td>
-          <i class="fas fa-angle-down" (click)="toggleChildren(parent)"></i>
-        </td>
-      </tr>
-      <tr *ngFor="let request of request.children" class="children">
-        <td>{{ request.requestId }}</td>
-        <td>{{ request.name }}</td>
-        <td>{{ request.requestLevel }}</td>
-        <td>{{ request.department }}</td>
-        <td>{{ request.position }}</td>
-        <td>{{ request.quantity }}</td>
-        <td>{{ request.createdOn }}</td>
-        <td>{{ request.deadline }}</td>
-        <td>{{ request.hrInchange }}</td>
-        <td>
-          <p
-            [ngClass]="{
-              pending: request.status === 'pending',
-              approved: request.status === 'approved'
-            }"
-          >
-            {{ request.status }}
-          </p>
-        </td>
-        td
-      </tr>
-    </ng-container>
-  </tbody>
-</table> -->

@@ -24,6 +24,9 @@ table {
       width: 100px;
       i{
         cursor: pointer;
+        &:active{
+          cursor: wait;
+        }
       }
     }
   }
@@ -45,12 +48,15 @@ table {
   margin: 0;
 }
 .children{
-  display: none;
-  td:first-of-type{
-    text-align: right;
-  }
-  background-color: #D6D5F999;
-}
-.children.active{
   display: table-row;
+  background-color: #D6D5F999;
+  td{
+    &:first-of-type{
+      text-align: right;
+    }
+  }
+
+}
+.children.hide{
+  display: none;
 }
