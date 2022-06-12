@@ -176,9 +176,11 @@ export class GridComponent implements OnInit {
 
   createRow(parent: HTMLElement, response: any) {
     let list = response.data;
-
+    let redInRGB = 214;
     for (let rq of list) {
       let tr = this.renderer.createElement('tr');
+      let td0=this.renderer.createElement('td')
+      td0.innerHTML=`<input type="checkbox"  [value]="request.id">`
       let td = this.renderer.createElement('td');
       td.innerHTML = `${rq.code}`;
       let td2 = this.renderer.createElement('td');
@@ -199,14 +201,20 @@ export class GridComponent implements OnInit {
       td9.innerHTML = `${rq.hrInchange}`;
       let td10 = this.renderer.createElement('td');
       let p = this.renderer.createElement('p');
-      p.innerHTML = `${rq.status}`;
+      let text = rq.status.toLowerCase();
+      if(rq.rank>2){
+        redInRGB+=25;
+      }
+      tr.style.backgroundColor =`rgb(${redInRGB},249,213)`
+
+      p.innerHTML = `${text}`;
       if (rq.status == 'pending') {
         this.addClass(p, 'pending');
       }
-      if (rq.status == 'approve') {
+      if (rq.status == 'Accept') {
         this.addClass(p, 'approve');
       }
-      if (rq.status == 'reject') {
+      if (rq.status == 'Reject') {
         this.addClass(p, 'reject');
       }
       td10.appendChild(p);
@@ -219,6 +227,7 @@ export class GridComponent implements OnInit {
       this.addClass(i, 'fas');
       this.addClass(i, 'fa-angle-down');
       td11.appendChild(i);
+      tr.appendChild(td0)
       tr.appendChild(td);
       tr.appendChild(td2);
       tr.appendChild(td3);

@@ -15,4 +15,8 @@ export class RequestService {
     let params = new HttpParams().set('parentId', parentID);
     return this.__http.post(this.baseUrl+`/GetChildRequestById?parentId=${parentID}`,{params:params})
   }
+  getAutoGenerateCODE(table:string,code:string){
+    let obj={'table':table,'code':code}
+    return this.__http.post('https://localhost:44376/api/CommonAPI/autoGenCode3character',{table,code})
+  }
 }

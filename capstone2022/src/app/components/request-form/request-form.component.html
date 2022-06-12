@@ -15,8 +15,8 @@
   >
     <div class="left">
       <div class="form-group">
-        <label for="requestID">Request ID</label>
-        <input type="text" class="form-control" value="1" disabled />
+        <label for="requestID">Request Code</label>
+        <input type="text"  class="form-control"  formControlName="requestCode"  />
       </div>
       <div class="form-group">
         <label for="name">Name</label>
@@ -31,9 +31,9 @@
         >
       </div>
       <div class="form-group">
-        <label for="name">Request Level</label>
-        <select name="dep" formControlName="requestLevel">
-          <option *ngFor="let level of dep" [ngValue]="level">
+        <label for="name">Type</label>
+        <select style="font-family: Poppins;" name="dep" formControlName="type">
+          <option  style="font-family: Poppins;"  *ngFor="let level of type" [ngValue]="level">
             {{ level }}
           </option>
         </select>
@@ -53,7 +53,19 @@
       </div>
       <div class="form-group">
         <label for="name">Position</label>
-        <input type="text" class="form-control" />
+        <select name="dep" formControlName="position">
+          <option *ngFor="let position of listPosition" [ngValue]="position">
+            {{ position.name }}
+          </option>
+        </select>
+        <small
+        class="text-danger"
+        *ngIf="
+          requestForm.get('position')?.hasError('required') &&
+          requestForm.get('position')?.touched
+        "
+        >Please choose position</small
+      >
       </div>
       <div class="form-group">
         <label for="name">Quantity</label>

@@ -17,14 +17,36 @@ table {
     th {
       text-align: center;
       height: 60px;
+      &:last-of-type {
+        width: 40px;
+      }
+      &:first-of-type {
+        width: 40px;
+      }
     }
     td {
+      input {
+        &:checked + label:before {
+          content: "";
+          display: inline-block;
+          width: 1px;
+          height: 5px;
+          border: solid rgb(31, 133, 17);
+          border-width: 0 3px 3px 0;
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          border-radius: 0px;
+          margin: 0px 15px 5px 5px;
+        }
+      }
+
       text-align: center;
       height: 60px;
       width: 100px;
-      i{
+      i {
         cursor: pointer;
-        &:active{
+        &:active {
           cursor: wait;
         }
       }
@@ -35,28 +57,36 @@ table {
   position: absolute;
   right: 20px;
 }
-.approved{
-  background-color: #36CA68;
+.approve {
+  background-color: #36ca68;
   border-radius: 10px;
   color: #fff;
   margin: 0;
+  padding: 2px;
 }
-.pending{
-  background-color: #FFAA01;
+.pending {
+  background-color: #ffaa01;
+  border-radius: 10px;
+  color: #fff;
+  padding: 2px;
+  margin: 0;
+}
+.reject {
+  background-color: #eb4962;
   border-radius: 10px;
   color: #fff;
   margin: 0;
+  padding: 2px;
 }
-.children{
+.children {
   display: table-row;
-  background-color: #D6D5F999;
-  td{
-    &:first-of-type{
+  background-color: #d6d5f999;
+  td {
+    &:first-of-type {
       text-align: right;
     }
   }
-
 }
-.children.hide{
+.children.hide {
   display: none;
 }

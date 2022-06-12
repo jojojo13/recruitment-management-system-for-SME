@@ -4,6 +4,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>Request ID</th>
         <th>Name</th>
         <th>Request level</th>
@@ -30,6 +31,7 @@
         "
       >
         <tr #clicked level="1">
+          <td><input type="checkbox"  [value]="request.id"></td>
           <td>{{ request.code }}</td>
           <td>{{ request.name }}</td>
           <td>{{ request.requestLevel }}</td>
@@ -43,10 +45,11 @@
             <p
               [ngClass]="{
                 pending: request.status === 'pending',
-                approved: request.status === 'approved'
+                approved: request.status === 'Accept',
+                reject: request.status === 'Reject'
               }"
             >
-              {{ request.status }}
+              {{ request.status |lowercase}}
             </p>
           </td>
           <td>

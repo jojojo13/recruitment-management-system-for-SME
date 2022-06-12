@@ -37,6 +37,9 @@ h2 {
   padding: 0 100px 40px 100px;
   width: 980px;
   display: flex;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
   position: relative;
   .left {
     margin-right: 80px;
@@ -61,11 +64,11 @@ h2 {
       &--clear {
         background-color: #dc3545;
       }
-      &--draft{
-        background-color: #354EA0;
+      &--draft {
+        background-color: #354ea0;
       }
-      &--send{
-        background-color: #27AE60;
+      &--send {
+        background-color: #27ae60;
       }
     }
   }
@@ -76,17 +79,18 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     width: 420px;
-    .poppup{
+    .poppup {
       position: absolute;
       right: 30px;
-      color: #4057F9;
+      top: 5px;
+      color: #4057f9;
       cursor: pointer;
     }
     &:last-of-type {
       align-items: initial;
       margin-bottom: 0;
     }
-    small{
+    small {
       margin-left: 122px;
       margin-top: 5px;
     }
@@ -118,3 +122,9 @@ h2 {
     padding: 5px 0 5px 15px;
   }
 }
+input[type="text"],select option {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+}
+
