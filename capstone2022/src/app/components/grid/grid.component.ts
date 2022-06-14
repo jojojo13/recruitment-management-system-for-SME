@@ -1,12 +1,19 @@
+import { Router } from '@angular/router';
 import { RequestService } from './../../services/request-service/request.service';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
   fake = {
     data: [
       {
@@ -65,6 +72,7 @@ export class GridComponent implements OnInit {
       },
     ],
   };
+  fn: any;
   requestList!: any;
   itemsPerPage = 2;
   totalItems!: number;
@@ -73,10 +81,19 @@ export class GridComponent implements OnInit {
 
   constructor(
     public requestService: RequestService,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private router: Router
+  ) {
+    router.events.subscribe((val: any) => {
+      document.removeEventListener('click', (e) => {}, false);
+    });
+  }
+  ngOnDestroy(): void {
+    document.removeEventListener('click', this.fn, false);
+  }
 
   ngOnInit() {
+    this.unSelectedRequest();
     this.loadData(0);
   }
 
@@ -85,9 +102,9 @@ export class GridComponent implements OnInit {
       .getRequestByPaging(pageIndex, this.itemsPerPage)
       .subscribe((response: any) => {
         this.requestList = response.data;
-        console.log(response.data);
         this.totalItems = response.totalItem;
         this.isLoaded = true;
+        console.log(this.requestList)
       });
   }
 
@@ -106,11 +123,22 @@ export class GridComponent implements OnInit {
     while (
       next &&
       next.classList.contains('children') &&
-      nextSiblingLevel == clickedLevel + 1
+      nextSiblingLevel > clickedLevel
     ) {
-      next?.classList.toggle('hide'); // check for existence and class
-      next = next.nextElementSibling; // if it exists, but the class does not, move to the next element and repeat.
-      nextSiblingLevel = parseInt(next?.getAttribute('level') as string);
+      if (nextSiblingLevel == clickedLevel + 1) {
+        next?.classList.toggle('hide'); // check for existence and class
+        next = next.nextElementSibling; // if it exists, but the class does not, move to the next element and repeat.
+        nextSiblingLevel = parseInt(next?.getAttribute('level') as string);
+      } else {
+        if (!next.classList.contains('hide')) {
+          next?.classList.toggle('hide'); // check for existence and class
+          next = next.nextElementSibling; // if it exists, but the class does not, move to the next element and repeat.
+          nextSiblingLevel = parseInt(next?.getAttribute('level') as string);
+        } else {
+          next = next.nextElementSibling; // if it exists, but the class does not, move to the next element and repeat.
+          nextSiblingLevel = parseInt(next?.getAttribute('level') as string);
+        }
+      }
     }
   }
 
@@ -176,11 +204,12 @@ export class GridComponent implements OnInit {
 
   createRow(parent: HTMLElement, response: any) {
     let list = response.data;
-    let redInRGB = 214;
+    let nodeArr = [];
     for (let rq of list) {
+      let redInRGB = 214;
       let tr = this.renderer.createElement('tr');
-      let td0=this.renderer.createElement('td')
-      td0.innerHTML=`<input type="checkbox"  [value]="request.id">`
+      let td0 = this.renderer.createElement('td');
+      td0.innerHTML = `<input type="checkbox"  [value]="request.id">`;
       let td = this.renderer.createElement('td');
       td.innerHTML = `${rq.code}`;
       let td2 = this.renderer.createElement('td');
@@ -202,10 +231,10 @@ export class GridComponent implements OnInit {
       let td10 = this.renderer.createElement('td');
       let p = this.renderer.createElement('p');
       let text = rq.status.toLowerCase();
-      if(rq.rank>2){
-        redInRGB+=25;
+      if (rq.rank > 2) {
+        redInRGB += rq.rank * 8;
       }
-      tr.style.backgroundColor =`rgb(${redInRGB},249,213)`
+      tr.style.backgroundColor = `rgb(${redInRGB},249,213)`;
 
       p.innerHTML = `${text}`;
       if (rq.status == 'pending') {
@@ -227,7 +256,7 @@ export class GridComponent implements OnInit {
       this.addClass(i, 'fas');
       this.addClass(i, 'fa-angle-down');
       td11.appendChild(i);
-      tr.appendChild(td0)
+      tr.appendChild(td0);
       tr.appendChild(td);
       tr.appendChild(td2);
       tr.appendChild(td3);
@@ -239,9 +268,46 @@ export class GridComponent implements OnInit {
       tr.appendChild(td9);
       tr.appendChild(td10);
       tr.appendChild(td11);
-      this.insertAfter(tr, parent);
+      nodeArr.push(tr);
+      this.renderer.listen(tr, 'click', (evt) => {
+        this.getSelectedRQ(rq, tr);
+      });
       this.addClass(tr, 'children');
       this.renderer.setAttribute(tr, 'level', rq.rank);
+      for (let i = 0; i < tr.childNodes - 1; i++) {
+        this.renderer.setAttribute(tr[i], 'level', rq.rank);
+      }
     }
+    this.insertListNodeToElement(nodeArr, parent);
+  }
+
+  insertListNodeToElement(list: Array<HTMLElement>, parent: HTMLElement) {
+    for (let ele of list) {
+      this.insertAfter(ele, parent);
+      parent = ele;
+    }
+  }
+  getSelectedRQ(request: any, clicked: any) {
+    this.requestService.selectedRequest = request;
+    this.clearClass();
+    clicked.classList.add('selected');
+  }
+  clearClass() {
+    let tr: any = document.querySelectorAll('tbody tr');
+    for (let i = 0; i < tr.length; i++) {
+      let item = tr[i];
+      item.classList.remove('selected');
+    }
+  }
+  clearSelectedRequest = (e: MouseEvent) => {
+    let target = (e.target as HTMLElement).parentElement;
+    if (!target?.hasAttribute('level')) {
+      this.requestService.resetDataSelectedRq();
+      this.clearClass();
+    }
+  };
+  unSelectedRequest() {
+    this.fn = this.clearSelectedRequest.bind(this);
+    document.addEventListener('click', this.fn, false);
   }
 }

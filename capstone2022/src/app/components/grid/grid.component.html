@@ -7,7 +7,7 @@
         <th></th>
         <th>Request ID</th>
         <th>Name</th>
-        <th>Request level</th>
+        <th>Type</th>
         <th>Department</th>
         <th>Position</th>
         <th>Quantity</th>
@@ -30,18 +30,18 @@
                 }
         "
       >
-        <tr #clicked level="1">
-          <td><input type="checkbox"  [value]="request.id"></td>
-          <td>{{ request.code }}</td>
-          <td>{{ request.name }}</td>
-          <td>{{ request.requestLevel }}</td>
-          <td>{{ request.department }}</td>
-          <td>{{ request.position }}</td>
-          <td>{{ request.quantity }}</td>
-          <td>{{ request.createdOn }}</td>
-          <td>{{ request.deadline }}</td>
-          <td>{{ request.hrInchange }}</td>
-          <td>
+        <tr #clicked level="1" (click)="getSelectedRQ(request, clicked)">
+          <td level="1"><input type="checkbox" [value]="request.id" /></td>
+          <td level="1">{{ request.code }}</td>
+          <td level="1">{{ request.name }}</td>
+          <td level="1">{{ request.requestLevel }}</td>
+          <td level="1">{{ request.department }}</td>
+          <td level="1">{{ request.position }}</td>
+          <td level="1">{{ request.quantity }}</td>
+          <td level="1">{{ request.createdOn }}</td>
+          <td level="1">{{ request.deadline }}</td>
+          <td level="1">{{ request.hrInchange }}</td>
+          <td level="1">
             <p
               [ngClass]="{
                 pending: request.status === 'pending',
@@ -49,7 +49,7 @@
                 reject: request.status === 'Reject'
               }"
             >
-              {{ request.status |lowercase}}
+              {{ request.status | lowercase }}
             </p>
           </td>
           <td>
@@ -59,31 +59,6 @@
             ></i>
           </td>
         </tr>
-
-        <!-- <ng-container >
-          <tr *ngFor="let rq of data.children" class="children active">
-            <td>{{ rq.code }}</td>
-            <td>{{ rq.name }}</td>
-            <td>{{ rq.department }}</td>
-            <td>{{ rq.position }}</td>
-            <td>{{ rq.quantity }}</td>
-            <td>{{ rq.createdOn }}</td>
-            <td>{{ rq.deadline }}</td>
-            <td>{{ rq.requestLevel }}</td>
-            <td>{{ rq.hrInchange }}</td>
-            <td>
-              <p
-                [ngClass]="{
-                  pending: rq.status === 'pending',
-                  approved: rq.status === 'approved'
-                }"
-              >
-                {{ rq.status }}
-              </p>
-            </td>
-            <td></td>
-          </tr>
-        </ng-container> -->
       </ng-container>
     </tbody>
   </table>

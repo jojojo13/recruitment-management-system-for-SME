@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+}
 table {
   width: 100%;
   font-size: 14px;
@@ -18,7 +22,7 @@ table {
       text-align: center;
       height: 60px;
       &:last-of-type {
-        width: 40px;
+        width: 20px;
       }
       &:first-of-type {
         width: 40px;
@@ -40,7 +44,7 @@ table {
           margin: 0px 15px 5px 5px;
         }
       }
-
+      vertical-align: middle;
       text-align: center;
       height: 60px;
       width: 100px;
@@ -53,6 +57,16 @@ table {
     }
   }
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// @font-face {
+//   font-family: 'Poppins';
+//   src: url("../../../assets/poppins/Poppins-Regular.otf");
+// }
+
 .pagi {
   position: absolute;
   right: 20px;
@@ -61,22 +75,28 @@ table {
   background-color: #36ca68;
   border-radius: 10px;
   color: #fff;
-  margin: 0;
-  padding: 2px;
+  margin: auto;
+  padding: 0;
+  width: 91px;
+  height: 22px;
 }
 .pending {
   background-color: #ffaa01;
   border-radius: 10px;
   color: #fff;
-  padding: 2px;
-  margin: 0;
+  padding: 0;
+  margin: auto;
+  width: 91px;
+  height: 22px;
 }
 .reject {
   background-color: #eb4962;
   border-radius: 10px;
   color: #fff;
-  margin: 0;
-  padding: 2px;
+  margin: auto;
+  padding: 0;
+  width: 91px;
+  height: 22px;
 }
 .children {
   display: table-row;
@@ -90,3 +110,53 @@ table {
 .children.hide {
   display: none;
 }
+.rowtable {
+  display: table-row-group;
+}
+.selected{
+  background-color: #36ca68 !important;
+}
+// .table {
+//   font-family: "Poppins";
+//   font-style: normal;
+//   display: table;
+//   width: 100%;
+//   text-align: center;
+//   p {
+//     margin: 0;
+//     padding: 0;
+//   }
+//   &-head {
+//     display: table-header-group;
+//     font-weight: 600;
+//     font-size: 12px;
+//     p {
+//       display: table-cell;
+//       border-bottom: 1px solid #afafaf;
+//     }
+//   }
+//   &-body {
+//     font-weight: 400;
+//     font-size: 13px;
+//     display: table-row-group;
+//     &-row {
+//       display: table-row;
+//       height: 47px;
+//       p {
+//         display: table-cell;
+//         border-bottom: 0.5px solid #afafaf;
+//         vertical-align: middle;
+//         width: 120px;
+//         &:last-of-type {
+//           width: 20px;
+//           cursor: pointer;
+//         }
+//         span {
+//           display: inline-block;
+//           width: 91px;
+//           height: 22px;
+//         }
+//       }
+//     }
+//   }
+// }

@@ -1,10 +1,21 @@
-<h5>Xem yêu cầu tuyển dụng</h5>
-<div class="link" (click)="navigate()">
-  <h2>
-    <app-back-btn [link]="'/yeucautuyendung'"></app-back-btn>
-    Yêu cầu tuyển dụng
-  </h2>
+<div class="content">
+  <h5>Recruitment Request</h5>
+  <div class="top">
+    <div class="link" (click)="navigate()">
+      <h2>
+        <app-back-btn [link]="'/yeucautuyendung'"></app-back-btn>
+        View all request
+      </h2>
+    </div>
+    <div class="action">
+      <app-add-btn></app-add-btn>
+    </div>
+  
+  </div>
+  
+  
+  <app-navigate-bar></app-navigate-bar>
+
+  <app-grid></app-grid>
 </div>
 
-<app-navigate-bar></app-navigate-bar>
-<app-grid></app-grid>

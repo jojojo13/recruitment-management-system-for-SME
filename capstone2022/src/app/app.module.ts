@@ -23,6 +23,7 @@ import { OrganizationPoppupComponent } from './components/organization-poppup/or
 import { ToStringPipe } from './components/pipes/to-string.pipe';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PopUpOrganizationsComponent } from './components/pop-up-organizations/pop-up-organizations.component';
+import { AddBtnComponent } from './components/add-btn/add-btn.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { PopUpOrganizationsComponent } from './components/pop-up-organizations/p
     OrganizationPoppupComponent,
     ToStringPipe,
     PopUpOrganizationsComponent,
+    AddBtnComponent,
   ],
   imports: [
     BrowserModule,

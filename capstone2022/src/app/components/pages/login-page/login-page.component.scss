@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: center;
 }
+@font-face {
+  font-family: 'Poppins';
+  src: url("../../../../assets/poppins/Poppins-Regular.otf") format("truetype");
+}
 .form {
   width: 670px;
   height: 600px;

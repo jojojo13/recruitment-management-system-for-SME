@@ -1,8 +1,8 @@
-<h5>Tạo yêu cầu tuyển dụng</h5>
-<div class="link">
+<h5>Recruitment Request</h5>
+<div class="link" (click)="navigate()">
   <h2>
     <app-back-btn [link]="'/yeucautuyendung'"></app-back-btn>
-    Yêu cầu tuyển dụng
+    Create new request
   </h2>
 </div>
 <div class="content">
@@ -16,7 +16,7 @@
     <div class="left">
       <div class="form-group">
         <label for="requestID">Request Code</label>
-        <input type="text"  class="form-control"  formControlName="requestCode"  />
+        <input type="text" class="form-control" formControlName="requestCode" />
       </div>
       <div class="form-group">
         <label for="name">Name</label>
@@ -32,9 +32,13 @@
       </div>
       <div class="form-group">
         <label for="name">Type</label>
-        <select style="font-family: Poppins;" name="dep" formControlName="type">
-          <option  style="font-family: Poppins;"  *ngFor="let level of type" [ngValue]="level">
-            {{ level }}
+        <select style="font-family: Poppins" name="dep" formControlName="type">
+          <option
+            style="font-family: Poppins"
+            *ngFor="let type of types"
+            [ngValue]="type.id"
+          >
+            {{ type.name }}
           </option>
         </select>
       </div>
@@ -52,20 +56,37 @@
         >
       </div>
       <div class="form-group">
+        <label for="name">Projects</label>
+        <select name="dep" formControlName="projects">
+          <option *ngFor="let project of projects" [ngValue]="project.id">
+            {{ project.name }}
+          </option>
+        </select>
+        <small
+          class="text-danger"
+          *ngIf="
+            requestForm.get('projects')?.hasError('required') &&
+            requestForm.get('projects')?.touched
+          "
+          >Please choose projects</small
+        >
+       
+      </div>
+      <div class="form-group">
         <label for="name">Position</label>
-        <select name="dep" formControlName="position">
-          <option *ngFor="let position of listPosition" [ngValue]="position">
+        <select name="position" formControlName="position">
+          <option *ngFor="let position of listPosition" [ngValue]="position.id">
             {{ position.name }}
           </option>
         </select>
         <small
-        class="text-danger"
-        *ngIf="
-          requestForm.get('position')?.hasError('required') &&
-          requestForm.get('position')?.touched
-        "
-        >Please choose position</small
-      >
+          class="text-danger"
+          *ngIf="
+            requestForm.get('position')?.hasError('required') &&
+            requestForm.get('position')?.touched
+          "
+          >Please choose position</small
+        >
       </div>
       <div class="form-group">
         <label for="name">Quantity</label>
@@ -86,7 +107,12 @@
       </div>
       <div class="form-group">
         <label for="name">Office</label>
-        <input type="text" class="form-control" />
+        <input
+          type="text"
+          class="form-control"
+          [value]=""
+          formControlName="office"
+        />
       </div>
       <div class="form-group">
         <label for="name">Deadline</label>
@@ -109,25 +135,13 @@
       </div>
       <div class="form-group">
         <label for="name">Level</label>
-        <input type="text" class="form-control" />
+        <select name="level" formControlName="level">
+          <option *ngFor="let level of levels" [ngValue]="level.id">
+            {{ level.name }}
+          </option>
+        </select>
       </div>
-      <div class="form-group">
-        <label for="name">Budget</label>
-        <input type="text" class="form-control" formControlName="budget" />
-        <small
-          class="text-danger"
-          *ngIf="
-            requestForm.get('budget')?.hasError('required') &&
-            requestForm.get('budget')?.touched
-          "
-          >Please input budget</small
-        >
-        <small
-          class="text-danger"
-          *ngIf="requestForm.get('budget')?.hasError('pattern')"
-          >Please input number greater than 0.</small
-        >
-      </div>
+
       <div class="form-group">
         <label for="name">Notes</label>
         <textarea
@@ -146,7 +160,7 @@
         >
       </div>
       <div class="form-buttons">
-        <button class="form-buttons-items form-buttons-items--clear">
+        <button (click)="clearInputField()" type="button"class="form-buttons-items form-buttons-items--clear">
           Clear all
         </button>
         <button class="form-buttons-items form-buttons-items--draft">

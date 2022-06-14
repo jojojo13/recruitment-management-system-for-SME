@@ -12,7 +12,7 @@ export class ViewRequestPageComponent implements OnInit {
   ngOnInit(): void {}
 
   navigate() {
-    console.log('hehe')
+ 
     this.router.navigateByUrl('/yeucautuyendung');
   }
 }

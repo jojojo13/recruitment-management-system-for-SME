@@ -12,4 +12,6 @@ export class AuthorizeService {
   signIn(account:Account){
     return this._http.post('https://localhost:44376/api/AccountAPI/GetAccount',account)
   }
+  
+
 }

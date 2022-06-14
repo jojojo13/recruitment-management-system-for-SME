@@ -1,8 +1,13 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 h5 {
   font-family: "Poppins";
   font-style: normal;
@@ -10,9 +15,6 @@ h5 {
   font-size: 24px;
   margin-left: 9px;
   margin-bottom: 10px;
-  /* identical to box height, or 233% */
-
-  font-feature-settings: "salt" on, "liga" off;
 }
 h2 {
   font-family: "Poppins";
@@ -34,7 +36,7 @@ h2 {
   margin-top: 15px;
 }
 .form {
-  padding: 0 100px 40px 100px;
+  padding: 0 60px 40px 60px;
   width: 980px;
   display: flex;
   font-family: "Poppins";
@@ -42,7 +44,7 @@ h2 {
   font-weight: 300;
   position: relative;
   .left {
-    margin-right: 80px;
+    margin-right: 60px;
   }
   &-buttons {
     position: absolute;
@@ -91,7 +93,7 @@ h2 {
       margin-bottom: 0;
     }
     small {
-      margin-left: 122px;
+      margin-left: 140px;
       margin-top: 5px;
     }
     select {
@@ -113,7 +115,7 @@ h2 {
       font-weight: 600;
       font-size: 15px;
       margin-right: 20px;
-      width: 100px;
+      width: 120px;
     }
   }
   &-control {

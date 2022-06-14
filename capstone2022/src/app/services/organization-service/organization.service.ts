@@ -16,4 +16,8 @@ export class OrganizationService {
   getPositionByOrgID(id:number){
     return this.__http.post(`https://localhost:44376/api/ProfileAPI/GetListPositionByOrgID?ID=${id}`,[])
   }
+
+  getOrgByID(id:number){
+    return this.__http.post(this.baseUrl+`/getOrgByID?Id=${id}`,{})
+  }
 }

@@ -1,18 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-    font-family: Poppins-Bold;
-    src: url('./assets/poppins/Poppins-Bold.ttf');
-  }
+
   @font-face {
-    font-family: Poppins-Regular;
-    src: url('./assets/poppins/Poppins-Light.ttf');
+    font-family: 'Poppins';
+    src: url('assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf');
   }
 h1,h2,h3,h4,h5,h6{
     font-family: Arial, Helvetica, sans-serif;
 }
+html {
+  scroll-behavior: smooth;
+} 
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Poppins';
 }
 .ngx-pagination .current{
   background-color: #354EA0 !important;
+}
+.swal2-popup {
+  font-size: 14px !important;
+  font-family: 'Poppins';
 }

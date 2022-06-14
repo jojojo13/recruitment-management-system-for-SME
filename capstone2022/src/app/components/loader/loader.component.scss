@@ -1,22 +1,28 @@
-.loading{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+@font-face {
+  font-family: "Poppins";
+  src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .loader {
-  border: 6px solid #DEDEDE;
+  border: 6px solid #dedede;
   border-radius: 50%;
-  border-top: 6px solid #AFAFAF;
+  border-top: 6px solid #afafaf;
   width: 60px;
   height: 60px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
-p{
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px; 
+h6 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* Safari */

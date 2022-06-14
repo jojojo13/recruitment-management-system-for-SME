@@ -28,9 +28,9 @@ export class LoginPageComponent implements OnInit {
     this.account=this.loginForm.value
     console.log(this.account)
     this.auth.signIn(this.account).subscribe((data:any)=>{
-     console.log('dang call data')
-alert('da dang nhap duoc rui')
       console.log(data)
+      localStorage.setItem('token',data.data)
+      
     },(err:any)=>{
       console.log(err)
       
