@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.content {
+  .form {
+    padding: 0 60px 40px 60px;
+    width: 980px;
+    display: flex;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    position: relative;
+    .left {
+      margin-right: 60px;
+    }
+    &-buttons {
+      position: absolute;
+      bottom: 40px;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+      &-items {
+        height: 32px;
+        width: 110px;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        &--clear {
+          background-color: #dc3545;
+        }
+        &--draft {
+          background-color: #354ea0;
+        }
+        &--send {
+          background-color: #27ae60;
+        }
+      }
+    }
+    &-group {
+      display: flex;
+      position: relative;
+      margin-bottom: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 420px;
+      .poppup {
+        position: absolute;
+        right: 30px;
+        top: 5px;
+        color: #4057f9;
+        cursor: pointer;
+      }
+      &:last-of-type {
+        align-items: initial;
+        margin-bottom: 0;
+      }
+      small {
+        margin-left: 140px;
+        margin-top: 5px;
+      }
+      select {
+        cursor: pointer;
+        width: 280px;
+        padding: 8px 0 8px 10px;
+        border-radius: 10px;
+        border: 1px solid rgb(197, 197, 197);
+        option {
+          border-radius: 10px;
+          padding: 5px 0 5px 15px;
+          width: 100px;
+        }
+      }
+      label {
+        color: #565656;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        margin-right: 20px;
+        width: 120px;
+      }
+    }
+    &-control {
+      width: 280px;
+      border-radius: 10px;
+      padding: 5px 0 5px 15px;
+    }
+  }
+}
+input[type="text"],
+select option {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+}

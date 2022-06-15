@@ -24,6 +24,16 @@ import { ToStringPipe } from './components/pipes/to-string.pipe';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PopUpOrganizationsComponent } from './components/pop-up-organizations/pop-up-organizations.component';
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
+import { ViewOneRequestPageComponent } from './components/pages/recruitment-request-page/view-one-request-page/view-one-request-page.component';
+import { FormRequestComponent } from './components/form-request/form-request.component';
+import { CustomizeButtonComponent } from './components/customize-button/customize-button.component';
+import { CandidatePageComponent } from './components/pages/candidate-page/candidate-page.component';
+import { CreateCandidatePageComponent } from './components/pages/candidate-page/create-candidate-page/create-candidate-page.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AttachFileComponent } from './components/attach-file/attach-file.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
+import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
 
 
 @NgModule({
@@ -47,6 +57,16 @@ import { AddBtnComponent } from './components/add-btn/add-btn.component';
     ToStringPipe,
     PopUpOrganizationsComponent,
     AddBtnComponent,
+    ViewOneRequestPageComponent,
+    FormRequestComponent,
+    CustomizeButtonComponent,
+    CandidatePageComponent,
+    CreateCandidatePageComponent,
+    ProfileComponent,
+    AttachFileComponent,
+    ContactFormComponent,
+    ClassifyPageComponent,
+    SystemCategoriesPageComponent,
   ],
   imports: [
     BrowserModule,

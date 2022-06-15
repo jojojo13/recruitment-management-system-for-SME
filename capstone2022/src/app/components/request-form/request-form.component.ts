@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./request-form.component.scss'],
 })
 export class RequestFormComponent implements OnInit {
+  route = { name: 'Create request', link: 'yeucautuyendung' };
   listPosition: any;
   requestForm!: FormGroup;
   today: string = new Date().toISOString().slice(0, 10);
@@ -21,7 +22,7 @@ export class RequestFormComponent implements OnInit {
   projects: any;
   officeID!: number;
   departmentID!: number;
-  managerID!:number
+  managerID!: number;
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
     private fb: FormBuilder,
@@ -33,7 +34,6 @@ export class RequestFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.requestService.selectedRequest);
     this.requestForm = this.fb.group({
       requestCode: [{ value: '', disabled: true }],
       name: ['', [Validators.required]],
@@ -99,16 +99,16 @@ export class RequestFormComponent implements OnInit {
       updateBy: 'HUNGNX',
       updateDate: this.today,
     };
-    console.log(request);
+
     Swal.fire({
       text: 'Are you sure you want to send this request?',
-      iconHtml: ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+      iconHtml:
+        ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
       showCancelButton: true,
       confirmButtonColor: '#309EFC',
       cancelButtonColor: '#8B94B2',
       confirmButtonText: 'Confirm',
-      width:'380px',
-    
+      width: '380px',
     }).then((result) => {
       if (result.isConfirmed) {
         this.requestService.insertRequest(request).subscribe(
@@ -147,7 +147,6 @@ export class RequestFormComponent implements OnInit {
       this.requestForm.controls['office'].setValue(response.data.office);
       this.managerID = response.data.managerID;
 
-      console.log(response.data)
     });
   }
   renderPosition(id: number) {
@@ -162,18 +161,13 @@ export class RequestFormComponent implements OnInit {
   resetPositionField() {
     this.requestForm.controls['position']?.reset();
   }
-  navigate() {
-    this.router.navigateByUrl('/yeucautuyendung');
-  }
   clearInputField() {
     if (this.requestService.selectedRequest.id != 0) {
     }
   }
   extendFromParent() {
     let parentRequest = this.requestService.selectedRequest;
-    console.log(parentRequest);
     if (parentRequest.id != 0) {
-      console.log(parentRequest.orgnizationId);
       this.requestForm.controls['dep'].setValue(parentRequest.orgnizationId);
     }
   }

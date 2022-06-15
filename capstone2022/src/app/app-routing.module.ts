@@ -7,6 +7,12 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
 import { RecruitmentRequestPageComponent } from './components/pages/recruitment-request-page/recruitment-request-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 import { CreateRequestPageComponent } from './components/pages/recruitment-request-page/create-request-page/create-request-page.component';
+import { AuthorizeGuard } from './services/guard/authorize.guard';
+import { ViewOneRequestPageComponent } from './components/pages/recruitment-request-page/view-one-request-page/view-one-request-page.component';
+import { CandidatePageComponent } from './components/pages/candidate-page/candidate-page.component';
+import { CreateCandidatePageComponent } from './components/pages/candidate-page/create-candidate-page/create-candidate-page.component';
+import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
+import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +27,28 @@ const routes: Routes = [
       {
         path: 'yeucautuyendung/taoyeucau',
         component: CreateRequestPageComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'yeucautuyendung/xemyeucau/:id',
+        component: ViewOneRequestPageComponent,
+      },
+      { path: 'ungvien', component: CandidatePageComponent },
+      {
+        path: 'ungvien/taoungvien',
+        component: CreateCandidatePageComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'phanloaitochuc',
+        component: ClassifyPageComponent,
+        children: [
+         
+        ],
+      },
+      {
+        path: 'phanloaitochuc/thamsohethong',
+        component: SystemCategoriesPageComponent,
       },
     ],
   },

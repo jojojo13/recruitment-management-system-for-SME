@@ -1,0 +1,41 @@
+<div class="content">
+  <h5>Classify Organization</h5>
+  <app-back-btn [route]="route"></app-back-btn>
+  <div class="content" (click)="addNewCategory()">
+    <p><i class="far fa-plus circle-icon"></i>Add new</p>
+  </div>
+  <div class="content" (click)="addNewCategory()">
+    <p><i class="far fa-plus circle-icon"></i>Edit</p>
+  </div>
+  <div class="content-middle">
+    <div class="content-middle-category">
+      <div class="content-middle-category-heading">
+        <p>Category</p>
+      </div>
+      <ul class="content-middle-category-list">
+        <li *ngFor="let category of categories">{{category.name}}</li>
+       
+      </ul>
+    </div>
+    <div class="content-middle-form">
+      <form novalidate [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+        </div>
+        <div class="form-group">
+          <label for="code">Code</label>
+          <input type="text" class="form-control" formControlName="code" />
+        </div>
+        <div class="form-group">
+          <label for="note">Notes</label>
+          <textarea name="note" rows="4" cols="30" formControlName="note">
+                        At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+                        </textarea
+          >
+        </div>
+      </form>
+      <button class="btnSave">Save</button>
+    </div>
+  </div>
+</div>

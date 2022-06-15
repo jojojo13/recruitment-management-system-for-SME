@@ -5,7 +5,6 @@
         </div>
         <div class="form-content">
             <form [formGroup]="loginForm" (ngSubmit)="signIn()" novalidate>
-                <h6 class="text-danger">{{msg}}</h6>
                 <div class="form-control custom">
                     <span class="form-control-label">Tên đăng nhập</span>
                     <input type="text" formControlName="username" class="form-control-input" placeholder="Enter your username" />
@@ -43,6 +42,8 @@
             <span><a href="">Forgot password?</a></span>
           </div>
         </div>
+        <h6 class="text-danger err">{{msg}}</h6>
+
         <button type="submit"  [disabled]='loginForm.invalid'  class="form-button">Login</button>
       </form>
     </div>

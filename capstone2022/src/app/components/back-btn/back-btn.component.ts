@@ -16,15 +16,12 @@ import { Router } from '@angular/router';
 })
 export class BackBtnComponent implements AfterViewInit {
   @ViewChild('backBtn') backBtn!: ElementRef;
-  @Input('link') link = '';
+  @Input('route') route:any;
+
   constructor(private router: Router) {}
   ngAfterViewInit(): void {}
 
-  @HostListener('click')
-  onBackBtnComponentClicked(event: MouseEvent) {
-    console.log(event.target);
-
-    this.router.navigateByUrl(this.link);
-    // Do something with the clicked SVG; maybe read it's ID
+  navigate(){
+    this.router.navigateByUrl(this.route.link)
   }
 }

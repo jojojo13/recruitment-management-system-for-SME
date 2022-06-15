@@ -22,7 +22,7 @@
   }
   &-list {
     color: #686868;
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
@@ -35,10 +35,33 @@
           margin-right: 20px;
         }
         &:hover {
-          background:#D6D5F9;
+          background: #d6d5f9;
         }
       }
       &-request {
+        transform: scaleY(0);
+        opacity: 0;
+
+        visibility: hidden;
+        height: 0;
+        transform-origin: 50% 0;
+        transition: all 0.6s ease;
+
+        ul {
+          width: 100%;
+          li {
+            cursor: pointer;
+            padding: 10px 0;
+            width: 100%;
+            padding-left: 70px;
+
+            &:hover {
+              background-color: #d9d9d9;
+            }
+          }
+        }
+      }
+      &-system {
         transform: scaleY(0);
         opacity: 0;
 
@@ -65,8 +88,8 @@
   }
 }
 .is-active {
-  background-color:  #d9d9d9;
+  background-color: #d9d9d9;
 }
 .active {
-  background-color: #D6D5F9;
+  background-color: #d6d5f9;
 }

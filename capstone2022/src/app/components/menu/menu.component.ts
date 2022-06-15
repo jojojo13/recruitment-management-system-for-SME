@@ -10,9 +10,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  showDropdown(clickedEle: HTMLElement) {
-    let dropDown = document.querySelector(
-      '.menu-list-item-request'
+  showDropdown(clickedEle: HTMLElement,className:string) {
+    let dropDown = document.querySelector('.'+
+      className
     ) as HTMLElement;
     if (clickedEle.classList.contains('active')) {
       dropDown.style.opacity = '0';

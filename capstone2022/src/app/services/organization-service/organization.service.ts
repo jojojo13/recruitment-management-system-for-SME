@@ -20,4 +20,7 @@ export class OrganizationService {
   getOrgByID(id:number){
     return this.__http.post(this.baseUrl+`/getOrgByID?Id=${id}`,{})
   }
+  getOtherListType(id:number){
+    return this.__http.post(`https://localhost:44376/api/CommonAPI/GetOtherListType?phanHe=${id}`,{})
+  }
 }

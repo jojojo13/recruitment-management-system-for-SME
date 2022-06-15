@@ -74,7 +74,7 @@ export class GridComponent implements OnInit, OnDestroy {
   };
   fn: any;
   requestList!: any;
-  itemsPerPage = 2;
+  itemsPerPage = 20;
   totalItems!: number;
   page: number = 1;
   isLoaded: boolean = false;

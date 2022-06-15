@@ -7,12 +7,10 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./view-request-page.component.scss'],
 })
 export class ViewRequestPageComponent implements OnInit {
+  route={name:'View all request',link:'yeucautuyendung'}
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
-  navigate() {
- 
-    this.router.navigateByUrl('/yeucautuyendung');
-  }
+  
 }
