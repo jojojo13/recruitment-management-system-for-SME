@@ -172,3 +172,10 @@ table {
 .active {
   background-color: #a3a0ec;
 }
+.content-bottom{
+  position: relative;
+  .pagi{
+    position: absolute;
+    right: 15px;
+  }
+}

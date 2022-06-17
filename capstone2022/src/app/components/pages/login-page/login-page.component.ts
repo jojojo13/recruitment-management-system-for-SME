@@ -1,6 +1,6 @@
 import { Account } from '../../../models/Account';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,12 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   account: Account;
   msg = '';
   redirectURL = '/';
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private auth: AuthorizeService,
     private router: Router,
     private route: ActivatedRoute

@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 
@@ -12,27 +16,26 @@ export class SystemCategoriesPageComponent implements OnInit {
   disable = true;
   idSelected: any;
   route = { name: 'System categories', link: 'phanloaitochuc' };
-  categoryForm!: FormGroup;
+  categoryForm!: UntypedFormGroup;
   action = 'Viewing';
   categories: any;
   listItemInCategory: any;
+  listSelected!: Array<number>;
   selectedIndex = 0;
   typeID = 8;
-  code = '';
-  task: any = {
-    name: '',
-    completed: false,
-    color: 'primary',
-    subtasks:[],
-  };
+  code = 'RC_PROJECT';
+  itemsPerPage = 4;
+  totalItems!: number;
+  page: number = 1;
   selectedIndexInTable: any;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private organizationService: OrganizationService,
     private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
+    this.listSelected = [];
     this.categoryForm = this.fb.group({
       name: [{ value: '', disabled: true }, [Validators.required]],
       code: [{ value: '', disabled: true }],
@@ -42,10 +45,11 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.organizationService.getOtherListType(3).subscribe((res: any) => {
       this.categories = res.data;
     });
-    this.commonService.getOtherList('RC_PROJECT',0,9999).subscribe((res: any) => {
-      this.listItemInCategory = res.data;
-      this.task.subtasks=this.listItemInCategory
-    });
+    this.commonService
+      .getOtherList('RC_PROJECT', 0, 9999)
+      .subscribe((res: any) => {
+        this.listItemInCategory = res.data;
+      });
   }
   addNewCategory() {
     this.enableAllControl();
@@ -66,6 +70,11 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.categoryForm.controls['note'].enable();
   }
 
+  disableControl() {
+    this.categoryForm.controls['name'].disable();
+    this.categoryForm.controls['note'].disable();
+  }
+
   onSubmit() {
     let obj = {
       id: 0,
@@ -81,15 +90,16 @@ export class SystemCategoriesPageComponent implements OnInit {
       this.commonService.insertOtherList(obj).subscribe(
         (res: any) => {
           if (res.status == true) {
-            this.loadData(this.code);
-            this.resetToDefault();
+            this.loadData(this.code, this.page - 1);
+            this.resetValue();
+            this.innitCode();
             this.commonService.popUpSuccess();
           } else {
-            this.commonService.popUpFailed();
+            this.commonService.popUpFailed('Failed');
           }
         },
         (err) => {
-          this.commonService.popUpFailed();
+          this.commonService.popUpFailed('Failed');
         }
       );
     }
@@ -109,32 +119,37 @@ export class SystemCategoriesPageComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res.status == true) {
-            this.loadData(this.code);
-            this.resetToDefault();
+            this.loadData(this.code, this.page - 1);
+            this.resetValue();
             this.commonService.popUpSuccess();
           } else {
-            this.commonService.popUpFailed();
+            this.commonService.popUpFailed('Failed');
           }
         },
         (err) => {
-          this.commonService.popUpFailed();
+          this.commonService.popUpFailed('Failed');
         }
       );
     }
   }
   renderData(code: string, index: number, categoryID: number) {
-    this.resetToDefault();
+    this.page = 1;
+    this.resetValue();
+    this.resetSelectedList();
     this.code = code;
     this.selectedIndex = index;
     this.typeID = categoryID;
     this.selectedIndexInTable = null;
-    this.loadData(code);
+    this.loadData(code, this.page - 1);
+    this.disableControl();
   }
-  loadData(code: string) {
-    this.commonService.getOtherList(code,0,9999).subscribe((res: any) => {
-      this.listItemInCategory = res.data;
-      console.log(this.listItemInCategory);
-    });
+  loadData(code: string, pageIndex: number) {
+    this.commonService
+      .getOtherList(code, pageIndex, this.itemsPerPage)
+      .subscribe((res: any) => {
+        this.listItemInCategory = res.data;
+        this.totalItems = res.totalItem;
+      });
   }
   chooseItem(item: any, i: number) {
     this.selectedIndexInTable = i;
@@ -146,29 +161,47 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.categoryForm.controls['note'].setValue(item.note);
     this.categoryForm.controls['code'].setValue(item.code);
   }
-  resetToDefault() {
+
+  resetValue() {
     this.categoryForm.controls['name'].setValue('');
     this.categoryForm.controls['note'].setValue('');
-    this.innitCode();
+    this.categoryForm.controls['code'].setValue('');
   }
-  allComplete: boolean = false;
-
-  updateAllComplete() {
-    this.allComplete = this.task.subtasks != null && this.task.subtasks.every((t:any) => t.completed);
+  resetSelectedList() {
+    this.listSelected = [];
   }
 
-  someComplete(): boolean {
-    if (this.task.subtasks == null) {
-      return false;
+  updateAllComplete($event: any, id: number) {
+    if ((event?.target as any).checked) {
+      this.listSelected.push(id);
+    } else {
+      let index = this.listSelected.findIndex((idObject) => idObject == id);
+      this.listSelected.splice(index, 1);
     }
-    return this.task.subtasks.filter((t:any) => t.completed).length > 0 && !this.allComplete;
+    console.log(this.listSelected);
   }
+  gty(page: number) {
+    this.selectedIndexInTable = null;
+    this.loadData(this.code, page - 1);
+  }
+  deleteCategory() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.commonService.deleteOtherList(this.listSelected).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData(this.code, this.page - 1);
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.task.subtasks == null) {
-      return;
+            this.commonService.popUpSuccess();
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
     }
-    this.task.subtasks.forEach((t:any) => (t.completed = completed));
   }
 }

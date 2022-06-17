@@ -5,7 +5,7 @@
     <div class="action-item" (click)="addNewCategory()">
       <p><i class="far fa-plus circle-icon"></i>Add new</p>
     </div>
-    <div class="action-item" (click)="addNewCategory()">
+    <div class="action-item" (click)="deleteCategory()">
       <p><i class="far fa-plus circle-icon"></i>Delete</p>
     </div>
   </div>
@@ -74,10 +74,20 @@
             <tr
               [ngClass]="{ active: selectedIndexInTable === i }"
               (click)="chooseItem(item, i)"
-              *ngFor="let item of listItemInCategory; let i = index"
+              *ngFor="
+                let item of listItemInCategory
+                  | paginate
+                    : {
+                        itemsPerPage: itemsPerPage,
+                        currentPage: page,
+                        totalItems: totalItems
+                      };
+                let i = index
+              "
             >
               <td>
-                
+                <mat-checkbox (change)="updateAllComplete($event, item.id)">
+                </mat-checkbox>
               </td>
               <td>{{ item.name }}</td>
               <td>{{ item.code }}</td>
@@ -85,6 +95,10 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+          class="pagi"
+          (pageChange)="gty((page = $event))"
+        ></pagination-controls>
       </div>
     </div>
   </div>

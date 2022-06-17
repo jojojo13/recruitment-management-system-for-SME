@@ -24,6 +24,9 @@ export class CommonService {
   editOtherList(obj:any){
     return this.__http.put('https://localhost:44376/api/CommonAPI/ModifyOtherList',obj)
   }
+  deleteOtherList(arr:Array<number>){
+    return this.__http.post('https://localhost:44376/api/CommonAPI/DeleteOtherList',arr)
+  }
   popUpSuccess(){
     Swal.fire({
       icon: 'success',
@@ -32,12 +35,15 @@ export class CommonService {
       timer: 1500,
     });
   }
-  popUpFailed(){
+  popUpFailed(msg:string){
     Swal.fire({
       icon: 'error',
-      title: 'Failed',
+      title: msg,
       showConfirmButton: true,
     
     });
+  }
+  popUpMessage(msg:string){
+    Swal.fire(msg)
   }
 }

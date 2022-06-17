@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-form',
@@ -7,8 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-  contactForm!:FormGroup
-  constructor(private fb:FormBuilder) { }
+  contactForm!:UntypedFormGroup
+  constructor(private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.contactForm=this.fb.group({

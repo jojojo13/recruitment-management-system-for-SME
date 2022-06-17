@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CommonService } from 'src/app/services/common.service';
@@ -12,13 +12,13 @@ import { RequestService } from 'src/app/services/request-service/request.service
   styleUrls: ['./form-request.component.scss']
 })
 export class FormRequestComponent implements OnInit {
-  requestForm!:FormGroup
+  requestForm!:UntypedFormGroup
   types:any
   projects:any
   positions:any
   levels:any
   today: string = new Date().toISOString().slice(0, 10);
-  constructor(private fb:FormBuilder,private requestService: RequestService,
+  constructor(private fb:UntypedFormBuilder,private requestService: RequestService,
     public readonly swalTargets: SwalPortalTargets,
     private orgService: OrganizationService,
     private commonService: CommonService,

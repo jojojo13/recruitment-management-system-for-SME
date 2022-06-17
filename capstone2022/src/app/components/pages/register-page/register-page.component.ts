@@ -1,6 +1,6 @@
 import { User } from '../../../models/User';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -9,10 +9,10 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
-  registerForm:FormGroup
+  registerForm:UntypedFormGroup
   user:User
   msg=''
-  constructor(private fb:FormBuilder,private registerService:RegisterService) {
+  constructor(private fb:UntypedFormBuilder,private registerService:RegisterService) {
     this.registerForm=this.fb.group({
       name:['',Validators.required],
       email:['',[Validators.email,Validators.required]],      avatar_url:['',Validators.required],

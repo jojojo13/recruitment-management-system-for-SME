@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CommonService } from 'src/app/services/common.service';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class RequestFormComponent implements OnInit {
   route = { name: 'Create request', link: 'yeucautuyendung' };
   listPosition: any;
-  requestForm!: FormGroup;
+  requestForm!: UntypedFormGroup;
   today: string = new Date().toISOString().slice(0, 10);
   types: any;
   levels: any;
@@ -25,7 +25,7 @@ export class RequestFormComponent implements OnInit {
   managerID!: number;
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private requestService: RequestService,
     public readonly swalTargets: SwalPortalTargets,
     private orgService: OrganizationService,
@@ -115,12 +115,11 @@ export class RequestFormComponent implements OnInit {
         this.requestService.insertRequest(request).subscribe(
           (response: any) => {
             if (response.status == true) {
-              this.commonService.popUpSuccess()
-             
+              this.commonService.popUpSuccess()  
             }
           },
           (err) => {
-            this.commonService.popUpFailed()
+            this.commonService.popUpFailed('Failed')
           }
         );
       }

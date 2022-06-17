@@ -113,7 +113,6 @@ export class GridComponent implements OnInit, OnDestroy {
     if (isFirstTimeLoading) {
       this.initLoadingWhenCallAPI();
       this.hideButtonWhenCallAPI($event);
-
       this.process(requestID, clicked, $event);
     }
 
