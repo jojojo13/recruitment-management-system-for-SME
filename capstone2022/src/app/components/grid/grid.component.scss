@@ -71,7 +71,7 @@ table {
   position: absolute;
   right: 20px;
 }
-.approve {
+.submitted {
   background-color: #36ca68;
   border-radius: 10px;
   color: #fff;
@@ -80,7 +80,16 @@ table {
   width: 91px;
   height: 22px;
 }
-.pending {
+.approved {
+  background-color: #36ca68;
+  border-radius: 10px;
+  color: #fff;
+  margin: auto;
+  padding: 0;
+  width: 91px;
+  height: 22px;
+}
+.cancel{
   background-color: #ffaa01;
   border-radius: 10px;
   color: #fff;
@@ -89,8 +98,18 @@ table {
   width: 91px;
   height: 22px;
 }
+
 .reject {
   background-color: #eb4962;
+  border-radius: 10px;
+  color: #fff;
+  margin: auto;
+  padding: 0;
+  width: 91px;
+  height: 22px;
+}
+.draft{
+  background-color: #4057f9;
   border-radius: 10px;
   color: #fff;
   margin: auto;

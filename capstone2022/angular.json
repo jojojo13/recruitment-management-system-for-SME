@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "social-media"
+  "defaultProject": "social-media",
+  "cli": {
+    "analytics": "ec84988a-2b9f-433d-90ec-76eea80c5c9a"
+  }
 }

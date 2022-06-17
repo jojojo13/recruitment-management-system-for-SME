@@ -3,7 +3,7 @@
 <div class="content">
   <form
     novalidate
-    (ngSubmit)="onSubmit()"
+    (ngSubmit)="onSubmit(2)"
     [formGroup]="requestForm"
     class="form"
     action=""
@@ -158,11 +158,12 @@
         <button (click)="clearInputField()" type="button"class="form-buttons-items form-buttons-items--clear">
           Clear all
         </button>
-        <button class="form-buttons-items form-buttons-items--draft">
+        <button  type="button" (click)="onSubmit(1)" class="form-buttons-items form-buttons-items--draft">
           Save Draft
         </button>
         <button
           type="submit"
+          (click)="onSubmit(2)"
           class="form-buttons-items form-buttons-items--send"
         >
           Send

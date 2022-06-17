@@ -28,6 +28,7 @@ export class PopUpOrganizationsComponent implements OnInit {
     document.body.style.cursor = 'wait';
     this.orgService.getAllOrganization().subscribe((response: any) => {
       this.organizationList = response.data;
+      console.log(this.organizationList)
       let content = document.querySelector('.popup') as HTMLElement;
       for (let org of this.organizationList) {
         let main = this.renderer.createElement('div');
@@ -102,10 +103,10 @@ export class PopUpOrganizationsComponent implements OnInit {
         this.renderer.addClass(folderIcon, 'fas');
         this.renderer.addClass(folderIcon, 'fa-folder');
         p.appendChild(folderIcon);
-        const text = this.renderer.createText(org.name);
+        const text = this.renderer.createText(child.name);
         //add click listener
         this.renderer.listen(p, 'click', (evt) => {
-          let department = { id: org.id, name: org.name };
+          let department = { id: child.id, name: child.name };
           this.department.emit(department);
         });
         this.renderer.appendChild(p, text);

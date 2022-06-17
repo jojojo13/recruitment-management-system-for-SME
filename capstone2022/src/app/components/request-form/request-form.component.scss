@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
 }
 * {
@@ -83,10 +83,11 @@ h2 {
     width: 420px;
     .poppup {
       position: absolute;
-      right: 30px;
-      top: 5px;
+      right: 8px;
+      top: 8px;
       color: #4057f9;
       cursor: pointer;
+      font-size: 14px;
     }
     &:last-of-type {
       align-items: initial;
@@ -124,9 +125,9 @@ h2 {
     padding: 5px 0 5px 15px;
   }
 }
-input[type="text"],select option {
+input[type="text"],
+select option {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
 }
-

@@ -47,12 +47,12 @@ export class FormRequestComponent implements OnInit {
 
   }
   loadListOfType(){
-    this.commonService.getOtherList('RC_TYPE').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_TYPE',0,9999).subscribe((response: any) => {
       this.types = response.data;
     });
   }
   loadListOfProject(){
-    this.commonService.getOtherList('RC_PROJECT').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_PROJECT',0,9999).subscribe((response: any) => {
       this.projects = response.data;
     });
   }
@@ -65,7 +65,7 @@ export class FormRequestComponent implements OnInit {
     );
   }
   loadListOfLevel(){
-    this.commonService.getOtherList('RC_LEVEL').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_LEVEL',0,9999).subscribe((response: any) => {
       this.levels = response.data;
     });
   }

@@ -51,10 +51,10 @@ export class RequestFormComponent implements OnInit {
       level: [''],
       notes: ['', Validators.required],
     });
-    this.commonService.getOtherList('RC_TYPE').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_TYPE',0,9999).subscribe((response: any) => {
       this.types = response.data;
     });
-    this.commonService.getOtherList('RC_LEVEL').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_LEVEL',0,9999).subscribe((response: any) => {
       this.levels = response.data;
     });
     this.requestService
@@ -67,12 +67,12 @@ export class RequestFormComponent implements OnInit {
       .subscribe((code) => {
         this.requestForm.controls['requestCode'].setValue(code);
       });
-    this.commonService.getOtherList('RC_PROJECT').subscribe((response: any) => {
+    this.commonService.getOtherList('RC_PROJECT',0,9999).subscribe((response: any) => {
       this.projects = response.data;
     });
     this.extendFromParent();
   }
-  onSubmit() {
+  onSubmit(status:number) {
     let request = {
       id: 0,
       name: this.requestForm.controls['name'].value,
@@ -91,7 +91,7 @@ export class RequestFormComponent implements OnInit {
       budget: 0,
       note: this.requestForm.controls['notes'].value,
       comment: 'string',
-      status: 0,
+      status: status,
       parentID: this.requestService.selectedRequest.id,
       rank: 0,
       createBy: 'HUNGNX',
@@ -99,6 +99,7 @@ export class RequestFormComponent implements OnInit {
       updateBy: 'HUNGNX',
       updateDate: this.today,
     };
+ 
 
     Swal.fire({
       text: 'Are you sure you want to send this request?',
@@ -114,21 +115,12 @@ export class RequestFormComponent implements OnInit {
         this.requestService.insertRequest(request).subscribe(
           (response: any) => {
             if (response.status == true) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Successfully sent',
-                showConfirmButton: true,
-                timer: 1500,
-              });
+              this.commonService.popUpSuccess()
+             
             }
           },
           (err) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Success',
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            this.commonService.popUpFailed()
           }
         );
       }
@@ -154,7 +146,10 @@ export class RequestFormComponent implements OnInit {
       (response: any) => {
         this.listPosition = response.data;
       },
-      (err) => {}
+      (err) => {
+        Swal.fire('Position for this department is not available ')
+        this.requestForm.controls['dep']?.reset()
+      }
     );
   }
 

@@ -34,8 +34,7 @@ import { AttachFileComponent } from './components/attach-file/attach-file.compon
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
-
-
+import {MatCheckboxModule} from '@angular/material/checkbox'
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,17 +70,13 @@ import { SystemCategoriesPageComponent } from './components/pages/classify-page/
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
-    ReactiveFormsModule,
     NgxPaginationModule,
     SweetAlert2Module.forRoot(),
-    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

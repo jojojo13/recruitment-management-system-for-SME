@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class RequestService {
   baseUrl = 'https://localhost:44376/api/RequestAPI';
-  selectedRequest= {
+  selectedRequest = {
     id: 0,
     name: '',
     code: 'string',
@@ -36,9 +36,16 @@ export class RequestService {
 
   getRequestByPaging(index: number, size: number) {
     var httpOptions1 = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization': 'Bearer ' + localStorage.getItem('token') })
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
     };
-    return this.__http.post(this.baseUrl + '/GetAllRequest', { index, size },httpOptions1);
+    return this.__http.post(
+      this.baseUrl + '/GetAllRequest',
+      { index, size },
+      httpOptions1
+    );
   }
   getChildrenByParentID(parentID: number) {
     let params = new HttpParams().set('parentId', parentID);
@@ -61,7 +68,6 @@ export class RequestService {
   }
 
   insertRequest(request: any) {
-    
     return this.__http.post(
       'https://localhost:44376/api/RequestAPI/InsertRequest',
       request

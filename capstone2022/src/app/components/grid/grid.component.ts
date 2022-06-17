@@ -104,7 +104,7 @@ export class GridComponent implements OnInit, OnDestroy {
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
-        console.log(this.requestList)
+        console.log(this.requestList);
       });
   }
 
@@ -204,6 +204,7 @@ export class GridComponent implements OnInit, OnDestroy {
 
   createRow(parent: HTMLElement, response: any) {
     let list = response.data;
+    console.log(list);
     let nodeArr = [];
     for (let rq of list) {
       let redInRGB = 214;
@@ -237,14 +238,20 @@ export class GridComponent implements OnInit, OnDestroy {
       tr.style.backgroundColor = `rgb(${redInRGB},249,213)`;
 
       p.innerHTML = `${text}`;
-      if (rq.status == 'pending') {
-        this.addClass(p, 'pending');
+      if (rq.statusID == 1) {
+        this.addClass(p, 'draft');
       }
-      if (rq.status == 'Accept') {
-        this.addClass(p, 'approve');
+      if (rq.statusID == 2) {
+        this.addClass(p, 'submitted');
       }
-      if (rq.status == 'Reject') {
+      if (rq.statusID == 5 || 0) {
         this.addClass(p, 'reject');
+      }
+      if (rq.statusID == 4) {
+        this.addClass(p, 'approved');
+      }
+      if (rq.statusID == 3) {
+        this.addClass(p, 'cancel');
       }
       td10.appendChild(p);
 

@@ -44,9 +44,11 @@
           <td level="1">
             <p
               [ngClass]="{
-                pending: request.status === 'pending',
-                approved: request.status === 'Accept',
-                reject: request.status === 'Reject'
+                draft: request.statusID === 1,
+                submitted: request.statusID === 2,
+                cancel: request.statusID === 3,
+                approved: request.statusID === 4,
+                reject: request.statusID === 5||0
               }"
             >
               {{ request.status | lowercase }}
