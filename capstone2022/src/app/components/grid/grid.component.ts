@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { RequestService } from './../../services/request-service/request.service';
 import {
   Component,
@@ -14,64 +13,6 @@ import {
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit, OnDestroy {
-  fake = {
-    data: [
-      {
-        id: 2,
-        code: 'RC002',
-        name: 'Tuyển dụng .NET',
-        requestLevel: 'Chưa cần gấp',
-        department: 'Phòng ban tuyển dụng',
-        position: 'Lập trình viên',
-        quantity: 4,
-        createdOn: '2022-06-10T00:00:00',
-        deadline: '2022-06-30T00:00:00',
-        office: 'Nguyễn Xuân Hùng',
-        status: 'pending',
-        parentId: 1,
-        rank: 2,
-        note: 'HUNGNX',
-        comment: 'HUNGNX',
-        hrInchange: 'Vũ Hồng Sơn',
-      },
-      {
-        id: 3,
-        code: 'RC002',
-        name: 'Tuyển dụng .NET',
-        requestLevel: 'Chưa cần gấp',
-        department: 'Phòng ban tuyển dụng',
-        position: 'Lập trình viên',
-        quantity: 4,
-        createdOn: '2022-06-10T00:00:00',
-        deadline: '2022-06-30T00:00:00',
-        office: 'Nguyễn Xuân Hùng',
-        status: 'pending',
-        parentId: 1,
-        rank: 2,
-        note: 'HUNGNX',
-        comment: 'HUNGNX',
-        hrInchange: 'Vũ Hồng Sơn',
-      },
-      {
-        id: 3,
-        code: 'RC002',
-        name: 'Tuyển dụng .NET',
-        requestLevel: 'Chưa cần gấp',
-        department: 'Phòng ban tuyển dụng',
-        position: 'Lập trình viên',
-        quantity: 4,
-        createdOn: '2022-06-10T00:00:00',
-        deadline: '2022-06-30T00:00:00',
-        office: 'Nguyễn Xuân Hùng',
-        status: 'pending',
-        parentId: 1,
-        rank: 2,
-        note: 'HUNGNX',
-        comment: 'HUNGNX',
-        hrInchange: 'Vũ Hồng Sơn',
-      },
-    ],
-  };
   fn: any;
   requestList!: any;
   itemsPerPage = 20;
@@ -81,13 +22,8 @@ export class GridComponent implements OnInit, OnDestroy {
 
   constructor(
     public requestService: RequestService,
-    private renderer: Renderer2,
-    private router: Router
-  ) {
-    router.events.subscribe((val: any) => {
-      document.removeEventListener('click', (e) => {}, false);
-    });
-  }
+    private renderer: Renderer2
+  ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
   }
@@ -209,7 +145,13 @@ export class GridComponent implements OnInit, OnDestroy {
       let redInRGB = 214;
       let tr = this.renderer.createElement('tr');
       let td0 = this.renderer.createElement('td');
-      td0.innerHTML = `<input type="checkbox"  [value]="request.id">`;
+      let input = this.renderer.createElement('input');
+      this.renderer.setAttribute(input,'type','checkbox')
+      this.renderer.setAttribute(input,'value',rq.id)
+      this.renderer.appendChild(td0,input)
+      this.renderer.listen(input,'click',e=>{
+        this.selectedChange(rq.id,e)
+      })
       let td = this.renderer.createElement('td');
       td.innerHTML = `${rq.code}`;
       let td2 = this.renderer.createElement('td');
@@ -315,5 +257,15 @@ export class GridComponent implements OnInit, OnDestroy {
   unSelectedRequest() {
     this.fn = this.clearSelectedRequest.bind(this);
     document.addEventListener('click', this.fn, false);
+  }
+  selectedChange(id: number, event: any) {
+    if (event.target.checked) {
+      this.requestService.listSelectedRequest.push(id);
+    } else {
+      let index = this.requestService.listSelectedRequest.findIndex(
+        (idInList) => idInList == id
+      );
+      this.requestService.listSelectedRequest.splice(index, 1);
+    }
   }
 }

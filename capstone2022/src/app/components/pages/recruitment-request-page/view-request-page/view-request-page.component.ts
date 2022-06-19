@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RequestService } from 'src/app/services/request-service/request.service';
 
 @Component({
   selector: 'app-view-request-page',
@@ -8,9 +9,13 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 })
 export class ViewRequestPageComponent implements OnInit {
   route={name:'View all request',link:'yeucautuyendung'}
-  constructor(private router: Router) {}
+  approveAction = { name: 'Approve request'};
+  cancelAction = { name: 'Cancel request'};
+  constructor(private reqService:RequestService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   
 }

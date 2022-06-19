@@ -3,11 +3,11 @@ import { CommonService } from 'src/app/services/common.service';
 import { RequestService } from 'src/app/services/request-service/request.service';
 
 @Component({
-  selector: 'app-edit-btn',
-  templateUrl: './edit-btn.component.html',
-  styleUrls: ['./edit-btn.component.scss'],
+  selector: 'app-cancel-btn',
+  templateUrl: './cancel-btn.component.html',
+  styleUrls: ['./cancel-btn.component.scss'],
 })
-export class EditBtnComponent implements OnInit {
+export class CancelBtnComponent implements OnInit {
   @Input('action') action: any;
   constructor(
     private reqService: RequestService,
@@ -15,10 +15,9 @@ export class EditBtnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
   editStatus() {
     this.reqService
-      .approveRequest(this.reqService.listSelectedRequest)
+      .cancelRequest(this.reqService.listSelectedRequest)
       .subscribe(
         (response: any) => {
           if (response.status == true) {

@@ -35,7 +35,8 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { EditBtnComponent } from './components/edit-btn/edit-btn.component'
+import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
+import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { EditBtnComponent } from './components/edit-btn/edit-btn.component'
     ClassifyPageComponent,
     SystemCategoriesPageComponent,
     EditBtnComponent,
+    CancelBtnComponent,
   ],
   imports: [
     BrowserModule,

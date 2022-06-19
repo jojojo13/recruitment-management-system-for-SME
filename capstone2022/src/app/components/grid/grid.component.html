@@ -31,7 +31,7 @@
         "
       >
         <tr #clicked level="1" (click)="getSelectedRQ(request, clicked)">
-          <td level="1"><input type="checkbox" [value]="request.id" /></td>
+          <td level="1"><input type="checkbox" (change)="selectedChange(request.id,$event)" [value]="request.id" /></td>
           <td level="1">{{ request.code }}</td>
           <td level="1">{{ request.name }}</td>
           <td level="1">{{ request.requestLevel }}</td>

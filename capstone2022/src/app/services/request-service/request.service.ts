@@ -32,7 +32,10 @@ export class RequestService {
     updateBy: '',
     updateDate: '',
   };
-  constructor(private __http: HttpClient) {}
+  listSelectedRequest!:Array<number>
+  constructor(private __http: HttpClient) {
+    this.listSelectedRequest=[]
+  }
 
   getRequestByPaging(index: number, size: number) {
     var httpOptions1 = {
@@ -101,7 +104,10 @@ export class RequestService {
       updateDate: '',
     };
   }
-  editRequest(){
-    
+  approveRequest(list:Array<number>){
+    return this.__http.put(this.baseUrl+'/ApproveRequest',list)
+  }
+  cancelRequest(list:Array<number>){
+    return this.__http.put(this.baseUrl+'/CancelRequest',list)
   }
 }
