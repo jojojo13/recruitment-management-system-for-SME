@@ -5,8 +5,10 @@
     <div class="action">
       <app-customize-button></app-customize-button>
       <app-add-btn></app-add-btn>
+      <app-submit-btn [action]="submitAction"></app-submit-btn>
       <app-edit-btn [action]="approveAction"></app-edit-btn>
       <app-cancel-btn [action]="cancelAction"></app-cancel-btn>
+      <app-reject-btn [action]="rejectAction"></app-reject-btn>
     </div>
   </div>
   <app-navigate-bar></app-navigate-bar>

@@ -36,7 +36,9 @@ import { ClassifyPageComponent } from './components/pages/classify-page/classify
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
-import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component'
+import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
+import { SubmitBtnComponent } from './components/submit-btn/submit-btn.component';
+import { RejectBtnComponent } from './components/reject-btn/reject-btn.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,8 @@ import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component
     SystemCategoriesPageComponent,
     EditBtnComponent,
     CancelBtnComponent,
+    SubmitBtnComponent,
+    RejectBtnComponent,
   ],
   imports: [
     BrowserModule,

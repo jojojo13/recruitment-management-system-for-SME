@@ -110,4 +110,10 @@ export class RequestService {
   cancelRequest(list:Array<number>){
     return this.__http.put(this.baseUrl+'/CancelRequest',list)
   }
+  submitRequest(list:Array<number>){
+    return this.__http.put(this.baseUrl+'/SubmitRequest',list)
+  }
+  rejectRequest(list:Array<number>){
+    return this.__http.put(this.baseUrl+'/RejectRequest',list)
+  }
 }
