@@ -16,19 +16,32 @@ export class CancelBtnComponent implements OnInit {
 
   ngOnInit(): void {}
   editStatus() {
-    this.reqService
-      .cancelRequest(this.reqService.listSelectedRequest)
-      .subscribe(
-        (response: any) => {
-          if (response.status == true) {
-            this.commonService.popUpSuccess();
-          } else {
+    let check = this.reqService.listSelectedRequest.every((req: any) => {
+      return req.statusID == 2;
+    });
+
+    if (check) {
+      let idList = this.reqService.listSelectedRequest.map(
+        (req: any) => req.id
+      );
+      this.reqService
+        .cancelRequest(idList)
+        .subscribe(
+          (response: any) => {
+            if (response.status == true) {
+              this.commonService.popUpSuccess();
+            } else {
+              this.commonService.popUpFailed('Something wrong');
+            }
+          },
+          (err) => {
             this.commonService.popUpFailed('Something wrong');
           }
-        },
-        (err) => {
-          this.commonService.popUpFailed('Something wrong');
-        }
+        );
+    } else {
+      this.commonService.popUpFailed(
+        'Only choose request has submitted status'
       );
+    }
   }
 }

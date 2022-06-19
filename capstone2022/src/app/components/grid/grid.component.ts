@@ -258,12 +258,12 @@ export class GridComponent implements OnInit, OnDestroy {
     this.fn = this.clearSelectedRequest.bind(this);
     document.addEventListener('click', this.fn, false);
   }
-  selectedChange(id: number, event: any) {
+  selectedChange(request:any, event: any) {
     if (event.target.checked) {
-      this.requestService.listSelectedRequest.push(id);
+      this.requestService.listSelectedRequest.push(request);
     } else {
       let index = this.requestService.listSelectedRequest.findIndex(
-        (idInList) => idInList == id
+        (req:any) => req.id == request.id
       );
       this.requestService.listSelectedRequest.splice(index, 1);
     }

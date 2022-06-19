@@ -17,8 +17,13 @@ export class EditBtnComponent implements OnInit {
   ngOnInit(): void {}
 
   editStatus() {
-    this.reqService
-      .approveRequest(this.reqService.listSelectedRequest)
+    let check = this.reqService.listSelectedRequest.every((req: any) => {
+      return req.statusID == 2;
+    });
+    if(check){
+      let idList=this.reqService.listSelectedRequest.map((req:any)=>req.id)
+      this.reqService
+      .approveRequest(idList)
       .subscribe(
         (response: any) => {
           if (response.status == true) {
@@ -31,5 +36,9 @@ export class EditBtnComponent implements OnInit {
           this.commonService.popUpFailed('Something wrong');
         }
       );
+    }else{
+      this.commonService.popUpFailed('Only choose request has submitted status');
+    }
+   
   }
 }
