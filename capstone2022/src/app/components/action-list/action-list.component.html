@@ -1,24 +1,16 @@
-<div class="content">
-  <div class="content-box">
-    <span>Thêm</span>
-  </div>
-  <div class="content-box">
-    <span>Sửa</span>
-  </div>
-  <div class="content-box">
-    <span>Hủy</span>
-  </div>
-  <div class="content-box">
-    <span>Áp dụng</span>
-  </div>
+<div class="action">
+  <app-customize-button></app-customize-button>
+  <ng-container *ngIf="user">
+    <ng-container *ngIf="user.rule==2 ">
+      <app-add-btn></app-add-btn>
+      <app-submit-btn [action]="submitAction"></app-submit-btn>
+      <app-cancel-btn [action]="cancelAction"></app-cancel-btn>
+    </ng-container>
+    <ng-container *ngIf="user.rule == 1">
+      <app-edit-btn [action]="approveAction"></app-edit-btn>
+      <app-reject-btn [action]="rejectAction"></app-reject-btn>
+    </ng-container>
+  </ng-container>
 
-  <div class="content-box">
-    <span>Ngừng áp dụng</span>
-  </div>
-  <div class="content-box">
-    <span>Xuất excel</span>
-  </div>
-  <div class="content-box">
-    <span>Xóa</span>
-  </div>
+ 
 </div>

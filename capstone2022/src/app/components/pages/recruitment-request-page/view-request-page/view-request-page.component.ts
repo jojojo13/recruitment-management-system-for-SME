@@ -9,10 +9,7 @@ import { RequestService } from 'src/app/services/request-service/request.service
 })
 export class ViewRequestPageComponent implements OnInit {
   route={name:'View all request',link:'yeucautuyendung'}
-  approveAction = { name: 'Approve request'};
-  cancelAction = { name: 'Cancel request'};
-  submitAction = { name: 'Submit request'};
-  rejectAction = { name: 'Reject request'};
+ 
   constructor(private reqService:RequestService) {}
 
   ngOnInit(): void {

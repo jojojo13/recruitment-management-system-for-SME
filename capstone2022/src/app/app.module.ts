@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
@@ -34,11 +34,14 @@ import { AttachFileComponent } from './components/attach-file/attach-file.compon
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
 import { SubmitBtnComponent } from './components/submit-btn/submit-btn.component';
-import { RejectBtnComponent } from './components/reject-btn/reject-btn.component'
+import { RejectBtnComponent } from './components/reject-btn/reject-btn.component';
+import { RequestService } from './services/request-service/request.service';
+import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
+import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +77,7 @@ import { RejectBtnComponent } from './components/reject-btn/reject-btn.component
     CancelBtnComponent,
     SubmitBtnComponent,
     RejectBtnComponent,
+    TitleCategoryPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +89,9 @@ import { RejectBtnComponent } from './components/reject-btn/reject-btn.component
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass:  JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

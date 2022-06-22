@@ -101,29 +101,7 @@ export class RequestFormComponent implements OnInit {
     };
  
 
-    Swal.fire({
-      text: 'Are you sure you want to send this request?',
-      iconHtml:
-        ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
-      showCancelButton: true,
-      confirmButtonColor: '#309EFC',
-      cancelButtonColor: '#8B94B2',
-      confirmButtonText: 'Confirm',
-      width: '380px',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.requestService.insertRequest(request).subscribe(
-          (response: any) => {
-            if (response.status == true) {
-              this.commonService.popUpSuccess()  
-            }
-          },
-          (err) => {
-            this.commonService.popUpFailed('Failed')
-          }
-        );
-      }
-    });
+   
   }
   showPopUp() {
     this.orgPicker.fire();

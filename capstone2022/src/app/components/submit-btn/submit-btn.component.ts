@@ -16,27 +16,32 @@ export class SubmitBtnComponent implements OnInit {
 
   ngOnInit(): void {}
   submit() {
-    let check = this.reqService.listSelectedRequest.every((req: any) => {
-      return req.statusID == 1;
-    });
-    if (check) {
-      let idList = this.reqService.listSelectedRequest.map(
-        (req: any) => req.id
-      );
-      this.reqService.submitRequest(idList).subscribe(
-        (response: any) => {
-          if (response.status == true) {
-            this.commonService.popUpSuccess();
-          } else {
+    if(this.reqService.listSelectedRequest.length>0){
+      let check = this.reqService.listSelectedRequest.every((req: any) => {
+        return req.statusID == 1;
+      });
+      if (check) {
+        let idList = this.reqService.listSelectedRequest.map(
+          (req: any) => req.id
+        );
+        this.reqService.submitRequest(idList).subscribe(
+          (response: any) => {
+            if (response.status == true) {
+              this.commonService.popUpSuccess();
+            } else {
+              this.commonService.popUpFailed('Something wrong');
+            }
+          },
+          (err) => {
             this.commonService.popUpFailed('Something wrong');
           }
-        },
-        (err) => {
-          this.commonService.popUpFailed('Something wrong');
-        }
-      );
-    } else {
-      this.commonService.popUpFailed('Only choose request has draft status');
+        );
+      } else {
+        this.commonService.popUpFailed('Only choose request has draft status');
+      }
+    }else{
+      this.commonService.popUpFailed('Please choose request');
     }
+   
   }
 }

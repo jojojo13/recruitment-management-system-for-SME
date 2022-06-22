@@ -34,6 +34,7 @@ export class LoginPageComponent implements OnInit {
     console.log(this.account);
     this.auth.signIn(this.account).subscribe(
       (data: any) => {
+        console.log(data)
         localStorage.setItem('token', data.data);
         let params = this.route.snapshot.queryParams;
         if (params['redirectURL']) {

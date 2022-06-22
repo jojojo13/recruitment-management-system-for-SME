@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthorizeService } from 'src/app/services/authorize.service';
 
 @Component({
   selector: 'app-action-list',
   templateUrl: './action-list.component.html',
-  styleUrls: ['./action-list.component.scss']
+  styleUrls: ['./action-list.component.scss'],
 })
 export class ActionListComponent implements OnInit {
+  approveAction = { name: 'Approve request' };
+  cancelAction = { name: 'Cancel request' };
+  submitAction = { name: 'Submit request' };
+  rejectAction = { name: 'Reject request' };
+  user:any
+  constructor(public auth: AuthorizeService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+   ngOnInit() {
+    this.auth.userSubject.subscribe(user=>{
+      this.user=user
+    })
+   
   }
-  log(){
-    console.log('hello world')
-  }
-
 }

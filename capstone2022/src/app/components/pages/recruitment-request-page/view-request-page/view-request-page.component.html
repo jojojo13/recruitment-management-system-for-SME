@@ -2,14 +2,7 @@
   <h5>Recruitment Request</h5>
   <div class="top">
     <app-back-btn [route]="route"></app-back-btn>
-    <div class="action">
-      <app-customize-button></app-customize-button>
-      <app-add-btn></app-add-btn>
-      <app-submit-btn [action]="submitAction"></app-submit-btn>
-      <app-edit-btn [action]="approveAction"></app-edit-btn>
-      <app-cancel-btn [action]="cancelAction"></app-cancel-btn>
-      <app-reject-btn [action]="rejectAction"></app-reject-btn>
-    </div>
+    <app-action-list></app-action-list>
   </div>
   <app-navigate-bar></app-navigate-bar>
   <app-grid></app-grid>

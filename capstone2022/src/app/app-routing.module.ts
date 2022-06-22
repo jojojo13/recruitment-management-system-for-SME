@@ -13,6 +13,7 @@ import { CandidatePageComponent } from './components/pages/candidate-page/candid
 import { CreateCandidatePageComponent } from './components/pages/candidate-page/create-candidate-page/create-candidate-page.component';
 import { ClassifyPageComponent } from './components/pages/classify-page/classify-page.component';
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
+import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'phanloaitochuc/thamsohethong',
         component: SystemCategoriesPageComponent,
+      },
+      {
+        path: 'phanloaitochuc/danhmuchucdanh',
+        component: TitleCategoryPageComponent,
       },
     ],
   },

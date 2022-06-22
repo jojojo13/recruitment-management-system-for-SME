@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
+  FormBuilder,
+  FormGroup,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -16,7 +18,7 @@ export class SystemCategoriesPageComponent implements OnInit {
   disable = true;
   idSelected: any;
   route = { name: 'System categories', link: 'phanloaitochuc' };
-  categoryForm!: UntypedFormGroup;
+  categoryForm!: FormGroup;
   action = 'Viewing';
   categories: any;
   listItemInCategory: any;
@@ -29,7 +31,7 @@ export class SystemCategoriesPageComponent implements OnInit {
   page: number = 1;
   selectedIndexInTable: any;
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private organizationService: OrganizationService,
     private commonService: CommonService
   ) {}
@@ -192,8 +194,8 @@ export class SystemCategoriesPageComponent implements OnInit {
         (res: any) => {
           if (res.status == true) {
             this.loadData(this.code, this.page - 1);
-
             this.commonService.popUpSuccess();
+            this.listSelected=[]
           } else {
             this.commonService.popUpFailed('Some records have been appplied');
           }

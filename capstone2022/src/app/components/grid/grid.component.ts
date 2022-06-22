@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RequestService } from './../../services/request-service/request.service';
 import {
   Component,
@@ -22,7 +23,8 @@ export class GridComponent implements OnInit, OnDestroy {
 
   constructor(
     public requestService: RequestService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router:Router
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
@@ -32,11 +34,14 @@ export class GridComponent implements OnInit, OnDestroy {
     this.unSelectedRequest();
     this.loadData(0);
   }
-
+  navigateEdit(request:any){
+    this.router.navigate(["yeucautuyendung/xemyeucau", request.id]);
+  }
   loadData(pageIndex: number) {
     this.requestService
       .getRequestByPaging(pageIndex, this.itemsPerPage)
       .subscribe((response: any) => {
+        console.log(response)
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
