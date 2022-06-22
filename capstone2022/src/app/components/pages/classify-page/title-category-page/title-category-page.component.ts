@@ -21,7 +21,6 @@ export class TitleCategoryPageComponent implements OnInit {
   categories: any;
   listSelected!: Array<number>;
   selectedIndex = 0;
-  code = 'RC_PROJECT';
   itemsPerPage = 20;
   totalItems!: number;
   page: number = 1;
