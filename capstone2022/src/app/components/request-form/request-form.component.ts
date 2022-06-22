@@ -47,7 +47,7 @@ export class RequestFormComponent implements OnInit {
       ],
       office: [{ value: '', disabled: true }],
       deadline: [''],
-      experience: [''],
+      experience: ['',  [Validators.pattern('^[1-9][0-9]*$'), Validators.required]],
       level: [''],
       notes: ['', Validators.required],
     });
@@ -140,7 +140,7 @@ export class RequestFormComponent implements OnInit {
   extendFromParent() {
     let parentRequest = this.requestService.selectedRequest;
     if (parentRequest.id != 0) {
-      this.requestForm.controls['dep'].setValue(parentRequest.orgnizationId);
+      this.requestForm.controls['dep'].setValue(parentRequest.orgnizationID);
     }
   }
 }

@@ -11,14 +11,15 @@ export class SubmitBtnComponent implements OnInit {
   @Input('action') action: any;
   constructor(
     private reqService: RequestService,
-    private commonService: CommonService
+    private commonService: CommonService,
+
   ) {}
 
   ngOnInit(): void {}
   submit() {
     if(this.reqService.listSelectedRequest.length>0){
       let check = this.reqService.listSelectedRequest.every((req: any) => {
-        return req.statusID == 1;
+        return req.statusID == 1||req.statusID == 3;
       });
       if (check) {
         let idList = this.reqService.listSelectedRequest.map(
@@ -27,6 +28,8 @@ export class SubmitBtnComponent implements OnInit {
         this.reqService.submitRequest(idList).subscribe(
           (response: any) => {
             if (response.status == true) {
+
+              this.commonService.dataChange.next(true)
               this.commonService.popUpSuccess();
             } else {
               this.commonService.popUpFailed('Something wrong');

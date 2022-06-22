@@ -39,6 +39,7 @@ export class RejectBtnComponent implements OnInit {
             this.reqService.rejectRequest(idList).subscribe(
               (response: any) => {
                 if (response.status == true) {
+                  this.commonService.dataChange.next(true)
                   this.commonService.popUpSuccess();
                 } else {
                   this.commonService.popUpFailed('Something wrong');

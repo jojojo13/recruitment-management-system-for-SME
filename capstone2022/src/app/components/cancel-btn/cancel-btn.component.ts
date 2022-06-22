@@ -40,6 +40,7 @@ export class CancelBtnComponent implements OnInit {
             this.reqService.cancelRequest(idList).subscribe(
               (response: any) => {
                 if (response.status == true) {
+                  this.commonService.dataChange.next(true)
                   this.commonService.popUpSuccess();
                 } else {
                   this.commonService.popUpFailed('Something wrong');

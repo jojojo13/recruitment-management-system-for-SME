@@ -6,6 +6,7 @@
     class="form"
     action=""
   >
+  <div class="box">
     <div class="left">
       <div class="form-group">
         <label for="requestID">Request Code</label>
@@ -26,7 +27,7 @@
       <div class="form-group">
         <label for="name">Type</label>
         <select style="font-family: Poppins" name="dep" formControlName="type">
-          <option
+          <option [selected]="type.id==requestForm.controls['type'].value"
             style="font-family: Poppins"
             *ngFor="let type of types"
             [ngValue]="type.id"
@@ -51,7 +52,7 @@
       <div class="form-group">
         <label for="name">Projects</label>
         <select name="dep" formControlName="projects">
-          <option *ngFor="let project of projects" [ngValue]="project.id">
+          <option [selected]="project.id==requestForm.controls['projects'].value" *ngFor="let project of projects" [ngValue]="project.id">
             {{ project.name }}
           </option>
         </select>
@@ -112,7 +113,8 @@
           type="date"
           [min]="today"
           class="form-control"
-          formControlName="deadline"
+          value="2022-09-06"
+          
         />
       </div>
       <div class="form-group">
@@ -121,6 +123,8 @@
       </div>
     </div>
     <div class="right">
+  </div>
+ 
       <div class="form-group">
         <label for="name">Experience</label>
         <input type="text" class="form-control" formControlName="experience" />
@@ -151,6 +155,14 @@
           >Please input notes</small
         >
       </div>
-    </div>
+    </div>  
+    <button>Edit</button>
   </form>
 </div>
+<swal #orgPicker title="Choose department" width="500px" tabindex="100">
+  <div *swalPortal="swalTargets.content">
+    <app-pop-up-organizations
+      (department)="getDataFromPopup($event)"
+    ></app-pop-up-organizations>
+  </div>
+</swal>

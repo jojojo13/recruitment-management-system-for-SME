@@ -40,6 +40,7 @@ export class EditBtnComponent implements OnInit {
             this.reqService.approveRequest(idList).subscribe(
               (response: any) => {
                 if (response.status == true) {
+                  this.commonService.dataChange.next(true)
                   this.commonService.popUpSuccess();
                 } else {
                   this.commonService.popUpFailed('Something wrong');

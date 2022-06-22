@@ -19,9 +19,9 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token: string = 'invald token';
-    req = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token')),
-    });
+    // req = req.clone({
+    //   headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token')),
+    // });
 
     return next.handle(req).pipe(
       catchError((error) => {

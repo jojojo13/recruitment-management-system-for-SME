@@ -7,6 +7,7 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-grid',
@@ -24,28 +25,31 @@ export class GridComponent implements OnInit, OnDestroy {
   constructor(
     public requestService: RequestService,
     private renderer: Renderer2,
-    private router:Router,
-    private activatedRoute:ActivatedRoute
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private commonService: CommonService
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
   }
 
   ngOnInit() {
-    this.page=this.activatedRoute.snapshot.queryParams["index"];
-    this.itemsPerPage=this.activatedRoute.snapshot.queryParams["size"];
-    this.unSelectedRequest();
-    this.loadData(this.page);
-   
+    this.commonService.dataChange.subscribe((isChange) => {
+      this.isLoaded = false;
+      this.clearData()
+      this.page = this.activatedRoute.snapshot.queryParams['index'];
+      this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
+      this.unSelectedRequest();
+      this.loadData(this.page-1);
+    });
   }
-  navigateEdit(request:any){
-    this.router.navigate(["yeucautuyendung/xemyeucau", request.id]);
+  navigateEdit(request: any) {
+    this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
   }
   loadData(pageIndex: number) {
     this.requestService
       .getRequestByPaging(pageIndex, this.itemsPerPage)
       .subscribe((response: any) => {
-     
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
@@ -118,11 +122,13 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   gty(page: number) {
-    this.router.navigateByUrl(`yeucautuyendung/xemyeucau?index=${page-1}&size=${this.itemsPerPage}`);
+    this.router.navigateByUrl(
+      `yeucautuyendung/xemyeucau?index=${page}&size=${this.itemsPerPage}`
+    );
 
     this.isLoaded = false;
     this.clearData();
-  
+
     this.loadData(page - 1);
   }
 
@@ -158,12 +164,12 @@ export class GridComponent implements OnInit, OnDestroy {
       let tr = this.renderer.createElement('tr');
       let td0 = this.renderer.createElement('td');
       let input = this.renderer.createElement('input');
-      this.renderer.setAttribute(input,'type','checkbox')
-      this.renderer.setAttribute(input,'value',rq.id)
-      this.renderer.appendChild(td0,input)
-      this.renderer.listen(input,'click',e=>{
-        this.selectedChange(rq.id,e)
-      })
+      this.renderer.setAttribute(input, 'type', 'checkbox');
+      this.renderer.setAttribute(input, 'value', rq.id);
+      this.renderer.appendChild(td0, input);
+      this.renderer.listen(input, 'click', (e) => {
+        this.selectedChange(rq.id, e);
+      });
       let td = this.renderer.createElement('td');
       td.innerHTML = `${rq.code}`;
       let td2 = this.renderer.createElement('td');
@@ -270,12 +276,12 @@ export class GridComponent implements OnInit, OnDestroy {
     this.fn = this.clearSelectedRequest.bind(this);
     document.addEventListener('click', this.fn, false);
   }
-  selectedChange(request:any, event: any) {
+  selectedChange(request: any, event: any) {
     if (event.target.checked) {
       this.requestService.listSelectedRequest.push(request);
     } else {
       let index = this.requestService.listSelectedRequest.findIndex(
-        (req:any) => req.id == request.id
+        (req: any) => req.id == request.id
       );
       this.requestService.listSelectedRequest.splice(index, 1);
     }

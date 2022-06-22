@@ -1,18 +1,27 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { GridComponent } from '../components/grid/grid.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
   baseUrl = 'https://localhost:44376/api/CommonAPI/GetOtherList';
-
-  constructor(private __http: HttpClient) {}
+  dataChange:BehaviorSubject<boolean>;
+  constructor(
+    private __http: HttpClient,
+    private router: Router,
+    private activateRoute: ActivatedRoute
+  ) {
+    this.dataChange=new BehaviorSubject<any>(null);
+  }
 
   getOtherList(code: string, index: number, size: number) {
     return this.__http.post(
-      'https://localhost:44376/api/CommonAPI/GetOtherList',
+      `https://localhost:44376/api/CommonAPI/GetOtherList?code=${code}&index=${index}&size=${size}`,
       { code, index, size }
     );
   }
@@ -59,8 +68,9 @@ export class CommonService {
   popUpMessage(msg: string) {
     Swal.fire(msg);
   }
-  popUpConfirmed(msg:string){
-   
+  popUpConfirmed(msg: string) {}
+  reloadCurrentRoute(route: string) {
+
+
   }
-  
 }

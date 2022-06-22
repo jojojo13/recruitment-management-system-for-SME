@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Account } from '../models/Account';
@@ -25,6 +25,12 @@ export class AuthorizeService {
       );
   }
   getUserInfo(){
-    return this._http.get('https://localhost:44376/api/AccountAPI/GetUserLog')
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this._http.get('https://localhost:44376/api/AccountAPI/GetUserLog',httpOptions1)
   }
 }
