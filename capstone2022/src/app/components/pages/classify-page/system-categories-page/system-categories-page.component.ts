@@ -6,6 +6,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 
@@ -26,17 +27,21 @@ export class SystemCategoriesPageComponent implements OnInit {
   selectedIndex = 0;
   typeID = 8;
   code = 'RC_PROJECT';
-  itemsPerPage = 4;
+  itemsPerPage = 20;
   totalItems!: number;
   page: number = 1;
   selectedIndexInTable: any;
   constructor(
     private fb: FormBuilder,
     private organizationService: OrganizationService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.page = this.activatedRoute.snapshot.queryParams["index"];
+    this.itemsPerPage = this.activatedRoute.snapshot.queryParams["size"];
     this.listSelected = [];
     this.categoryForm = this.fb.group({
       name: [{ value: '', disabled: true }, [Validators.required]],
@@ -94,6 +99,7 @@ export class SystemCategoriesPageComponent implements OnInit {
           if (res.status == true) {
             this.loadData(this.code, this.page - 1);
             this.resetValue();
+            this.disableControl();
             this.innitCode();
             this.commonService.popUpSuccess();
           } else {
@@ -123,6 +129,7 @@ export class SystemCategoriesPageComponent implements OnInit {
           if (res.status == true) {
             this.loadData(this.code, this.page - 1);
             this.resetValue();
+            this.disableControl();
             this.commonService.popUpSuccess();
           } else {
             this.commonService.popUpFailed('Failed');
@@ -183,6 +190,8 @@ export class SystemCategoriesPageComponent implements OnInit {
     console.log(this.listSelected);
   }
   gty(page: number) {
+    this.router.navigateByUrl(`/phanloaitochuc/danhmuchucdanh?index=${page - 1}&size=${this.itemsPerPage}`);
+    this.resetValue();
     this.selectedIndexInTable = null;
     this.loadData(this.code, page - 1);
   }
