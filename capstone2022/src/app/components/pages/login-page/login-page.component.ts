@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
   signIn() {
     this.account = this.loginForm.value;
-    console.log(this.account);
+   
     this.auth.signIn(this.account).subscribe(
       (data: any) => {
         console.log(data)
@@ -39,7 +39,7 @@ export class LoginPageComponent implements OnInit {
         let params = this.route.snapshot.queryParams;
         if (params['redirectURL']) {
           this.redirectURL = params['redirectURL'];
-        }
+        } 
 
         if (this.redirectURL) {
           this.router

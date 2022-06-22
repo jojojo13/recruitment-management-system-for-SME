@@ -90,7 +90,12 @@ import { TitleCategoryPageComponent } from './components/pages/classify-page/tit
     SweetAlert2Module.forRoot(),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass:  JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+}
+   
   ],
   bootstrap: [AppComponent],
 })

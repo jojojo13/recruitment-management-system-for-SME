@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from './../../services/request-service/request.service';
 import {
   Component,
@@ -24,15 +24,19 @@ export class GridComponent implements OnInit, OnDestroy {
   constructor(
     public requestService: RequestService,
     private renderer: Renderer2,
-    private router:Router
+    private router:Router,
+    private activatedRoute:ActivatedRoute
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
   }
 
   ngOnInit() {
+    this.page=this.activatedRoute.snapshot.queryParams["index"];
+    this.itemsPerPage=this.activatedRoute.snapshot.queryParams["size"];
     this.unSelectedRequest();
-    this.loadData(0);
+    this.loadData(this.page);
+   
   }
   navigateEdit(request:any){
     this.router.navigate(["yeucautuyendung/xemyeucau", request.id]);
@@ -41,7 +45,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.requestService
       .getRequestByPaging(pageIndex, this.itemsPerPage)
       .subscribe((response: any) => {
-        console.log(response)
+     
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
@@ -114,8 +118,11 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   gty(page: number) {
+    this.router.navigateByUrl(`yeucautuyendung/xemyeucau?index=${page-1}&size=${this.itemsPerPage}`);
+
     this.isLoaded = false;
     this.clearData();
+  
     this.loadData(page - 1);
   }
 

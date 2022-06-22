@@ -45,8 +45,8 @@ export class RequestService {
       }),
     };
     return this.__http.post(
-      this.baseUrl + '/GetAllRequest',
-      { index, size },
+      this.baseUrl + `/GetAllRequest?index=${index}&size=${size}`,
+      {  },
       httpOptions1
     );
   }

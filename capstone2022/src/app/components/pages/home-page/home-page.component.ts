@@ -11,7 +11,9 @@ export class HomePageComponent implements OnInit {
   constructor(public auth:AuthorizeService) { }
 
   ngOnInit(): void {
+    
     this.auth.getUserInfo().subscribe((res:any)=>{
+      console.log(res)
     this.auth.user=res.data
     this.auth.userSubject.next(this.auth.user)
     })
