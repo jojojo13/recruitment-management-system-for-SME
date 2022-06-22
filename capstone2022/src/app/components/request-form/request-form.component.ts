@@ -99,6 +99,16 @@ export class RequestFormComponent implements OnInit {
       updateBy: 'HUNGNX',
       updateDate: this.today,
     };
+   
+    this.requestService.insertRequest(request).subscribe((response:any)=>{
+      if(response.status==true){
+        this.commonService.popUpSuccess()
+      }else{
+        this.commonService.popUpFailed('Failed')
+      }
+    },(err)=>{
+      this.commonService.popUpFailed('Failed')
+    })
  
 
    

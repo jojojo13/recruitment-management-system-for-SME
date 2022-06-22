@@ -11,7 +11,7 @@
   .form {
     padding: 0 60px 40px 60px;
     width: 980px;
-   
+    display: flex;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 300;
@@ -105,6 +105,13 @@ select option {
   font-style: normal;
   font-weight: 600;
 }
-.box{
+.editBtn{
   position: absolute;
+  right: 30px;
+  top: 240px;
+  outline: none;
+  border: none;
+  color: #4057f9;
+  background-color: #fff;
 }
+
