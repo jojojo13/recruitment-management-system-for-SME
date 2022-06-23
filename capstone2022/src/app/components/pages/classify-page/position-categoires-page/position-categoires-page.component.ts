@@ -197,12 +197,13 @@ export class PositionCategoiresPageComponent implements OnInit {
   }
 
   onSubmit() {
+    let workform = this.positionForm.controls['workForms'].value == '' ? 0 : this.positionForm.controls['workForms'].value
     let obj = {
       id: 0,
       code: this.positionForm.controls['code'].value,
       name: this.positionForm.controls['name'].value,
       note: this.positionForm.controls['note'].value,
-      formWorking: this.positionForm.controls['workForms'].value,
+      formWorking: workform,
       basicSalary: this.positionForm.controls['basicSalary'].value,
       otherSkill: this.positionForm.controls['otherSkill'].value,
       titleID: this.positionForm.controls['titles'].value,
@@ -233,7 +234,7 @@ export class PositionCategoiresPageComponent implements OnInit {
         code: this.positionForm.controls['code'].value,
         name: this.positionForm.controls['name'].value,
         note: this.positionForm.controls['note'].value,
-        formWorking: this.positionForm.controls['workForms'].value,
+        formWorking: workform,
         basicSalary: this.positionForm.controls['basicSalary'].value,
         otherSkill: this.positionForm.controls['otherSkill'].value,
         titleID: this.positionForm.controls['titles'].value,
