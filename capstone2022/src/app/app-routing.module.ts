@@ -57,7 +57,7 @@ const routes: Routes = [
         component: TitleCategoryPageComponent,
       },
       {
-        path: 'phanloaitochuc/congviec',
+        path: 'phanloaitochuc/danhmucvitricongviec',
         component: PositionCategoiresPageComponent,
       },
     ],

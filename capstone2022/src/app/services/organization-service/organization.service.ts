@@ -23,4 +23,39 @@ export class OrganizationService {
   getOtherListType(id:number){
     return this.__http.post(`https://localhost:44376/api/CommonAPI/GetOtherListType?phanHe=${id}`,{})
   }
+
+
+  getAllTitle(index: number, size: number) {
+    return this.__http.post(`https://localhost:44376/api/OrgnizationAPI/GetAllTitle?index=${index}&size=${size}`, {})
+  }
+
+  getAllPosition(index: number, size: number) {
+    return this.__http.post(`https://localhost:44376/api/OrgnizationAPI/GetAllPosition?index=${index}&size=${size}`, {})
+  }
+
+
+  insertPosition(request: any) {
+    return this.__http.post(
+      'https://localhost:44376/api/OrgnizationAPI/InsertPosition',
+      request
+    );
+  }
+  modifyPosition(request: any) {
+    return this.__http.post(
+      'https://localhost:44376/api/OrgnizationAPI/ModifyPosition',
+      request
+    );
+  }
+
+  deletePosition(arr: Array<number>) {
+    return this.__http.post(
+      'https://localhost:44376/api/OrgnizationAPI/DeletePosition',
+      arr
+    );
+  }
+ 
+
+
+
+
 }
