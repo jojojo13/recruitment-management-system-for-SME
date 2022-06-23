@@ -7,36 +7,40 @@ import { Injectable } from '@angular/core';
 export class RequestService {
   baseUrl = 'https://localhost:44376/api/RequestAPI';
   selectedRequest = {
-    code: "",
-    comment: "string",
-    createdOn: "",
-    deadline: "",
-    department: "",
-    history: "",
-    hrInchange: "",
+    code: '',
+    comment: 'string',
+    createdOn: '',
+    deadline: '',
+    department: '',
+    experience: 0,
+    history: '',
+    hrInchange: '',
     hrInchangeId: null,
     id: 0,
-    name: "",
-    note: "",
-    office: "",
+    level: 0,
+    levelName: '',
+    name: '',
+    note: '',
+    office: '',
     orgnizationID: 0,
-    orgnizationName: "",
+    orgnizationName: '',
     parentId: 0,
-    position: "",
+    position: '',
+    positionID: 2,
     projectID: 0,
-    projectname: "",
+    projectname: '',
     quantity: 0,
     rank: 0,
-    requestLevel: "",
+    requestLevel: '',
     signID: 0,
-    status: "",
+    status: '',
     statusID: 0,
     typeID: 0,
-    typename: "",
+    typename: '',
   };
-  listSelectedRequest!:Array<number>
+  listSelectedRequest!: Array<number>;
   constructor(private __http: HttpClient) {
-    this.listSelectedRequest=[]
+    this.listSelectedRequest = [];
   }
 
   getRequestByPaging(index: number, size: number) {
@@ -48,7 +52,7 @@ export class RequestService {
     };
     return this.__http.post(
       this.baseUrl + `/GetAllRequest?index=${index}&size=${size}`,
-      {  },
+      {},
       httpOptions1
     );
   }
@@ -79,45 +83,58 @@ export class RequestService {
     );
   }
   resetDataSelectedRq() {
-    this.selectedRequest ={
-      code: "",
-      comment: "string",
-      createdOn: "",
-      deadline: "",
-      department: "",
-      history: "",
-      hrInchange: "",
+    this.selectedRequest = {
+      code: '',
+      comment: 'string',
+      createdOn: '',
+      deadline: '',
+      department: '',
+      experience: 0,
+      history: '',
+      hrInchange: '',
       hrInchangeId: null,
       id: 0,
-      name: "",
-      note: "",
-      office: "",
+      level: 0,
+      levelName: '',
+      name: '',
+      note: '',
+      office: '',
       orgnizationID: 0,
-      orgnizationName: "",
+      orgnizationName: '',
       parentId: 0,
-      position: "",
+      position: '',
+      positionID: 2,
       projectID: 0,
-      projectname: "",
+      projectname: '',
       quantity: 0,
       rank: 0,
-      requestLevel: "",
+      requestLevel: '',
       signID: 0,
-      status: "",
+      status: '',
       statusID: 0,
       typeID: 0,
-      typename: "",
+      typename: '',
     };
   }
-  approveRequest(list:Array<number>){
-    return this.__http.put(this.baseUrl+'/ApproveRequest',list)
+  approveRequest(list: Array<number>) {
+    return this.__http.put(this.baseUrl + '/ApproveRequest', list);
   }
-  cancelRequest(list:Array<number>){
-    return this.__http.put(this.baseUrl+'/CancelRequest',list)
+  cancelRequest(list: Array<number>) {
+    return this.__http.put(this.baseUrl + '/CancelRequest', list);
   }
-  submitRequest(list:Array<number>){
-    return this.__http.put(this.baseUrl+'/SubmitRequest',list)
+  submitRequest(list: Array<number>) {
+    return this.__http.put(this.baseUrl + '/SubmitRequest', list);
   }
-  rejectRequest(list:Array<number>){
-    return this.__http.put(this.baseUrl+'/RejectRequest',list)
+  rejectRequest(list: Array<number>) {
+    return this.__http.put(this.baseUrl + '/RejectRequest', list);
+  }
+  editRequest(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put('https://localhost:44376/api/RequestAPI/ModifyRequest', request,httpOptions1);
   }
 }

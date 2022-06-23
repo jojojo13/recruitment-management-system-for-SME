@@ -67,7 +67,7 @@
       <div class="form-group">
         <label for="name">Position</label>
         <select name="position" formControlName="position">
-          <option *ngFor="let position of positions" [ngValue]="position.id">
+          <option [selected]="position.id==requestForm.controls['position'].value" *ngFor="let position of positions" [ngValue]="position.id">
             {{ position.name }}
           </option>
         </select>
@@ -93,7 +93,8 @@
         >
         <small
           class="text-danger"
-          *ngIf="requestForm.get('quantity')?.hasError('pattern')"
+          *ngIf="requestForm.get('quantity')?.hasError('pattern') &&
+          requestForm.get('quantity')?.touched"
           >Please input number greater than 0.</small
         >
       </div>
@@ -129,7 +130,7 @@
       <div class="form-group">
         <label for="name">Level</label>
         <select name="level" formControlName="level">
-          <option *ngFor="let level of levels" [ngValue]="level.id">
+          <option [selected]="level.id==requestForm.controls['level'].value" *ngFor="let level of levels" [ngValue]="level.id">
             {{ level.name }}
           </option>
         </select>
@@ -153,7 +154,7 @@
         >
       </div>
     </div>  
-    <button type="submit" class="editBtn">Edit</button>
+    <button [disabled]="requestForm.invalid" type="btn" (click)="onSubmit()" class="editBtn">Edit</button>
   </form>
 </div>
 <swal #orgPicker title="Choose department" width="500px" tabindex="100">

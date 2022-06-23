@@ -43,6 +43,7 @@ import { RequestService } from './services/request-service/request.service';
 import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
+import { HistoryComponent } from './components/history/history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +81,7 @@ import { PositionCategoiresPageComponent } from './components/pages/classify-pag
     RejectBtnComponent,
     TitleCategoryPageComponent,
     PositionCategoiresPageComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,11 +94,11 @@ import { PositionCategoiresPageComponent } from './components/pages/classify-pag
     SweetAlert2Module.forRoot(),
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-}
+//     {
+//       provide: HTTP_INTERCEPTORS,
+//       useClass: JwtInterceptor,
+//       multi: true
+// }
    
   ],
   bootstrap: [AppComponent],

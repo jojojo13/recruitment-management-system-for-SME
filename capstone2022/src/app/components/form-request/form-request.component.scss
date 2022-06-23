@@ -9,7 +9,7 @@
 }
 .content {
   .form {
-    padding: 0 60px 40px 60px;
+    padding: 0 0 40px 40px;
     width: 980px;
     display: flex;
     font-family: "Poppins";
@@ -17,7 +17,7 @@
     font-weight: 300;
     position: relative;
     .left {
-      margin-right: 60px;
+      margin-right: 40px;
     }
     &-buttons {
       position: absolute;
@@ -107,11 +107,14 @@ select option {
 }
 .editBtn{
   position: absolute;
-  right: 30px;
+  right: 60px;
   top: 240px;
   outline: none;
   border: none;
   color: #4057f9;
   background-color: #fff;
+  &:disabled{
+    color: #565656;
+  }
 }
 

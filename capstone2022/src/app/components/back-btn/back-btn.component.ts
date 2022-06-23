@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -18,10 +19,10 @@ export class BackBtnComponent implements AfterViewInit {
   @ViewChild('backBtn') backBtn!: ElementRef;
   @Input('route') route:any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private location:Location) {}
   ngAfterViewInit(): void {}
 
   navigate(){
-    this.router.navigateByUrl(this.route.link)
+   this.location.back()
   }
 }

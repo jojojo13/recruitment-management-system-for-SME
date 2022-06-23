@@ -51,11 +51,13 @@ export class SystemCategoriesPageComponent implements OnInit {
 
     this.organizationService.getOtherListType(3).subscribe((res: any) => {
       this.categories = res.data;
+      
     });
     this.commonService
       .getOtherList('RC_PROJECT', 0, 9999)
       .subscribe((res: any) => {
         this.listItemInCategory = res.data;
+        this.totalItems=res.totalItem
       });
   }
   addNewCategory() {
@@ -190,7 +192,7 @@ export class SystemCategoriesPageComponent implements OnInit {
     console.log(this.listSelected);
   }
   gty(page: number) {
-    this.router.navigateByUrl(`/phanloaitochuc/danhmuchucdanh?index=${page - 1}&size=${this.itemsPerPage}`);
+    this.router.navigateByUrl(`/phanloaitochuc/thamsohethong?index=${page }&size=${this.itemsPerPage}`);
     this.resetValue();
     this.selectedIndexInTable = null;
     this.loadData(this.code, page - 1);

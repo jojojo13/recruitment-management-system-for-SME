@@ -6,7 +6,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 import { RequestService } from 'src/app/services/request-service/request.service';
 import Swal from 'sweetalert2';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-form-request',
   templateUrl: './form-request.component.html',
@@ -22,13 +22,16 @@ export class FormRequestComponent implements OnInit {
   today: string = new Date().toISOString().slice(0, 10);
   departmentID!: number;
   managerID!: number;
+  reqService: any;
   constructor(
     private fb: FormBuilder,
     private requestService: RequestService,
     public readonly swalTargets: SwalPortalTargets,
     private orgService: OrganizationService,
     private commonService: CommonService,
-    private router: Router
+    private router: Router,
+    private location:Location
+    
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +50,7 @@ export class FormRequestComponent implements OnInit {
         [Validators.required],
       ],
       position: [
-        this.requestService.selectedRequest.position,
+        this.requestService.selectedRequest.positionID,
         [Validators.required],
       ],
       quantity: [
@@ -58,27 +61,28 @@ export class FormRequestComponent implements OnInit {
         { value: this.requestService.selectedRequest.office, disabled: true },
       ],
       deadline: [
-        this.reformatDate(this.requestService.selectedRequest.deadline),
+       '02/02/2023',
       ],
-      experience: [this.requestService.selectedRequest.projectname],
-      level: [this.requestService.selectedRequest.projectname],
+      experience: [this.requestService.selectedRequest.experience],
+      level: [this.requestService.selectedRequest.level],
       notes: [this.requestService.selectedRequest.note, Validators.required],
     });
     this.departmentID=this.requestService.selectedRequest.orgnizationID
+    this.managerID=this.requestService.selectedRequest.signID
     this.loadData();
   }
   onSubmit() {
     let request = {
-      id: 0,
+      id: this.requestService.selectedRequest.id,
       name: this.requestForm.controls['name'].value,
       code: this.requestForm.controls['requestCode'].value,
       requestLevel: this.requestForm.controls['type'].value,
       orgnizationId: this.departmentID,
       positionID: this.requestForm.controls['position'].value,
       number: this.requestForm.controls['quantity'].value,
-      signId: this.requestService.selectedRequest.signID,
-      effectDate:this.requestService.selectedRequest.createdOn,
-      expireDate: this.requestForm.controls['deadline'].value,
+      signId: this.managerID,
+      effectDate:'02/02/2023',
+      expireDate: '02/02/2023',
       yearExperience: this.requestForm.controls['experience'].value,
       level: this.requestForm.controls['level'].value,
       type: this.requestForm.controls['type'].value,
@@ -94,7 +98,35 @@ export class FormRequestComponent implements OnInit {
       updateBy: 'HUNGNX',
       updateDate: this.requestService.selectedRequest.createdOn,
     };
-   
+    console.log(request)
+    Swal.fire({
+      text: 'Are you sure to edit this request?',
+      iconHtml:
+        ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+      showCancelButton: true,
+      confirmButtonColor: '#309EFC',
+      cancelButtonColor: '#8B94B2',
+      confirmButtonText: 'Confirm',
+      width: '380px',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log('confirm')
+        this.requestService.editRequest(request).subscribe(
+          (response: any) => {
+            console.log('call api')
+            if (response.status == true) {
+              this.commonService.popUpSuccess();
+              this.location.back()
+            } else {
+              this.commonService.popUpFailed('Something wrong');
+            }
+          },
+          // (err:any) => {
+          //   this.commonService.popUpFailed('Something wrong');
+          // }
+        );
+      }
+    });
 
   }
   loadData() {

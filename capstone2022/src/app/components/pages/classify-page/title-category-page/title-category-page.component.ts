@@ -42,8 +42,9 @@ export class TitleCategoryPageComponent implements OnInit {
       note: [{ value: '', disabled: true }],
     });
     this.listSelected = []
-    this.titleservice.getAll(0, 9999).subscribe((response: any) => {
+    this.titleservice.getAll(this.page-1, this.itemsPerPage).subscribe((response: any) => {
       this.titleList = response.data
+      this.totalItems=response.totalItem
     })
   }
   addNewTitle() {
@@ -169,7 +170,7 @@ export class TitleCategoryPageComponent implements OnInit {
     console.log(this.listSelected);
   }
   gty(page: number) {
-    this.router.navigateByUrl(`/phanloaitochuc/danhmuchucdanh?index=${page - 1}&size=${this.itemsPerPage}`);
+    this.router.navigateByUrl(`/phanloaitochuc/danhmuchucdanh?index=${page}&size=${this.itemsPerPage}`);
     this.resetValue();
     this.selectedIndexInTable = null;
     this.loadData(page - 1);
