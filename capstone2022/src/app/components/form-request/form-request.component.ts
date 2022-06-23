@@ -39,7 +39,7 @@ export class FormRequestComponent implements OnInit {
       name: [this.requestService.selectedRequest.name, [Validators.required]],
       type: [this.requestService.selectedRequest.typeID],
       dep: [
-        this.requestService.selectedRequest.orgnizationID,
+        this.requestService.selectedRequest.orgnizationName,
         [Validators.required],
       ],
       projects: [
@@ -64,10 +64,39 @@ export class FormRequestComponent implements OnInit {
       level: [this.requestService.selectedRequest.projectname],
       notes: [this.requestService.selectedRequest.note, Validators.required],
     });
-
+    this.departmentID=this.requestService.selectedRequest.orgnizationID
     this.loadData();
   }
-  onSubmit() {}
+  onSubmit() {
+    let request = {
+      id: 0,
+      name: this.requestForm.controls['name'].value,
+      code: this.requestForm.controls['requestCode'].value,
+      requestLevel: this.requestForm.controls['type'].value,
+      orgnizationId: this.departmentID,
+      positionID: this.requestForm.controls['position'].value,
+      number: this.requestForm.controls['quantity'].value,
+      signId: this.requestService.selectedRequest.signID,
+      effectDate:this.requestService.selectedRequest.createdOn,
+      expireDate: this.requestForm.controls['deadline'].value,
+      yearExperience: this.requestForm.controls['experience'].value,
+      level: this.requestForm.controls['level'].value,
+      type: this.requestForm.controls['type'].value,
+      project: this.requestForm.controls['projects'].value,
+      budget: 0,
+      note: this.requestForm.controls['notes'].value,
+      comment: this.requestService.selectedRequest.comment,
+      status: this.requestService.selectedRequest.statusID,
+      parentID: this.requestService.selectedRequest.parentId,
+      rank: this.requestService.selectedRequest.rank,
+      createBy: 'HUNGNX',
+      createDate: this.requestService.selectedRequest.createdOn,
+      updateBy: 'HUNGNX',
+      updateDate: this.requestService.selectedRequest.createdOn,
+    };
+   
+
+  }
   loadData() {
     this.loadListOfLevel();
     this.loadListOfPosition();
@@ -141,4 +170,6 @@ export class FormRequestComponent implements OnInit {
     let dArr = dateStr.split('/'); // ex input "2010-01-18"
     return dArr[2] + '/' + dArr[1] + '/' + dArr[0].substring(2); //ex out: "18/01/10"
   }
+
+  
 }

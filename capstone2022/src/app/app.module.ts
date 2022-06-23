@@ -42,6 +42,7 @@ import { RejectBtnComponent } from './components/reject-btn/reject-btn.component
 import { RequestService } from './services/request-service/request.service';
 import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
+import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +79,7 @@ import { TitleCategoryPageComponent } from './components/pages/classify-page/tit
     SubmitBtnComponent,
     RejectBtnComponent,
     TitleCategoryPageComponent,
+    PositionCategoiresPageComponent,
   ],
   imports: [
     BrowserModule,
