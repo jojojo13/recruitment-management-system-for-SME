@@ -9,12 +9,26 @@
 }
 .content {
   padding-bottom: 40px;
-  &-middle{
-    &-left{
+  &-middle {
+    margin-top: 40px;
+
+    display: flex;
+    padding: 0 30px;
+    &-left {
+      width: 30%;
       margin-top: 10px;
       margin-left: 20px;
-      &-attach{
+      &-attach {
         display: flex;
+      }
+    }
+    &-right {
+      width: 70%;
+      padding-left: 50px;
+      &-attach {
+        display: flex;
+        width: 100%;
+        justify-content: center;
       }
     }
   }

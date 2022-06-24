@@ -257,6 +257,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.requestService.selectedRequest = request;
     this.clearClass();
     clicked.classList.add('selected');
+    console.log(request)
   }
   clearClass() {
     let tr: any = document.querySelectorAll('tbody tr');

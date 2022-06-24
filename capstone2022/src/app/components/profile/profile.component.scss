@@ -8,9 +8,14 @@
   src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
 }
 .content {
+  width: 100%;
+
   &-wrapper {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
     &-box {
       width: 80px;
       height: 80px;
@@ -22,13 +27,16 @@
       }
     }
     p {
-      color: #565656;
-      margin-left: 20px;
+      color: #252525;
+      margin-top: 10px;
       font-style: normal;
       font-weight: 300;
       font-size: 15px;
       padding: 5px;
       background-color: #d3d3d3;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
     }
   }
 }
