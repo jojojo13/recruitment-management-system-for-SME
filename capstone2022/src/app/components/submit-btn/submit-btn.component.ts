@@ -19,7 +19,7 @@ export class SubmitBtnComponent implements OnInit {
   submit() {
     if(this.reqService.listSelectedRequest.length>0){
       let check = this.reqService.listSelectedRequest.every((req: any) => {
-        return req.statusID == 1||req.statusID == 3;
+        return req.statusID == 1 || req.statusID == 3 || req.statusID == 5;
       });
       if (check) {
         let idList = this.reqService.listSelectedRequest.map(
@@ -40,7 +40,7 @@ export class SubmitBtnComponent implements OnInit {
           }
         );
       } else {
-        this.commonService.popUpFailed('Only choose request has draft status');
+        this.commonService.popUpFailed('Only choose request has draft, cancel, reject status');
       }
     }else{
       this.commonService.popUpFailed('Please choose request');
