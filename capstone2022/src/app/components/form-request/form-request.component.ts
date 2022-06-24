@@ -123,10 +123,10 @@ export class FormRequestComponent implements OnInit {
             } else {
               this.commonService.popUpFailed('Something wrong');
             }
+          },
+          (err:any) => {
+            this.commonService.popUpFailed('Something wrong');
           }
-          // (err:any) => {
-          //   this.commonService.popUpFailed('Something wrong');
-          // }
         );
       }
     });

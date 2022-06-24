@@ -8,6 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
+import { AuthorizeService } from 'src/app/services/authorize.service';
 
 @Component({
   selector: 'app-grid',
@@ -27,7 +28,8 @@ export class GridComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private auth:AuthorizeService
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
@@ -44,7 +46,21 @@ export class GridComponent implements OnInit, OnDestroy {
     });
   }
   navigateEdit(request: any) {
-    this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
+   
+    this.auth.userSubject.subscribe(user=>{
+      if(user.rule==2){
+        if(request.statusID==1||request.statusID==3||request.statusID==5){
+          this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
+    
+        }else{
+          this.commonService.popUpFailed('Only edit request have draft,cancel and reject status')
+    
+        }
+      }else{
+        this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
+      }
+    })
+    
   }
   loadData(pageIndex: number) {
     this.requestService

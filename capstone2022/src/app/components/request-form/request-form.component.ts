@@ -37,7 +37,7 @@ export class RequestFormComponent implements OnInit {
     this.requestForm = this.fb.group({
       requestCode: [{ value: '', disabled: true }],
       name: ['', [Validators.required]],
-      type: [],
+      type: ['',[Validators.required]],
       dep: ['', [Validators.required]],
       projects: ['', [Validators.required]],
       position: ['', [Validators.required]],
@@ -46,9 +46,9 @@ export class RequestFormComponent implements OnInit {
         [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
       ],
       office: [{ value: '', disabled: true }],
-      deadline: [''],
+      deadline: ['',[Validators.required]],
       experience: ['',  [Validators.pattern('^[1-9][0-9]*$'), Validators.required]],
-      level: [''],
+      level: ['',[Validators.required]],
       notes: ['', Validators.required],
     });
     this.commonService.getOtherList('RC_TYPE',0,9999).subscribe((response: any) => {

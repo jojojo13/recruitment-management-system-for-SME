@@ -36,6 +36,14 @@
             {{ type.name }}
           </option>
         </select>
+        <small
+        class="text-danger"
+        *ngIf="
+          requestForm.get('type')?.hasError('required') &&
+          requestForm.get('type')?.touched
+        "
+        >Please input level</small
+      >
       </div>
       <div class="form-group">
         <label for="name">Dep/Proj Name</label>
@@ -65,7 +73,6 @@
           "
           >Please choose projects</small
         >
-       
       </div>
       <div class="form-group">
         <label for="name">Position</label>
@@ -117,6 +124,14 @@
           class="form-control"
           formControlName="deadline"
         />
+        <small
+        class="text-danger"
+        *ngIf="
+          requestForm.get('deadline')?.hasError('required') &&
+          requestForm.get('deadline')?.touched
+        "
+        >Please input deadline</small
+      >
       </div>
       <div class="form-group">
         <label for="name">Roadmap</label>
@@ -148,6 +163,14 @@
             {{ level.name }}
           </option>
         </select>
+        <small
+        class="text-danger"
+        *ngIf="
+          requestForm.get('level')?.hasError('required') &&
+          requestForm.get('level')?.touched
+        "
+        >Please input level</small
+      >
       </div>
 
       <div class="form-group">
@@ -168,14 +191,23 @@
         >
       </div>
       <div class="form-buttons">
-        <button (click)="clearInputField()"   type="button"class="form-buttons-items form-buttons-items--clear">
+        <button
+          (click)="clearInputField()"
+          type="button"
+          class="form-buttons-items form-buttons-items--clear"
+        >
           Clear all
         </button>
-        <button  type="button"  [disabled]="!requestForm.valid" (click)="onSubmit(1)" class="form-buttons-items form-buttons-items--draft">
+        <button
+          type="button"
+          [disabled]="!requestForm.valid"
+          (click)="onSubmit(1)"
+          class="form-buttons-items form-buttons-items--draft"
+        >
           Save Draft
         </button>
         <button
-          type="submit"
+          type="button"
           (click)="onSubmit(2)"
           [disabled]="!requestForm.valid"
           class="form-buttons-items form-buttons-items--send"
