@@ -9,9 +9,12 @@ export class CreateCandidatePageComponent implements OnInit {
   route={name:'Create New Candidate',link:'/ungvien'}
   attach={name:'Attach CV'}
   attach2={name:'Attach Portfolio'}
+  pdfSrc=''
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  getPdfSrc(src:string){
+    this.pdfSrc=src
+  }
 }

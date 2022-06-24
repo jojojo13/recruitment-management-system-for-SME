@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-attach-file',
@@ -6,9 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./attach-file.component.scss']
 })
 export class AttachFileComponent implements OnInit {
+  @Output() pdfSrc = new EventEmitter<string>();
   @Input('attach') attach:any
-  src=''
-  constructor() { }
+
+  constructor(private commonService:CommonService) { }
 
   ngOnInit(): void {
   }
@@ -16,8 +18,7 @@ export class AttachFileComponent implements OnInit {
     let inputTypeFILE=(document.querySelector('input[type="file"]') as HTMLInputElement)
     inputTypeFILE.click() ;
     inputTypeFILE.addEventListener('change',()=>{
-      this.src=inputTypeFILE.value
-      console.log(this.src)
+      this.pdfSrc.emit(inputTypeFILE.value)
     })
   }
 }

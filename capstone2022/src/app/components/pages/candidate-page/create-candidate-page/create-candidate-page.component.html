@@ -12,11 +12,11 @@
     </div>
     <div class="content-middle-right">
         <div class="content-middle-right-attach">
-            <app-attach-file [attach]="attach"> </app-attach-file>
-            <app-attach-file [attach]="attach2"> </app-attach-file>
+            <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach"> </app-attach-file>
+            <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach2"> </app-attach-file>
         </div>
         <div class="content-middle-right-show">
-          <app-show-pdf-file></app-show-pdf-file>
+          <app-show-pdf-file [pdfSrc]="pdfSrc"></app-show-pdf-file>
         </div>
     </div>
   </div>

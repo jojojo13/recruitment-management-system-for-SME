@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonService {
   baseUrl = 'https://localhost:44376/api/CommonAPI/GetOtherList';
   dataChange:BehaviorSubject<boolean>;
+  pdfSrc=''
   constructor(
     private __http: HttpClient,
     private router: Router,

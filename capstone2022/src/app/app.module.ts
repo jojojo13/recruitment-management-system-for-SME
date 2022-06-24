@@ -39,7 +39,7 @@ import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
 import { SubmitBtnComponent } from './components/submit-btn/submit-btn.component';
 import { RejectBtnComponent } from './components/reject-btn/reject-btn.component';
-import { RequestService } from './services/request-service/request.service';
+
 import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
@@ -48,6 +48,7 @@ import { StepComponent } from './components/step/step.component';
 import { ShowPdfFileComponent } from './components/show-pdf-file/show-pdf-file.component';
 import { InstitutePageComponent } from './components/pages/institute-page/institute-page.component';
 import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,6 +101,7 @@ import { PositionInOrgComponent } from './components/pages/institute-page/positi
     NgxPaginationModule,
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
+    PdfViewerModule
   ],
   providers: [
     {
