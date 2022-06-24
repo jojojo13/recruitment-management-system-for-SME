@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrganizationService {
-  baseUrl='https://localhost:44376/api/OrgnizationAPI'
+  baseUrl = 'https://localhost:44376/api/OrgnizationAPI'
+  baseCommonUrl = 'https://localhost:44376/api/CommonAPI'
   constructor(private __http:HttpClient) { }
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class OrganizationService {
     return this.__http.post(this.baseUrl+`/getOrgByID?Id=${id}`,{})
   }
   getOtherListType(id:number){
-    return this.__http.post(this.baseUrl+`/GetOtherListType?phanHe=${id}`,{})
+    return this.__http.post(this.baseCommonUrl+`/GetOtherListType?phanHe=${id}`,{})
   }
 
 
