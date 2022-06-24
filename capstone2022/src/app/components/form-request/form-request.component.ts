@@ -6,7 +6,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 import { RequestService } from 'src/app/services/request-service/request.service';
 import Swal from 'sweetalert2';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-form-request',
   templateUrl: './form-request.component.html',
@@ -21,6 +21,7 @@ export class FormRequestComponent implements OnInit {
   levels: any;
   today: string = new Date().toISOString().slice(0, 10);
   departmentID!: number;
+  setDeadline: any;
   managerID!: number;
   reqService: any;
   constructor(
@@ -30,11 +31,13 @@ export class FormRequestComponent implements OnInit {
     private orgService: OrganizationService,
     private commonService: CommonService,
     private router: Router,
-    private location:Location
-    
+    private location: Location
   ) {}
 
   ngOnInit(): void {
+    this.setDeadline = this.reformatDate(
+      this.requestService.selectedRequest.deadline
+    );
     this.requestForm = this.fb.group({
       requestCode: [
         { value: this.requestService.selectedRequest.code, disabled: true },
@@ -60,16 +63,16 @@ export class FormRequestComponent implements OnInit {
       office: [
         { value: this.requestService.selectedRequest.office, disabled: true },
       ],
-      deadline: [
-       '02/02/2023',
-      ],
-      experience: [this.requestService.selectedRequest.experience],
+      deadline: [this.setDeadline,[Validators.required]],
+      experience: [this.requestService.selectedRequest.experience,[Validators.required]],
       level: [this.requestService.selectedRequest.level],
       notes: [this.requestService.selectedRequest.note, Validators.required],
     });
-    this.departmentID=this.requestService.selectedRequest.orgnizationID
-    this.managerID=this.requestService.selectedRequest.signID
+  
+    this.departmentID = this.requestService.selectedRequest.orgnizationID;
+    this.managerID = this.requestService.selectedRequest.signID;
     this.loadData();
+    console.log(this.setDeadline);
   }
   onSubmit() {
     let request = {
@@ -81,8 +84,8 @@ export class FormRequestComponent implements OnInit {
       positionID: this.requestForm.controls['position'].value,
       number: this.requestForm.controls['quantity'].value,
       signId: this.managerID,
-      effectDate:'02/02/2023',
-      expireDate: '02/02/2023',
+      effectDate: '2022-06-23T08:45:38.630Z',
+      expireDate: this.requestForm.controls['deadline'].value,
       yearExperience: this.requestForm.controls['experience'].value,
       level: this.requestForm.controls['level'].value,
       type: this.requestForm.controls['type'].value,
@@ -94,11 +97,11 @@ export class FormRequestComponent implements OnInit {
       parentID: this.requestService.selectedRequest.parentId,
       rank: this.requestService.selectedRequest.rank,
       createBy: 'HUNGNX',
-      createDate: this.requestService.selectedRequest.createdOn,
+      createDate:'2022-06-23T08:45:38.630Z',
       updateBy: 'HUNGNX',
-      updateDate: this.requestService.selectedRequest.createdOn,
+      updateDate: '2022-06-23T08:45:38.630Z',
     };
-    console.log(request)
+    console.log(request);
     Swal.fire({
       text: 'Are you sure to edit this request?',
       iconHtml:
@@ -110,24 +113,23 @@ export class FormRequestComponent implements OnInit {
       width: '380px',
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('confirm')
+        console.log('confirm');
         this.requestService.editRequest(request).subscribe(
           (response: any) => {
-            console.log('call api')
+            console.log('call api');
             if (response.status == true) {
               this.commonService.popUpSuccess();
-              this.location.back()
+              this.location.back();
             } else {
               this.commonService.popUpFailed('Something wrong');
             }
-          },
+          }
           // (err:any) => {
           //   this.commonService.popUpFailed('Something wrong');
           // }
         );
       }
     });
-
   }
   loadData() {
     this.loadListOfLevel();
@@ -199,9 +201,7 @@ export class FormRequestComponent implements OnInit {
     }
   }
   reformatDate(dateStr: string) {
-    let dArr = dateStr.split('/'); // ex input "2010-01-18"
-    return dArr[2] + '/' + dArr[1] + '/' + dArr[0].substring(2); //ex out: "18/01/10"
+    let newdate;
+    return (newdate = dateStr.split('/').reverse().join('-')); //ex out: "18/01/10"
   }
-
-  
 }

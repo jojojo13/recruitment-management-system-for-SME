@@ -44,6 +44,10 @@ import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
 import { HistoryComponent } from './components/history/history.component';
+import { StepComponent } from './components/step/step.component';
+import { ShowPdfFileComponent } from './components/show-pdf-file/show-pdf-file.component';
+import { InstitutePageComponent } from './components/pages/institute-page/institute-page.component';
+import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +86,10 @@ import { HistoryComponent } from './components/history/history.component';
     TitleCategoryPageComponent,
     PositionCategoiresPageComponent,
     HistoryComponent,
+    StepComponent,
+    ShowPdfFileComponent,
+    InstitutePageComponent,
+    PositionInOrgComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,11 +102,11 @@ import { HistoryComponent } from './components/history/history.component';
     SweetAlert2Module.forRoot(),
   ],
   providers: [
-//     {
-//       provide: HTTP_INTERCEPTORS,
-//       useClass: JwtInterceptor,
-//       multi: true
-// }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+}
    
   ],
   bootstrap: [AppComponent],

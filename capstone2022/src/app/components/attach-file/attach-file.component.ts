@@ -7,9 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AttachFileComponent implements OnInit {
   @Input('attach') attach:any
+  src=''
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  uploadFile(){
+    let inputTypeFILE=(document.querySelector('input[type="file"]') as HTMLInputElement)
+    inputTypeFILE.click() ;
+    inputTypeFILE.addEventListener('change',()=>{
+      this.src=inputTypeFILE.value
+      console.log(this.src)
+    })
+  }
 }

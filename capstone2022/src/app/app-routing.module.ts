@@ -15,6 +15,8 @@ import { ClassifyPageComponent } from './components/pages/classify-page/classify
 import { SystemCategoriesPageComponent } from './components/pages/classify-page/system-categories-page/system-categories-page.component';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
+import { InstitutePageComponent } from './components/pages/institute-page/institute-page.component';
+import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
 
 const routes: Routes = [
   {
@@ -44,9 +46,11 @@ const routes: Routes = [
       {
         path: 'phanloaitochuc',
         component: ClassifyPageComponent,
-        children: [
-         
-        ],
+       
+      },
+      {
+        path: 'thietlaptochuc',
+        component: InstitutePageComponent,
       },
       {
         path: 'phanloaitochuc/thamsohethong',
@@ -59,6 +63,10 @@ const routes: Routes = [
       {
         path: 'phanloaitochuc/danhmucvitricongviec',
         component: PositionCategoiresPageComponent,
+      },
+      {
+        path: 'thietlaptochuc/vitricongviec',
+        component: PositionInOrgComponent,
       },
     ],
   },
