@@ -26,7 +26,7 @@ export class RejectBtnComponent implements OnInit {
           (req: any) => req.id
         );
         Swal.fire({
-          text: 'Are you sure to cancel?',
+          text: 'Are you sure to reject?',
           iconHtml:
             ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
           showCancelButton: true,

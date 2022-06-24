@@ -27,7 +27,7 @@ export class EditBtnComponent implements OnInit {
           (req: any) => req.id
         );
         Swal.fire({
-          text: 'Are you sure to cancel?',
+          text: 'Are you sure to approve?',
           iconHtml:
             ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
           showCancelButton: true,
