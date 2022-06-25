@@ -49,6 +49,8 @@ import { ShowPdfFileComponent } from './components/show-pdf-file/show-pdf-file.c
 import { InstitutePageComponent } from './components/pages/institute-page/institute-page.component';
 import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ViewOrganizationComponent } from './components/pages/institute-page/view-organization/view-organization.component';
+import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +93,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ShowPdfFileComponent,
     InstitutePageComponent,
     PositionInOrgComponent,
+    ViewOrganizationComponent,
+    InstituteForOrganizationComponent,
   ],
   imports: [
     BrowserModule,

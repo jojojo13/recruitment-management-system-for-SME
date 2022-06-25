@@ -17,6 +17,8 @@ import { TitleCategoryPageComponent } from './components/pages/classify-page/tit
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
 import { InstitutePageComponent } from './components/pages/institute-page/institute-page.component';
 import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
+import { ViewOrganizationComponent } from './components/pages/institute-page/view-organization/view-organization.component';
+import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,14 @@ const routes: Routes = [
       {
         path: 'thietlaptochuc/vitricongviec',
         component: PositionInOrgComponent,
+      },
+      {
+        path: 'thietlaptochuc/xemtochuc',
+        component: ViewOrganizationComponent,
+      },
+      {
+        path: 'thietlaptochuc/tochuc',
+        component: InstituteForOrganizationComponent,
       },
     ],
   },

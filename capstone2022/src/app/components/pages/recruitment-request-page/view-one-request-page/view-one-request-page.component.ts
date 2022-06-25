@@ -30,6 +30,7 @@ export class ViewOneRequestPageComponent implements OnInit {
     let request = this.requestService.selectedRequest;
     request.comment = this.commentString;
     request.requestLevel='2'
+    console.log(request)
     this.requestService.editRequest(request).subscribe(
       (response: any) => {
         if ((response.status = true)) {
