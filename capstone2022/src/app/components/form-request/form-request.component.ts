@@ -103,7 +103,7 @@ export class FormRequestComponent implements OnInit {
       createDate: '2022-06-23T08:45:38.630Z',
       updateBy: 'HUNGNX',
       updateDate: '2022-06-23T08:45:38.630Z',
-      hrInchange: '',
+      hrInchange: 2,
     };
     console.log(request);
     Swal.fire({

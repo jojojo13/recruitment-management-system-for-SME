@@ -143,4 +143,15 @@ export class RequestService {
     };
     return this.__http.put('https://localhost:44376/api/RequestAPI/ModifyRequest', request,httpOptions1);
   }
+
+
+  sendComment(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put('https://localhost:44376/api/RequestAPI/SendComment', request, httpOptions1);
+  }
 }
