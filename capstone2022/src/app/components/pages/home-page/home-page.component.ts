@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 
 @Component({
@@ -7,8 +8,8 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-
-  constructor(public auth:AuthorizeService) { }
+  @ViewChild('orgPicker') orgPicker!: SwalComponent;
+  constructor(public auth:AuthorizeService, public readonly swalTargets: SwalPortalTargets,) { }
 
   ngOnInit(): void {
     
@@ -18,5 +19,7 @@ export class HomePageComponent implements OnInit {
     this.auth.userSubject.next(this.auth.user)
     })
   }
-
+  showPopUp() {
+    this.orgPicker.fire();
+  }
 }

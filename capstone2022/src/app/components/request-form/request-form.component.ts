@@ -86,6 +86,8 @@ export class RequestFormComponent implements OnInit {
     this.extendFromParent();
   }
   onSubmit(status: number) {
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
     let request = {
       id: 0,
       name: this.requestForm.controls['name'].value,
@@ -117,12 +119,18 @@ export class RequestFormComponent implements OnInit {
       (response: any) => {
         if (response.status == true) {
           this.commonService.popUpSuccess();
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
         } else {
           this.commonService.popUpFailed('Failed');
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
         }
       },
       (err) => {
         this.commonService.popUpFailed('Failed');
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'none';
       }
     );
   }

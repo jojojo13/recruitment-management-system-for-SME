@@ -51,6 +51,7 @@ import { PositionInOrgComponent } from './components/pages/institute-page/positi
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ViewOrganizationComponent } from './components/pages/institute-page/view-organization/view-organization.component';
 import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
+import { PopupEmployeeComponent } from './components/popup-employee/popup-employee.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +96,7 @@ import { InstituteForOrganizationComponent } from './components/pages/institute-
     PositionInOrgComponent,
     ViewOrganizationComponent,
     InstituteForOrganizationComponent,
+    PopupEmployeeComponent,
   ],
   imports: [
     BrowserModule,

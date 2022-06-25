@@ -75,6 +75,7 @@ export class FormRequestComponent implements OnInit {
     this.departmentID = this.requestService.selectedRequest.orgnizationID;
     this.managerID = this.requestService.selectedRequest.signID;
     this.loadData();
+    this.renderPosition(this.departmentID) 
     this.disableALL();
   }
   onSubmit() {
@@ -137,7 +138,7 @@ export class FormRequestComponent implements OnInit {
   }
   loadData() {
     this.loadListOfLevel();
-    this.loadListOfPosition();
+    // this.loadListOfPosition();
     this.loadListOfProject();
     this.loadListOfType();
   }
@@ -195,6 +196,7 @@ export class FormRequestComponent implements OnInit {
     this.orgService.getPositionByOrgID(id).subscribe(
       (response: any) => {
         this.positions = response.data;
+     
       },
       (err) => {
         Swal.fire('Position for this department is not available ');

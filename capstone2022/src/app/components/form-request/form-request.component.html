@@ -26,7 +26,8 @@
       <div class="form-group">
         <label for="name">Type</label>
         <select style="font-family: Poppins" name="dep" formControlName="type">
-          <option [selected]="type.id==requestForm.controls['type'].value"
+          <option
+            [selected]="type.id == requestForm.controls['type'].value"
             style="font-family: Poppins"
             *ngFor="let type of types"
             [ngValue]="type.id"
@@ -51,7 +52,11 @@
       <div class="form-group">
         <label for="name">Projects</label>
         <select name="dep" formControlName="projects">
-          <option [selected]="project.id==requestForm.controls['projects'].value" *ngFor="let project of projects" [ngValue]="project.id">
+          <option
+            [selected]="project.id == requestForm.controls['projects'].value"
+            *ngFor="let project of projects"
+            [ngValue]="project.id"
+          >
             {{ project.name }}
           </option>
         </select>
@@ -67,7 +72,11 @@
       <div class="form-group">
         <label for="name">Position</label>
         <select name="position" formControlName="position">
-          <option [selected]="position.id==requestForm.controls['position'].value" *ngFor="let position of positions" [ngValue]="position.id">
+          <option
+            [selected]="position.id == requestForm.controls['position'].value"
+            *ngFor="let position of positions"
+            [ngValue]="position.id"
+          >
             {{ position.name }}
           </option>
         </select>
@@ -93,8 +102,10 @@
         >
         <small
           class="text-danger"
-          *ngIf="requestForm.get('quantity')?.hasError('pattern') &&
-          requestForm.get('quantity')?.touched"
+          *ngIf="
+            requestForm.get('quantity')?.hasError('pattern') &&
+            requestForm.get('quantity')?.touched
+          "
           >Please input number greater than 0.</small
         >
       </div>
@@ -110,11 +121,10 @@
       <div class="form-group">
         <label for="name">Deadline</label>
         <input
-          type="datetime"
+          type="date"
           [min]="today"
           class="form-control"
           formControlName="deadline"
-          
         />
       </div>
       <div class="form-group">
@@ -130,7 +140,11 @@
       <div class="form-group">
         <label for="name">Level</label>
         <select name="level" formControlName="level">
-          <option [selected]="level.id==requestForm.controls['level'].value" *ngFor="let level of levels" [ngValue]="level.id">
+          <option
+            [selected]="level.id == requestForm.controls['level'].value"
+            *ngFor="let level of levels"
+            [ngValue]="level.id"
+          >
             {{ level.name }}
           </option>
         </select>
@@ -161,8 +175,19 @@
           >Please input notes</small
         >
       </div>
-    </div>  
-    <button [disabled]="requestForm.invalid||this.requestService.selectedRequest.statusID == 2|| this.requestService.selectedRequest.statusID == 4" type="button" (click)="onSubmit()" class="editBtn">Edit</button>
+    </div>
+    <button
+      [disabled]="
+        requestForm.invalid ||
+        this.requestService.selectedRequest.statusID == 2 ||
+        this.requestService.selectedRequest.statusID == 4
+      "
+      type="button"
+      (click)="onSubmit()"
+      class="editBtn"
+    >
+      Edit
+    </button>
   </form>
 </div>
 <swal #orgPicker title="Choose department" width="500px" tabindex="100">

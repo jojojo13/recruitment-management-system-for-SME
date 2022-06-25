@@ -27,8 +27,7 @@ export class ViewOneRequestPageComponent implements OnInit {
     });
   }
   uploadComment() {
-  
-   
+
     let obj = {
       id: this.requestService.selectedRequest.id,
       name: this.requestService.selectedRequest.name,
