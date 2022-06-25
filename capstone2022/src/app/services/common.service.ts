@@ -74,4 +74,7 @@ export class CommonService {
 
 
   }
+  formatDate(date:string){
+    return date.split('/').join('-')
+  }
 }

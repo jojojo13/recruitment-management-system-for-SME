@@ -23,10 +23,10 @@ export class FormRequestComponent implements OnInit {
   departmentID!: number;
   setDeadline: any;
   managerID!: number;
-  reqService: any;
+
   constructor(
     private fb: FormBuilder,
-    private requestService: RequestService,
+    public requestService: RequestService,
     public readonly swalTargets: SwalPortalTargets,
     private orgService: OrganizationService,
     private commonService: CommonService,
@@ -63,16 +63,19 @@ export class FormRequestComponent implements OnInit {
       office: [
         { value: this.requestService.selectedRequest.office, disabled: true },
       ],
-      deadline: [this.setDeadline,[Validators.required]],
-      experience: [this.requestService.selectedRequest.experience,[Validators.required]],
-      level: [this.requestService.selectedRequest.level],
+      deadline: [this.setDeadline, [Validators.required]],
+      experience: [
+        this.requestService.selectedRequest.experience,
+        [Validators.required],
+      ],
+      level: [this.requestService.selectedRequest.level, Validators.required],
       notes: [this.requestService.selectedRequest.note, Validators.required],
     });
-  
+
     this.departmentID = this.requestService.selectedRequest.orgnizationID;
     this.managerID = this.requestService.selectedRequest.signID;
     this.loadData();
-    console.log(this.setDeadline);
+    this.disableALL();
   }
   onSubmit() {
     let request = {
@@ -97,9 +100,10 @@ export class FormRequestComponent implements OnInit {
       parentID: this.requestService.selectedRequest.parentId,
       rank: this.requestService.selectedRequest.rank,
       createBy: 'HUNGNX',
-      createDate:'2022-06-23T08:45:38.630Z',
+      createDate: '2022-06-23T08:45:38.630Z',
       updateBy: 'HUNGNX',
       updateDate: '2022-06-23T08:45:38.630Z',
+      hrInchange: '',
     };
     console.log(request);
     Swal.fire({
@@ -124,7 +128,7 @@ export class FormRequestComponent implements OnInit {
               this.commonService.popUpFailed('Something wrong');
             }
           },
-          (err:any) => {
+          (err: any) => {
             this.commonService.popUpFailed('Something wrong');
           }
         );
@@ -168,7 +172,13 @@ export class FormRequestComponent implements OnInit {
       });
   }
   showPopUp() {
-    this.orgPicker.fire();
+    if (
+      this.requestService.selectedRequest.statusID == 1 ||
+      this.requestService.selectedRequest.statusID == 3 ||
+      this.requestService.selectedRequest.statusID == 5
+    ) {
+      this.orgPicker.fire();
+    }
   }
   getDataFromPopup(department: any) {
     this.requestForm.controls['dep']?.setValue(department.name);
@@ -203,5 +213,14 @@ export class FormRequestComponent implements OnInit {
   reformatDate(dateStr: string) {
     let newdate;
     return (newdate = dateStr.split('/').reverse().join('-')); //ex out: "18/01/10"
+  }
+  disableALL() {
+    if (
+      this.requestService.selectedRequest.statusID == 2 ||
+      this.requestService.selectedRequest.statusID == 4
+    ) {
+      this.requestForm.disable();
+      this.requestForm.controls['dep'].setErrors({ incorrect: true });
+    }
   }
 }

@@ -27,15 +27,41 @@ export class ViewOneRequestPageComponent implements OnInit {
     });
   }
   uploadComment() {
-    let request = this.requestService.selectedRequest;
-    request.comment = this.commentString;
-    request.requestLevel='2'
-    console.log(request)
-    this.requestService.editRequest(request).subscribe(
+  
+   
+    let obj = {
+      id: this.requestService.selectedRequest.id,
+      name: this.requestService.selectedRequest.name,
+      code: this.requestService.selectedRequest.code,
+      requestLevel: this.requestService.selectedRequest.typeID,
+      orgnizationId: this.requestService.selectedRequest.orgnizationID,
+      positionID: this.requestService.selectedRequest.positionID,
+      number: this.requestService.selectedRequest.quantity,
+      signId: this.requestService.selectedRequest.signID,
+      effectDate:'2022-06-23T08:45:38.630Z',
+      expireDate:this.commonService.formatDate(this.requestService.selectedRequest.deadline),
+      yearExperience: this.requestService.selectedRequest.experience,
+      level: this.requestService.selectedRequest.level,
+      type: this.requestService.selectedRequest.typeID,
+      project: this.requestService.selectedRequest.projectID,
+      budget: 0,
+      note: this.requestService.selectedRequest.note,
+      comment: this.commentString,
+      status: this.requestService.selectedRequest.statusID,
+      parentID: this.requestService.selectedRequest.parentId,
+      rank: this.requestService.selectedRequest.rank,
+      createBy: '',
+      createDate: '2022-07-17',
+      updateBy: 'string',
+      updateDate: '2022-06-25T15:24:09.888',
+      hrInchange: 0,
+    };
+
+    console.log(obj);
+    this.requestService.editRequest(obj).subscribe(
       (response: any) => {
         if ((response.status = true)) {
           this.commonService.popUpSuccess();
-          this.location.back();
         } else {
           this.commonService.popUpFailed('Failed');
         }

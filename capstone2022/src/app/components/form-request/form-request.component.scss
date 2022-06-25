@@ -117,4 +117,15 @@ select option {
     color: #565656;
   }
 }
-
+select option [disabled] { background-color: blue; }
+ /*css style for IE*/
+ select[disabled='disabled']::-ms-value {
+  color: #555;
+}
+/*Specific to chrome and firefox*/
+select:disabled {
+  background-color: #e9ecef;
+}
+.form-control:disabled{
+  background-color: #e9ecef;
+}

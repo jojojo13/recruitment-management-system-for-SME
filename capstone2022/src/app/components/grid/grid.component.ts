@@ -47,20 +47,9 @@ export class GridComponent implements OnInit, OnDestroy {
   }
   navigateEdit(request: any) {
    
-    this.auth.userSubject.subscribe(user=>{
-      if(user.rule==2){
-        if(request.statusID==1||request.statusID==3||request.statusID==5){
-          this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
-    
-        }else{
-          this.commonService.popUpFailed('Only edit request have draft,cancel and reject status')
-    
-        }
-      }else{
+
         this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
-      }
-    })
-    
+
   }
   loadData(pageIndex: number) {
     this.requestService

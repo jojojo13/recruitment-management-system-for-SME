@@ -23,6 +23,8 @@
   </div>
   <div class="content-ending">
     <h5>Comment</h5>
+    <p>{{ requestService.selectedRequest.comment }}</p>
+
     <ng-container *ngIf="user.rule == 1">
       <textarea
         [(ngModel)]="commentString"
@@ -34,8 +36,7 @@
 
       <button type="button" (click)="uploadComment()">Send Comment</button>
     </ng-container>
-    <ng-container *ngIf="user.rule == 2">
-      <p>{{ requestService.selectedRequest.comment }}</p>
-    </ng-container>
+    
+
   </div>
 </div>

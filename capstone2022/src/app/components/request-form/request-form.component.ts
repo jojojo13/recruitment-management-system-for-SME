@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CommonService } from 'src/app/services/common.service';
@@ -16,7 +20,7 @@ export class RequestFormComponent implements OnInit {
   route = { name: 'Create request', link: 'yeucautuyendung' };
   listPosition: any;
   requestForm!: UntypedFormGroup;
-  today: string = new Date().toISOString().slice(0, 10);
+  today: Date = new Date();
   types: any;
   levels: any;
   projects: any;
@@ -37,7 +41,7 @@ export class RequestFormComponent implements OnInit {
     this.requestForm = this.fb.group({
       requestCode: [{ value: '', disabled: true }],
       name: ['', [Validators.required]],
-      type: ['',[Validators.required]],
+      type: ['', [Validators.required]],
       dep: ['', [Validators.required]],
       projects: ['', [Validators.required]],
       position: ['', [Validators.required]],
@@ -46,17 +50,24 @@ export class RequestFormComponent implements OnInit {
         [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
       ],
       office: [{ value: '', disabled: true }],
-      deadline: ['',[Validators.required]],
-      experience: ['',  [Validators.pattern('^[1-9][0-9]*$'), Validators.required]],
-      level: ['',[Validators.required]],
+      deadline: ['', [Validators.required]],
+      experience: [
+        '',
+        [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
+      ],
+      level: ['', [Validators.required]],
       notes: ['', Validators.required],
     });
-    this.commonService.getOtherList('RC_TYPE',0,9999).subscribe((response: any) => {
-      this.types = response.data;
-    });
-    this.commonService.getOtherList('RC_LEVEL',0,9999).subscribe((response: any) => {
-      this.levels = response.data;
-    });
+    this.commonService
+      .getOtherList('RC_TYPE', 0, 9999)
+      .subscribe((response: any) => {
+        this.types = response.data;
+      });
+    this.commonService
+      .getOtherList('RC_LEVEL', 0, 9999)
+      .subscribe((response: any) => {
+        this.levels = response.data;
+      });
     this.requestService
       .getAutoGenerateCODE(
         'Rc_Request',
@@ -67,12 +78,14 @@ export class RequestFormComponent implements OnInit {
       .subscribe((code) => {
         this.requestForm.controls['requestCode'].setValue(code);
       });
-    this.commonService.getOtherList('RC_PROJECT',0,9999).subscribe((response: any) => {
-      this.projects = response.data;
-    });
+    this.commonService
+      .getOtherList('RC_PROJECT', 0, 9999)
+      .subscribe((response: any) => {
+        this.projects = response.data;
+      });
     this.extendFromParent();
   }
-  onSubmit(status:number) {
+  onSubmit(status: number) {
     let request = {
       id: 0,
       name: this.requestForm.controls['name'].value,
@@ -99,19 +112,19 @@ export class RequestFormComponent implements OnInit {
       updateBy: 'HUNGNX',
       updateDate: this.today,
     };
-   
-    this.requestService.insertRequest(request).subscribe((response:any)=>{
-      if(response.status==true){
-        this.commonService.popUpSuccess()
-      }else{
-        this.commonService.popUpFailed('Failed')
-      }
-    },(err)=>{
-      this.commonService.popUpFailed('Failed')
-    })
- 
 
-   
+    this.requestService.insertRequest(request).subscribe(
+      (response: any) => {
+        if (response.status == true) {
+          this.commonService.popUpSuccess();
+        } else {
+          this.commonService.popUpFailed('Failed');
+        }
+      },
+      (err) => {
+        this.commonService.popUpFailed('Failed');
+      }
+    );
   }
   showPopUp() {
     this.orgPicker.fire();
@@ -125,7 +138,6 @@ export class RequestFormComponent implements OnInit {
     this.orgService.getOrgByID(department.id).subscribe((response: any) => {
       this.requestForm.controls['office'].setValue(response.data.office);
       this.managerID = response.data.managerID;
-
     });
   }
   renderPosition(id: number) {
@@ -134,8 +146,8 @@ export class RequestFormComponent implements OnInit {
         this.listPosition = response.data;
       },
       (err) => {
-        Swal.fire('Position for this department is not available ')
-        this.requestForm.controls['dep']?.reset()
+        Swal.fire('Position for this department is not available ');
+        this.requestForm.controls['dep']?.reset();
       }
     );
   }
@@ -150,7 +162,18 @@ export class RequestFormComponent implements OnInit {
   extendFromParent() {
     let parentRequest = this.requestService.selectedRequest;
     if (parentRequest.id != 0) {
-      this.requestForm.controls['dep'].setValue(parentRequest.orgnizationID);
+      this.requestForm.controls['dep'].setValue(parentRequest.orgnizationName);
+      this.departmentID = parentRequest.orgnizationID;
+      this.requestForm.controls['projects'].setValue(parentRequest.projectID);
+      this.renderPosition(this.departmentID);
+      this.orgService
+        .getOrgByID(this.departmentID)
+        .subscribe((response: any) => {
+          this.requestForm.controls['office'].setValue(response.data.office);
+          this.managerID = response.data.managerID;
+          this.requestForm.controls['dep'].disable();
+          this.requestForm.controls['projects'].disable();
+        });
     }
   }
 }

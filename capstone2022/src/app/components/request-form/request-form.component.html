@@ -61,7 +61,7 @@
       <div class="form-group">
         <label for="name">Projects</label>
         <select name="dep" formControlName="projects">
-          <option *ngFor="let project of projects" [ngValue]="project.id">
+          <option [selected]="project.id==requestForm.controls['projects'].value"  *ngFor="let project of projects" [ngValue]="project.id">
             {{ project.name }}
           </option>
         </select>
@@ -119,7 +119,7 @@
       <div class="form-group">
         <label for="name">Deadline</label>
         <input
-          type="date"
+          type="datetime-local"
           [min]="today"
           class="form-control"
           formControlName="deadline"
