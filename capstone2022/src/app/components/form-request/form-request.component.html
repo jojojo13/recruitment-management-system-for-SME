@@ -1,4 +1,5 @@
 <div class="content">
+  <app-loader [isLoaded]="isLoaded"></app-loader>
   <form
     novalidate
     (ngSubmit)="onSubmit()"
@@ -179,8 +180,8 @@
     <button
       [disabled]="
         requestForm.invalid ||
-        this.requestService.selectedRequest.statusID == 2 ||
-        this.requestService.selectedRequest.statusID == 4
+        this.request.statusID == 2 ||
+        this.request.statusID == 4
       "
       type="button"
       (click)="onSubmit()"
@@ -190,6 +191,7 @@
     </button>
   </form>
 </div>
+<div class="overlay"></div>
 <swal #orgPicker title="Choose department" width="500px" tabindex="100">
   <div *swalPortal="swalTargets.content">
     <app-pop-up-organizations

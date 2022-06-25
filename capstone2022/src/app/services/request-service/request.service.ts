@@ -154,4 +154,10 @@ export class RequestService {
     };
     return this.__http.put('https://localhost:44376/api/RequestAPI/SendComment', request, httpOptions1);
   }
+  getRequestByID(id:number){
+    return this.__http.put(`https://localhost:44376/api/RequestAPI/GetRequestByID?Id=${id}`,{});
+  }
+  modifyRQbyID(id:number,comment:string){
+    return this.__http.put(`https://localhost:44376/api/RequestAPI/SendComment`,{id,comment});
+  }
 }

@@ -1,6 +1,7 @@
 <h5>Recruitment Request</h5>
 <app-back-btn [route]="route"></app-back-btn>
 <div class="content">
+  <app-loader [isLoaded]="isLoaded"></app-loader>
   <form
     novalidate
     (ngSubmit)="onSubmit(2)"

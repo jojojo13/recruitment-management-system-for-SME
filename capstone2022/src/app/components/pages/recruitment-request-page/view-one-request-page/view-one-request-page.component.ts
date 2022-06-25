@@ -13,7 +13,7 @@ export class ViewOneRequestPageComponent implements OnInit {
   route: any = { name: 'View any request', link: 'yeucautuyendung' };
   user: any;
   commentString: any;
-
+ req:any
   constructor(
     private location: Location,
     public requestService: RequestService,
@@ -46,5 +46,8 @@ export class ViewOneRequestPageComponent implements OnInit {
         this.commonService.popUpFailed('Failed');
       }
     );
+  }
+  getReq(req:any){
+    this.req=req
   }
 }

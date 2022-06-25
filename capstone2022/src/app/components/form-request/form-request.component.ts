@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { CommonService } from 'src/app/services/common.service';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 import { RequestService } from 'src/app/services/request-service/request.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-form-request',
   templateUrl: './form-request.component.html',
@@ -14,6 +15,7 @@ import { Location } from '@angular/common';
 })
 export class FormRequestComponent implements OnInit {
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
+  @Output('req') req = new EventEmitter<any>();
   requestForm!: FormGroup;
   types: any;
   projects: any;
@@ -23,64 +25,77 @@ export class FormRequestComponent implements OnInit {
   departmentID!: number;
   setDeadline: any;
   managerID!: number;
-
+  request: any;
+  isLoaded=false;
   constructor(
     private fb: FormBuilder,
     public requestService: RequestService,
     public readonly swalTargets: SwalPortalTargets,
     private orgService: OrganizationService,
     private commonService: CommonService,
-    private router: Router,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.setDeadline = this.reformatDate(
-      this.requestService.selectedRequest.deadline
-    );
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
+
+    let id = this.route.snapshot.paramMap.get('id') as string;
     this.requestForm = this.fb.group({
-      requestCode: [
-        { value: this.requestService.selectedRequest.code, disabled: true },
-      ],
-      name: [this.requestService.selectedRequest.name, [Validators.required]],
-      type: [this.requestService.selectedRequest.typeID],
-      dep: [
-        this.requestService.selectedRequest.orgnizationName,
-        [Validators.required],
-      ],
-      projects: [
-        this.requestService.selectedRequest.projectID,
-        [Validators.required],
-      ],
-      position: [
-        this.requestService.selectedRequest.positionID,
-        [Validators.required],
-      ],
+      requestCode: [{ value: '', disabled: true }],
+      name: ['', [Validators.required]],
+      type: [''],
+      dep: ['', [Validators.required]],
+      projects: ['', [Validators.required]],
+      position: ['', [Validators.required]],
       quantity: [
-        this.requestService.selectedRequest.quantity,
+        '',
         [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
       ],
-      office: [
-        { value: this.requestService.selectedRequest.office, disabled: true },
-      ],
-      deadline: [this.setDeadline, [Validators.required]],
-      experience: [
-        this.requestService.selectedRequest.experience,
-        [Validators.required],
-      ],
-      level: [this.requestService.selectedRequest.level, Validators.required],
-      notes: [this.requestService.selectedRequest.note, Validators.required],
+      office: [{ value: '', disabled: true }],
+      deadline: ['', [Validators.required]],
+      experience: ['', [Validators.required]],
+      level: ['', Validators.required],
+      notes: ['', Validators.required],
     });
+    this.requestService
+      .getRequestByID(parseInt(id))
+      .subscribe((respone: any) => {
+        let rq = respone.data;
+        this.isLoaded=true
+        this.request = rq;
+        this.req.emit(rq)
+        this.setDeadline = this.reformatDate(this.request.deadline);
+        this.requestForm.controls['requestCode'].setValue(rq.code);
+        this.requestForm.controls['name'].setValue(rq.name);
+        this.requestForm.controls['type'].setValue(rq.typeID);
+        this.requestForm.controls['dep'].setValue(rq.orgnizationName);
+        this.requestForm.controls['projects'].setValue(rq.projectID);
+        this.requestForm.controls['position'].setValue(rq.positionID);
+        this.requestForm.controls['quantity'].setValue(rq.quantity);
+        this.requestForm.controls['office'].setValue(rq.office);
+        this.requestForm.controls['deadline'].setValue(this.setDeadline);
+        this.requestForm.controls['experience'].setValue(rq.experience);
+        this.requestForm.controls['level'].setValue(rq.level);
+        this.requestForm.controls['notes'].setValue(rq.note);
+        this.departmentID = rq.orgnizationID;
+        this.managerID = rq.signID;
+        this.renderPosition(this.departmentID);
+        this.disableALL();
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'none';
+      });
 
-    this.departmentID = this.requestService.selectedRequest.orgnizationID;
-    this.managerID = this.requestService.selectedRequest.signID;
     this.loadData();
-    this.renderPosition(this.departmentID) 
-    this.disableALL();
   }
   onSubmit() {
+ 
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
+      this.isLoaded=true
     let request = {
-      id: this.requestService.selectedRequest.id,
+      id: this.request.id,
       name: this.requestForm.controls['name'].value,
       code: this.requestForm.controls['requestCode'].value,
       requestLevel: this.requestForm.controls['type'].value,
@@ -96,10 +111,10 @@ export class FormRequestComponent implements OnInit {
       project: this.requestForm.controls['projects'].value,
       budget: 0,
       note: this.requestForm.controls['notes'].value,
-      comment: this.requestService.selectedRequest.comment,
-      status: this.requestService.selectedRequest.statusID,
-      parentID: this.requestService.selectedRequest.parentId,
-      rank: this.requestService.selectedRequest.rank,
+      comment: this.request.comment,
+      status: this.request.statusID,
+      parentID: this.request.parentId,
+      rank: this.request.rank,
       createBy: 'HUNGNX',
       createDate: '2022-06-23T08:45:38.630Z',
       updateBy: 'HUNGNX',
@@ -122,15 +137,26 @@ export class FormRequestComponent implements OnInit {
         this.requestService.editRequest(request).subscribe(
           (response: any) => {
             console.log('call api');
+            this.isLoaded=true
             if (response.status == true) {
+              (
+                document?.querySelector('.overlay') as HTMLElement
+              ).style.display = 'none';
               this.commonService.popUpSuccess();
               this.location.back();
             } else {
+              (
+                document?.querySelector('.overlay') as HTMLElement
+              ).style.display = 'none';
               this.commonService.popUpFailed('Something wrong');
             }
           },
           (err: any) => {
+          
+            (document?.querySelector('.overlay') as HTMLElement).style.display =
+              'none';
             this.commonService.popUpFailed('Something wrong');
+            this.isLoaded=true
           }
         );
       }
@@ -174,9 +200,9 @@ export class FormRequestComponent implements OnInit {
   }
   showPopUp() {
     if (
-      this.requestService.selectedRequest.statusID == 1 ||
-      this.requestService.selectedRequest.statusID == 3 ||
-      this.requestService.selectedRequest.statusID == 5
+      this.request.statusID == 1 ||
+      this.request.statusID == 3 ||
+      this.request.statusID == 5
     ) {
       this.orgPicker.fire();
     }
@@ -196,7 +222,6 @@ export class FormRequestComponent implements OnInit {
     this.orgService.getPositionByOrgID(id).subscribe(
       (response: any) => {
         this.positions = response.data;
-     
       },
       (err) => {
         Swal.fire('Position for this department is not available ');
@@ -209,7 +234,7 @@ export class FormRequestComponent implements OnInit {
     this.requestForm.controls['position']?.reset();
   }
   clearInputField() {
-    if (this.requestService.selectedRequest.id != 0) {
+    if (this.request.id != 0) {
     }
   }
   reformatDate(dateStr: string) {
@@ -217,10 +242,7 @@ export class FormRequestComponent implements OnInit {
     return (newdate = dateStr.split('/').reverse().join('-')); //ex out: "18/01/10"
   }
   disableALL() {
-    if (
-      this.requestService.selectedRequest.statusID == 2 ||
-      this.requestService.selectedRequest.statusID == 4
-    ) {
+    if (this.request.statusID == 2 || this.request.statusID == 4) {
       this.requestForm.disable();
       this.requestForm.controls['dep'].setErrors({ incorrect: true });
     }

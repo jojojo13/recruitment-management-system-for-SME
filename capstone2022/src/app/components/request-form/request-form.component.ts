@@ -27,6 +27,7 @@ export class RequestFormComponent implements OnInit {
   officeID!: number;
   departmentID!: number;
   managerID!: number;
+  isLoaded=false
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
     private fb: UntypedFormBuilder,
@@ -88,6 +89,7 @@ export class RequestFormComponent implements OnInit {
   onSubmit(status: number) {
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
+      this.isLoaded=false
     let request = {
       id: 0,
       name: this.requestForm.controls['name'].value,
@@ -117,6 +119,7 @@ export class RequestFormComponent implements OnInit {
 
     this.requestService.insertRequest(request).subscribe(
       (response: any) => {
+        this.isLoaded=true
         if (response.status == true) {
           this.commonService.popUpSuccess();
           (document?.querySelector('.overlay') as HTMLElement).style.display =
@@ -128,6 +131,7 @@ export class RequestFormComponent implements OnInit {
         }
       },
       (err) => {
+        this.isLoaded=true
         this.commonService.popUpFailed('Failed');
         (document?.querySelector('.overlay') as HTMLElement).style.display =
           'none';

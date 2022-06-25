@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/services/request-service/request.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { RequestService } from 'src/app/services/request-service/request.service
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-
+  @Input('req') req:any
   constructor(public requestService:RequestService) { }
 
   ngOnInit(): void {
