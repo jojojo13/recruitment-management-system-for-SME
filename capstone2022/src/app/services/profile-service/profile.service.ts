@@ -87,7 +87,7 @@ export class ProfileService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseProfileUrl + `/GetProvinceByProvinceId?ProvinceID=${id}`, {}, httpOptions1)
+    return this.__http.post(this.baseProfileUrl + `/GetProvinceByNationId?nationID=${id}`, {}, httpOptions1)
   }
 
   insertProvince(request: any) {

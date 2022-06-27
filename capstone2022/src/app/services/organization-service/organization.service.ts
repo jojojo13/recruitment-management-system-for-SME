@@ -71,6 +71,16 @@ export class OrganizationService {
     return this.__http.post(this.baseUrl + `/GetAllPosition?index=${index}&size=${size}`, {}, httpOptions1)
   }
 
+  getAllofPosition(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/GetAllOfPosition?index=${index}&size=${size}`, {}, httpOptions1)
+  }
+
 
   insertPosition(request: any) {
     let httpOptions1 = {

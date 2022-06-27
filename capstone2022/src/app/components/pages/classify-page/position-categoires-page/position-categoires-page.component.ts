@@ -51,7 +51,7 @@ export class PositionCategoiresPageComponent implements OnInit {
       workForms: [{ value: '', disabled: true }],
       otherSkill: [{ value: '', disabled: true }]
     });
-    this.organizationService.getAllPosition(this.page - 1, this.itemsPerPage).subscribe((response: any) => {
+    this.organizationService.getAllofPosition(this.page - 1, this.itemsPerPage).subscribe((response: any) => {
       this.positionList = response.data
       this.totalItems = response.totalItem
     })
