@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class RejectBtnComponent implements OnInit {
   @Input('action') action: any;
+  @Input('request') request: any;
   constructor(
     private reqService: RequestService,
     private commonService: CommonService
@@ -17,14 +18,9 @@ export class RejectBtnComponent implements OnInit {
 
   ngOnInit(): void {}
   reject() {
-    if (this.reqService.listSelectedRequest.length > 0) {
-      let check = this.reqService.listSelectedRequest.every((req: any) => {
-        return req.statusID == 2;
-      });
-      if (check) {
-        let idList = this.reqService.listSelectedRequest.map(
-          (req: any) => req.id
-        );
+
+      if (this.request.statusID==2) {
+       
         Swal.fire({
           text: 'Are you sure to reject?',
           iconHtml:
@@ -36,11 +32,12 @@ export class RejectBtnComponent implements OnInit {
           width: '380px',
         }).then((result) => {
           if (result.isConfirmed) {
-            this.reqService.rejectRequest(idList).subscribe(
+            this.reqService.rejectRequest([this.request.statusID]).subscribe(
               (response: any) => {
                 if (response.status == true) {
                   this.commonService.dataChange.next(true)
                   this.commonService.popUpSuccess();
+                  this.commonService.reloadCurrentRoute()
                 } else {
                   this.commonService.popUpFailed('Something wrong');
                 }
@@ -57,8 +54,6 @@ export class RejectBtnComponent implements OnInit {
           'Only choose request has submitted status'
         );
       }
-    } else {
-      this.commonService.popUpFailed('Please choose request ');
-    }
+   
   }
 }

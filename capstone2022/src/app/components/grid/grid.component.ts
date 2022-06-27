@@ -238,7 +238,7 @@ export class GridComponent implements OnInit, OnDestroy {
       this.renderer.listen(tr, 'click', (evt) => {
         this.getSelectedRQ(rq, tr);
       });
-      this.renderer.listen(tr, 'dbclick', (evt) => {
+      this.renderer.listen(tr, 'dblclick', (evt) => {
         this.navigateEdit(rq);
       });
       this.addClass(tr, 'children');
@@ -281,7 +281,6 @@ export class GridComponent implements OnInit, OnDestroy {
     document.addEventListener('click', this.fn, false);
   }
   selectedChange(request: any, event: any) {
-    console.log(request)
     if (event.target.checked) {
       this.requestService.listSelectedRequest.push(request);
     } else {

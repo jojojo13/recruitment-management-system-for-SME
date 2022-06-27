@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class CancelBtnComponent implements OnInit {
   @Input('action') action: any;
+  @Input('request') request: any;
   constructor(
     private reqService: RequestService,
     private commonService: CommonService
@@ -17,48 +18,39 @@ export class CancelBtnComponent implements OnInit {
 
   ngOnInit(): void {}
   editStatus() {
-    if (this.reqService.listSelectedRequest.length > 0) {
-      let check = this.reqService.listSelectedRequest.every((req: any) => {
-        return req.statusID == 2;
-      });
-
-      if (check) {
-        let idList = this.reqService.listSelectedRequest.map(
-          (req: any) => req.id
-        );
-        Swal.fire({
-          text: 'Are you sure to cancel?',
-          iconHtml:
-            ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
-          showCancelButton: true,
-          confirmButtonColor: '#309EFC',
-          cancelButtonColor: '#8B94B2',
-          confirmButtonText: 'Confirm',
-          width: '380px',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.reqService.cancelRequest(idList).subscribe(
-              (response: any) => {
-                if (response.status == true) {
-                  this.commonService.dataChange.next(true)
-                  this.commonService.popUpSuccess();
-                } else {
-                  this.commonService.popUpFailed('Something wrong');
-                }
-              },
-              (err) => {
+    console.log(this.request)
+    if (this.request.statusID == 2) {
+      Swal.fire({
+        text: 'Are you sure to cancel?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.reqService.cancelRequest([this.request.statusID]).subscribe(
+            (response: any) => {
+              if (response.status == true) {
+                this.commonService.dataChange.next(true);
+                this.commonService.popUpSuccess();
+                this.commonService.reloadCurrentRoute()
+              } else {
                 this.commonService.popUpFailed('Something wrong');
               }
-            );
-          }
-        });
-      } else {
-        this.commonService.popUpFailed(
-          'Only choose request has submitted status'
-        );
-      }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Something wrong');
+            }
+          );
+        }
+      });
     } else {
-      this.commonService.popUpFailed('Please choose request');
+      this.commonService.popUpFailed(
+        'Only choose request has submitted status'
+      );
     }
   }
 }
