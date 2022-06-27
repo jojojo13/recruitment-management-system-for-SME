@@ -118,26 +118,40 @@ export class RequestFormComponent implements OnInit {
       updateDate: this.today,
     };
 
-    this.requestService.insertRequest(request).subscribe(
+    this.requestService.checkTotal(this.requestService.selectedRequest.id, this.requestForm.controls['quantity'].value).subscribe(
       (response: any) => {
-        this.isLoaded = true;
-        if (response.status == true) {
-          this.commonService.popUpSuccess();
-          (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none';
-        } else {
-          this.commonService.popUpFailed('Failed');
+        if (response.status == false) {
+          Swal.fire('Total quantity must be less than quantity of request parent');
           (document?.querySelector('.overlay') as HTMLElement).style.display =
             'none';
         }
+        else {
+          this.requestService.insertRequest(request).subscribe(
+            (response: any) => {
+              this.isLoaded = true;
+              if (response.status == true) {
+                this.commonService.popUpSuccess();
+                (document?.querySelector('.overlay') as HTMLElement).style.display =
+                  'none';
+              } else {
+                this.commonService.popUpFailed('Failed');
+                (document?.querySelector('.overlay') as HTMLElement).style.display =
+                  'none';
+              }
+            },
+            (err) => {
+              this.isLoaded = true;
+              this.commonService.popUpFailed('Failed');
+              (document?.querySelector('.overlay') as HTMLElement).style.display =
+                'none';
+            }
+          );
+        }
       },
-      (err) => {
-        this.isLoaded = true;
-        this.commonService.popUpFailed('Failed');
-        (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'none';
-      }
     );
+
+
+
   }
   showPopUp() {
     this.orgPicker.fire();

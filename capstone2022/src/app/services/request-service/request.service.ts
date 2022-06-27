@@ -162,7 +162,7 @@ export class RequestService {
   }
 
   checkTotal(id: number, quantity: number) {
-    return this.__http.post(`https://localhost:44376/api/RequestAPI/GetRequestByID?id=${id}&quantity=${quantity}`, {});
+    return this.__http.post(`https://localhost:44376/api/RequestAPI/CheckTotalQuantity?id=${id}&quantity=${quantity}`, {});
   }
 
 
