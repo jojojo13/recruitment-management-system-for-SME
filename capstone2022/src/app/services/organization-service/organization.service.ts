@@ -13,73 +13,182 @@ export class OrganizationService {
   ngOnInit(): void {
   }
   getAllOrganization() {
-    return this.__http.post(this.baseUrl + '/GetAllOrg', {});
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + '/GetAllOrg', {}, httpOptions1);
   }
   getPositionByOrgID(id: number) {
-    return this.__http.post(this.baseProfileUrl + `/GetListPositionByOrgID?ID=${id}`, [])
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseProfileUrl + `/GetListPositionByOrgID?ID=${id}`, [], httpOptions1)
   }
 
   getOrgByID(id: number) {
-    return this.__http.post(this.baseUrl + `/getOrgByID?Id=${id}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/getOrgByID?Id=${id}`, {}, httpOptions1)
   }
   getOtherListType(id: number) {
-    return this.__http.post(this.baseCommonUrl + `/GetOtherListType?phanHe=${id}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseCommonUrl + `/GetOtherListType?phanHe=${id}`, {}, httpOptions1)
   }
 
 
   getAllTitle(index: number, size: number) {
-    return this.__http.post(this.baseUrl + `/GetAllTitle?index=${index}&size=${size}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/GetAllTitle?index=${index}&size=${size}`, {}, httpOptions1)
   }
 
   getAllPosition(index: number, size: number) {
-    return this.__http.post(this.baseUrl + `/GetAllPosition?index=${index}&size=${size}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/GetAllPosition?index=${index}&size=${size}`, {}, httpOptions1)
   }
 
 
   insertPosition(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/InsertPosition',
-      request
+      request, httpOptions1
     );
   }
   modifyPosition(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/ModifyPosition',
-      request
+      request, httpOptions1
     );
   }
 
   deletePosition(arr: Array<number>) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/DeletePosition',
-      arr
+      arr, httpOptions1
+    );
+  }
+
+  activePosition(arr: Array<number>) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + '/ActivePosition',
+      arr, httpOptions1
+    );
+  }
+  deactivePosition(arr: Array<number>) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + '/DeActivePosition',
+      arr, httpOptions1
     );
   }
 
   checkPositionExist(orgId: number, positionId: number) {
-    return this.__http.post(this.baseUrl + `/CheckPositionExist?orgId=${orgId}&positionId=${positionId}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/CheckPositionExist?orgId=${orgId}&positionId=${positionId}`, {}, httpOptions1)
   }
 
   getAllPositionOrg(index: number, size: number) {
-    return this.__http.post(this.baseUrl + `/GetAllPositionOrg?index=${index}&size=${size}`, {})
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/GetAllPositionOrg?index=${index}&size=${size}`, {}, httpOptions1)
   }
 
   insertPositionOrg(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/InsertPositionOrg',
-      request
+      request, httpOptions1
     );
   }
   modifyPositionOrg(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/ModifyPositionOrg',
-      request
+      request, httpOptions1
     );
   }
   deletePositionOrg(arr: Array<number>) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
     return this.__http.post(
       this.baseUrl + '/DeletePositionOrg',
-      arr
+      arr, httpOptions1
     );
   }
   insertOrg(request: any) {

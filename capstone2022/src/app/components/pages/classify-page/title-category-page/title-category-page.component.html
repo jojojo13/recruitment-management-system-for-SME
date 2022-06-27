@@ -1,12 +1,19 @@
 <div class="content">
   <h5>Classify Organization</h5>
   <app-back-btn [route]="route"></app-back-btn>
+
   <div class="action">
     <div class="action-item" (click)="addNewTitle()">
       <p><i class="far fa-plus circle-icon"></i>Add new</p>
     </div>
     <div class="action-item" (click)="deleteTitle()">
-      <p><i class="far fa-plus circle-icon"></i>Delete</p>
+      <p><i class="fa fa-trash"></i>Delete</p>
+    </div>
+    <div class="action-item" (click)="activeTitle()">
+      <p><i class="fa fa-check"></i>Active</p>
+    </div>
+    <div class="action-item" (click)="deactiveTitle()">
+      <p><i class="fa fa-ban"></i>Deactive</p>
     </div>
   </div>
 
@@ -44,6 +51,7 @@
               <td>Name</td>
               <td>Code</td>
               <td>Note</td>
+              <td>Status</td>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +74,7 @@
               <td>{{ item.name }}</td>
               <td>{{ item.code }}</td>
               <td>{{ item.note }}</td>
+              <td>{{ item.status }}</td>
             </tr>
           </tbody>
         </table>

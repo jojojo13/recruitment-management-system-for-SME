@@ -144,6 +144,77 @@ export class PositionCategoiresPageComponent implements OnInit {
       });
     }
   }
+
+  activePosition() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    }
+    else {
+      Swal.fire({
+        text: 'Are you sure to delete?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.organizationService.activePosition(this.listSelected).subscribe(
+            (res: any) => {
+              if (res.status == true) {
+                this.loadData(this.page - 1);
+                this.commonService.popUpSuccess();
+                this.listSelected = []
+              } else {
+                this.commonService.popUpFailed('Some records have been appplied');
+              }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Some records have been appplied');
+            }
+          );
+        }
+      });
+    }
+
+  }
+  deactivePosition() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    }
+    else {
+      Swal.fire({
+        text: 'Are you sure to delete?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.organizationService.deactivePosition(this.listSelected).subscribe(
+            (res: any) => {
+              if (res.status == true) {
+                this.loadData(this.page - 1);
+                this.commonService.popUpSuccess();
+                this.listSelected = []
+              } else {
+                this.commonService.popUpFailed('Some records have been appplied');
+              }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Some records have been appplied');
+            }
+          );
+        }
+      });
+    }
+
+  }
   renderData(index: number, categoryID: number) {
     this.page = 1;
     this.resetValue();

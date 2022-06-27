@@ -42,7 +42,7 @@ export class TitleCategoryPageComponent implements OnInit {
       note: [{ value: '', disabled: true }],
     });
     this.listSelected = []
-    this.titleservice.getAll(this.page-1, this.itemsPerPage).subscribe((response: any) => {
+    this.titleservice.getAllTitle(this.page-1, this.itemsPerPage).subscribe((response: any) => {
       this.titleList = response.data
       this.totalItems=response.totalItem
     })
@@ -195,7 +195,82 @@ export class TitleCategoryPageComponent implements OnInit {
               if (res.status == true) {
                 this.loadData(this.page - 1);
                 this.commonService.popUpSuccess();
-                this.listSelected = []
+                this.listSelected = [];
+                this.resetValue();
+                this.disableControl();
+
+              } else {
+                this.commonService.popUpFailed('Some records have been appplied');
+              }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Some records have been appplied');
+            }
+          );
+        }
+      });
+    }
+  }
+
+  activeTitle() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      Swal.fire({
+        text: 'Are you sure to delete?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.titleservice.activeTitle(this.listSelected).subscribe(
+            (res: any) => {
+              if (res.status == true) {
+                this.loadData(this.page - 1);
+                this.commonService.popUpSuccess();
+                this.listSelected = [];
+                this.resetValue();
+                this.disableControl();
+              } else {
+                this.commonService.popUpFailed('Some records have been appplied');
+              }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Some records have been appplied');
+            }
+          );
+        }
+      });
+    }
+  }
+
+  deactiveTitle() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      Swal.fire({
+        text: 'Are you sure to delete?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.titleservice.deactiveTitle(this.listSelected).subscribe(
+            (res: any) => {
+              if (res.status == true) {
+                this.loadData(this.page - 1);
+                this.commonService.popUpSuccess();
+                this.listSelected = [];
+                this.resetValue();
+                this.disableControl();
               } else {
                 this.commonService.popUpFailed('Some records have been appplied');
               }

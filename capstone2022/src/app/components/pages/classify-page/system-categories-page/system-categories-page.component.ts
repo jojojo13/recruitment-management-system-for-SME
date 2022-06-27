@@ -54,7 +54,7 @@ export class SystemCategoriesPageComponent implements OnInit {
       
     });
     this.commonService
-      .getOtherList('RC_PROJECT', 0, 9999)
+      .getAllOtherList('RC_PROJECT', 0, 9999)
       .subscribe((res: any) => {
         this.listItemInCategory = res.data;
         this.totalItems=res.totalItem
@@ -156,7 +156,7 @@ export class SystemCategoriesPageComponent implements OnInit {
   }
   loadData(code: string, pageIndex: number) {
     this.commonService
-      .getOtherList(code, pageIndex, this.itemsPerPage)
+      .getAllOtherList(code, pageIndex, this.itemsPerPage)
       .subscribe((res: any) => {
         this.listItemInCategory = res.data;
         this.totalItems = res.totalItem;
@@ -206,7 +206,9 @@ export class SystemCategoriesPageComponent implements OnInit {
           if (res.status == true) {
             this.loadData(this.code, this.page - 1);
             this.commonService.popUpSuccess();
-            this.listSelected=[]
+            this.listSelected = [];
+            this.resetValue();
+            this.disableControl();
           } else {
             this.commonService.popUpFailed('Some records have been appplied');
           }
@@ -217,4 +219,51 @@ export class SystemCategoriesPageComponent implements OnInit {
       );
     }
   }
+
+  activeCategory() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.commonService.activeOtherList(this.listSelected).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData(this.code, this.page - 1);
+            this.commonService.popUpSuccess();
+            this.listSelected = [];
+            this.resetValue();
+            this.disableControl();
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
+    }
+  }
+
+  deactiveCategory() {
+    if (this.listSelected.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.commonService.deactiveOtherList(this.listSelected).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData(this.code, this.page - 1);
+            this.commonService.popUpSuccess();
+            this.listSelected = [];
+            this.resetValue();
+            this.disableControl();
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
+    }
+  }
+
 }

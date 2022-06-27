@@ -6,10 +6,15 @@
       <p><i class="far fa-plus circle-icon"></i>Add new</p>
     </div>
     <div class="action-item" (click)="deleteCategory()">
-      <p><i class="far fa-plus circle-icon"></i>Delete</p>
+      <p><i class="fa fa-trash"></i>Delete</p>
+    </div>
+    <div class="action-item" (click)="activeCategory()">
+      <p><i class="fa fa-check"></i>Active</p>
+    </div>
+    <div class="action-item" (click)="deactiveCategory()">
+      <p><i class="fa fa-ban"></i>Deactive</p>
     </div>
   </div>
-
   <div class="content-middle">
     <div class="content-middle-category">
       <div class="content-middle-category-heading">
@@ -68,13 +73,13 @@
               <td>Name</td>
               <td>Code</td>
               <td>Note</td>
+              <td>Status</td>
             </tr>
           </thead>
           <tbody>
-            <tr
-              [ngClass]="{ active: selectedIndexInTable === i }"
-              (click)="chooseItem(item, i)"
-              *ngFor="
+            <tr [ngClass]="{ active: selectedIndexInTable === i }"
+                (click)="chooseItem(item, i)"
+                *ngFor="
                 let item of listItemInCategory
                   | paginate
                     : {
@@ -83,8 +88,7 @@
                         totalItems: totalItems
                       };
                 let i = index
-              "
-            >
+              ">
               <td>
                 <mat-checkbox (change)="updateAllComplete($event, item.id)">
                 </mat-checkbox>
@@ -92,6 +96,7 @@
               <td>{{ item.name }}</td>
               <td>{{ item.code }}</td>
               <td>{{ item.note }}</td>
+              <td>{{ item.statusName }}</td>
             </tr>
           </tbody>
         </table>
