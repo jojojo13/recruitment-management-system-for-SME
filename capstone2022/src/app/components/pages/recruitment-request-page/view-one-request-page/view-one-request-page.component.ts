@@ -14,6 +14,7 @@ export class ViewOneRequestPageComponent implements OnInit {
   user: any;
   commentString: any;
   request: any;
+  isLoaded = true;
   constructor(
     private location: Location,
     public requestService: RequestService,
@@ -27,20 +28,33 @@ export class ViewOneRequestPageComponent implements OnInit {
     });
   }
   uploadComment() {
+    this.isLoaded = false;
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
     let obj = {
-      id: this.requestService.selectedRequest.id,
+      id: this.request.id,
       comment: this.commentString,
     };
 
     this.requestService.sendComment(obj).subscribe(
       (response: any) => {
         if ((response.status = true)) {
+          this.isLoaded = true;
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
           this.commonService.popUpSuccess();
+          this.commonService.reloadCurrentRoute();
         } else {
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
+          this.isLoaded = true;
           this.commonService.popUpFailed('Failed');
         }
       },
       (err) => {
+        this.isLoaded = true;
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'none';
         this.commonService.popUpFailed('Failed');
       }
     );

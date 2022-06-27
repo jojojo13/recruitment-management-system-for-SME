@@ -34,7 +34,7 @@ export class SubmitBtnComponent implements OnInit {
         width: '380px',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.reqService.submitRequest([this.request.statusID]).subscribe(
+          this.reqService.submitRequest([this.request.id]).subscribe(
             (response: any) => {
               if (response.status == true) {
                 this.commonService.dataChange.next(true);

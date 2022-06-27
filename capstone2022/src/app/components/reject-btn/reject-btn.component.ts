@@ -32,7 +32,7 @@ export class RejectBtnComponent implements OnInit {
           width: '380px',
         }).then((result) => {
           if (result.isConfirmed) {
-            this.reqService.rejectRequest([this.request.statusID]).subscribe(
+            this.reqService.rejectRequest([this.request.id]).subscribe(
               (response: any) => {
                 if (response.status == true) {
                   this.commonService.dataChange.next(true)

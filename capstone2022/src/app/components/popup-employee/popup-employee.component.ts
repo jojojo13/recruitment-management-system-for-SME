@@ -1,114 +1,50 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { OrganizationService } from 'src/app/services/organization-service/organization.service';
 
 @Component({
   selector: 'app-popup-employee',
   templateUrl: './popup-employee.component.html',
-  styleUrls: ['./popup-employee.component.scss']
+  styleUrls: ['./popup-employee.component.scss'],
 })
-export class PopupEmployeeComponent implements OnInit {
-
+export class PopupEmployeeComponent implements OnInit,OnChanges {
+  @Input('dep') dep: any;
+  @Output('emp') emp=new EventEmitter<any>()
   isLoaded = false;
-  organizationList!: any;
+  listEmp!: any;
+  itemsPerPage = 10;
+  totalItems!: number;
+  page: number = 1;
+  selectedIndex!:number
+  message=''
   constructor(
     private orgService: OrganizationService,
     private renderer: Renderer2
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+   this.loadData(this.dep.id,this.page,this.itemsPerPage)
+  }
+  loadData(depID:number,index:number,size:number){
+    this.orgService
+    .getEmployeeByOrgID(depID, index-1,size)
+    .subscribe((response: any) => {
+      this.message=''
+      console.log(response)
+      this.totalItems = response.totalItem;
+      this.listEmp=response.data
+    },(err)=>{
+    this.listEmp=undefined
+    this.message='This department has no employee'
+    });
+  }
 
   ngOnInit(): void {
     // this.generateElement();
+  } 
+  chooseEmp(emp:any,index:number){
+    this.selectedIndex=index
+    this.emp.emit(emp)
   }
-  generateElement() {
-    document.body.style.cursor = 'wait';
-    this.orgService.getAllOrganization().subscribe((response: any) => {
-      this.organizationList = response.data;
-      console.log(this.organizationList)
-      let content = document.querySelector('.popup') as HTMLElement;
-      for (let org of this.organizationList) {
-        let main = this.renderer.createElement('div');
-        this.renderer.addClass(main, 'master');
-        let p = this.renderer.createElement('p');
-        let span = this.renderer.createElement('span');
-        let arrow = this.renderer.createElement('i');
-        this.renderer.addClass(arrow, 'fal');
-        this.renderer.addClass(arrow, 'fa-angle-down');
-        this.renderer.addClass(arrow, 'down');
-        this.renderer.listen(arrow, 'click', (evt) => {
-          arrow.classList.toggle('down');
-          let parent = arrow.parentElement;
-          let wrapper = parent.parentElement;
-          let listChildren = wrapper.children;
-          for (let child of listChildren) {
-            if (child.tagName == 'DIV') {
-              child.classList.toggle('hide');
-            }
-          }
-        });
-        span.appendChild(arrow);
-        main.appendChild(span);
-        let folderIcon = this.renderer.createElement('i');
-        this.renderer.addClass(folderIcon, 'fas');
-        this.renderer.addClass(folderIcon, 'fa-folder');
-        p.appendChild(folderIcon);
-        const text = this.renderer.createText(org.name);
-        //add click listener
-        this.renderer.listen(p, 'click', (evt) => {
-          let department = { id: org.id, name: org.name };
-     
-        });
-        this.renderer.appendChild(p, text);
-        main.appendChild(p);
-        content?.appendChild(main);
-        this.renderer.setAttribute(main, 'level', org.level);
-        this.render(org, main);
-      }
-      document.body.style.cursor = 'initial';
-    });
-  }
-  render(org: any, parent: HTMLElement) {
-    let flag = org.children;
-    if (flag.length > 0) {
-      for (let child of org.children) {
-        let div = this.renderer.createElement('div');
-        this.renderer.addClass(div, 'child');
-        if (child.level > 2) {
-          this.renderer.addClass(div, 'hide');
-        }
-        let p = this.renderer.createElement('p');
-        let span = this.renderer.createElement('span');
-        let arrow = this.renderer.createElement('i');
-        this.renderer.addClass(arrow, 'fal');
-        this.renderer.addClass(arrow, 'fa-angle-down');
-        this.renderer.addClass(arrow, 'down');
-        this.renderer.listen(arrow, 'click', (evt) => {
-          arrow.classList.toggle('down');
-          let parent = arrow.parentElement;
-          let wrapper = parent.parentElement;
-          let listChildren = wrapper.children;
-          for (let child of listChildren) {
-            if (child.tagName == 'DIV') {
-              child.classList.toggle('hide');
-            }
-          }
-        });
-        span.appendChild(arrow);
-        div.appendChild(span);
-        let folderIcon = this.renderer.createElement('i');
-        this.renderer.addClass(folderIcon, 'fas');
-        this.renderer.addClass(folderIcon, 'fa-folder');
-        p.appendChild(folderIcon);
-        const text = this.renderer.createText(child.name);
-        //add click listener
-        this.renderer.listen(p, 'click', (evt) => {
-          let department = { id: child.id, name: child.name };
-        
-        });
-        this.renderer.appendChild(p, text);
-        div.appendChild(p);
-        parent?.appendChild(div);
-        this.renderer.setAttribute(div, 'level', child.level);
-        this.render(child, div);
-      }
-    }
+  gty(page:number){
+    this.loadData(this.dep.id,page,this.itemsPerPage)
   }
 }

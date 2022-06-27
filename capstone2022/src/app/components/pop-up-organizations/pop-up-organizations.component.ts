@@ -28,7 +28,7 @@ export class PopUpOrganizationsComponent implements OnInit {
     document.body.style.cursor = 'wait';
     this.orgService.getAllOrganization().subscribe((response: any) => {
       this.organizationList = response.data;
-      console.log(this.organizationList)
+      console.log(this.organizationList);
       let content = document.querySelector('.popup') as HTMLElement;
       for (let org of this.organizationList) {
         let main = this.renderer.createElement('div');

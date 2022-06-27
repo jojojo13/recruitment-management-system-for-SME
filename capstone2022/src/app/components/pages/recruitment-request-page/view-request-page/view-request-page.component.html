@@ -2,12 +2,13 @@
   <h5>Recruitment Request</h5>
   <div class="top">
     <app-back-btn [route]="route"></app-back-btn>
-    <ng-container *ngIf="user">
-      <ng-container *ngIf="user.rule==2 ">
+
+    <div class="d-flex" *ngIf="user">
+      <ng-container *ngIf="user.rule == 2">
+        <app-customize-button></app-customize-button>
         <app-add-btn></app-add-btn>
       </ng-container>
-     
-    </ng-container>
+    </div>
   </div>
   <app-navigate-bar></app-navigate-bar>
   <app-grid></app-grid>

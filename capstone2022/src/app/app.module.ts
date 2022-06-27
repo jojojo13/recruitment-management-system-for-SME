@@ -39,7 +39,6 @@ import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
 import { SubmitBtnComponent } from './components/submit-btn/submit-btn.component';
 import { RejectBtnComponent } from './components/reject-btn/reject-btn.component';
-
 import { JwtInterceptor } from './helpers/tokenExpired.intercepter';
 import { TitleCategoryPageComponent } from './components/pages/classify-page/title-category-page/title-category-page.component';
 import { PositionCategoiresPageComponent } from './components/pages/classify-page/position-categoires-page/position-categoires-page.component';
@@ -56,6 +55,7 @@ import { GeneralInfComponent } from './components/general-inf/general-inf.compon
 import { ProfileCategoryPageComponent } from './components/pages/profile-category-page/profile-category-page.component';
 import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
 import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
+import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +106,7 @@ import { ContractCategoryPageComponent } from './components/pages/profile-catego
     ProfileCategoryPageComponent,
     ProfileInstitutePageComponent,
     ContractCategoryPageComponent,
-
+    HrInchangeComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,11 +117,14 @@ import { ContractCategoryPageComponent } from './components/pages/profile-catego
     NgxPaginationModule,
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers: [
- 
-   
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

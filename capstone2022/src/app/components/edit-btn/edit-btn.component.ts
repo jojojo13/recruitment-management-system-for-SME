@@ -20,8 +20,8 @@ export class EditBtnComponent implements OnInit {
 
   editStatus() {
     console.log(this.request.statusID);
-  let list:Array<number>=[]
-   list.push(this.request.id)
+    let list: Array<number> = [];
+    list.push(this.request.id);
     if (this.request.statusID == 2) {
       Swal.fire({
         text: 'Are you sure to approve?',
@@ -39,7 +39,7 @@ export class EditBtnComponent implements OnInit {
               if (response.status == true) {
                 this.commonService.dataChange.next(true);
                 this.commonService.popUpSuccess();
-                this.commonService.reloadCurrentRoute()
+                this.commonService.reloadCurrentRoute();
               } else {
                 this.commonService.popUpFailed('Something wrong');
               }

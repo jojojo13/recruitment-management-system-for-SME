@@ -2,16 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrganizationService {
-  baseUrl = 'https://localhost:44376/api/OrgnizationAPI'
-  baseCommonUrl = 'https://localhost:44376/api/CommonAPI'
-  baseProfileUrl = 'https://localhost:44376/api/ProfileAPI'
-  constructor(private __http: HttpClient) { }
+  baseUrl = 'https://localhost:44376/api/OrgnizationAPI';
+  baseCommonUrl = 'https://localhost:44376/api/CommonAPI';
+  baseProfileUrl = 'https://localhost:44376/api/ProfileAPI';
+  constructor(private __http: HttpClient) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   getAllOrganization() {
     let httpOptions1 = {
       headers: new HttpHeaders({
@@ -28,7 +27,11 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseProfileUrl + `/GetListPositionByOrgID?ID=${id}`, [], httpOptions1)
+    return this.__http.post(
+      this.baseProfileUrl + `/GetListPositionByOrgID?ID=${id}`,
+      [],
+      httpOptions1
+    );
   }
 
   getOrgByID(id: number) {
@@ -38,7 +41,11 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/getOrgByID?Id=${id}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl + `/getOrgByID?Id=${id}`,
+      {},
+      httpOptions1
+    );
   }
   getOtherListType(id: number) {
     let httpOptions1 = {
@@ -47,9 +54,12 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseCommonUrl + `/GetOtherListType?phanHe=${id}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseCommonUrl + `/GetOtherListType?phanHe=${id}`,
+      {},
+      httpOptions1
+    );
   }
-
 
   getAllTitle(index: number, size: number) {
     let httpOptions1 = {
@@ -58,7 +68,11 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/GetAllTitle?index=${index}&size=${size}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl + `/GetAllTitle?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
   }
 
   getAllPosition(index: number, size: number) {
@@ -68,7 +82,11 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/GetAllPosition?index=${index}&size=${size}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl + `/GetAllPosition?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
   }
 
   getAllofPosition(index: number, size: number) {
@@ -78,9 +96,12 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/GetAllOfPosition?index=${index}&size=${size}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl + `/GetAllOfPosition?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
   }
-
 
   insertPosition(request: any) {
     let httpOptions1 = {
@@ -91,7 +112,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/InsertPosition',
-      request, httpOptions1
+      request,
+      httpOptions1
     );
   }
   modifyPosition(request: any) {
@@ -103,7 +125,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/ModifyPosition',
-      request, httpOptions1
+      request,
+      httpOptions1
     );
   }
 
@@ -116,7 +139,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/DeletePosition',
-      arr, httpOptions1
+      arr,
+      httpOptions1
     );
   }
 
@@ -129,7 +153,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/ActivePosition',
-      arr, httpOptions1
+      arr,
+      httpOptions1
     );
   }
   deactivePosition(arr: Array<number>) {
@@ -141,7 +166,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/DeActivePosition',
-      arr, httpOptions1
+      arr,
+      httpOptions1
     );
   }
 
@@ -152,7 +178,12 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/CheckPositionExist?orgId=${orgId}&positionId=${positionId}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl +
+        `/CheckPositionExist?orgId=${orgId}&positionId=${positionId}`,
+      {},
+      httpOptions1
+    );
   }
 
   getAllPositionOrg(index: number, size: number) {
@@ -162,7 +193,11 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseUrl + `/GetAllPositionOrg?index=${index}&size=${size}`, {}, httpOptions1)
+    return this.__http.post(
+      this.baseUrl + `/GetAllPositionOrg?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
   }
 
   insertPositionOrg(request: any) {
@@ -174,7 +209,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/InsertPositionOrg',
-      request, httpOptions1
+      request,
+      httpOptions1
     );
   }
   modifyPositionOrg(request: any) {
@@ -186,7 +222,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/ModifyPositionOrg',
-      request, httpOptions1
+      request,
+      httpOptions1
     );
   }
   deletePositionOrg(arr: Array<number>) {
@@ -198,7 +235,8 @@ export class OrganizationService {
     };
     return this.__http.post(
       this.baseUrl + '/DeletePositionOrg',
-      arr, httpOptions1
+      arr,
+      httpOptions1
     );
   }
   insertOrg(request: any) {
@@ -208,10 +246,13 @@ export class OrganizationService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(
-      this.baseUrl + `/InsertOrg`,
-      request, httpOptions1
-    );
+    return this.__http.post(this.baseUrl + `/InsertOrg`, request, httpOptions1);
   }
 
+  getEmployeeByOrgID(id: number, index: number, size: number) {
+    return this.__http.post(
+      `https://localhost:44376/api/ProfileAPI/GetListEmployeeByOrgID?id=${id}&index=${index}&size=${size}`,
+      {},
+    );
+  }
 }

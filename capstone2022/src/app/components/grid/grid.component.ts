@@ -260,7 +260,6 @@ export class GridComponent implements OnInit, OnDestroy {
     this.requestService.selectedRequest = request;
     this.clearClass();
     clicked.classList.add('selected');
- 
   }
   clearClass() {
     let tr: any = document.querySelectorAll('tbody tr');
@@ -274,6 +273,7 @@ export class GridComponent implements OnInit, OnDestroy {
     if (!target?.hasAttribute('level')) {
       this.requestService.resetDataSelectedRq();
       this.clearClass();
+      console.log('clear');
     }
   };
   unSelectedRequest() {

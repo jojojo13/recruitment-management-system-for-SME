@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwalComponent, SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
@@ -26,7 +32,7 @@ export class FormRequestComponent implements OnInit {
   setDeadline: any;
   managerID!: number;
   request: any;
-  isLoaded=false;
+  isLoaded = false;
   constructor(
     private fb: FormBuilder,
     public requestService: RequestService,
@@ -63,9 +69,10 @@ export class FormRequestComponent implements OnInit {
       .getRequestByID(parseInt(id))
       .subscribe((respone: any) => {
         let rq = respone.data;
-        this.isLoaded=true
+        this.isLoaded = true;
         this.request = rq;
-        this.req.emit(rq)
+        console.log(rq);
+        this.req.emit(rq);
         this.setDeadline = this.reformatDate(this.request.deadline);
         this.requestForm.controls['requestCode'].setValue(rq.code);
         this.requestForm.controls['name'].setValue(rq.name);
@@ -90,10 +97,9 @@ export class FormRequestComponent implements OnInit {
     this.loadData();
   }
   onSubmit() {
- 
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
-      this.isLoaded=true
+    this.isLoaded = true;
     let request = {
       id: this.request.id,
       name: this.requestForm.controls['name'].value,
@@ -137,7 +143,7 @@ export class FormRequestComponent implements OnInit {
         this.requestService.editRequest(request).subscribe(
           (response: any) => {
             console.log('call api');
-            this.isLoaded=true
+            this.isLoaded = true;
             if (response.status == true) {
               (
                 document?.querySelector('.overlay') as HTMLElement
@@ -152,11 +158,10 @@ export class FormRequestComponent implements OnInit {
             }
           },
           (err: any) => {
-          
             (document?.querySelector('.overlay') as HTMLElement).style.display =
               'none';
             this.commonService.popUpFailed('Something wrong');
-            this.isLoaded=true
+            this.isLoaded = true;
           }
         );
       }
@@ -179,7 +184,7 @@ export class FormRequestComponent implements OnInit {
     this.commonService
       .getOtherList('RC_PROJECT', 0, 9999)
       .subscribe((response: any) => {
-        console.log(response);
+        console.log(response )
         this.projects = response.data;
       });
   }

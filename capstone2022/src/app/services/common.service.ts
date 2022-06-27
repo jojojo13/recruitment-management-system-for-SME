@@ -10,14 +10,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CommonService {
   baseUrl = 'https://localhost:44376/api/CommonAPI/GetOtherList';
-  dataChange:BehaviorSubject<boolean>;
-  pdfSrc=''
+  dataChange: BehaviorSubject<boolean>;
+  pdfSrc = '';
   constructor(
     private __http: HttpClient,
     private router: Router,
     private activateRoute: ActivatedRoute
   ) {
-    this.dataChange=new BehaviorSubject<any>(null);
+    this.dataChange = new BehaviorSubject<any>(null);
   }
 
   getOtherList(code: string, index: number, size: number) {
@@ -93,14 +93,14 @@ export class CommonService {
     Swal.fire(msg);
   }
   popUpConfirmed(msg: string) {}
-atDate(date:string){
-    return date.split('/').join('-')
+  atDate(date: string) {
+    return date.split('/').join('-');
   }
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
-        console.log(currentUrl);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+      console.log(currentUrl);
     });
   }
 }

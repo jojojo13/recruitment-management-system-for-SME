@@ -31,7 +31,7 @@ export class CancelBtnComponent implements OnInit {
         width: '380px',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.reqService.cancelRequest([this.request.statusID]).subscribe(
+          this.reqService.cancelRequest([this.request.id]).subscribe(
             (response: any) => {
               if (response.status == true) {
                 this.commonService.dataChange.next(true);

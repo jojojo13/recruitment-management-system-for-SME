@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+}
+p {
+  font-family: "Poppins";
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  color: blue;
+  width: 30px;
+}
+.emp {
+  font-size: 14px;
+  width: 30px;
+  margin-top: 20px;
+}
+.popup-content {
+  display: flex;
+}
+.org {
+  width: 400px;
+}
+.emp {
+  width: 700px;
+}
