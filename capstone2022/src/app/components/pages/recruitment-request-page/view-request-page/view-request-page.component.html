@@ -2,7 +2,12 @@
   <h5>Recruitment Request</h5>
   <div class="top">
     <app-back-btn [route]="route"></app-back-btn>
-    <app-action-list></app-action-list>
+    <ng-container *ngIf="user">
+      <ng-container *ngIf="user.rule==2 ">
+        <app-add-btn></app-add-btn>
+      </ng-container>
+     
+    </ng-container>
   </div>
   <app-navigate-bar></app-navigate-bar>
   <app-grid></app-grid>

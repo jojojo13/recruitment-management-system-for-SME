@@ -52,6 +52,11 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ViewOrganizationComponent } from './components/pages/institute-page/view-organization/view-organization.component';
 import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
 import { PopupEmployeeComponent } from './components/popup-employee/popup-employee.component';
+import { GeneralInfComponent } from './components/general-inf/general-inf.component';
+import { ProfileCategoryPageComponent } from './components/pages/profile-category-page/profile-category-page.component';
+import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
+import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +102,11 @@ import { PopupEmployeeComponent } from './components/popup-employee/popup-employ
     ViewOrganizationComponent,
     InstituteForOrganizationComponent,
     PopupEmployeeComponent,
+    GeneralInfComponent,
+    ProfileCategoryPageComponent,
+    ProfileInstitutePageComponent,
+    ContractCategoryPageComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -110,11 +120,7 @@ import { PopupEmployeeComponent } from './components/popup-employee/popup-employ
     PdfViewerModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-}
+ 
    
   ],
   bootstrap: [AppComponent],

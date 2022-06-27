@@ -1,23 +1,27 @@
 <div class="content">
   <h5>Candidate</h5>
   <app-back-btn [route]="route"></app-back-btn>
-  <app-step></app-step>
+  <app-step (step)="getStep($event)"></app-step>
   <div class="content-middle">
     <div class="content-middle-left">
-        <app-profile></app-profile>
-
-     
-
-      <app-contact-form></app-contact-form>
+      <div [ngClass]="{'show':step==1,'hide':step!=1}">
+        <app-profile [candidateName]="name"></app-profile>
+        <app-contact-form></app-contact-form>
+      </div>
+      <div  [ngClass]="{'show':step==2,'hide':step!=2}">
+        <app-general-inf (candidateName)="getName($event)"></app-general-inf>
+      </div>
     </div>
     <div class="content-middle-right">
-        <div class="content-middle-right-attach">
-            <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach"> </app-attach-file>
-            <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach2"> </app-attach-file>
-        </div>
-        <div class="content-middle-right-show">
-          <app-show-pdf-file [pdfSrc]="pdfSrc"></app-show-pdf-file>
-        </div>
+      <div class="content-middle-right-attach">
+        <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach">
+        </app-attach-file>
+        <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach2">
+        </app-attach-file>
+      </div>
+      <div class="content-middle-right-show">
+        <app-show-pdf-file [pdfSrc]="pdfSrc"></app-show-pdf-file>
+      </div>
     </div>
   </div>
 </div>

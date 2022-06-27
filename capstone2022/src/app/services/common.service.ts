@@ -70,11 +70,14 @@ export class CommonService {
     Swal.fire(msg);
   }
   popUpConfirmed(msg: string) {}
-  reloadCurrentRoute(route: string) {
-
-
-  }
-  formatDate(date:string){
+atDate(date:string){
     return date.split('/').join('-')
+  }
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+        console.log(currentUrl);
+    });
   }
 }

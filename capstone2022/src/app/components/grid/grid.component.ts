@@ -29,7 +29,7 @@ export class GridComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
-    private auth:AuthorizeService
+    private auth: AuthorizeService
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
@@ -38,18 +38,15 @@ export class GridComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.commonService.dataChange.subscribe((isChange) => {
       this.isLoaded = false;
-      this.clearData()
+      this.clearData();
       this.page = this.activatedRoute.snapshot.queryParams['index'];
       this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
       this.unSelectedRequest();
-      this.loadData(this.page-1);
+      this.loadData(this.page - 1);
     });
   }
   navigateEdit(request: any) {
-   
-
-        this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
-
+    this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
   }
   loadData(pageIndex: number) {
     this.requestService
@@ -162,7 +159,6 @@ export class GridComponent implements OnInit, OnDestroy {
 
   createRow(parent: HTMLElement, response: any) {
     let list = response.data;
-    console.log(list);
     let nodeArr = [];
     for (let rq of list) {
       let redInRGB = 214;
@@ -218,7 +214,6 @@ export class GridComponent implements OnInit, OnDestroy {
         this.addClass(p, 'cancel');
       }
       td10.appendChild(p);
-
       let td11 = this.renderer.createElement('td');
       let i = this.renderer.createElement('i');
       this.renderer.listen(i, 'click', (evt) => {
@@ -243,6 +238,9 @@ export class GridComponent implements OnInit, OnDestroy {
       this.renderer.listen(tr, 'click', (evt) => {
         this.getSelectedRQ(rq, tr);
       });
+      this.renderer.listen(tr, 'dblclick', (evt) => {
+        this.navigateEdit(rq);
+      });
       this.addClass(tr, 'children');
       this.renderer.setAttribute(tr, 'level', rq.rank);
       for (let i = 0; i < tr.childNodes - 1; i++) {
@@ -262,7 +260,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.requestService.selectedRequest = request;
     this.clearClass();
     clicked.classList.add('selected');
-    console.log(request)
+ 
   }
   clearClass() {
     let tr: any = document.querySelectorAll('tbody tr');

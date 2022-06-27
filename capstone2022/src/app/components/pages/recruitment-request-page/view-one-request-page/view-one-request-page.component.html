@@ -1,22 +1,38 @@
 <div class="content">
   <div class="content-top">
     <h5>Recruitment request</h5>
-    <app-back-btn [route]="route"></app-back-btn>
+    <div class="d-flex custom">
+      <app-back-btn [route]="route"></app-back-btn>
+      <app-action-list [request]="request"></app-action-list>
+    </div>
   </div>
   <div class="content-middle">
     <div class="content-middle-heading">
-      <i class="fal fa-user"></i>
       <div class="content-middle-heading__ttl">
+        <i class="fal fa-user"></i>
         <p>2. Backend Dev</p>
       </div>
+      <p
+        *ngIf="request"
+        [ngClass]="{
+          draft: request.statusID === 1,
+          submitted: request.statusID === 2,
+          cancel: request.statusID === 3,
+          approved: request.statusID === 4,
+          reject: request.statusID === 5 || 0
+        }"
+      >
+        {{ request.status | lowercase }}
+      </p>
     </div>
     <div class="content-middle-form">
       <app-form-request (req)="getReq($event)"></app-form-request>
-      <app-history [req]="req"></app-history>
+      <app-history [req]="request"></app-history>
     </div>
     <div class="content-middle-heading">
-      <i class="fal fa-user"></i>
       <div class="content-middle-heading__ttl">
+      <i class="fal fa-user"></i>
+
         <p>2. Related request</p>
       </div>
     </div>
@@ -24,21 +40,18 @@
   <div class="content-ending">
     <h5>Comment</h5>
     <p>{{ requestService.selectedRequest.comment }}</p>
-<ng-container *ngIf="user">
-  <ng-container *ngIf="user.rule == 1">
-    <textarea
-      [(ngModel)]="commentString"
-      class="form-control"
-      placeholder="Notes"
-      rows="4"
-      >{{ requestService.selectedRequest.comment }}</textarea
-    >
+    <ng-container *ngIf="user">
+      <ng-container *ngIf="user.rule == 1">
+        <textarea
+          [(ngModel)]="commentString"
+          class="form-control"
+          placeholder="Notes"
+          rows="4"
+          >{{ requestService.selectedRequest.comment }}</textarea
+        >
 
-    <button type="button" (click)="uploadComment()">Send Comment</button>
-  </ng-container>
-</ng-container>
-    
-    
-
+        <button type="button" (click)="uploadComment()">Send Comment</button>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

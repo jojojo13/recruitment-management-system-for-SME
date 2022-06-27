@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 
@@ -8,6 +8,7 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
   styleUrls: ['./action-list.component.scss'],
 })
 export class ActionListComponent implements OnInit {
+  @Input('request') request:any
   approveAction = { name: 'Approve request' };
   cancelAction = { name: 'Cancel request' };
   submitAction = { name: 'Submit request' };

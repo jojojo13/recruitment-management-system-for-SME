@@ -13,7 +13,7 @@ export class ViewOneRequestPageComponent implements OnInit {
   route: any = { name: 'View any request', link: 'yeucautuyendung' };
   user: any;
   commentString: any;
- req:any
+  request: any;
   constructor(
     private location: Location,
     public requestService: RequestService,
@@ -27,13 +27,11 @@ export class ViewOneRequestPageComponent implements OnInit {
     });
   }
   uploadComment() {
-
     let obj = {
-      id: this.requestService.selectedRequest.id, 
+      id: this.requestService.selectedRequest.id,
       comment: this.commentString,
     };
 
-    console.log(obj);
     this.requestService.sendComment(obj).subscribe(
       (response: any) => {
         if ((response.status = true)) {
@@ -47,7 +45,7 @@ export class ViewOneRequestPageComponent implements OnInit {
       }
     );
   }
-  getReq(req:any){
-    this.req=req
+  getReq(req: any) {
+    this.request = req;
   }
 }

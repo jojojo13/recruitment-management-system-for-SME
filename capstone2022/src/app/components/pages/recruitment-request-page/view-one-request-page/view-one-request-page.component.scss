@@ -8,7 +8,6 @@
   src: url("../../../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
 }
 .content {
-
   &-top {
     h5 {
       font-family: "Poppins";
@@ -23,11 +22,12 @@
     position: relative;
     &-heading {
       display: flex;
+      align-items: center;
       height: 35px;
       width: 100%;
       background-color: #d6d5f9;
-      align-items: baseline;
       padding: 10px;
+      justify-content: space-between;
       margin-bottom: 14px;
       i {
         margin-right: 10px;
@@ -38,8 +38,11 @@
         font-weight: 300;
         font-size: 13px;
       }
+      &__ttl {
+        display: flex;
+      }
     }
-    &-form{
+    &-form {
       display: flex;
     }
   }
@@ -58,4 +61,58 @@
   a {
     text-decoration: none;
   }
+}
+.custom {
+  justify-content: space-between;
+}
+.submitted {
+  text-align: center;
+  background-color: #2feb1e;
+  border-radius: 10px;
+  color: #fff;
+  
+  padding: 0;
+  width: 91px;
+  height: 22px;
+}
+.approved {
+  text-align: center;
+  background-color: #36ca68;
+  border-radius: 10px;
+  color: #fff;
+
+  padding: 0;
+  width: 91px;
+  height: 22px;
+}
+.cancel {
+  text-align: center;
+  background-color: #ffaa01;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0;
+ 
+  width: 91px;
+  height: 22px;
+}
+
+.reject {
+  text-align: center;
+  background-color: #eb4962;
+  border-radius: 10px;
+  color: #fff;
+
+  padding: 0;
+  width: 91px;
+  height: 22px;
+}
+.draft {
+  background-color: #4057f9;
+  border-radius: 10px;
+  color: #fff;
+
+  padding: 0;
+  width: 91px;
+  text-align: center;
+  height: 22px;
 }

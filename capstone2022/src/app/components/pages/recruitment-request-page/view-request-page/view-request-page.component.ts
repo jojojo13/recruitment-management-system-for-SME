@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/services/request-service/request.service';
+import { AuthorizeService } from 'src/app/services/authorize.service';
 
 @Component({
   selector: 'app-view-request-page',
@@ -9,11 +10,14 @@ import { RequestService } from 'src/app/services/request-service/request.service
 })
 export class ViewRequestPageComponent implements OnInit {
   route={name:'View all request',link:'yeucautuyendung'}
- 
-  constructor(private reqService:RequestService) {}
+
+  user:any
+  constructor(private reqService:RequestService,private auth:AuthorizeService) {}
 
   ngOnInit(): void {
-
+    this.auth.userSubject.subscribe(user=>{
+      this.user=user
+    })
   }
 
   

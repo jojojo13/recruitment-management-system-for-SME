@@ -10,59 +10,50 @@ import Swal from 'sweetalert2';
 })
 export class SubmitBtnComponent implements OnInit {
   @Input('action') action: any;
+  @Input('request') request: any;
   constructor(
     private reqService: RequestService,
-    private commonService: CommonService,
-
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {}
   submit() {
-    if(this.reqService.listSelectedRequest.length>0){
-      let check = this.reqService.listSelectedRequest.every((req: any) => {
-        return req.statusID == 1 || req.statusID == 3 || req.statusID == 5;
-      });
-      if (check) {
-        let idList = this.reqService.listSelectedRequest.map(
-          (req: any) => req.id
-        );
-
-
-        Swal.fire({
-          text: 'Are you sure to submit?',
-          iconHtml:
-            ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
-          showCancelButton: true,
-          confirmButtonColor: '#309EFC',
-          cancelButtonColor: '#8B94B2',
-          confirmButtonText: 'Confirm',
-          width: '380px',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.reqService.submitRequest(idList).subscribe(
-              (response: any) => {
-                if (response.status == true) {
-
-                  this.commonService.dataChange.next(true)
-                  this.commonService.popUpSuccess();
-                } else {
-                  this.commonService.popUpFailed('Something wrong');
-                }
-              },
-              (err) => {
+    if (
+      this.request.statusID == 1 ||
+      this.request.statusID == 3 ||
+      this.request.statusID == 5
+    ) {
+      Swal.fire({
+        text: 'Are you sure to submit?',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.reqService.submitRequest([this.request.statusID]).subscribe(
+            (response: any) => {
+              if (response.status == true) {
+                this.commonService.dataChange.next(true);
+                this.commonService.popUpSuccess();
+                this.commonService.reloadCurrentRoute()
+              } else {
                 this.commonService.popUpFailed('Something wrong');
               }
-            );
-          }
-        });
-
-
-      } else {
-        this.commonService.popUpFailed('Only choose request has draft, cancel, reject status');
-      }
-    }else{
-      this.commonService.popUpFailed('Please choose request');
+            },
+            (err) => {
+              this.commonService.popUpFailed('Something wrong');
+            }
+          );
+        }
+      });
+    } else {
+      this.commonService.popUpFailed(
+        'Only choose request has draft, cancel, reject status'
+      );
     }
-   
   }
 }

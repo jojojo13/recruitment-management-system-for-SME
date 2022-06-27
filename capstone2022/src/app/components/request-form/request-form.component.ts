@@ -20,14 +20,14 @@ export class RequestFormComponent implements OnInit {
   route = { name: 'Create request', link: 'yeucautuyendung' };
   listPosition: any;
   requestForm!: UntypedFormGroup;
-  today: Date = new Date();
+  today: string = new Date().toISOString().slice(0, 10);
   types: any;
   levels: any;
   projects: any;
   officeID!: number;
   departmentID!: number;
   managerID!: number;
-  isLoaded=false
+  isLoaded = false;
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
     private fb: UntypedFormBuilder,
@@ -39,6 +39,7 @@ export class RequestFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoaded = true;
     this.requestForm = this.fb.group({
       requestCode: [{ value: '', disabled: true }],
       name: ['', [Validators.required]],
@@ -89,7 +90,7 @@ export class RequestFormComponent implements OnInit {
   onSubmit(status: number) {
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
-      this.isLoaded=false
+    this.isLoaded = false;
     let request = {
       id: 0,
       name: this.requestForm.controls['name'].value,
@@ -119,7 +120,7 @@ export class RequestFormComponent implements OnInit {
 
     this.requestService.insertRequest(request).subscribe(
       (response: any) => {
-        this.isLoaded=true
+        this.isLoaded = true;
         if (response.status == true) {
           this.commonService.popUpSuccess();
           (document?.querySelector('.overlay') as HTMLElement).style.display =
@@ -131,7 +132,7 @@ export class RequestFormComponent implements OnInit {
         }
       },
       (err) => {
-        this.isLoaded=true
+        this.isLoaded = true;
         this.commonService.popUpFailed('Failed');
         (document?.querySelector('.overlay') as HTMLElement).style.display =
           'none';
