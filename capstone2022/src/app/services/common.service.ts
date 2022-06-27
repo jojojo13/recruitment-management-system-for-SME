@@ -26,6 +26,14 @@ export class CommonService {
       { code, index, size }
     );
   }
+
+  getAllOtherList(code: string, index: number, size: number) {
+    return this.__http.post(
+      `https://localhost:44376/api/CommonAPI/GetAllOtherList?code=${code}&index=${index}&size=${size}`,
+      { code, index, size }
+    );
+  }
+
   insertOtherList(obj: any) {
     return this.__http.post(
       'https://localhost:44376/api/CommonAPI/InsertOtherList',
@@ -51,6 +59,21 @@ export class CommonService {
       arr
     );
   }
+
+  activeOtherList(arr: Array<number>) {
+    return this.__http.post(
+      'https://localhost:44376/api/CommonAPI/ActiveOtherList',
+      arr
+    );
+  }
+
+  deactiveOtherList(arr: Array<number>) {
+    return this.__http.post(
+      'https://localhost:44376/api/CommonAPI/DeactiveOtherList',
+      arr
+    );
+  }
+
   popUpSuccess() {
     Swal.fire({
       icon: 'success',
