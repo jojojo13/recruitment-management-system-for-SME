@@ -19,6 +19,9 @@ import { InstitutePageComponent } from './components/pages/institute-page/instit
 import { PositionInOrgComponent } from './components/pages/institute-page/position-in-org/position-in-org.component';
 import { ViewOrganizationComponent } from './components/pages/institute-page/view-organization/view-organization.component';
 import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
+import { ProfileCategoryPageComponent } from './components/pages/profile-category-page/profile-category-page.component';
+import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
+
 
 const routes: Routes = [
   {
@@ -77,6 +80,14 @@ const routes: Routes = [
       {
         path: 'thietlaptochuc/tochuc',
         component: InstituteForOrganizationComponent,
+      },
+      {
+        path: 'danhmuchoso',
+        component: ProfileCategoryPageComponent,
+      },
+      {
+        path: 'danhmuchoso/hopdong',
+        component: ContractCategoryPageComponent,
       },
     ],
   },

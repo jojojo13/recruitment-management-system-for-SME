@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
-  styleUrls: ['./step.component.scss']
+  styleUrls: ['./step.component.scss'],
 })
 export class StepComponent implements OnInit {
+  @Output('step') step = new EventEmitter<number>();
+  index = 1;
+  ourStep = 1;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  chooseStep(step: number, ele: HTMLElement) {
+    this.step.emit(step);
+    this.ourStep = step;
   }
-
 }

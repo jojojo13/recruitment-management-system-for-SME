@@ -27,21 +27,25 @@
       position: relative;
       -webkit-clip-path: polygon(87% 0, 100% 51%, 88% 99%, 0 99%, 16% 52%, 0 0);
       clip-path: polygon(87% 0, 100% 51%, 88% 99%, 0 99%, 16% 52%, 0 0);
-      padding: 15px 20px 15px 10px ;
+      width: 260px;
+      height: 80px;
       background-color: #fff;
       p {
         font-size: 16px;
-        margin-left: 38px;
+        margin-left: 50px;
         font-family: "Poppins";
         font-style: normal;
         font-weight: 600;
       }
       h6 {
         font-size: 13px;
-      
-        margin-left: 38px;
+        margin-top: 20px;
+        margin-left: 50px;
         font-family: "Poppins";
       }
     }
   }
+}
+.highlight{
+  background-color: red;
 }
