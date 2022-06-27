@@ -160,4 +160,10 @@ export class RequestService {
   modifyRQbyID(id:number,comment:string){
     return this.__http.put(`https://localhost:44376/api/RequestAPI/SendComment`,{id,comment});
   }
+
+  checkTotal(id: number, quantity: number) {
+    return this.__http.post(`https://localhost:44376/api/RequestAPI/GetRequestByID?id=${id}&quantity=${quantity}`, {});
+  }
+
+
 }
