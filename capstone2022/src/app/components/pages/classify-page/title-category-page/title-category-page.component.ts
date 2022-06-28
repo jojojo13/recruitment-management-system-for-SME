@@ -25,7 +25,7 @@ export class TitleCategoryPageComponent implements OnInit {
   totalItems!: number;
   page: number = 1;
   selectedIndexInTable: any;
-
+  tableData: any = [];
 
   constructor(private fb: FormBuilder, private titleservice: TitleService,
     private commonService: CommonService,
@@ -175,6 +175,11 @@ export class TitleCategoryPageComponent implements OnInit {
     this.selectedIndexInTable = null;
     this.loadData(page - 1);
   }
+
+  exportExcel() {
+    this.commonService.exportExcel(this.categories, "Title");
+  }
+
   deleteTitle() {
     if (this.listSelected.length <= 0) {
       this.commonService.popUpMessage('Choose at least one record!!!');

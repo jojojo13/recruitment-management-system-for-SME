@@ -31,6 +31,8 @@ export class SystemCategoriesPageComponent implements OnInit {
   totalItems!: number;
   page: number = 1;
   selectedIndexInTable: any;
+  tableData: any = [];
+
   constructor(
     private fb: FormBuilder,
     private organizationService: OrganizationService,
@@ -196,6 +198,10 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.resetValue();
     this.selectedIndexInTable = null;
     this.loadData(this.code, page - 1);
+  }
+
+  exportExcel() {
+    this.commonService.exportExcel(this.listItemInCategory, "SystemCategories");
   }
   deleteCategory() {
     if (this.listSelected.length <= 0) {

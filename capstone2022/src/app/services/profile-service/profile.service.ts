@@ -298,14 +298,30 @@ export class ProfileService {
 
 
 
-  getContractType() {
+  getContractType(index: number, size: number) {
     let httpOptions1 = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.post(this.baseProfileUrl + '/GetContractType', {}, httpOptions1);
+    return this.__http.post(
+      this.baseProfileUrl + `/GetContractType?index=${index}&size=${size}`,
+      { index, size }, httpOptions1
+    );
+  }
+
+  getAllContractType(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseProfileUrl + `/GetAllContractType?index=${index}&size=${size}`,
+      { index, size }, httpOptions1
+    );
   }
 
   insertContractType(request: any) {
