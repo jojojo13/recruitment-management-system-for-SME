@@ -59,6 +59,7 @@ import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.compon
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
 import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
+import { SkillsAndExpComponent } from './components/skills-and-exp/skills-and-exp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,6 +112,7 @@ import { EmployeeInformationComponent } from './components/pages/profile-institu
     HrInchangeComponent,
     ViewEmployeePagesComponent,
     EmployeeInformationComponent,
+    SkillsAndExpComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,11 +127,11 @@ import { EmployeeInformationComponent } from './components/pages/profile-institu
     MatSelectCountryModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: JwtInterceptor,
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent],
 })

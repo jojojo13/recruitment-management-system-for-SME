@@ -4,13 +4,20 @@
   <app-step (step)="getStep($event)"></app-step>
   <div class="content-middle">
     <div class="content-middle-left">
-      <div [ngClass]="{'show':step==1,'hide':step!=1}">
-        <app-profile [candidateName]="name"></app-profile>
-        <app-contact-form></app-contact-form>
+      <div>
+        <app-profile
+          class="profile"
+          [ngClass]="{ show: step == 1, hide: step != 1 }"
+          [candidateName]="name"
+        ></app-profile>
+        <app-general-inf
+          [step]="step"
+          (candidateName)="getName($event)"
+        ></app-general-inf>
+
+        <!-- <app-contact-form></app-contact-form> -->
       </div>
-      <div  [ngClass]="{'show':step==2,'hide':step!=2}">
-        <app-general-inf (candidateName)="getName($event)"></app-general-inf>
-      </div>
+      
     </div>
     <div class="content-middle-right">
       <div class="content-middle-right-attach">

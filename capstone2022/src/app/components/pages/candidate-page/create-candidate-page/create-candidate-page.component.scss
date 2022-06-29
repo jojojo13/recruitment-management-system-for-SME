@@ -15,7 +15,7 @@
     display: flex;
     padding: 0 30px;
     &-left {
-      width: 30%;
+      width: 35%;
       margin-top: 10px;
       margin-left: 20px;
       &-attach {
@@ -23,7 +23,7 @@
       }
     }
     &-right {
-      width: 70%;
+      width: 65%;
       padding-left: 50px;
       &-attach {
         display: flex;
@@ -73,4 +73,7 @@ svg {
 }
 .hide{
   display: none;
+}
+.profile{
+  margin-bottom:20px;
 }
