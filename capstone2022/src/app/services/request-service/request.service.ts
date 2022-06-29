@@ -85,7 +85,7 @@ export class RequestService {
     };
     return this.__http.post(
       'https://localhost:44376/api/RequestAPI/InsertRequest',
-      request,httpOptions1
+      request, httpOptions1
     );
   }
   resetDataSelectedRq() {
@@ -165,7 +165,7 @@ export class RequestService {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       }),
     };
-    return this.__http.put('https://localhost:44376/api/RequestAPI/ModifyRequest', request,httpOptions1);
+    return this.__http.put('https://localhost:44376/api/RequestAPI/ModifyRequest', request, httpOptions1);
   }
 
 
@@ -178,18 +178,27 @@ export class RequestService {
     };
     return this.__http.put('https://localhost:44376/api/RequestAPI/SendComment', request, httpOptions1);
   }
-  getRequestByID(id:number){
-    return this.__http.put(`https://localhost:44376/api/RequestAPI/GetRequestByID?Id=${id}`,{});
+
+  setHRID(id: number, hrID: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put('https://localhost:44376/api/RequestAPI/setHrInchage', { id, hrID }, httpOptions1)
   }
-  modifyRQbyID(id:number,comment:string){
-    return this.__http.put(`https://localhost:44376/api/RequestAPI/SendComment`,{id,comment});
+
+  getRequestByID(id: number) {
+    return this.__http.put(`https://localhost:44376/api/RequestAPI/GetRequestByID?Id=${id}`, {});
+  }
+  modifyRQbyID(id: number, comment: string) {
+    return this.__http.put(`https://localhost:44376/api/RequestAPI/SendComment`, { id, comment });
   }
 
   checkTotal(id: number, quantity: number) {
     return this.__http.post(`https://localhost:44376/api/RequestAPI/CheckTotalQuantity?id=${id}&quantity=${quantity}`, {});
   }
-  setHRID(id:number,hrID:number){
-    return this.__http.put('https://localhost:44376/api/RequestAPI/setHrInchage',{id,hrID})
-  }
+
 
 }
