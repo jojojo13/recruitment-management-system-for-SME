@@ -1,45 +1,52 @@
 <div class="content">
-    <form novalidate [formGroup]="contactForm" class="form">
-        <div class="form-group">
-            <label for="phone">Candidate ID</label>
-            <input type="text" class="form-control"  name="name" formControlName="phone" />
-          </div>
-          <div class="form-group">
-            <label for="email">Name*</label>
-            <input type="text" class="form-control" (change)="onChange()" [(ngModel)]="name" formControlName="email" />
-          </div>
-          <div class="form-group">
-            <label for="linkedIn">Date of birth</label>
-            <input type="date" class="form-control" formControlName="linkedIn" />
-          </div>
-          <div class="form-group">
-            <label for="facebook">Gender</label>
-            <input type="text" class="form-control" formControlName="facebook" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">Major</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">University</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">Graduate</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">GPA</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">Location</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-          <div class="form-group">
-            <label for="twitter">Awards</label>
-            <input type="text" class="form-control" formControlName="twitter" />
-          </div>
-
-    </form>
+  <form novalidate [formGroup]="contactForm" class="form">
+    <div class="form-group">
+      <label for="email">Name*</label>
+      <input
+        type="text"
+        class="form-control"
+        (change)="onChange()"
+        [(ngModel)]="name"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="linkedIn">Date of birth</label>
+      <input type="date" class="form-control" formControlName="linkedIn" />
+    </div>
+    <div class="form-group">
+      <label for="facebook">Gender</label>
+      <input type="text" class="form-control" formControlName="facebook" />
+    </div>
+    <div class="form-group">
+      <label for="twitter">Major</label>
+      <input type="text" class="form-control" formControlName="twitter" />
+    </div>
+    <div class="form-group">
+      <label for="twitter">University</label>
+      <input type="text" class="form-control" formControlName="twitter" />
+    </div>
+    <div class="form-group">
+      <label for="twitter">Graduate</label>
+      <input type="text" class="form-control" formControlName="twitter" />
+    </div>
+    <div class="form-group">
+      <label for="twitter">GPA</label>
+      <input type="text" class="form-control" formControlName="twitter" />
+    </div>
+    <div class="form-group">
+      <!-- <mat-select-country
+        appearance="outline"
+        label="Country"
+        class="className"
+        formControlName="country"
+        (onCountrySelected)="onCountrySelected($event)"
+      >
+      </mat-select-country> -->
+    </div>
+    <div class="form-group">
+      <label for="twitter">Awards</label>
+      <input type="text" class="form-control" formControlName="twitter" />
+    </div>
+  </form>
 </div>

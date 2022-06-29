@@ -164,6 +164,8 @@ export class RequestService {
   checkTotal(id: number, quantity: number) {
     return this.__http.post(`https://localhost:44376/api/RequestAPI/CheckTotalQuantity?id=${id}&quantity=${quantity}`, {});
   }
-
+  setHRID(id:number,hrID:number){
+    return this.__http.put('https://localhost:44376/api/RequestAPI/setHrInchage',{id,hrID})
+  }
 
 }

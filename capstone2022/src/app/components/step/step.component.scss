@@ -16,13 +16,13 @@
     display: flex;
     justify-content: space-between;
     filter: drop-shadow(1px 0px 0px #8C8C8C)
-          drop-shadow(-1px 0px 0px #8C8C8C)
+          drop-shadow(0px 0px 0px #8C8C8C)
           drop-shadow(0px 1px 0px #8C8C8C)
           drop-shadow(0px -1px 0px #8C8C8C)
-          drop-shadow(1px 1px 0px #8C8C8C)
-          drop-shadow(-1px -1px 0px #8C8C8C)
-          drop-shadow(-1px 1px 0px #8C8C8C)
-          drop-shadow(1px -1px 0px #8C8C8C);
+          drop-shadow(0px 0px 0px #8C8C8C)
+          drop-shadow(0px 0px 0px #8C8C8C)
+          drop-shadow(0px 0px 0px #8C8C8C)
+          drop-shadow(0px 0px 0px #8C8C8C);
     &-item {
       position: relative;
       -webkit-clip-path: polygon(87% 0, 100% 51%, 88% 99%, 0 99%, 16% 52%, 0 0);
@@ -47,5 +47,6 @@
   }
 }
 .highlight{
-  background-color: red;
+  background-color:#374151;
+  color: #fff;
 }

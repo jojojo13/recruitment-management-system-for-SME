@@ -56,7 +56,7 @@ import { ProfileCategoryPageComponent } from './components/pages/profile-categor
 import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
 import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
 import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.component';
-
+import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,6 +118,7 @@ import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.compon
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
     PdfViewerModule,
+    MatSelectCountryModule
   ],
   providers: [
     {

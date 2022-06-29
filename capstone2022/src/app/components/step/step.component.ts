@@ -8,12 +8,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class StepComponent implements OnInit {
   @Output('step') step = new EventEmitter<number>();
   index = 1;
-  ourStep = 1;
+
   constructor() {}
 
   ngOnInit(): void {}
   chooseStep(step: number, ele: HTMLElement) {
     this.step.emit(step);
-    this.ourStep = step;
+    this.index = step;
   }
 }

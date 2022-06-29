@@ -1,6 +1,9 @@
 <p (click)="showPopUp()">Choose employee</p>
-<p class="emp" *ngIf="emp">Employee: {{ emp.fullName }}</p>
-
+<p class="nameEmp" *ngIf="emp">Employee: {{ emp.fullName }}</p>
+<p class="nameEmp" *ngIf="req&&!emp">Employee: {{req.hrInchange}}</p>
+<button [disabled]="!emp" (click)="setHrInChg()">Assign</button>
+<app-loader [isLoaded]="isLoaded"></app-loader>
+<div class="overlay"></div>
 <swal #orgPicker title="Choose employee" width="1100px" tabindex="100">
   <div *swalPortal="swalTargets.content" class="popup-content">
     <app-pop-up-organizations

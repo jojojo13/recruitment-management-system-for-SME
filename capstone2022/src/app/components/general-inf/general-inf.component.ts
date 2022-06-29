@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Country } from 'src/app/models/Country';
 
 @Component({
   selector: 'app-general-inf',
@@ -23,5 +24,8 @@ export class GeneralInfComponent implements OnInit {
   }
   onChange(){
     this.candidateName.emit(this.name)
+  }
+  onCountrySelected($event: Country){
+   
   }
 }
