@@ -57,6 +57,8 @@ import { ProfileInstitutePageComponent } from './components/pages/profile-instit
 import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
 import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.component';
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
+import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
+import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,6 +109,8 @@ import { MatSelectCountryModule } from "@angular-material-extensions/select-coun
     ProfileInstitutePageComponent,
     ContractCategoryPageComponent,
     HrInchangeComponent,
+    ViewEmployeePagesComponent,
+    EmployeeInformationComponent,
   ],
   imports: [
     BrowserModule,

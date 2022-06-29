@@ -2,7 +2,6 @@ import { ViewRequestPageComponent } from './components/pages/recruitment-request
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
-
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RecruitmentRequestPageComponent } from './components/pages/recruitment-request-page/recruitment-request-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
@@ -21,7 +20,9 @@ import { ViewOrganizationComponent } from './components/pages/institute-page/vie
 import { InstituteForOrganizationComponent } from './components/pages/institute-page/institute-for-organization/institute-for-organization.component';
 import { ProfileCategoryPageComponent } from './components/pages/profile-category-page/profile-category-page.component';
 import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
-
+import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
+import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
+import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
 
 const routes: Routes = [
   {
@@ -88,6 +89,22 @@ const routes: Routes = [
       {
         path: 'danhmuchoso/hopdong',
         component: ContractCategoryPageComponent,
+      },
+      {
+        path: 'danhmuchoso/',
+        component: ContractCategoryPageComponent,
+      },
+      {
+        path: 'thietlaphoso',
+        component: ProfileInstitutePageComponent,
+      },
+      {
+        path: 'thietlaphoso/nhanvien',
+        component: ViewEmployeePagesComponent,
+      },
+      {
+        path: 'thietlaphoso/thongtinnhanvien',
+        component: EmployeeInformationComponent,
       },
     ],
   },
