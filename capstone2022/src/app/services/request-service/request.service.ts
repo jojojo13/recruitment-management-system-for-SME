@@ -123,16 +123,40 @@ export class RequestService {
     };
   }
   approveRequest(list: Array<number>) {
-    return this.__http.put(this.baseUrl + '/ApproveRequest', list);
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put(this.baseUrl + '/ApproveRequest', list, httpOptions1);
   }
   cancelRequest(list: Array<number>) {
-    return this.__http.put(this.baseUrl + '/CancelRequest', list);
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put(this.baseUrl + '/CancelRequest', list, httpOptions1);
   }
   submitRequest(list: Array<number>) {
-    return this.__http.put(this.baseUrl + '/SubmitRequest', list);
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put(this.baseUrl + '/SubmitRequest', list, httpOptions1);
   }
   rejectRequest(list: Array<number>) {
-    return this.__http.put(this.baseUrl + '/RejectRequest', list);
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.put(this.baseUrl + '/RejectRequest', list, httpOptions1);
   }
   editRequest(request: any) {
     let httpOptions1 = {

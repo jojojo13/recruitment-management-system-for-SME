@@ -27,7 +27,7 @@ export class PositionCategoiresPageComponent implements OnInit {
   totalItems!: number;
   page: number = 1;
   selectedIndexInTable: any;
-
+  tableData: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -111,6 +111,10 @@ export class PositionCategoiresPageComponent implements OnInit {
     this.innitCode();
   }
 
+
+  exportExcel() {
+    this.commonService.exportExcel(this.positionList, "Position");
+  }
   deletePosition() {
     if (this.listSelected.length <= 0) {
       this.commonService.popUpMessage('Choose at least one record!!!');

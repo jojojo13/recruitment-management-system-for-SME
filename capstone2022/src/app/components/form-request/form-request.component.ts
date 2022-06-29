@@ -138,33 +138,44 @@ export class FormRequestComponent implements OnInit {
       confirmButtonText: 'Confirm',
       width: '380px',
     }).then((result) => {
-      if (result.isConfirmed) {
-        console.log('confirm');
-        this.requestService.editRequest(request).subscribe(
-          (response: any) => {
-            console.log('call api');
-            this.isLoaded = true;
-            if (response.status == true) {
-              (
-                document?.querySelector('.overlay') as HTMLElement
-              ).style.display = 'none';
-              this.commonService.popUpSuccess();
-              this.location.back();
-            } else {
-              (
-                document?.querySelector('.overlay') as HTMLElement
-              ).style.display = 'none';
-              this.commonService.popUpFailed('Something wrong');
-            }
-          },
-          (err: any) => {
+
+      this.requestService.checkTotal(this.requestService.selectedRequest.id, this.requestForm.controls['quantity'].value).subscribe(
+        (response: any) => {
+          if (response.status == false) {
+            Swal.fire('Total quantity must be less than quantity of request parent');
             (document?.querySelector('.overlay') as HTMLElement).style.display =
               'none';
-            this.commonService.popUpFailed('Something wrong');
-            this.isLoaded = true;
           }
-        );
-      }
+          else {
+            if (result.isConfirmed) {
+              console.log('confirm');
+              this.requestService.editRequest(request).subscribe(
+                (response: any) => {
+                  console.log('call api');
+                  this.isLoaded = true;
+                  if (response.status == true) {
+                    (
+                      document?.querySelector('.overlay') as HTMLElement
+                    ).style.display = 'none';
+                    this.commonService.popUpSuccess();
+                    this.location.back();
+                  } else {
+                    (
+                      document?.querySelector('.overlay') as HTMLElement
+                    ).style.display = 'none';
+                    this.commonService.popUpFailed('Something wrong');
+                  }
+                },
+                (err: any) => {
+                  (document?.querySelector('.overlay') as HTMLElement).style.display =
+                    'none';
+                  this.commonService.popUpFailed('Something wrong');
+                  this.isLoaded = true;
+                }
+              );
+            }
+          }
+        });
     });
   }
   loadData() {
