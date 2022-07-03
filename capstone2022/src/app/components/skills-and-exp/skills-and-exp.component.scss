@@ -21,19 +21,18 @@
     .content {
       cursor: pointer;
       margin: 0 5px;
-      i {
-        background-color: #ffc145;
-        border-radius: 50%;
-        padding: 3px 5px;
-        margin-right: 5px;
-      }
     }
   }
   &-content {
     margin-top: 20px;
     &-item {
-        margin-top: 20px;
+      margin-top: 20px;
       &-main {
+  
+        p{
+          width: 110px;
+          text-align: center;
+        }
         &-category {
           label {
             margin-top: 20px;
@@ -68,6 +67,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
+    width: auto;
     &:first-of-type {
       padding: 5px 25px;
       background-color: #ffc700;
@@ -91,4 +91,32 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+
+}
+select {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 100px;
+  text-align: center;
+  padding: 5px 15px;
+  option {
+    font-family: "Poppins";
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+    padding: 5px 15px;
+  }
+}
+.fa-trash-alt{
+  color: red;
+  margin-left: auto;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 18px;
 }

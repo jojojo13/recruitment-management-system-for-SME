@@ -32,6 +32,10 @@
       }
     }
   }
+  &-bottom {
+    &-button {
+    }
+  }
 }
 h5 {
   font-family: "Poppins";
@@ -68,12 +72,12 @@ svg {
   display: flex;
   margin-right: 20px;
 }
-.show{
+.show {
   display: block;
 }
-.hide{
+.hide {
   display: none;
 }
-.profile{
-  margin-bottom:20px;
+.profile {
+  margin-bottom: 20px;
 }

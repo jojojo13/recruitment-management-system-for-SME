@@ -23,6 +23,7 @@ import { ContractCategoryPageComponent } from './components/pages/profile-catego
 import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
 import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
 import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
+import { ViewCandidatePageComponent } from './components/pages/candidate-page/view-candidate-page/view-candidate-page.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
         path: 'ungvien/taoungvien',
         component: CreateCandidatePageComponent,
         canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'ungvien/xemungvien',
+        component: ViewCandidatePageComponent,
+        // canActivate: [AuthorizeGuard],
       },
       {
         path: 'phanloaitochuc',

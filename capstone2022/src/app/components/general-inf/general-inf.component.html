@@ -1,6 +1,6 @@
 <div class="content">
   <form novalidate [formGroup]="contactForm" class="form">
-    <div [ngClass]="{ show: step == 3, hide: step != 3 }">
+    <div [ngClass]="{ show: step == 1, hide: step != 1 }">
       <div class="form-group">
         <label for="phone">Phone number</label>
         <input type="text" class="form-control" formControlName="phone" />
@@ -104,7 +104,7 @@
       </div>
     </div>
   </form>
-  <div class="skill" [ngClass]="{ show: step == 1, hide: step != 1 }">
+  <div class="skill" [ngClass]="{ show: step == 3, hide: step != 3 }">
     <app-skills-and-exp></app-skills-and-exp>
   </div>
 </div>

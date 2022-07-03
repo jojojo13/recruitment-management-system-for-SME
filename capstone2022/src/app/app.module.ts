@@ -60,6 +60,9 @@ import { MatSelectCountryModule } from "@angular-material-extensions/select-coun
 import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
 import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
 import { SkillsAndExpComponent } from './components/skills-and-exp/skills-and-exp.component';
+import { PopupForCandidateComponent } from './components/popup-for-candidate/popup-for-candidate.component';
+import { ViewCandidatePageComponent } from './components/pages/candidate-page/view-candidate-page/view-candidate-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +116,9 @@ import { SkillsAndExpComponent } from './components/skills-and-exp/skills-and-ex
     ViewEmployeePagesComponent,
     EmployeeInformationComponent,
     SkillsAndExpComponent,
+    PopupForCandidateComponent,
+    ViewCandidatePageComponent,
+    
   ],
   imports: [
     BrowserModule,

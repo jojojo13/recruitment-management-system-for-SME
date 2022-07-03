@@ -120,10 +120,12 @@ export class RequestFormComponent implements OnInit {
 
     this.requestService.checkTotal(this.requestService.selectedRequest.id, this.requestForm.controls['quantity'].value).subscribe(
       (response: any) => {
+        this.isLoaded=true
         if (response.status == false) {
           Swal.fire('Total quantity must be less than quantity of request parent');
           (document?.querySelector('.overlay') as HTMLElement).style.display =
             'none';
+        
         }
         else {
           this.requestService.insertRequest(request).subscribe(

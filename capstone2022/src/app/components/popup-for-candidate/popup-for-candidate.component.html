@@ -1,0 +1,16 @@
+<div class="content">
+  <p (click)="showSelectList()">
+    <i class="far fa-plus circle-icon"></i>
+  </p>
+  <select
+    [(ngModel)]="selectedSkill"
+    (change)="chooseSkill()"
+    class="list"
+    name=""
+    id=""
+  >
+    <option [ngValue]="skill" *ngFor="let skill of listSkill">
+      {{ skill.name }}
+    </option>
+  </select>
+</div>
