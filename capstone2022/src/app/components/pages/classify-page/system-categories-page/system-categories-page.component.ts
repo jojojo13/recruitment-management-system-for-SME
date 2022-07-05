@@ -32,6 +32,8 @@ export class SystemCategoriesPageComponent implements OnInit {
   page: number = 1;
   selectedIndexInTable: any;
   tableData: any = [];
+  languageList: any;
+  checkIsLanguage =0;
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +51,7 @@ export class SystemCategoriesPageComponent implements OnInit {
       name: [{ value: '', disabled: true }, [Validators.required]],
       code: [{ value: '', disabled: true }],
       note: [{ value: '', disabled: true }],
+      languages: [{ value: '', disabled: false }],
     });
 
     this.organizationService.getOtherListType(3).subscribe((res: any) => {
@@ -61,8 +64,15 @@ export class SystemCategoriesPageComponent implements OnInit {
         this.listItemInCategory = res.data;
         this.totalItems=res.totalItem
       });
+
+    this.commonService
+      .getAllOtherList('LANGUAGE', 0, 9999)
+      .subscribe((res: any) => {
+        this.languageList = res.data;
+      });
   }
   addNewCategory() {
+    this.resetValue();
     this.enableAllControl();
     this.disable = false;
     this.action = 'Add new';
@@ -87,12 +97,19 @@ export class SystemCategoriesPageComponent implements OnInit {
   }
 
   onSubmit() {
+    let atribute;
+    if (this.checkIsLanguage === -1) {
+      atribute = this.categoryForm.controls['languages'].value.toString();
+    }
+    else {
+      atribute = "";
+    }
     let obj = {
       id: 0,
       code: this.categoryForm.controls['code'].value,
       name: this.categoryForm.controls['name'].value,
       note: this.categoryForm.controls['note'].value,
-      atribute1: 'string',
+      atribute1: atribute,
       atribute2: 'string',
       atribute3: 'string',
       typeID: this.typeID,
@@ -122,7 +139,7 @@ export class SystemCategoriesPageComponent implements OnInit {
         code: this.categoryForm.controls['code'].value,
         name: this.categoryForm.controls['name'].value,
         note: this.categoryForm.controls['note'].value,
-        atribute1: 'string',
+        atribute1: atribute,
         atribute2: 'string',
         atribute3: 'string',
         typeID: this.typeID,
@@ -155,6 +172,12 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.selectedIndexInTable = null;
     this.loadData(code, this.page - 1);
     this.disableControl();
+    if (code === "SKILL_LANG") {
+      this.checkIsLanguage = -1;
+    }
+    else {
+      this.checkIsLanguage = 0;
+    }
   }
   loadData(code: string, pageIndex: number) {
     this.commonService
@@ -173,12 +196,17 @@ export class SystemCategoriesPageComponent implements OnInit {
     this.categoryForm.controls['name'].setValue(item.name);
     this.categoryForm.controls['note'].setValue(item.note);
     this.categoryForm.controls['code'].setValue(item.code);
+
+    if (this.checkIsLanguage === -1) {
+      this.categoryForm.controls['languages'].setValue(parseInt(item.attribute1));
+    }
   }
 
   resetValue() {
     this.categoryForm.controls['name'].setValue('');
     this.categoryForm.controls['note'].setValue('');
     this.categoryForm.controls['code'].setValue('');
+    this.categoryForm.controls['languages'].setValue('');
   }
   resetSelectedList() {
     this.listSelected = [];

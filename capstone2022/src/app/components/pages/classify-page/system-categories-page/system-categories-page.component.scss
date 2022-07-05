@@ -10,23 +10,28 @@
 .content {
   font-family: "Poppins";
   width: 100%;
+
   &-middle {
     display: flex;
     width: 100%;
     border-top: 1px solid black;
+
     &-category {
       color: #686868;
       background-color: #d9d9d9;
       height: 555px;
       width: 185px;
       text-align: center;
+
       &-heading {
         padding: 10px;
         background-color: #d6d5f9;
       }
+
       &-list {
         list-style: none;
         text-align: start;
+
         li {
           padding: 5px;
           margin-top: 10px;
@@ -34,6 +39,7 @@
         }
       }
     }
+
     &-form {
       height: 100vh;
       width: 100%;
@@ -54,11 +60,25 @@
         background-color: #6c67fc;
       }
 
+      select {
+        cursor: pointer;
+        width: 280px;
+        padding: 8px 0 8px 10px;
+        border-radius: 10px;
+        border: 1px solid rgb(197, 197, 197);
+
+        option {
+          border-radius: 10px;
+          padding: 5px 0 5px 15px;
+        }
+      }
+
       h4 {
         margin-top: 20px;
         font-size: 16px;
         margin-left: 60px;
       }
+
       form {
         width: 100%;
         display: flex;
@@ -66,22 +86,26 @@
         margin-top: 35px;
         flex-wrap: wrap;
         justify-content: space-between;
+
         .form-group {
           display: flex;
           width: 40%;
-
           margin-bottom: 30px;
           position: relative;
+
           label {
             margin-right: 20px;
             font-size: 14px;
+            width: 60px;
           }
+
           small {
             position: absolute;
             top: 28px;
             left: 60px;
           }
         }
+
         input {
           width: 260px;
         }
