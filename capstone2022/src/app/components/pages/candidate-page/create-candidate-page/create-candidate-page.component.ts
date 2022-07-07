@@ -14,7 +14,7 @@ export class CreateCandidatePageComponent implements OnInit {
   attach = { name: 'Attach CV' };
   attach2 = { name: 'Attach Portfolio' };
   pdfSrc = '';
-  step = 3;
+  step = 1;
   candidate: any;
   objForAPI = {
     fullName: '',
@@ -69,7 +69,7 @@ export class CreateCandidatePageComponent implements OnInit {
   getName(name: string) {
     this.name = name;
   }
-  onSubmit() {
+  onSubmit(action:string) {
     this.commonService.emitBahavior.next(true);
 
     (this.objForAPI.fullName = this.candidate.name),
@@ -90,8 +90,15 @@ export class CreateCandidatePageComponent implements OnInit {
       (this.objForAPI.graduate = this.candidate.graduate),
       (this.objForAPI.school = this.candidate.university),
       (this.objForAPI.gpa = this.candidate.gpa),
-      (this.objForAPI.awards = this.candidate.awards),
-      (this.objForAPI.recordStatus = 1);
+      (this.objForAPI.awards = this.candidate.awards);
+      
+      if(action=='submit'){
+        (this.objForAPI.recordStatus = 1);
+      }
+      if(action=='draft'){
+        (this.objForAPI.recordStatus = 0);
+      }
+     
     Swal.fire({
       text: 'Are you sure to edit this request?',
       iconHtml:

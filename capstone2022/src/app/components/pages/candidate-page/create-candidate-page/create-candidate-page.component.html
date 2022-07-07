@@ -40,8 +40,8 @@
   <div class="content-bottom">
     <div class="content-bottom-button">
       <button class="btn btn-danger">Back</button>
-      <button class="btn btn-primary">Save draft</button>
-      <button [disabled]="!candidate.name" class="btn btn-success" (click)="onSubmit()">Create</button>
+      <button class="btn btn-primary" (click)="onSubmit('draft')">Save draft</button>
+      <button [disabled]="!candidate.name" class="btn btn-success" (click)="onSubmit('submit')">Create</button>
     </div>
   </div>
 </div>
