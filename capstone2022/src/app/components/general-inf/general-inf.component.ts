@@ -23,13 +23,15 @@ export class GeneralInfComponent implements OnInit, OnChanges {
   @Output('candidate') candidate = new EventEmitter<any>();
   name = '';
   contactForm!: FormGroup;
-  countries:any
-  selectedCountry:number=0
-  provinces:any
-  constructor(private fb: FormBuilder, private commonService: CommonService,private profileService:ProfileService) {}
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
+  countries: any;
+  selectedCountry: number = 0;
+  provinces: any;
+  constructor(
+    private fb: FormBuilder,
+    private commonService: CommonService,
+    private profileService: ProfileService
+  ) {}
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
@@ -53,24 +55,27 @@ export class GeneralInfComponent implements OnInit, OnChanges {
     this.commonService.emitBahavior.subscribe((change) => {
       this.candidate.emit(this.contactForm.value);
     });
-    this.contactForm.valueChanges.subscribe(value=>{
+    this.contactForm.valueChanges.subscribe((value) => {
       this.candidate.emit(this.contactForm.value);
-    })
-    this.loadCountry()
+    });
+    this.loadCountry();
   }
   onChange() {
     console.log(this.contactForm.value);
+    this.candidateName.emit(this.name)
   }
   onCountrySelected($event: Country) {}
 
-  loadCountry(){
-    this.profileService.getNationList().subscribe((response:any)=>{
-     this.countries=response.data
-    })
+  loadCountry() {
+    this.profileService.getNationList().subscribe((response: any) => {
+      this.countries = response.data;
+    });
   }
-  onSelectedCountry(){
-    this.profileService.getProvinceByNationId(this.contactForm.controls['country'].value).subscribe((data:any)=>{
-     this.provinces=data.data
-    })
+  onSelectedCountry() {
+    this.profileService
+      .getProvinceByNationId(this.contactForm.controls['country'].value)
+      .subscribe((data: any) => {
+        this.provinces = data.data;
+      });
   }
 }
