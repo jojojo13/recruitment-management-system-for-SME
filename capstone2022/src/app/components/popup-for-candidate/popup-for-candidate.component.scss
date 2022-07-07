@@ -13,14 +13,16 @@
 i {
   background-color: #ffc145;
   border-radius: 50%;
-  padding: 3px 5px;
+ font-size: 16px;
   margin-right: 5px;
+  padding: 6px 7px 3px 7px ;
 }
 .list {
   display: none;
   position: absolute;
   top: 30px;
   right: -25px;
+  z-index: 2;
 }
 select {
   font-family: "Poppins";

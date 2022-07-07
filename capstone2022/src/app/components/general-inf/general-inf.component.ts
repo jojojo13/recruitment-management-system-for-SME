@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/models/Country';
+import { CommonService } from 'src/app/services/common.service';
+import { ProfileService } from 'src/app/services/profile-service/profile.service';
 
 @Component({
   selector: 'app-general-inf',
@@ -17,26 +19,30 @@ import { Country } from 'src/app/models/Country';
 })
 export class GeneralInfComponent implements OnInit, OnChanges {
   @Output('candidateName') candidateName = new EventEmitter<string>();
-  @Input('step') step = 3;
+  @Input('step') step = 4;
+  @Output('candidate') candidate = new EventEmitter<any>();
   name = '';
   contactForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  countries:any
+  selectedCountry:number=0
+  provinces:any
+  constructor(private fb: FormBuilder, private commonService: CommonService,private profileService:ProfileService) {}
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.step);
+
   }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      phone: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      phone: [''],
+      email: [''],
       linkedIn: [''],
       facebook: [''],
       twitter: [''],
       skype: [''],
       website: [''],
-      name: ['',Validators.required],
-      dob: [''],
-      gender: [''],
+      name: ['', Validators.required],
+      dob: [],
+      gender: [0],
       major: [''],
       university: [''],
       graduate: [''],
@@ -44,9 +50,27 @@ export class GeneralInfComponent implements OnInit, OnChanges {
       country: [''],
       awards: [''],
     });
+    this.commonService.emitBahavior.subscribe((change) => {
+      this.candidate.emit(this.contactForm.value);
+    });
+    this.contactForm.valueChanges.subscribe(value=>{
+      this.candidate.emit(this.contactForm.value);
+    })
+    this.loadCountry()
   }
   onChange() {
-    this.candidateName.emit(this.name);
+    console.log(this.contactForm.value);
   }
   onCountrySelected($event: Country) {}
+
+  loadCountry(){
+    this.profileService.getNationList().subscribe((response:any)=>{
+     this.countries=response.data
+    })
+  }
+  onSelectedCountry(){
+    this.profileService.getProvinceByNationId(this.contactForm.controls['country'].value).subscribe((data:any)=>{
+     this.provinces=data.data
+    })
+  }
 }

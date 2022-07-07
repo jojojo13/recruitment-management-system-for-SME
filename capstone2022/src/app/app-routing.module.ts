@@ -48,7 +48,7 @@ const routes: Routes = [
       {
         path: 'ungvien/taoungvien',
         component: CreateCandidatePageComponent,
-        canActivate: [AuthorizeGuard],
+        // canActivate: [AuthorizeGuard],
       },
       {
         path: 'ungvien/xemungvien',

@@ -3,14 +3,132 @@
     <div class="language-heading">
       <h5 class="language-heading__ttl">1. Foreign Language</h5>
       <div class="content">
-        <app-popup-for-candidate
-          (data)="getDataFromPopup($event)"
-          [skillCode]="'LANGUAGE'"
-        ></app-popup-for-candidate>
+        <app-list-childskill
+          (childSkill)="getDataFromPopup($event)"
+          [parentCode]="'LANGUAGE'"
+        ></app-list-childskill>
+      </div>
+    </div>
+    <div class="language-content"></div>
+  </div>
+
+  <div class="language">
+    <div class="language-heading">
+      <h5 class="language-heading__ttl">2. SkillSheets</h5>
+      <div class="content">
+        <app-combobox-for-candidate (childSkill)="getData($event)">
+        </app-combobox-for-candidate>
       </div>
     </div>
     <div class="language-content">
-    
+      <div
+        _ngcontent-yxd-c87=""
+        class="language-content-item"
+        *ngFor="let skillsheet of skillSheets"
+      >
+        <div _ngcontent-yxd-c87="" class="language-content-item-main">
+          <div _ngcontent-yxd-c87="" class="main">
+            <p _ngcontent-yxd-c87="">{{ skillsheet.name }}</p>
+            <app-list-childskill
+              (childSkill)="getChildSkill($event, skillsheet)"
+              [parentCode]="skillsheet.code"
+            ></app-list-childskill>
+            <i
+              class="far fa-trash-alt"
+              (click)="removeSkillSheet(skillsheet)"
+            ></i>
+          </div>
+          <div class="language-content-item-main-category">
+            <div class="main" *ngFor="let skillChild of skillsheet.listSkill">
+              <span>{{ skillChild.name }}</span>
+              <select
+                #select
+                (change)="
+                  chooseLevel(skillChild, select.options[select.selectedIndex])
+                "
+              >
+                <option
+                  *ngFor="let item of skillChild.listSkill"
+                  [value]="item.id"
+                >
+                  {{ item.name }}
+                </option></select
+              ><input
+                required
+                #input
+                (change)="inputChange(skillChild, input)"
+                type="text"
+              />
+              <i
+                class="far fa-trash-alt"
+                (click)="removeSkillSheetChild(skillChild)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="language">
+    <div class="language-heading">
+      <h5 class="language-heading__ttl">3. Experience</h5>
+      <div class="content">
+        <app-list-childskill
+          (childSkill)="getFromChild($event)"
+          [parentCode]="'RC_EXP'"
+        ></app-list-childskill>
+      </div>
+    </div>
+    <div class="language-content">
+      <div class="language-content-item" *ngFor="let exp of expList">
+        <div _ngcontent-yxd-c87="" class="language-content-item-main">
+          <div _ngcontent-yxd-c87="" class="main">
+            <p _ngcontent-yxd-c87="">{{ exp.name }}</p>
+
+            <p (click)="addExpChild(exp)">
+              <i class="far fa-plus circle-icon"></i>
+            </p>
+            <i  (click)="removeExp(exp)" class="far fa-trash-alt"></i>
+          </div>
+          <div
+            _ngcontent-yxd-c87=""
+            class="language-content-item-main-category"
+          >
+            <div class="main" *ngFor="let skillChild of exp.listSkill">
+              <div class="exp">
+                <input
+                  class="firm"
+                  required
+                  #firm
+                  (change)="inputChangeFirm(skillChild, firm)"
+                  type="text"
+                />
+                <small class="text-danger">Required</small>
+              </div>
+              <div class="exp">
+                <input
+                  required
+                  #pos
+                  (change)="inputChangePosition(skillChild, pos)"
+                  type="text"
+                />
+                <small class="text-danger">Required</small>
+              </div>
+
+              <div class="exp">
+                <input
+                  #time
+                  (change)="inputChangeTime(skillChild, time)"
+                  type="text"
+                />
+                <small class="text-danger">Required</small>
+              </div>
+              <i  (click)="removeExpChild(skillChild)" class="far fa-trash-alt cus"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p (click)="show()">sadsad</p>
 </div>

@@ -9,13 +9,14 @@
 }
 .content {
   padding-bottom: 40px;
+  position: relative;
   &-middle {
     margin-top: 40px;
-
+    width: 100%;
     display: flex;
     padding: 0 30px;
     &-left {
-      width: 35%;
+      width: 40%;
       margin-top: 10px;
       margin-left: 20px;
       &-attach {
@@ -23,7 +24,7 @@
       }
     }
     &-right {
-      width: 65%;
+      width: 60%;
       padding-left: 50px;
       &-attach {
         display: flex;
@@ -33,7 +34,15 @@
     }
   }
   &-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
     &-button {
+      button{
+        width: 120px;
+        padding: 5px 15px;
+        margin: 0 10px;
+      }
     }
   }
 }
@@ -80,4 +89,11 @@ svg {
 }
 .profile {
   margin-bottom: 20px;
+}
+.show-full{
+  width: 100%;
+}
+button:disabled{
+  background-color: rgb(83, 83, 83);
+  border: none;
 }

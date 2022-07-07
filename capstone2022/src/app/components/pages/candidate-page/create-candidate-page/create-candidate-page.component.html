@@ -13,12 +13,16 @@
         <app-general-inf
           [step]="step"
           (candidateName)="getName($event)"
+          (candidate)="getCandidate($event)"
         ></app-general-inf>
 
         <!-- <app-contact-form></app-contact-form> -->
       </div>
     </div>
-    <div class="content-middle-right">
+    <div
+      class="content-middle-right"
+      [ngClass]="{ hide: step == 4, show: step != 4 }"
+    >
       <div class="content-middle-right-attach">
         <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach">
         </app-attach-file>
@@ -30,13 +34,14 @@
       </div>
     </div>
   </div>
+  <div [ngClass]="{ show: step == 4, hide: step != 4 }">
+    <app-over-view (listSkill)="getSkill($event)" (listExp)="getlistExp($event)" [candidate]="candidate"></app-over-view>
+  </div>
   <div class="content-bottom">
     <div class="content-bottom-button">
-      <button class="btn btn-success">Create</button>
-      <button class="btn btn-danger">Create</button>
-      <button class="btn btn-primary">Create</button>
+      <button class="btn btn-danger">Back</button>
+      <button class="btn btn-primary">Save draft</button>
+      <button [disabled]="!candidate.name" class="btn btn-success" (click)="onSubmit()">Create</button>
     </div>
-
   </div>
-
 </div>

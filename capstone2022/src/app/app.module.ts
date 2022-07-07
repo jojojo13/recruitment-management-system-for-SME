@@ -62,6 +62,9 @@ import { EmployeeInformationComponent } from './components/pages/profile-institu
 import { SkillsAndExpComponent } from './components/skills-and-exp/skills-and-exp.component';
 import { PopupForCandidateComponent } from './components/popup-for-candidate/popup-for-candidate.component';
 import { ViewCandidatePageComponent } from './components/pages/candidate-page/view-candidate-page/view-candidate-page.component';
+import { OverViewComponent } from './components/over-view/over-view.component';
+import { ComboboxForCandidateComponent } from './components/combobox-for-candidate/combobox-for-candidate.component';
+import { ListChildskillComponent } from './components/list-childskill/list-childskill.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +121,9 @@ import { ViewCandidatePageComponent } from './components/pages/candidate-page/vi
     SkillsAndExpComponent,
     PopupForCandidateComponent,
     ViewCandidatePageComponent,
+    OverViewComponent,
+    ComboboxForCandidateComponent,
+    ListChildskillComponent,
     
   ],
   imports: [

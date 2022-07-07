@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { GridComponent } from '../components/grid/grid.component';
+
 import { BehaviorSubject } from 'rxjs';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -10,15 +10,17 @@ import * as XLSX from 'xlsx';
   providedIn: 'root',
 })
 export class CommonService {
-
-  fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  fileType =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
 
   public exportExcel(jsonData: any[], fileName: string): void {
-
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
-    const wb: XLSX.WorkBook = { Sheets: { 'data': ws }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const wb: XLSX.WorkBook = { Sheets: { data: ws }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(wb, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
     this.saveExcelFile(excelBuffer, fileName);
   }
 
@@ -27,18 +29,17 @@ export class CommonService {
     FileSaver.saveAs(data, fileName + this.fileExtension);
   }
 
-
-
-
   baseUrl = 'https://localhost:44376/api/CommonAPI/GetOtherList';
   dataChange: BehaviorSubject<boolean>;
   pdfSrc = '';
+  emitBahavior:BehaviorSubject<boolean>
   constructor(
     private __http: HttpClient,
     private router: Router,
     private activateRoute: ActivatedRoute
   ) {
     this.dataChange = new BehaviorSubject<any>(null);
+    this.emitBahavior=new BehaviorSubject<any>(null)
   }
 
   getOtherList(code: string, index: number, size: number) {
