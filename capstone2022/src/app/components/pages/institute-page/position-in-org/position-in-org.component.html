@@ -15,7 +15,7 @@
       <h4>Mode:{{ action }}</h4>
       <form novalidate [formGroup]="positionOrgForm" (ngSubmit)="onSubmit()" class="form">
         <div class="form-group">
-          <label for="name">Dep/Proj Name</label>
+          <label for="name">Department</label>
           <input type="text" class="form-control" formControlName="dep" />
           <p (click)="showPopUp()" class="poppup">Choose</p>
           <small class="text-danger"

@@ -21,8 +21,10 @@ export class InstituteForOrganizationComponent implements OnInit {
   provinceList!: any;
   districtList!: any;
   wardList!: any;
-  managerId!: number;
+  managerId!: 0;
   today: string = new Date().toISOString().slice(0, 10);
+  department: any;
+  emp: any;
 
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
@@ -99,7 +101,7 @@ export class InstituteForOrganizationComponent implements OnInit {
       email: [''],
       numberBusiness: [''],
       provinces: [''],
-      manager: [''],
+      manager: [{ value: '', disabled: true }],
       phone: [''],
       address: ['', [Validators.required]],
       districts: [''],
@@ -123,6 +125,7 @@ export class InstituteForOrganizationComponent implements OnInit {
     let districtId = this.orgForm.controls['districts'].value == '' ? 0 : this.orgForm.controls['districts'].value;
     let wardId = this.orgForm.controls['wards'].value == '' ? 0 : this.orgForm.controls['wards'].value;
     let disDate = this.orgForm.controls['dissdate'].value == '' ? '1000-01-01T15:37:54.773Z' : this.orgForm.controls['dissdate'].value;
+    let mngID = this.managerId == null ? 0 : this.managerId
     let obj = {
       id: 0,
       name: this.orgForm.controls['name'].value,
@@ -143,7 +146,7 @@ export class InstituteForOrganizationComponent implements OnInit {
       provinceID: provinceId,
       districtID: districtId,
       wardID: wardId,
-      managerID: 2
+      managerID: mngID
     };
     this.organizationService.insertOrg(obj).subscribe((response: any) => {
       if (response.status == true) {
@@ -154,10 +157,19 @@ export class InstituteForOrganizationComponent implements OnInit {
     }, (err) => {
       this.commonService.popUpFailed('Failed')
     })
-    this.commonService.popUpFailed('Success')
   }
   showPopUp() {
     this.orgPicker.fire();
+  }
+
+  getDataFromPopup(department: any) {
+    this.department = department;
+  }
+
+  getEmp(emp: any) {
+    this.emp = emp;
+    this.managerId = emp.id;
+    this.orgForm.controls['manager'].setValue(emp.fullName);
   }
   resetPositionField() {
     this.orgForm.controls['position']?.reset();

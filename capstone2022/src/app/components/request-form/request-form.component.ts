@@ -124,8 +124,7 @@ export class RequestFormComponent implements OnInit {
         if (response.status == false) {
           Swal.fire('Total quantity must be less than quantity of request parent');
           (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none';
-        
+            'none'; 
         }
         else {
           this.requestService.insertRequest(request).subscribe(
