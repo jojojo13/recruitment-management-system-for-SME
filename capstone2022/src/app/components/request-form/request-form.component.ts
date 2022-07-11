@@ -23,6 +23,7 @@ export class RequestFormComponent implements OnInit {
   today: string = new Date().toISOString().slice(0, 10);
   types: any;
   levels: any;
+  skills: any;
   projects: any;
   officeID!: number;
   departmentID!: number;
@@ -58,6 +59,7 @@ export class RequestFormComponent implements OnInit {
         [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
       ],
       level: ['', [Validators.required]],
+      skill: ['', [Validators.required]],
       notes: ['', Validators.required],
     });
     this.commonService
@@ -84,6 +86,12 @@ export class RequestFormComponent implements OnInit {
       .getOtherList('RC_PROJECT', 0, 9999)
       .subscribe((response: any) => {
         this.projects = response.data;
+      });
+
+    this.commonService
+      .getOtherList('PRO_LANGUA', 0, 9999)
+      .subscribe((response: any) => {
+        this.skills = response.data;
       });
     this.extendFromParent();
   }
@@ -116,6 +124,7 @@ export class RequestFormComponent implements OnInit {
       createDate: this.today,
       updateBy: 'HUNGNX',
       updateDate: this.today,
+      otherSkill: this.requestForm.controls['skill'].value,
     };
 
     this.requestService.checkTotal(this.requestService.selectedRequest.id, this.requestForm.controls['quantity'].value).subscribe(

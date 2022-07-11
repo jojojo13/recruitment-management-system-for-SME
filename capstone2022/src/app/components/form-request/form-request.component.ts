@@ -27,6 +27,7 @@ export class FormRequestComponent implements OnInit {
   projects: any;
   positions: any;
   levels: any;
+  skills: any;
   today: string = new Date().toISOString().slice(0, 10);
   departmentID!: number;
   setDeadline: any;
@@ -63,6 +64,7 @@ export class FormRequestComponent implements OnInit {
       deadline: ['', [Validators.required]],
       experience: ['', [Validators.required]],
       level: ['', Validators.required],
+      skill: ['', Validators.required],
       notes: ['', Validators.required],
     });
     this.requestService
@@ -85,6 +87,7 @@ export class FormRequestComponent implements OnInit {
         this.requestForm.controls['deadline'].setValue(this.setDeadline);
         this.requestForm.controls['experience'].setValue(rq.experience);
         this.requestForm.controls['level'].setValue(rq.level);
+        this.requestForm.controls['skill'].setValue(rq.otherSkill);
         this.requestForm.controls['notes'].setValue(rq.note);
         this.departmentID = rq.orgnizationID;
         this.managerID = rq.signID;
@@ -113,6 +116,7 @@ export class FormRequestComponent implements OnInit {
       expireDate: this.requestForm.controls['deadline'].value,
       yearExperience: this.requestForm.controls['experience'].value,
       level: this.requestForm.controls['level'].value,
+      otherSkill: this.requestForm.controls['skill'].value,
       type: this.requestForm.controls['type'].value,
       project: this.requestForm.controls['projects'].value,
       budget: 0,
@@ -180,6 +184,7 @@ export class FormRequestComponent implements OnInit {
   }
   loadData() {
     this.loadListOfLevel();
+    this.loadListOfSkill();
     // this.loadListOfPosition();
     this.loadListOfProject();
     this.loadListOfType();
@@ -212,6 +217,13 @@ export class FormRequestComponent implements OnInit {
       .getOtherList('RC_LEVEL', 0, 9999)
       .subscribe((response: any) => {
         this.levels = response.data;
+      });
+  }
+  loadListOfSkill() {
+    this.commonService
+      .getOtherList('PRO_LANGUA', 0, 9999)
+      .subscribe((response: any) => {
+        this.skills = response.data;
       });
   }
   showPopUp() {
