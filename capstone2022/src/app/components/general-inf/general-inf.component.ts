@@ -35,8 +35,8 @@ export class GeneralInfComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      phone: [''],
-      email: [''],
+      phone: ['',Validators.required],
+      email: ['',Validators.required],
       linkedIn: [''],
       facebook: [''],
       twitter: [''],
@@ -48,8 +48,9 @@ export class GeneralInfComponent implements OnInit, OnChanges {
       major: [''],
       university: [''],
       graduate: [''],
-      gpa: [''],
-      country: [''],
+      gpa: [0],
+      country: [0],
+      city:[0],
       awards: [''],
     });
     this.commonService.emitBahavior.subscribe((change) => {
@@ -61,7 +62,6 @@ export class GeneralInfComponent implements OnInit, OnChanges {
     this.loadCountry();
   }
   onChange() {
-    console.log(this.contactForm.value);
     this.candidateName.emit(this.name);
   }
   onCountrySelected($event: Country) {}

@@ -33,6 +33,14 @@ body {
 .mat-form-field-wrapper {
   width: 90px !important;
 }
+.mat-form-field{
+  display: initial !important;
+
+}
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  margin: auto !important;
+  text-align: center !important;
+}
 // .mat-form-field-infix{
 //   input{
 //     &::placeholder{

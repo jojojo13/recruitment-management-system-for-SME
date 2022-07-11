@@ -11,11 +11,11 @@
   font-family: "Poppins";
   position: relative;
 }
-i{
-    background-color: #ffc145;
-    border-radius: 50%;
-    padding: 3px 5px;
-    margin-right: 5px;
+i {
+  background-color: #ffc145;
+  border-radius: 50%;
+  padding: 3px 5px;
+  margin-right: 5px;
 }
 ul {
   height: 160px;
@@ -25,35 +25,36 @@ ul {
   border: 1px solid black;
   position: absolute;
   z-index: 2;
-  background-color: #F1ffff;
+  background-color: #f1ffff;
   border: none;
 
-  li{
+  li {
     list-style: none;
     font-weight: 600;
     font-style: normal;
     font-family: "Poppins";
     cursor: pointer;
     padding: 5px 15px;
-    &:hover{
-        background-color: #FFF4CC;
+    &:hover {
+      background-color: #fff4cc;
     }
   }
 }
-.ad{
-  // display: none;
-  width: 120px;
+.ad {
+  display: none;
+  width: 160px;
 }
-.custom{
+.custom {
   z-index: 3;
-  // padding: 0;
-  // margin: 0;
-  // color: red;
+  padding: 0;
+  margin: 0;
+  color: red;
+  background-color: initial;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 30px;
+  right: 12px;
   left: auto;
-  font-size: 18px;
+  font-size: 20px;
 }
 ul::-webkit-scrollbar {
   width: 8px;
@@ -69,17 +70,17 @@ ul::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #6c67fc;
 }
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
-.show{
-    display: block;
+.show {
+  display: block;
 }
 .loading {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 .loader {
   border: 3px solid #dedede;

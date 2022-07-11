@@ -28,9 +28,12 @@ export class ComboboxForCandidateComponent implements OnInit {
   ) {}
   ngOnChanges(changes: SimpleChanges): void {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   getSkillType(target: HTMLElement) {
+  
     this.candidateService.getSkillType().subscribe(
       (response: any) => {
         this.listSkill = response.data;
@@ -43,6 +46,7 @@ export class ComboboxForCandidateComponent implements OnInit {
     );
 
     (target.children[1] as HTMLElement).style.display = 'block';
+    console.log(target.children[1])
   }
   chooseChildSkill(childSkill: any, target: HTMLElement) {
     // (document.querySelector('.ad') as HTMLElement).style.display = 'none';
@@ -50,5 +54,9 @@ export class ComboboxForCandidateComponent implements OnInit {
     this.childSkill.emit(childSkill);
 
     (target.children[1] as HTMLElement).style.display = 'none';
+  }
+  hideList(){
+    (document.querySelector('.ada') as HTMLElement).style.display='none'
+
   }
 }

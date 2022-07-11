@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-candidate-page.component.scss']
 })
 export class ViewCandidatePageComponent implements OnInit {
-
+  route = { name: 'View Candidates', link: 'phanloaitochuc' };
   constructor() { }
 
   ngOnInit(): void {

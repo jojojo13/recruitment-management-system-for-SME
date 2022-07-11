@@ -12,7 +12,7 @@ export class OrganizationPoppupComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationService.getAllOrganization().subscribe((response) => {
-      console.log(response);
+  
     });
   }
 
@@ -24,7 +24,7 @@ export class OrganizationPoppupComponent implements OnInit {
     }
     // first child of the parent node
     let sibling = ele.parentNode.firstChild as HTMLElement;
-    console.log(ele.parentElement)
+   
     // collecting siblings
     while (sibling) {
       if (sibling.nodeType === 1 && sibling !== ele) {
@@ -33,6 +33,6 @@ export class OrganizationPoppupComponent implements OnInit {
       }
       sibling = sibling.nextSibling as HTMLElement;
     }
-    console.log(siblings);
+  
   }
 }

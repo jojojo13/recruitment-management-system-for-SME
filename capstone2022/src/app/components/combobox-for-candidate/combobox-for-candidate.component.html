@@ -2,17 +2,19 @@
   <p>
     <i class="far fa-plus circle-icon" (click)="getSkillType(target)"></i>
   </p>
-
-  <ul class="ad">
-    <div class="loading" *ngIf="isLoaded == false">
-      <div class="loader"></div>
-      <h6>Loading</h6>
-    </div>
-    <li
-      (click)="chooseChildSkill(skill, target)"
-      *ngFor="let skill of listSkill"
-    >
-      {{ skill.name }}
-    </li>
-  </ul>
+  <div class="ada">
+    <ul>
+      <div class="loading" *ngIf="isLoaded == false">
+        <div class="loader"></div>
+        <h6>Loading</h6>
+      </div>
+      <li
+        (click)="chooseChildSkill(skill, target)"
+        *ngFor="let skill of listSkill"
+      >
+        {{ skill.name }}
+      </li>
+    </ul>
+    <i (click)="hideList()" class="fa fa-times custom"></i>
+  </div>
 </div>

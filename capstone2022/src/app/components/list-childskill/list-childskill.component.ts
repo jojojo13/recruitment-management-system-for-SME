@@ -31,7 +31,7 @@ export class ListChildskillComponent implements OnInit {
   //   }
   // }
   ngOnInit(): void {
-    this.getSkillType(document.querySelector('.ad') as HTMLElement)
+  
   }
   getSkillType(target: HTMLElement) {
     this.isShow = true;
@@ -52,5 +52,9 @@ export class ListChildskillComponent implements OnInit {
     this.childSkill.emit(childSkill);
     this.isShow = false;
     (target.children[1] as HTMLElement).style.display = 'none';
+  }
+  hideList(target:HTMLElement){
+    (target.children[1] as HTMLElement).style.display = 'none';
+
   }
 }

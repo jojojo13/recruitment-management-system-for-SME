@@ -32,7 +32,7 @@ export class CreateCandidatePageComponent implements OnInit {
     districtLive: 0,
     wardLive: 0,
     major: '',
-    graduate: '',
+    graduate: '1000-01-01T15:37:54.773Z',
     school: '',
     gpa: 0,
     awards: '',
@@ -69,7 +69,7 @@ export class CreateCandidatePageComponent implements OnInit {
   getName(name: string) {
     this.name = name;
   }
-  onSubmit(action:string) {
+  onSubmit(action: string) {
     this.commonService.emitBahavior.next(true);
 
     (this.objForAPI.fullName = this.candidate.name),
@@ -91,14 +91,14 @@ export class CreateCandidatePageComponent implements OnInit {
       (this.objForAPI.school = this.candidate.university),
       (this.objForAPI.gpa = this.candidate.gpa),
       (this.objForAPI.awards = this.candidate.awards);
-      
-      if(action=='submit'){
-        (this.objForAPI.recordStatus = 1);
-      }
-      if(action=='draft'){
-        (this.objForAPI.recordStatus = 0);
-      }
-     
+
+    if (action == 'submit') {
+      this.objForAPI.recordStatus = 1;
+    }
+    if (action == 'draft') {
+      this.objForAPI.recordStatus = 0;
+    }
+    console.log(this.objForAPI);
     Swal.fire({
       text: 'Are you sure to edit this request?',
       iconHtml:

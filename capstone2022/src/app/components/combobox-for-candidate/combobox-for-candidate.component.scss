@@ -9,7 +9,7 @@
 }
 .alias {
   font-family: "Poppins";
-  position: relative;
+ 
 }
 i{
     background-color: #ffc145;
@@ -27,7 +27,7 @@ ul {
   z-index: 2;
   background-color: #F1ffff;
   border: none;
-  display: none;
+
   li{
     list-style: none;
     font-weight: 600;
@@ -60,7 +60,11 @@ ul::-webkit-scrollbar-thumb {
 .show{
     display: block;
 }
-
+.ada{
+  position: relative;
+  display: none;
+  width: 160px;
+}
 .loading {
   position: absolute;
   top: 50%;
@@ -103,4 +107,16 @@ h6 {
   100% {
     transform: rotate(360deg);
   }
+}
+.custom{
+  z-index: 3;
+  padding: 0;
+  margin: 0;
+  color: red;
+  background-color: initial;
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  left: auto;
+  font-size: 20px;
 }

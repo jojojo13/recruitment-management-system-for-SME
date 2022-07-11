@@ -1,6 +1,10 @@
 import { Account } from '../../../models/Account';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,6 +18,7 @@ export class LoginPageComponent implements OnInit {
   account: Account;
   msg = '';
   redirectURL = '/';
+  isLoaded = true;
   constructor(
     private fb: UntypedFormBuilder,
     private auth: AuthorizeService,
@@ -30,16 +35,20 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {}
   signIn() {
+    this.isLoaded = false;
     this.account = this.loginForm.value;
-   
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
     this.auth.signIn(this.account).subscribe(
       (data: any) => {
-        console.log(data)
         localStorage.setItem('token', data.data);
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'none';
+        this.isLoaded = true;
         let params = this.route.snapshot.queryParams;
         if (params['redirectURL']) {
           this.redirectURL = params['redirectURL'];
-        } 
+        }
 
         if (this.redirectURL) {
           this.router
@@ -50,8 +59,10 @@ export class LoginPageComponent implements OnInit {
         }
       },
       (err: any) => {
+        this.isLoaded = true;
         this.msg = 'Wrong account or password';
-        console.log(err);
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'block';
       }
     );
   }
