@@ -3,9 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, finalize, Observable } from 'rxjs';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FileUpload } from '../models/FileUpload';
 @Injectable({
   providedIn: 'root',
 })
@@ -32,14 +35,17 @@ export class CommonService {
   baseUrl = 'https://localhost:44376/api/CommonAPI/GetOtherList';
   dataChange: BehaviorSubject<boolean>;
   pdfSrc = '';
-  emitBahavior:BehaviorSubject<boolean>
+  emitBahavior: BehaviorSubject<boolean>;
+  fileUrl=''
   constructor(
     private __http: HttpClient,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private db: AngularFireDatabase,
+    private storage: AngularFireStorage
   ) {
     this.dataChange = new BehaviorSubject<any>(null);
-    this.emitBahavior=new BehaviorSubject<any>(null)
+    this.emitBahavior = new BehaviorSubject<any>(null);
   }
 
   getOtherList(code: string, index: number, size: number) {
@@ -124,5 +130,34 @@ export class CommonService {
       this.router.navigate([currentUrl]);
       console.log(currentUrl);
     });
+  }
+
+  private basePath = '/uploads';
+
+  pushFileToStorage(fileUpload: FileUpload): Observable<number> {
+    const filePath = `${this.basePath}/${fileUpload.file.name}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, fileUpload.file);
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe((downloadURL) => {
+            fileUpload.url = downloadURL;
+            this.fileUrl=downloadURL
+            fileUpload.name = fileUpload.file.name;
+            this.saveFileData(fileUpload);
+          });
+        })
+      )
+      .subscribe();
+    return uploadTask.percentageChanges() as Observable<number>;
+  }
+  private saveFileData(fileUpload: FileUpload): void {
+    this.db.list(this.basePath).push(fileUpload);
+  }
+  getFiles(numberItems:number): AngularFireList<FileUpload> {
+    return this.db.list(this.basePath, ref =>
+      ref.limitToLast(numberItems));
   }
 }

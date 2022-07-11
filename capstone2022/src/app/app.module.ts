@@ -65,7 +65,12 @@ import { ViewCandidatePageComponent } from './components/pages/candidate-page/vi
 import { OverViewComponent } from './components/over-view/over-view.component';
 import { ComboboxForCandidateComponent } from './components/combobox-for-candidate/combobox-for-candidate.component';
 import { ListChildskillComponent } from './components/list-childskill/list-childskill.component';
+import { AngularFireModule } from "@angular/fire/compat";
 
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +141,11 @@ import { ListChildskillComponent } from './components/list-childskill/list-child
     MatCheckboxModule,
     SweetAlert2Module.forRoot(),
     PdfViewerModule,
-    MatSelectCountryModule
+    MatSelectCountryModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
+    
   ],
   providers: [
     // {

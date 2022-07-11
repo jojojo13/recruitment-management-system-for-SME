@@ -62,7 +62,7 @@ export class GeneralInfComponent implements OnInit, OnChanges {
   }
   onChange() {
     console.log(this.contactForm.value);
-    this.candidateName.emit(this.name)
+    this.candidateName.emit(this.name);
   }
   onCountrySelected($event: Country) {}
 
