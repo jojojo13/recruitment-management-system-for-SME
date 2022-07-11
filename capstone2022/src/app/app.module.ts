@@ -66,8 +66,9 @@ import { OverViewComponent } from './components/over-view/over-view.component';
 import { ComboboxForCandidateComponent } from './components/combobox-for-candidate/combobox-for-candidate.component';
 import { ListChildskillComponent } from './components/list-childskill/list-childskill.component';
 import { AngularFireModule } from "@angular/fire/compat";
-
+import {MatInputModule} from '@angular/material/input';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
@@ -144,15 +145,17 @@ import { environment } from 'src/environments/environment';
     MatSelectCountryModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatInputModule,
+    BrowserAnimationsModule
     
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: JwtInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

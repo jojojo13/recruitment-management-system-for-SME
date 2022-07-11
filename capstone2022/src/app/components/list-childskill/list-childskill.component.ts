@@ -30,7 +30,9 @@ export class ListChildskillComponent implements OnInit {
   //     (document.querySelector('.ad') as HTMLElement).style.display = 'none';
   //   }
   // }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSkillType(document.querySelector('.ad') as HTMLElement)
+  }
   getSkillType(target: HTMLElement) {
     this.isShow = true;
     this.candidateService

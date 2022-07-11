@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th></th>
-        <th>Request ID</th>
+        <th>ID</th>
         <th>Name</th>
         <th>Type</th>
         <th>Department</th>
@@ -13,11 +13,57 @@
         <th>Quantity</th>
         <th>Created on</th>
         <th>Deadline</th>
-        <th>HR in change</th>
+        <th>HR in charge</th>
         <th>Status</th>
         <th></th>
       </tr>
     </thead>
+    <tbody>
+      <tr class="filter-row">
+        <td></td>
+        <td></td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+        <td>
+          <!-- <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field> -->
+        </td>
+        <td>
+          <!-- <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field> -->
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" />
+          </mat-form-field>
+        </td>
+      </tr>
+    </tbody>
     <tbody>
       <ng-container
         *ngFor="
@@ -30,9 +76,20 @@
                 }
         "
       >
-        <tr #clicked level="1" (dblclick)="navigateEdit(request)" (click)="getSelectedRQ(request, clicked)">
-          <td level="1"><input type="checkbox" (change)="selectedChange(request,$event)" [value]="request.id" /></td>
-          <td level="1">{{ request.code }}</td>
+        <tr
+          #clicked
+          level="1"
+          (dblclick)="navigateEdit(request)"
+          (click)="getSelectedRQ(request, clicked)"
+        >
+          <td level="1">
+            <input
+              type="checkbox"
+              (change)="selectedChange(request, $event)"
+              [value]="request.id"
+            />
+          </td>
+          <td id="code-col" level="1">{{ request.code }}</td>
           <td level="1">{{ request.name }}</td>
           <td level="1">{{ request.requestLevel }}</td>
           <td level="1">{{ request.department }}</td>
@@ -48,7 +105,7 @@
                 submitted: request.statusID === 2,
                 cancel: request.statusID === 3,
                 approved: request.statusID === 4,
-                reject: request.statusID === 5||0
+                reject: request.statusID === 5 || 0
               }"
             >
               {{ request.status | lowercase }}
@@ -64,8 +121,10 @@
       </ng-container>
     </tbody>
   </table>
+
   <pagination-controls
     class="pagi"
     (pageChange)="gty((page = $event))"
   ></pagination-controls>
 </ng-container>
+

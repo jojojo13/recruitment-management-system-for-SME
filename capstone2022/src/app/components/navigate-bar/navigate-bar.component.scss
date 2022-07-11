@@ -14,15 +14,21 @@
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
+  
   &-list {
     background-color: #dedede;
     display: flex;
     border-top: 1px solid #00000099;
-
+    border-bottom: 1px solid #a8a4a4;
     &-item {
+
       width: calc(100% / 6);
       border-right: 2px solid #a8a4a4;
       cursor: pointer;
+      p{
+        font-family: 'Poppins';
+        margin-left: 9px;
+      }
       &:hover {
         background-color: rgb(189, 185, 185);
       }

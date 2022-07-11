@@ -27,7 +27,7 @@ ul {
   z-index: 2;
   background-color: #F1ffff;
   border: none;
-  display: none;
+
   li{
     list-style: none;
     font-weight: 600;
@@ -39,6 +39,21 @@ ul {
         background-color: #FFF4CC;
     }
   }
+}
+.ad{
+  // display: none;
+  width: 120px;
+}
+.custom{
+  z-index: 3;
+  // padding: 0;
+  // margin: 0;
+  // color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: auto;
+  font-size: 18px;
 }
 ul::-webkit-scrollbar {
   width: 8px;

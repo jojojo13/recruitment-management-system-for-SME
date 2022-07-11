@@ -36,8 +36,9 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isLoaded = false;
+
     this.commonService.dataChange.subscribe((isChange) => {
-      this.isLoaded = false;
       this.clearData();
       this.page = this.activatedRoute.snapshot.queryParams['index'];
       this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
@@ -55,7 +56,7 @@ export class GridComponent implements OnInit, OnDestroy {
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
-        console.log(this.requestList);
+        console.log(this.isLoaded);
       });
   }
 

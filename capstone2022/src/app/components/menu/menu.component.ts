@@ -27,19 +27,6 @@ export class MenuComponent implements OnInit {
     }
     clickedEle.classList.toggle('active');
 
-    // dropDown.style.animation='append-animate .6s linear'
-
-    //     dropDown.className = 'menu-list-item-request';
-    //     dropDown.innerHTML = `
-    //     <ul>
-    //       <li>Yêu cầu</li>
-    //       <li>Chiến dịch</li>
-    //       <li>Ứng viên</li>
-    //       <li>Lịch</li>
-    //       <li>Kết quả kiểm tra</li>
-    //       <li>Onboarding</li>
-    //       <li>Báo cáo</li>
-    // </ul>`;
-    // element.appendChild(dropDown)
+   
   }
 }

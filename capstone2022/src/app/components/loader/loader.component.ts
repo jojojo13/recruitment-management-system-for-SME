@@ -1,15 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.scss'],
 })
-export class LoaderComponent implements OnInit {
- @Input('isLoaded') isLoaded=false
-  constructor() { }
-
-  ngOnInit(): void {
+export class LoaderComponent implements OnInit,OnChanges {
+  @Input('isLoaded') isLoaded = false;
+  constructor() {}
+  ngOnChanges(changes: SimpleChanges): void {
+   console.log(this.isLoaded)
   }
 
+  ngOnInit(): void {}
 }
