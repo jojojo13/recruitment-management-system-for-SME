@@ -54,13 +54,10 @@ export class RequestFormComponent implements OnInit {
       ],
       office: [{ value: '', disabled: true }],
       deadline: ['', [Validators.required]],
-      experience: [
-        '',
-        [Validators.pattern('^[1-9][0-9]*$'), Validators.required],
-      ],
-      level: ['', [Validators.required]],
-      skill: ['', [Validators.required]],
-      notes: ['', Validators.required],
+      experience: ['', [Validators.pattern('^[1-9][0-9]*$')]],
+      level: [''],
+      skill: [''],
+      notes: [''],
     });
     this.commonService
       .getOtherList('RC_TYPE', 0, 9999)
@@ -110,13 +107,19 @@ export class RequestFormComponent implements OnInit {
       signId: this.managerID,
       effectDate: this.today,
       expireDate: this.requestForm.controls['deadline'].value,
-      yearExperience: this.requestForm.controls['experience'].value,
-      level: this.requestForm.controls['level'].value,
+      yearExperience:
+        this.requestForm.controls['experience'].value == ''
+          ? 0
+          : this.requestForm.controls['experience'].value,
+      level:
+        this.requestForm.controls['level'].value == ''
+          ? 0
+          : this.requestForm.controls['level'].value,
       type: this.requestForm.controls['type'].value,
       project: this.requestForm.controls['projects'].value,
       budget: 0,
       note: this.requestForm.controls['notes'].value,
-      comment: 'string',
+      comment: '',
       status: status,
       parentID: this.requestService.selectedRequest.id,
       rank: 0,
@@ -124,44 +127,54 @@ export class RequestFormComponent implements OnInit {
       createDate: this.today,
       updateBy: 'HUNGNX',
       updateDate: this.today,
-      otherSkill: this.requestForm.controls['skill'].value,
+      otherSkill:
+        this.requestForm.controls['skill'].value == ''
+          ? 0
+          : this.requestForm.controls['skill'].value,
     };
 
-    this.requestService.checkTotal(this.requestService.selectedRequest.id, this.requestForm.controls['quantity'].value).subscribe(
-      (response: any) => {
-        this.isLoaded=true
+    this.requestService
+      .checkTotal(
+        this.requestService.selectedRequest.id,
+        this.requestForm.controls['quantity'].value
+      )
+      .subscribe((response: any) => {
+        this.isLoaded = true;
         if (response.status == false) {
-          Swal.fire('Total quantity must be less than quantity of request parent');
+          Swal.fire(
+            'Total quantity must be less than quantity of request parent'
+          );
           (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none'; 
-        }
-        else {
+            'none';
+        } else {
           this.requestService.insertRequest(request).subscribe(
             (response: any) => {
-              this.isLoaded = true;
               if (response.status == true) {
+                this.isLoaded = true;
+
+                (
+                  document?.querySelector('.overlay') as HTMLElement
+                ).style.display = 'none';
                 this.commonService.popUpSuccess();
-                (document?.querySelector('.overlay') as HTMLElement).style.display =
-                  'none';
               } else {
+                this.isLoaded = true;
+
+                (
+                  document?.querySelector('.overlay') as HTMLElement
+                ).style.display = 'none';
                 this.commonService.popUpFailed('Failed');
-                (document?.querySelector('.overlay') as HTMLElement).style.display =
-                  'none';
               }
             },
             (err) => {
               this.isLoaded = true;
+              (
+                document?.querySelector('.overlay') as HTMLElement
+              ).style.display = 'none';
               this.commonService.popUpFailed('Failed');
-              (document?.querySelector('.overlay') as HTMLElement).style.display =
-                'none';
             }
           );
         }
-      },
-    );
-
-
-
+      });
   }
   showPopUp() {
     this.orgPicker.fire();
@@ -171,20 +184,21 @@ export class RequestFormComponent implements OnInit {
     this.orgPicker.close();
     this.renderPosition(department.id);
     this.resetPositionField();
-    this.departmentID = department.id;
-    this.orgService.getOrgByID(department.id).subscribe((response: any) => {
-      this.requestForm.controls['office'].setValue(response.data.office);
-      this.managerID = response.data.managerID;
-    });
   }
   renderPosition(id: number) {
     this.orgService.getPositionByOrgID(id).subscribe(
       (response: any) => {
         this.listPosition = response.data;
+        this.departmentID = id;
+        this.orgService.getOrgByID(id).subscribe((response: any) => {
+          this.requestForm.controls['office'].setValue(response.data.office);
+          this.managerID = response.data.managerID;
+        });
       },
       (err) => {
         Swal.fire('Position for this department is not available ');
         this.requestForm.controls['dep']?.reset();
+        this.requestForm.controls['office']?.reset();
       }
     );
   }
@@ -212,5 +226,44 @@ export class RequestFormComponent implements OnInit {
           this.requestForm.controls['projects'].disable();
         });
     }
+  }
+  showw() {
+    let request = {
+      id: 0,
+      name: this.requestForm.controls['name'].value,
+      code: this.requestForm.controls['requestCode'].value,
+      requestLevel: this.requestForm.controls['type'].value,
+      orgnizationId: this.departmentID,
+      positionID: this.requestForm.controls['position'].value,
+      number: this.requestForm.controls['quantity'].value,
+      signId: this.managerID,
+      effectDate: this.today,
+      expireDate: this.requestForm.controls['deadline'].value,
+      yearExperience:
+        this.requestForm.controls['experience'].value == ''
+          ? 0
+          : this.requestForm.controls['experience'].value,
+      level:
+        this.requestForm.controls['level'].value == ''
+          ? 0
+          : this.requestForm.controls['level'].value,
+      type: this.requestForm.controls['type'].value,
+      project: this.requestForm.controls['projects'].value,
+      budget: 0,
+      note: this.requestForm.controls['notes'].value,
+      comment: '',
+      status: status,
+      parentID: this.requestService.selectedRequest.id,
+      rank: 0,
+      createBy: 'HUNGNX',
+      createDate: this.today,
+      updateBy: 'HUNGNX',
+      updateDate: this.today,
+      otherSkill:
+        this.requestForm.controls['skill'].value == ''
+          ? 0
+          : this.requestForm.controls['skill'].value,
+    };
+    console.log(request);
   }
 }

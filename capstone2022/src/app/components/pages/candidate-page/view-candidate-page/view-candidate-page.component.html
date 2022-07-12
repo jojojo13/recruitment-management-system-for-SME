@@ -1,4 +1,5 @@
 <div class="content">
+  <app-loader [isLoaded]="isLoaded"></app-loader>
   <div class="content-heading">
     <h5>View candidates</h5>
     <app-back-btn [route]="route"></app-back-btn>
@@ -13,8 +14,9 @@
           <th>YOB</th>
           <th>Phone</th>
           <th>Email</th>
-          <th>Experiences</th>
           <th>Location</th>
+          <th>Position</th>
+          <th>Experiences</th>
           <th>Language</th>
         </tr>
       </thead>
@@ -57,20 +59,37 @@
           </mat-form-field>
         </td>
       </tbody>
-      <tbody>
-        <tr>
+      <tbody *ngIf="listCandidate">
+
+        <tr
+          *ngFor="
+            let candidate of listCandidate
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: page,
+                    totalItems: totalItems
+                  }
+          "
+        >
           <td><input type="checkbox" /></td>
-          <td>1</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          <td>Vu Hong Son</td>
-          
+          <td>{{ candidate.id }}</td>
+          <td>{{ candidate.name }}</td>
+          <td>{{ candidate.dob }}</td>
+          <td>{{ candidate.phone }}</td>
+          <td>{{ candidate.email }}</td>
+          <td>{{ candidate.location }}</td>
+          <td>{{ candidate.position }}</td>
+          <td>{{ candidate.yearExp }}</td>
+          <td>{{ candidate.language }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+  <ng-container *ngIf="listCandidate">
+    <pagination-controls
+      class="pagi"
+      (pageChange)="gty((page = $event))"
+    ></pagination-controls>
+  </ng-container>
 </div>

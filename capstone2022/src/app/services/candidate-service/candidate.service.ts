@@ -17,7 +17,9 @@ export class CandidateService {
     this.skillBehaviour = new BehaviorSubject<boolean>(false);
     this.detectChange = new BehaviorSubject<boolean>(false);
   }
-
+  getAllcandidateByPaging(index:number,size:number){
+    return this.__http.post(`https://localhost:44376/api/CandidateAPI/GetAllCandidate?index=${index}&size=${size}`,{})
+  }
   getSkillSheet(code: string) {
     return this.__http.post(
       `https://localhost:44376/api/CandidateAPI/GetSkillSheet?code1=${code}`,
@@ -32,5 +34,8 @@ export class CandidateService {
   }
   insertCandidate(obj:any){
     return this.__http.post('https://localhost:44376/api/CandidateAPI/InsertRcCandidate',obj)
+  }
+  filterCandidate(obj:any){
+    return this.__http.post('https://localhost:44376/api/RequestAPI/GetAllRequestByFilter',obj)
   }
 }

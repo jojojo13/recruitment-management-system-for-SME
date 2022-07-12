@@ -12,6 +12,11 @@ table {
     tr {
       &:first-of-type {
         border: none;
+        th{
+          &:nth-of-type(8), &:nth-of-type(9){
+            width: 140px;
+          }
+        }
       }
     }
   }
@@ -139,6 +144,9 @@ table {
 }
 tbody .filter-row {
   border-top: none;
+  td{
+    height: 75px;
+  }
 }
 #code-col {
   width: 50px !important;

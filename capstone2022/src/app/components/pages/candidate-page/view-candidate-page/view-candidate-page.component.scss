@@ -22,17 +22,18 @@
 table {
   width: 100%;
   font-size: 14px;
-
+  border-collapse: collapse;
+  table-layout: fixed;
   font-family: "Poppins";
   border: 1px solid rgb(202, 202, 202);
   thead {
     tr {
       &:first-of-type {
         border: none;
-        th{
-            &:first-of-type{
-                width: 20px;
-            }
+        th {
+          &:first-of-type {
+            width: 20px;
+          }
         }
       }
     }
@@ -45,9 +46,7 @@ table {
       width: 100px;
       text-align: center;
       height: 60px;
-      &:last-of-type {
-        width: 20px;
-      }
+     
       &:first-of-type {
         width: 40px;
       }
@@ -59,9 +58,10 @@ table {
       vertical-align: middle;
       text-align: center;
       height: 60px;
-    
       overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
+
       i {
         cursor: pointer;
         &:active {

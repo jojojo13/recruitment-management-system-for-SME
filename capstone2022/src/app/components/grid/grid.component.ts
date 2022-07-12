@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { AuthorizeService } from 'src/app/services/authorize.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounce, debounceTime } from 'rxjs';
+import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 
 @Component({
   selector: 'app-grid',
@@ -22,26 +25,84 @@ export class GridComponent implements OnInit, OnDestroy {
   totalItems!: number;
   page: number = 1;
   isLoaded: boolean = false;
-
+  filterForm!: FormGroup;
   constructor(
     public requestService: RequestService,
     private renderer: Renderer2,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
-    private auth: AuthorizeService
+    private auth: AuthorizeService,
+    private fb: FormBuilder,
+    private candidateService: CandidateService
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
   }
 
   ngOnInit() {
+    this.page = this.activatedRoute.snapshot.queryParams['index'];
+    this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
+    this.filterForm = this.fb.group({
+      name: [''],
+      orgName: [''],
+      department: [''],
+      positionName: [''],
+      quantity: [''],
+      createOn: [''],
+      deadLine: [''],
+      hrInchange: [''],
+      status: [''],
+      otherSkill: [''],
+      index: [this.page - 1],
+      size: [this.itemsPerPage],
+    });
+    this.filterForm.valueChanges
+      .pipe(debounceTime(2000))
+      .subscribe((selectedValue) => {
+        this.isLoaded = false;
+        this.clearData();
+        let obj = {
+          code: '',
+          name: this.filterForm.controls['name'].value,
+          orgName: this.filterForm.controls['department'].value,
+          positionName: this.filterForm.controls['positionName'].value,
+          quantity: this.filterForm.controls['quantity'].value,
+          createOn: this.filterForm.controls['createOn'].value,
+          deadLine: this.filterForm.controls['deadLine'].value,
+          hrInchange: this.filterForm.controls['hrInchange'].value,
+          status: this.filterForm.controls['status'].value,
+          otherSkill: this.filterForm.controls['otherSkill'].value,
+          index: this.page - 1,
+          size: this.itemsPerPage,
+        };
+        if (this.filterForm.controls['createOn'].value == '') {
+          obj.createOn = '1000-01-01T15:37:54.773Z';
+        }
+        if (this.filterForm.controls['deadLine'].value == '') {
+          obj.deadLine = '1000-01-01T15:37:54.773Z';
+        }
+        if (this.filterForm.controls['quantity'].value == '') {
+          obj.quantity = 0;
+        }
+        console.log(obj);
+
+        this.candidateService.filterCandidate(obj).subscribe(
+          (response: any) => {
+            this.isLoaded = true;
+            this.totalItems = response.totalItem;
+            this.requestList = response.data;
+          },
+          (err) => {
+            this.isLoaded = false;
+            this.commonService.popUpFailed('Something wrong');
+          }
+        );
+      });
     this.isLoaded = false;
 
     this.commonService.dataChange.subscribe((isChange) => {
       this.clearData();
-      this.page = this.activatedRoute.snapshot.queryParams['index'];
-      this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
       this.unSelectedRequest();
       this.loadData(this.page - 1);
     });
@@ -56,7 +117,6 @@ export class GridComponent implements OnInit, OnDestroy {
         this.requestList = response.data;
         this.totalItems = response.totalItem;
         this.isLoaded = true;
-        console.log(this.isLoaded);
       });
   }
 
@@ -274,7 +334,6 @@ export class GridComponent implements OnInit, OnDestroy {
     if (!target?.hasAttribute('level')) {
       this.requestService.resetDataSelectedRq();
       this.clearClass();
-      console.log('clear');
     }
   };
   unSelectedRequest() {

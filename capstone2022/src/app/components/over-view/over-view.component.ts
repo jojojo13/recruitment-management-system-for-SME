@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -15,7 +16,7 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './over-view.component.html',
   styleUrls: ['./over-view.component.scss'],
 })
-export class OverViewComponent implements OnInit, OnChanges {
+export class OverViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input('candidate') candidate: any;
   @Output('listSkill') listSkill = new EventEmitter<any>();
   @Output('listExp') listExp = new EventEmitter<any>();
@@ -27,6 +28,12 @@ export class OverViewComponent implements OnInit, OnChanges {
     private candidateService: CandidateService,
     private commonService: CommonService
   ) {}
+  ngOnDestroy(): void {
+    this.candidateService.otherList = [];
+    this.candidateService.skillList = [];
+    this.candidateService.skillSheet = [];
+    this.candidateService.expList = [];
+  }
   ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
@@ -44,8 +51,11 @@ export class OverViewComponent implements OnInit, OnChanges {
       }
     });
     this.commonService.emitBahavior.subscribe((change) => {
-      let concatArr = newArr2.concat(this.test);
-      this.listSkill.emit(concatArr);
+      if (newArr2) {
+        let concatArr = newArr2.concat(this.test);
+        this.listSkill.emit(concatArr);
+      }
+
       this.listExp.emit(newArr);
     });
   }

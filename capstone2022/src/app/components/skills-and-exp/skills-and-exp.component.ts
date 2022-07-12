@@ -316,11 +316,11 @@ export class SkillsAndExpComponent implements OnInit {
         listSkill: [],
       };
       this.expList.push(copiedSkill);
+      this.candidateService.expList = this.expList;
+      this.candidateService.detectChange.next(true);
     }
   }
-  show() {
-    console.log(this.expList);
-  }
+
   addExpChild(exp: any) {
     let obj = { firm: '', position: '', time: '' };
     for (let i = 0; i < this.expList.length; i++) {

@@ -111,11 +111,7 @@
       <div class="form-group">
         <label for="name">Experience (year)</label>
         <input type="text" class="form-control" formControlName="experience" />
-        <small class="text-danger"
-               *ngIf="
-            requestForm.get('experience')?.hasError('required') &&
-            requestForm.get('experience')?.touched
-          ">Please input experience</small>
+      
         <small class="text-danger"
                *ngIf="requestForm.get('experience')?.hasError('pattern')">Please input number greater than 0.</small>
       </div>
@@ -126,13 +122,8 @@
             {{ level.name }}
           </option>
         </select>
-        <small class="text-danger"
-               *ngIf="
-          requestForm.get('level')?.hasError('required') &&
-          requestForm.get('level')?.touched
-        ">Please input level</small>
+      
       </div>
-
 
       <div class="form-group">
         <label for="name">Other Skill</label>
@@ -141,11 +132,6 @@
             {{ skill.name }}
           </option>
         </select>
-        <small class="text-danger"
-               *ngIf="
-          requestForm.get('skill')?.hasError('required') &&
-          requestForm.get('skill')?.touched
-        ">Please input Skill</small>
       </div>
 
       <div class="form-group">
@@ -154,11 +140,6 @@
                   placeholder="Notes"
                   rows="4"
                   formControlName="notes"></textarea>
-        <small class="text-danger"
-               *ngIf="
-            requestForm.get('notes')?.hasError('required') &&
-            requestForm.get('notes')?.touched
-          ">Please input notes</small>
       </div>
       <div class="form-buttons">
         <button (click)="clearInputField()"
@@ -189,3 +170,4 @@
     <app-pop-up-organizations (department)="getDataFromPopup($event)"></app-pop-up-organizations>
   </div>
 </swal>
+<p (click)="showw()">adasdsa</p>

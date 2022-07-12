@@ -24,16 +24,22 @@ import { ProfileInstitutePageComponent } from './components/pages/profile-instit
 import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
 import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
 import { ViewCandidatePageComponent } from './components/pages/candidate-page/view-candidate-page/view-candidate-page.component';
+import { NationListComponent } from './components/pages/classify-page/location-categories-page/nation-list/nation-list.component';
+import { ProvinceListComponent } from './components/pages/classify-page/location-categories-page/province-list/province-list.component';
+import { DistrictListComponent } from './components/pages/classify-page/location-categories-page/district-list/district-list.component';
+import { WardListComponent } from './components/pages/classify-page/location-categories-page/ward-list/ward-list.component';
+import { LocationCategoriesPageComponent } from './components/pages/classify-page/location-categories-page/location-categories-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
     children: [
-      { path: 'yeucautuyendung', component: RecruitmentRequestPageComponent },
+      { path: 'yeucautuyendung', component: RecruitmentRequestPageComponent, canActivate: [AuthorizeGuard], },
       {
         path: 'yeucautuyendung/xemyeucau',
         component: ViewRequestPageComponent,
+         canActivate: [AuthorizeGuard],
       },
       {
         path: 'yeucautuyendung/taoyeucau',
@@ -43,8 +49,10 @@ const routes: Routes = [
       {
         path: 'yeucautuyendung/xemyeucau/:id',
         component: ViewOneRequestPageComponent,
+        canActivate: [AuthorizeGuard],
       },
-      { path: 'ungvien', component: CandidatePageComponent },
+      { path: 'ungvien', component: CandidatePageComponent ,
+      canActivate: [AuthorizeGuard],},
       {
         path: 'ungvien/taoungvien',
         component: CreateCandidatePageComponent,
@@ -58,59 +66,90 @@ const routes: Routes = [
       {
         path: 'phanloaitochuc',
         component: ClassifyPageComponent,
+        canActivate: [AuthorizeGuard],
        
       },
       {
         path: 'thietlaptochuc',
         component: InstitutePageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'phanloaitochuc/thamsohethong',
         component: SystemCategoriesPageComponent,
+        canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'phanloaitochuc/danhmucdiadiem',
+        component: LocationCategoriesPageComponent,
+        canActivate: [AuthorizeGuard],children:[{
+          path:'nations',component:NationListComponent
+        },
+        {
+          path:'provinces',component:ProvinceListComponent
+        },
+        {
+          path:'districts',component:DistrictListComponent
+        },
+        {
+          path:'wards',component:WardListComponent
+        },]
       },
       {
         path: 'phanloaitochuc/danhmuchucdanh',
         component: TitleCategoryPageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'phanloaitochuc/danhmucvitricongviec',
         component: PositionCategoiresPageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaptochuc/vitricongviec',
         component: PositionInOrgComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaptochuc/xemtochuc',
         component: ViewOrganizationComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaptochuc/tochuc',
         component: InstituteForOrganizationComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'danhmuchoso',
         component: ProfileCategoryPageComponent,
+        canActivate: [AuthorizeGuard],
       },
+      
       {
         path: 'danhmuchoso/hopdong',
         component: ContractCategoryPageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'danhmuchoso/',
         component: ContractCategoryPageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaphoso',
         component: ProfileInstitutePageComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaphoso/nhanvien',
         component: ViewEmployeePagesComponent,
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'thietlaphoso/thongtinnhanvien',
         component: EmployeeInformationComponent,
+        canActivate: [AuthorizeGuard],
       },
     ],
   },

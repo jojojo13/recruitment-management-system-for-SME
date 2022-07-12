@@ -1,13 +1,14 @@
 <app-loader [isLoaded]="isLoaded"></app-loader>
 
-<ng-container *ngIf="requestList">
+<ng-container>
+ 
   <table>
     <thead>
       <tr>
         <th></th>
         <th>ID</th>
         <th>Name</th>
-        <th>Type</th>
+        <th>Programing Language</th>
         <th>Department</th>
         <th>Position</th>
         <th>Quantity</th>
@@ -19,52 +20,78 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="filter-row">
+      <tr class="filter-row" [formGroup]="filterForm">
         <td></td>
         <td></td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input  matInput type="text" placeholder="Filter" formControlName="name"/>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input matInput type="text" placeholder="Filter" formControlName="otherSkill" />
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input matInput type="text" placeholder="Filter" formControlName="department" />
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input matInput type="text" placeholder="Filter" formControlName="positionName"/>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input matInput type="text" placeholder="Filter" formControlName="quantity"/>
           </mat-form-field>
         </td>
         <td>
-          <!-- <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field> -->
+          <mat-form-field appearance="fill" class="example-form-field custom">
+            <mat-label>Choose a date</mat-label>
+            <input type="date"  matInput  formControlName="createOn">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <!-- <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions class="cus-btn">
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker> -->
+          </mat-form-field>
         </td>
         <td>
-          <!-- <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field> -->
+          <mat-form-field appearance="fill" class="example-form-field custom">
+            <mat-label>Choose a date</mat-label>
+            <input  type="date" matInput   formControlName="deadLine">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <!-- <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker1>
+              <mat-datepicker-actions class="cus-btn">
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker> -->
+          </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
+            <input matInput type="text" placeholder="Filter" formControlName="hrInchange"/>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Filter" formControlName="status"/>
           </mat-form-field>
         </td>
       </tr>
     </tbody>
-    <tbody>
+   
+      
+   
+    <tbody  *ngIf="requestList">
       <ng-container
         *ngFor="
           let request of requestList
@@ -91,7 +118,7 @@
           </td>
           <td id="code-col" level="1">{{ request.code }}</td>
           <td level="1">{{ request.name }}</td>
-          <td level="1">{{ request.requestLevel }}</td>
+          <td level="1">{{ request.otherSkillname }}</td>
           <td level="1">{{ request.department }}</td>
           <td level="1">{{ request.position }}</td>
           <td level="1">{{ request.quantity }}</td>
@@ -121,10 +148,11 @@
       </ng-container>
     </tbody>
   </table>
-
+  <ng-container *ngIf="requestList">
   <pagination-controls
     class="pagi"
     (pageChange)="gty((page = $event))"
   ></pagination-controls>
+</ng-container>
 </ng-container>
 

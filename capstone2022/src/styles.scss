@@ -59,3 +59,34 @@ body {
 //     text-align: center !important;
 //   }
 // }
+.custom{
+  .mat-form-field-flex {
+    background-color: #fff !important;
+    padding-top: 0px !important;
+    .mat-form-field-infix {
+      padding-bottom: 9px !important;
+      margin: 0 auto !important;
+    }
+    
+  }
+  .mat-form-field-wrapper{
+    width: 130px !important;
+    margin: 0 auto !important;
+  }
+ 
+}
+.mat-datepicker-actions{
+  button{
+    border-radius: 5px !important;
+    border: none !important;
+    padding: 5px 8px !important;
+    margin: 0 3px !important;
+    color: #fff !important;
+    &:nth-of-type(2){
+      background-color: #354ea0 !important;
+    }
+    &:first-of-type{
+      background-color: #ccc9c9 !important;
+    }
+  }
+}

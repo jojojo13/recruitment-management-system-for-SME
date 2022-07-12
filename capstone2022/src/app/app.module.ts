@@ -56,7 +56,7 @@ import { ProfileCategoryPageComponent } from './components/pages/profile-categor
 import { ProfileInstitutePageComponent } from './components/pages/profile-institute-page/profile-institute-page.component';
 import { ContractCategoryPageComponent } from './components/pages/profile-category-page/contract-category-page/contract-category-page.component';
 import { HrInchangeComponent } from './components/hr-inchange/hr-inchange.component';
-import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { ViewEmployeePagesComponent } from './components/pages/profile-institute-page/view-employee-pages/view-employee-pages.component';
 import { EmployeeInformationComponent } from './components/pages/profile-institute-page/employee-information/employee-information.component';
 import { SkillsAndExpComponent } from './components/skills-and-exp/skills-and-exp.component';
@@ -65,13 +65,21 @@ import { ViewCandidatePageComponent } from './components/pages/candidate-page/vi
 import { OverViewComponent } from './components/over-view/over-view.component';
 import { ComboboxForCandidateComponent } from './components/combobox-for-candidate/combobox-for-candidate.component';
 import { ListChildskillComponent } from './components/list-childskill/list-childskill.component';
-import { AngularFireModule } from "@angular/fire/compat";
-import {MatInputModule} from '@angular/material/input';
+import { AngularFireModule } from '@angular/fire/compat';
+import { MatInputModule } from '@angular/material/input';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import { LocationCategoriesPageComponent } from './components/pages/classify-page/location-categories-page/location-categories-page.component';
+import { NationListComponent } from './components/pages/classify-page/location-categories-page/nation-list/nation-list.component';
+import { ProvinceListComponent } from './components/pages/classify-page/location-categories-page/province-list/province-list.component';
+import { DistrictListComponent } from './components/pages/classify-page/location-categories-page/district-list/district-list.component';
+import { WardListComponent } from './components/pages/classify-page/location-categories-page/ward-list/ward-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,7 +138,11 @@ import { environment } from 'src/environments/environment';
     OverViewComponent,
     ComboboxForCandidateComponent,
     ListChildskillComponent,
-    
+    LocationCategoriesPageComponent,
+    NationListComponent,
+    ProvinceListComponent,
+    DistrictListComponent,
+    WardListComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,8 +159,10 @@ import { environment } from 'src/environments/environment';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     MatInputModule,
-    BrowserAnimationsModule
-    
+    MatDatepickerModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatTableModule
   ],
   providers: [
     {
@@ -156,6 +170,7 @@ import { environment } from 'src/environments/environment';
       useClass: JwtInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
   bootstrap: [AppComponent],
 })
