@@ -18,7 +18,6 @@ export class PositionInOrgComponent implements OnInit {
   positionOrgForm!: FormGroup;
   action = 'Viewing';
   positionList: any;
-  workFormList: any;
   positionOrgList: any;
   listSelected!: Array<number>;
   selectedIndex = 0;

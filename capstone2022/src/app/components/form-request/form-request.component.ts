@@ -266,8 +266,7 @@ export class FormRequestComponent implements OnInit {
     }
   }
   reformatDate(dateStr: string) {
-    let newdate;
-    return (newdate = dateStr.split('/').reverse().join('-')); //ex out: "18/01/10"
+    return dateStr.slice(0, 10);
   }
   disableALL() {
     if (this.request.statusID == 2 || this.request.statusID == 4) {
