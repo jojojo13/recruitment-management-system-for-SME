@@ -80,6 +80,10 @@ import { NationListComponent } from './components/pages/classify-page/location-c
 import { ProvinceListComponent } from './components/pages/classify-page/location-categories-page/province-list/province-list.component';
 import { DistrictListComponent } from './components/pages/classify-page/location-categories-page/district-list/district-list.component';
 import { WardListComponent } from './components/pages/classify-page/location-categories-page/ward-list/ward-list.component';
+import { ViewACandidatePageComponent } from './components/pages/candidate-page/view-a-candidate-page/view-a-candidate-page.component';
+import { NavigationBarComponent } from './components/pages/candidate-page/view-a-candidate-page/navigation-bar/navigation-bar.component';
+import { GeneralInfCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/general-inf-candidate/general-inf-candidate.component';
+import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -143,6 +147,10 @@ import { WardListComponent } from './components/pages/classify-page/location-cat
     ProvinceListComponent,
     DistrictListComponent,
     WardListComponent,
+    ViewACandidatePageComponent,
+    NavigationBarComponent,
+    GeneralInfCandidateComponent,
+    CvCandidateComponent,
   ],
   imports: [
     BrowserModule,

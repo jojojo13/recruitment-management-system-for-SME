@@ -35,7 +35,5 @@ export class CandidateService {
   insertCandidate(obj:any){
     return this.__http.post('https://localhost:44376/api/CandidateAPI/InsertRcCandidate',obj)
   }
-  filterCandidate(obj:any){
-    return this.__http.post('https://localhost:44376/api/RequestAPI/GetAllRequestByFilter',obj)
-  }
+  
 }

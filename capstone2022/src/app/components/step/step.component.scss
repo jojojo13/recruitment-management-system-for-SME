@@ -15,14 +15,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    filter: drop-shadow(1px 0px 0px #8C8C8C)
-          drop-shadow(0px 0px 0px #8C8C8C)
-          drop-shadow(0px 1px 0px #8C8C8C)
-          drop-shadow(0px -1px 0px #8C8C8C)
-          drop-shadow(0px 0px 0px #8C8C8C)
-          drop-shadow(0px 0px 0px #8C8C8C)
-          drop-shadow(0px 0px 0px #8C8C8C)
-          drop-shadow(0px 0px 0px #8C8C8C);
+    filter: drop-shadow(1px 0px 0px #8c8c8c) drop-shadow(0px 0px 0px #8c8c8c)
+      drop-shadow(0px 1px 0px #8c8c8c) drop-shadow(0px -1px 0px #8c8c8c)
+      drop-shadow(0px 0px 0px #8c8c8c) drop-shadow(0px 0px 0px #8c8c8c)
+      drop-shadow(0px 0px 0px #8c8c8c) drop-shadow(0px 0px 0px #8c8c8c);
     &-item {
       position: relative;
       -webkit-clip-path: polygon(87% 0, 100% 51%, 88% 99%, 0 99%, 16% 52%, 0 0);
@@ -30,6 +26,7 @@
       width: 260px;
       height: 80px;
       background-color: #fff;
+      transition: all 0.6s;
       p {
         font-size: 16px;
         margin-left: 50px;
@@ -46,7 +43,8 @@
     }
   }
 }
-.highlight{
-  background-color:#374151;
+.highlight {
+  background-color: #374151;
   color: #fff;
+  width: 280px;
 }
