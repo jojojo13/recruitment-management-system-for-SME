@@ -61,8 +61,7 @@
       </tbody>
       <tbody *ngIf="listCandidate">
 
-        <tr
-          *ngFor="
+        <tr *ngFor="
             let candidate of listCandidate
               | paginate
                 : {
@@ -70,17 +69,16 @@
                     currentPage: page,
                     totalItems: totalItems
                   }
-          "
-        >
+          ">
           <td><input type="checkbox" /></td>
-          <td>{{ candidate.id }}</td>
+          <td>{{ candidate.code }}</td>
           <td>{{ candidate.name }}</td>
-          <td>{{ candidate.dob }}</td>
-          <td>{{ candidate.phone }}</td>
+          <td>{{ candidate.yob }}</td>
+          <td>{{ candidate.phoneNumber }}</td>
           <td>{{ candidate.email }}</td>
           <td>{{ candidate.location }}</td>
-          <td>{{ candidate.position }}</td>
-          <td>{{ candidate.yearExp }}</td>
+          <td>{{ candidate.lastestPosition }}</td>
+          <td>{{ candidate.experience }}</td>
           <td>{{ candidate.language }}</td>
         </tr>
       </tbody>
