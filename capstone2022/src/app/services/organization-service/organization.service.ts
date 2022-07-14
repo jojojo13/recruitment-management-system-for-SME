@@ -255,4 +255,62 @@ export class OrganizationService {
       {},
     );
   }
+
+
+
+
+  getAllNation(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + `/GetNationList?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
+  }
+
+
+  getAllProvince(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + `/GetProvinceList?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
+  }
+  getAllDistrict(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + `/GetDistrictList?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
+  }
+  getAllWard(index: number, size: number) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(
+      this.baseUrl + `/GetWardList?index=${index}&size=${size}`,
+      {},
+      httpOptions1
+    );
+  }
 }

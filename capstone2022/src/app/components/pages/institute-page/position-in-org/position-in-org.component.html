@@ -47,25 +47,26 @@
         Save
       </button>
       <div class="content-bottom">
-        <table>
-          <caption>
-            (Click any record to turn on Editting mode)
-          </caption>
-          <thead>
-            <tr>
-              <td></td>
-              <td>Orgnization name</td>
-              <td>Orgnization code</td>
-              <td>Title name</td>
-              <td>Position code</td>
-              <td>Position name</td>
-              <td>Note</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr [ngClass]="{ active: selectedIndexInTable === i }"
-                (click)="chooseItem(item, i)"
-                *ngFor="
+        <ng-container *ngIf="positionOrgList">
+          <table>
+            <caption>
+              (Click any record to turn on Editting mode)
+            </caption>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Orgnization name</td>
+                <td>Orgnization code</td>
+                <td>Title name</td>
+                <td>Position code</td>
+                <td>Position name</td>
+                <td>Note</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [ngClass]="{ active: selectedIndexInTable === i }"
+                  (click)="chooseItem(item, i)"
+                  *ngFor="
               let item of positionOrgList
                 | paginate
                   : {
@@ -75,21 +76,22 @@
                     };
               let i = index
             ">
-              <td>
-                <mat-checkbox (change)="updateAllComplete($event, item.id)">
-                </mat-checkbox>
-              </td>
-              <td>{{ item.orgName }}</td>
-              <td>{{ item.orgCode }}</td>
-              <td>{{ item.titleName }}</td>
-              <td>{{ item.positionCode }}</td>
-              <td>{{ item.positionName }}</td>
-              <td>{{ item.note }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls class="pagi"
-                             (pageChange)="gty((page = $event))"></pagination-controls>
+                <td>
+                  <mat-checkbox (change)="updateAllComplete($event, item.id)">
+                  </mat-checkbox>
+                </td>
+                <td>{{ item.orgName }}</td>
+                <td>{{ item.orgCode }}</td>
+                <td>{{ item.titleName }}</td>
+                <td>{{ item.positionCode }}</td>
+                <td>{{ item.positionName }}</td>
+                <td>{{ item.note }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls class="pagi"
+                               (pageChange)="gty((page = $event))"></pagination-controls>
+        </ng-container>
       </div>
     </div>
   </div>

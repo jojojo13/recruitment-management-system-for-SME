@@ -242,6 +242,18 @@ export class GridComponent implements OnInit, OnDestroy {
       let input = this.renderer.createElement('input');
       this.renderer.setAttribute(input, 'type', 'checkbox');
       this.renderer.setAttribute(input, 'value', rq.id);
+
+      let otherSkillname = rq.otherSkillname;
+      if (otherSkillname == null) {
+        otherSkillname = "";
+      }
+
+      let hrInchange = rq.hrInchange;
+      if (hrInchange == null) {
+        hrInchange = "";
+      }
+
+
       this.renderer.appendChild(td0, input);
       this.renderer.listen(input, 'click', (e) => {
         this.selectedChange(rq.id, e);
@@ -251,7 +263,7 @@ export class GridComponent implements OnInit, OnDestroy {
       let td2 = this.renderer.createElement('td');
       td2.innerHTML = `${rq.name}`;
       let td3 = this.renderer.createElement('td');
-      td3.innerHTML = `${rq.requestLevel}`;
+      td3.innerHTML = `${otherSkillname}`;
       let td4 = this.renderer.createElement('td');
       td4.innerHTML = `${rq.department}`;
       let td5 = this.renderer.createElement('td');
@@ -259,11 +271,11 @@ export class GridComponent implements OnInit, OnDestroy {
       let td6 = this.renderer.createElement('td');
       td6.innerHTML = `${rq.quantity}`;
       let td7 = this.renderer.createElement('td');
-      td7.innerHTML = `${rq.createdOn}`;
+      td7.innerHTML = `${rq.createdOnString}`;
       let td8 = this.renderer.createElement('td');
-      td8.innerHTML = `${rq.deadline}`;
+      td8.innerHTML = `${rq.deadlineString}`;
       let td9 = this.renderer.createElement('td');
-      td9.innerHTML = `${rq.hrInchange}`;
+      td9.innerHTML = `${hrInchange}`;
       let td10 = this.renderer.createElement('td');
       let p = this.renderer.createElement('p');
       let text = rq.status.toLowerCase();
