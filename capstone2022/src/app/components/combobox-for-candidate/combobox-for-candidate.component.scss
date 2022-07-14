@@ -9,67 +9,112 @@
 }
 .alias {
   font-family: "Poppins";
- 
 }
-i{
-    background-color: #ffc145;
-    border-radius: 50%;
-    padding: 3px 5px;
-    margin-right: 5px;
+i {
+  background-color: #ffc145;
+  border-radius: 50%;
+  padding: 3px 5px;
+  margin-right: 5px;
 }
-ul {
+ol {
+  padding: 20px;
   height: 160px;
   overflow-y: auto;
-  width: 160px;
+ 
   border-radius: 5px;
   border: 1px solid black;
   position: absolute;
   z-index: 2;
-  background-color: #F1ffff;
+  background-color: #f1ffff;
   border: none;
-
-  li{
-    list-style: none;
-    font-weight: 600;
-    font-style: normal;
-    font-family: "Poppins";
-    cursor: pointer;
-    padding: 5px 15px;
-    &:hover{
-        background-color: #FFF4CC;
-    }
-  }
+  counter-reset: li;
+  list-style: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-ul::-webkit-scrollbar {
+ol li {
+  position: relative;
+  display: block;
+  padding: 0.4em 0.4em 0.4em 0.8em;
+  margin: 0.5em 0 0.5em 2.5em;
+  background: #d3d4da;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+}
+ol li:hover {
+  background: #90a2e9;
+}
+ol li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #f9dd94;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+ol li:after {
+  position: absolute;
+  content: "";
+  border: 0.5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -0.5em;
+  transition: all 0.3s ease-out;
+}
+
+ol li:hover:after {
+  left: -0.5em;
+  border-left-color: #f9dd94;
+}
+ol::-webkit-scrollbar {
   width: 8px;
 }
 
-ul::-webkit-scrollbar-track {
+ol::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(235, 50, 50, 0.3);
 
   border-radius: 15px;
 }
 
-ul::-webkit-scrollbar-thumb {
+ol::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #6c67fc;
 }
-.hide{
-    display: none;
-}
-.show{
-    display: block;
-}
-.ada{
+.ada {
   position: relative;
-  display: none;
-  width: 160px;
+  transition: ease 0.32s;
+  height: 0;
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  z-index: 3;
 }
+.hide {
+  visibility: collapse;
+  height: 0;
+}
+.show {
+  display: block;
+
+  height: auto;
+  transform: scaleY(1);
+}
+
 .loading {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 .loader {
   border: 3px solid #dedede;
@@ -108,15 +153,15 @@ h6 {
     transform: rotate(360deg);
   }
 }
-.custom{
+.custom {
   z-index: 3;
   padding: 0;
   margin: 0;
   color: red;
   background-color: initial;
   position: absolute;
-  top: 6px;
-  right: 12px;
+  top: 4px;
+  right: -146px;
   left: auto;
   font-size: 20px;
 }

@@ -29,6 +29,9 @@ import { ProvinceListComponent } from './components/pages/classify-page/location
 import { DistrictListComponent } from './components/pages/classify-page/location-categories-page/district-list/district-list.component';
 import { WardListComponent } from './components/pages/classify-page/location-categories-page/ward-list/ward-list.component';
 import { LocationCategoriesPageComponent } from './components/pages/classify-page/location-categories-page/location-categories-page.component';
+import { ViewACandidatePageComponent } from './components/pages/candidate-page/view-a-candidate-page/view-a-candidate-page.component';
+import { GeneralInfCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/general-inf-candidate/general-inf-candidate.component';
+import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
 
 const routes: Routes = [
   {
@@ -62,6 +65,18 @@ const routes: Routes = [
         path: 'ungvien/xemungvien',
         component: ViewCandidatePageComponent,
         // canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'ungvien/xemungvien/:id',
+        component: ViewACandidatePageComponent,
+        // canActivate: [AuthorizeGuard],
+        children:[{
+          path:'info',component:GeneralInfCandidateComponent
+        },
+        { path:'cv',component:CvCandidateComponent
+
+        }
+      ]
       },
       {
         path: 'phanloaitochuc',

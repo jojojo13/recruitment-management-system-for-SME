@@ -44,17 +44,20 @@ export class ListChildskillComponent implements OnInit {
         this.isLoaded=true
       });
 
-    (target.children[1] as HTMLElement).style.display = 'block';
+    (target.children[1] as HTMLElement).classList.add("show");
+    (target.children[1] as HTMLElement).classList.remove("hide");
   }
   chooseChildSkill(childSkill: any, target: HTMLElement) {
     // (document.querySelector('.ad') as HTMLElement).style.display = 'none';
 
     this.childSkill.emit(childSkill);
     this.isShow = false;
-    (target.children[1] as HTMLElement).style.display = 'none';
+    (target.children[1] as HTMLElement).classList.add("hide");
+    (target.children[1] as HTMLElement).classList.remove("show");
   }
   hideList(target:HTMLElement){
-    (target.children[1] as HTMLElement).style.display = 'none';
+    (target.children[1] as HTMLElement).classList.add("hide");
+    (target.children[1] as HTMLElement).classList.remove("show");
 
   }
 }

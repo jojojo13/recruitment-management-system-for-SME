@@ -29,7 +29,7 @@ h5 {
       padding: 5px 10px;
       border-radius: 5px;
     }
-    select{
+    select {
       width: 220px;
       padding: 5px 10px;
       border-radius: 5px;
@@ -40,10 +40,18 @@ h5 {
   }
 }
 .show {
+  opacity: 1;
+  visibility: visible;
   display: block;
 }
 .hide {
   display: none;
+  visibility: collapse;
+  opacity: 0;
+}
+.trans{
+  transition: ease 0.5s;
+  
 }
 #country,
 #city {
@@ -55,11 +63,11 @@ label[class="city"] {
 small {
   margin-left: 120px;
 }
-.skill{
- width: 100%;
+.skill {
+  width: 100%;
   align-self: flex-start;
 }
-.button-list{
+.button-list {
   display: flex;
   position: absolute;
 }

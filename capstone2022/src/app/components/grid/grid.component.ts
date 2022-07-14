@@ -26,6 +26,20 @@ export class GridComponent implements OnInit, OnDestroy {
   page: number = 1;
   isLoaded: boolean = false;
   filterForm!: FormGroup;
+  filterObj = {
+    code: '',
+    name: '',
+    orgName: '',
+    positionName: '',
+    quantity: 0,
+    createOn: '1000-01-01T15:37:54.773Z',
+    deadLine: '1000-01-01T15:37:54.773Z',
+    hrInchange: '',
+    status: '',
+    otherSkill: '',
+    index: this.page - 1,
+    size: this.itemsPerPage,
+  };
   constructor(
     public requestService: RequestService,
     private renderer: Renderer2,
@@ -33,16 +47,18 @@ export class GridComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
     private auth: AuthorizeService,
-    private fb: FormBuilder,
-    private candidateService: CandidateService
+    private fb: FormBuilder
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
   }
 
   ngOnInit() {
+    this.isLoaded = false;
+
     this.page = this.activatedRoute.snapshot.queryParams['index'];
     this.itemsPerPage = this.activatedRoute.snapshot.queryParams['size'];
+
     this.filterForm = this.fb.group({
       name: [''],
       orgName: [''],
@@ -61,63 +77,50 @@ export class GridComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(2000))
       .subscribe((selectedValue) => {
         this.isLoaded = false;
+        this.filterObj.name = this.filterForm.controls['name'].value;
+        this.filterObj.orgName = this.filterForm.controls['department'].value;
+        this.filterObj.positionName =
+          this.filterForm.controls['positionName'].value;
+        this.filterObj.quantity = this.filterForm.controls['quantity'].value;
+        this.filterObj.createOn = this.filterForm.controls['createOn'].value;
+        this.filterObj.deadLine = this.filterForm.controls['deadLine'].value;
+        this.filterObj.hrInchange =
+          this.filterForm.controls['hrInchange'].value;
+        this.filterObj.status = this.filterForm.controls['status'].value;
+        this.filterObj.otherSkill =
+          this.filterForm.controls['otherSkill'].value;
         this.clearData();
-        let obj = {
-          code: '',
-          name: this.filterForm.controls['name'].value,
-          orgName: this.filterForm.controls['department'].value,
-          positionName: this.filterForm.controls['positionName'].value,
-          quantity: this.filterForm.controls['quantity'].value,
-          createOn: this.filterForm.controls['createOn'].value,
-          deadLine: this.filterForm.controls['deadLine'].value,
-          hrInchange: this.filterForm.controls['hrInchange'].value,
-          status: this.filterForm.controls['status'].value,
-          otherSkill: this.filterForm.controls['otherSkill'].value,
-          index: this.page - 1,
-          size: this.itemsPerPage,
-        };
-        if (this.filterForm.controls['createOn'].value == '') {
-          obj.createOn = '1000-01-01T15:37:54.773Z';
-        }
-        if (this.filterForm.controls['deadLine'].value == '') {
-          obj.deadLine = '1000-01-01T15:37:54.773Z';
-        }
-        if (this.filterForm.controls['quantity'].value == '') {
-          obj.quantity = 0;
-        }
-        console.log(obj);
-
-        this.candidateService.filterCandidate(obj).subscribe(
-          (response: any) => {
-            this.isLoaded = true;
-            this.totalItems = response.totalItem;
-            this.requestList = response.data;
-          },
-          (err) => {
-            this.isLoaded = false;
-            this.commonService.popUpFailed('Something wrong');
-          }
-        );
+        this.checktoFormat();
+        this.unSelectedRequest();
+        this.loadData();
       });
-    this.isLoaded = false;
 
     this.commonService.dataChange.subscribe((isChange) => {
       this.clearData();
       this.unSelectedRequest();
-      this.loadData(this.page - 1);
+      this.loadData();
     });
   }
   navigateEdit(request: any) {
     this.router.navigate(['yeucautuyendung/xemyeucau', request.id]);
   }
-  loadData(pageIndex: number) {
-    this.requestService
-      .getRequestByPaging(pageIndex, this.itemsPerPage)
-      .subscribe((response: any) => {
-        this.requestList = response.data;
-        this.totalItems = response.totalItem;
+  loadData() {
+    this.checktoFormat();
+    this.filterObj.index = this.page - 1;
+    this.filterObj.size = this.itemsPerPage;
+    console.log(this.filterObj)
+    this.requestService.filterRequest(this.filterObj).subscribe(
+      (response: any) => {
+        console.log(response)
         this.isLoaded = true;
-      });
+        this.totalItems = response.totalItem;
+        this.requestList = response.data;
+      },
+      (err) => {
+        this.isLoaded = true;
+        this.commonService.popUpFailed('Something wrong');
+      }
+    );
   }
 
   toggleChildren(clicked: HTMLElement, requestID: number, $event: MouseEvent) {
@@ -192,7 +195,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.isLoaded = false;
     this.clearData();
 
-    this.loadData(page - 1);
+    this.loadData();
   }
 
   clearData() {
@@ -216,6 +219,17 @@ export class GridComponent implements OnInit, OnDestroy {
         this.loadingDone($event, parent);
       }
     );
+  }
+  checktoFormat() {
+    if (this.filterForm.controls['createOn'].value == '') {
+      this.filterObj.createOn = '1000-01-01T15:37:54.773Z';
+    }
+    if (this.filterForm.controls['deadLine'].value == '') {
+      this.filterObj.deadLine = '1000-01-01T15:37:54.773Z';
+    }
+    if (this.filterForm.controls['quantity'].value == '') {
+      this.filterObj.quantity = 0;
+    }
   }
 
   createRow(parent: HTMLElement, response: any) {

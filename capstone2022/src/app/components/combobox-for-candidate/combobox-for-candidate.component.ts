@@ -45,18 +45,20 @@ export class ComboboxForCandidateComponent implements OnInit {
       }
     );
 
-    (target.children[1] as HTMLElement).style.display = 'block';
-    console.log(target.children[1])
+    (target.children[1] as HTMLElement).classList.add('show');
+    (target.children[1] as HTMLElement).classList.remove('hide');
   }
   chooseChildSkill(childSkill: any, target: HTMLElement) {
     // (document.querySelector('.ad') as HTMLElement).style.display = 'none';
 
     this.childSkill.emit(childSkill);
 
-    (target.children[1] as HTMLElement).style.display = 'none';
+    (target.children[1] as HTMLElement).classList.add('hide');
+    (target.children[1] as HTMLElement).classList.remove('show');
   }
-  hideList(){
-    (document.querySelector('.ada') as HTMLElement).style.display='none'
+  hideList(target:HTMLElement){
+    (target.children[1] as HTMLElement).classList.add('hide');
+    (target.children[1] as HTMLElement).classList.remove('show');
 
   }
 }
