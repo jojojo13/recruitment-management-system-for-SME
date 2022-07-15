@@ -1,4 +1,4 @@
-<div class="info">
+<div class="info" *ngIf="candidate">
   <div class="info-heading">
     <div class="info-heading-img">
       <img
@@ -7,9 +7,9 @@
       />
     </div>
     <div class="info-heading-contact">
-      <h6>Hoang Ngoc Minh</h6>
-      <p>09213132132</p>
-      <p>nguyenxuanhung@gmail.com</p>
+      <h6>{{ candidate.fullName }}</h6>
+      <p>{{ candidate.phone }}</p>
+      <p>{{ candidate.email }}</p>
     </div>
     <div class="info-heading-social">
       <div class="info-heading-social-item">
@@ -47,54 +47,80 @@
       <div class="info-middle-left-item">
         <span>Candidate ID</span>
         <div class="info-middle-left-item-right">
-            <span>2</span>
-          </div>
+          <span>{{ candidate.id }}</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>Gender</span>
         <div class="info-middle-left-item-right">
-            <span>Male</span>
-          </div>
+          <span>Male</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>Year of birth</span>
         <div class="info-middle-left-item-right">
-            <span>2000</span>
-          </div>
+          <span>{{ candidate.dob }}</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>Address</span>
         <div class="info-middle-left-item-right">
-          <span>17T1 Hoang Dao Thuy - Ha Noi</span>
+          <span>{{ candidate.nationLive }} - {{ candidate.provinceLive }}</span>
         </div>
       </div>
       <div class="info-middle-left-item">
         <span>University</span>
         <div class="info-middle-left-item-right">
-            <span>FTU</span>
-          </div>
+          <span>{{ candidate.school }}</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>Major</span>
         <div class="info-middle-left-item-right">
-            <span>Software Engineering</span>
-          </div>
+          <span>{{ candidate.major }}</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>GPA</span>
         <div class="info-middle-left-item-right">
-            <span>3.8</span>
-          </div>
+          <span>{{ candidate.score }}</span>
+        </div>
       </div>
       <div class="info-middle-left-item">
         <span>Graduate date</span>
         <div class="info-middle-left-item-right">
-            <span>12/12/2012</span>
-          </div>
+          <span>{{ candidate.graduate }}</span>
+        </div>
       </div>
     </div>
     <div class="info-middle-right">
-        <h5 class="info-middle-right__ttl">Languages and skillsheets</h5>
+      <h5 class="info-middle-right__ttl">Languages and skillsheets</h5>
+
+     
+          <div class="info-middle-right-languages">
+            <h6>1.Foreign language</h6>
+            <div class="box" *ngFor="let child of languageList.child" >
+              <p>{{ child.type }}</p>
+              <div class="box-item" *ngFor="let child of child.child" >
+                <span>{{ child.level }}</span>
+                <span>{{ child.goal }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-middle-right-skillsheet">
+            <h6>2.Skillsheets</h6>
+            <div class="box" *ngFor="let child of skillSheetList.child" >
+              <p>{{ child.type }}</p>
+              <div class="box-item" *ngFor="let child of child.child" >
+                <span>{{ child.level }}</span>
+                <span>{{ child.goal }}</span>
+              </div>
+            </div>
+          </div>
+    
+      
+
+   
     </div>
   </div>
 </div>

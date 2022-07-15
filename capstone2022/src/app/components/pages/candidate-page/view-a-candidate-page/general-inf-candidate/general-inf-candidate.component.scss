@@ -133,3 +133,19 @@
     }
   }
 }
+.box{
+  margin-left: 20px;
+  margin-top: 20px;
+  p{
+    font-family: "Poppins";
+    color: #565656;
+    font-style: normal;
+    font-weight: 600;
+  }
+  &-item{
+   
+    span{
+      margin: 10px 20px;
+    }
+  }
+}

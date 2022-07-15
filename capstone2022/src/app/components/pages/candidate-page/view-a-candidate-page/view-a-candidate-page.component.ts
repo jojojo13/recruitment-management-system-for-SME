@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-a-candidate-page',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewACandidatePageComponent implements OnInit {
   route = { name: 'View Candidate', link: '' };
-  constructor() { }
+  constructor(private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute
+    .queryParams
+    .subscribe(params => {
+        let thing = params['id'];
+        console.log(params)
+    });
   }
 
 }

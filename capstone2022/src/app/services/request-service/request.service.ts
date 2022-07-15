@@ -39,6 +39,7 @@ export class RequestService {
     typename: '',
   };
   listSelectedRequest!: Array<number>;
+  selectedRequestForCandidate:any
   constructor(private __http: HttpClient) {
     this.listSelectedRequest = [];
   }
@@ -91,7 +92,7 @@ export class RequestService {
   resetDataSelectedRq() {
     this.selectedRequest = {
       code: '',
-      comment: 'string',
+      comment: '',
       createdOn: '',
       deadline: '',
       department: '',

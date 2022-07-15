@@ -22,6 +22,7 @@ export class GeneralInfComponent implements OnInit, OnChanges {
   @Input('step') step = 4;
   @Output('candidate') candidate = new EventEmitter<any>();
   name = '';
+  genderObject={name:'Male',value:1}
   contactForm!: FormGroup;
   countries: any;
   selectedCountry: number = 0;
@@ -43,14 +44,14 @@ export class GeneralInfComponent implements OnInit, OnChanges {
       skype: [''],
       website: [''],
       name: ['', Validators.required],
-      dob: [],
-      gender: [0],
+      dob: [''],
+      gender: ['',Validators.required],
       major: [''],
       university: [''],
       graduate: [''],
       gpa: [0],
-      country: [0],
-      city:[0],
+      country: ['',Validators.required],
+      city:['',Validators.required],
       awards: [''],
     });
     this.commonService.emitBahavior.subscribe((change) => {
@@ -73,7 +74,7 @@ export class GeneralInfComponent implements OnInit, OnChanges {
   }
   onSelectedCountry() {
     this.profileService
-      .getProvinceByNationId(this.contactForm.controls['country'].value)
+      .getProvinceByNationId(this.contactForm.controls['country'].value.id)
       .subscribe((data: any) => {
         this.provinces = data.data;
       });

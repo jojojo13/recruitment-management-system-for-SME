@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -20,7 +20,10 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token: string = 'invald token';
     req = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token')),
+      headers: req.headers.set(
+        'Authorization',
+        'Bearer ' + localStorage.getItem('token')
+      ),
     });
 
     return next.handle(req).pipe(
@@ -34,6 +37,8 @@ export class JwtInterceptor implements HttpInterceptor {
             console.log(`error status : ${error.status} ${error.statusText}`);
             switch (error.status) {
               case 401: //login
+                alert('Token expired');
+                this.handleAuthError()
                 this.router.navigateByUrl('/login');
                 console.log(`redirect to login`);
                 handled = true;

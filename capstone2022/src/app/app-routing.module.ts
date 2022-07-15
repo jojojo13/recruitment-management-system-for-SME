@@ -38,11 +38,15 @@ const routes: Routes = [
     path: '',
     component: HomePageComponent,
     children: [
-      { path: 'yeucautuyendung', component: RecruitmentRequestPageComponent, canActivate: [AuthorizeGuard], },
+      {
+        path: 'yeucautuyendung',
+        component: RecruitmentRequestPageComponent,
+        canActivate: [AuthorizeGuard],
+      },
       {
         path: 'yeucautuyendung/xemyeucau',
         component: ViewRequestPageComponent,
-         canActivate: [AuthorizeGuard],
+        canActivate: [AuthorizeGuard],
       },
       {
         path: 'yeucautuyendung/taoyeucau',
@@ -54,8 +58,11 @@ const routes: Routes = [
         component: ViewOneRequestPageComponent,
         canActivate: [AuthorizeGuard],
       },
-      { path: 'ungvien', component: CandidatePageComponent ,
-      canActivate: [AuthorizeGuard],},
+      {
+        path: 'ungvien',
+        component: CandidatePageComponent,
+        canActivate: [AuthorizeGuard],
+      },
       {
         path: 'ungvien/taoungvien',
         component: CreateCandidatePageComponent,
@@ -67,22 +74,21 @@ const routes: Routes = [
         // canActivate: [AuthorizeGuard],
       },
       {
-        path: 'ungvien/xemungvien/:id',
+        path: 'ungvien/xemungvien',
         component: ViewACandidatePageComponent,
         // canActivate: [AuthorizeGuard],
-        children:[{
-          path:'info',component:GeneralInfCandidateComponent
-        },
-        { path:'cv',component:CvCandidateComponent
-
-        }
-      ]
+        children: [
+          {
+            path: 'info',
+            component: GeneralInfCandidateComponent,
+          },
+          { path: 'cv', component: CvCandidateComponent },
+        ],
       },
       {
         path: 'phanloaitochuc',
         component: ClassifyPageComponent,
         canActivate: [AuthorizeGuard],
-       
       },
       {
         path: 'thietlaptochuc',
@@ -97,18 +103,25 @@ const routes: Routes = [
       {
         path: 'phanloaitochuc/danhmucdiadiem',
         component: LocationCategoriesPageComponent,
-        canActivate: [AuthorizeGuard],children:[{
-          path:'nations',component:NationListComponent
-        },
-        {
-          path:'provinces',component:ProvinceListComponent
-        },
-        {
-          path:'districts',component:DistrictListComponent
-        },
-        {
-          path:'wards',component:WardListComponent
-        },]
+        canActivate: [AuthorizeGuard],
+        children: [
+          {
+            path: 'nations',
+            component: NationListComponent,
+          },
+          {
+            path: 'provinces',
+            component: ProvinceListComponent,
+          },
+          {
+            path: 'districts',
+            component: DistrictListComponent,
+          },
+          {
+            path: 'wards',
+            component: WardListComponent,
+          },
+        ],
       },
       {
         path: 'phanloaitochuc/danhmuchucdanh',
@@ -140,7 +153,7 @@ const routes: Routes = [
         component: ProfileCategoryPageComponent,
         canActivate: [AuthorizeGuard],
       },
-      
+
       {
         path: 'danhmuchoso/hopdong',
         component: ContractCategoryPageComponent,

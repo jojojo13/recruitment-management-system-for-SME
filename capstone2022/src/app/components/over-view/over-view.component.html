@@ -16,7 +16,7 @@
     <div class="content-profile-middle">
       <div class="group">
         <label for="">Gender:</label>
-        <p>{{ candidate.gender }}</p>
+        <p>{{ candidate.gender.name }}</p>
       </div>
       <div class="group">
         <label for="">Date of birth:</label>
@@ -24,7 +24,9 @@
       </div>
       <div class="group">
         <label for="">Address:</label>
-        <p>{{ candidate.country }}</p>
+        <p *ngIf="candidate.country.id && candidate.city.id">
+          {{ candidate.country.name }}-{{ candidate.city.name }}
+        </p>
       </div>
       <div class="group">
         <label for="">University:</label>
@@ -94,8 +96,9 @@
             <div class="language-content-item-main-category">
               <div class="main" *ngFor="let skillChild of skillsheet.listSkill">
                 <span>{{ skillChild.name }}</span>
-                <span>{{skillChild.levelName}}</span>
-                <input disabled [value]="skillChild.goal" #input type="text" />
+                <span>{{ skillChild.levelName }}</span>
+                <span>{{ skillChild.goal }}</span>
+                <!-- <span disabled [value]="" #input type="text" /> -->
               </div>
             </div>
           </div>
@@ -107,10 +110,7 @@
         <h5 class="language-heading__ttl">3. Experience</h5>
       </div>
       <div class="language-content">
-        <div
-          class="language-content-item"
-          *ngFor="let exp of listExps"
-        >
+        <div class="language-content-item" *ngFor="let exp of listExps">
           <div _ngcontent-yxd-c87="" class="language-content-item-main">
             <div _ngcontent-yxd-c87="" class="main">
               <p _ngcontent-yxd-c87="">{{ exp.name }}</p>
@@ -118,8 +118,8 @@
             <div class="language-content-item-main-category">
               <div class="main" *ngFor="let skillChild of exp.listSkill">
                 <span>{{ skillChild.firm }}</span>
-                <span>{{skillChild.position}}</span>
-                <span>{{skillChild.time}}</span>
+                <span>{{ skillChild.position }}</span>
+                <span>{{ skillChild.time }}</span>
               </div>
             </div>
           </div>

@@ -139,8 +139,9 @@ export class RequestFormComponent implements OnInit {
         this.requestForm.controls['quantity'].value
       )
       .subscribe((response: any) => {
-        this.isLoaded = true;
+      
         if (response.status == false) {
+          this.isLoaded = true;
           Swal.fire(
             'Total quantity must be less than quantity of request parent'
           );
@@ -151,11 +152,11 @@ export class RequestFormComponent implements OnInit {
             (response: any) => {
               if (response.status == true) {
                 this.isLoaded = true;
+                this.commonService.popUpSuccess();
 
                 (
                   document?.querySelector('.overlay') as HTMLElement
                 ).style.display = 'none';
-                this.commonService.popUpSuccess();
               } else {
                 this.isLoaded = true;
 

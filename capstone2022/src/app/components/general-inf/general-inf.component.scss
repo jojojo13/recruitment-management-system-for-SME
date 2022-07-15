@@ -61,7 +61,7 @@ label[class="city"] {
   width: 40px !important;
 }
 small {
-  margin-left: 120px;
+  display: block;
 }
 .skill {
   width: 100%;
@@ -70,4 +70,7 @@ small {
 .button-list {
   display: flex;
   position: absolute;
+}
+.err{
+
 }

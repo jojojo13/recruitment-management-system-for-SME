@@ -1,0 +1,9 @@
+<div class="content" (click)="popupRequest()">
+  <p><i class="far fa-plus circle-icon"></i>Show request</p>
+</div>
+<swal #requestPicker title="Choose request" width="1150px" tabindex="100">
+    <div *swalPortal="swalTargets.content">
+         <app-confirm-matching></app-confirm-matching>
+      <app-grid></app-grid>
+    </div>
+  </swal>

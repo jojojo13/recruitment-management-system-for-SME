@@ -2,7 +2,10 @@
   <app-loader [isLoaded]="isLoaded"></app-loader>
   <div class="content-heading">
     <h5>View candidates</h5>
-    <app-back-btn [route]="route"></app-back-btn>
+    <div class="d-flex justify-content-between">
+      <app-back-btn [route]="route"></app-back-btn>
+      <app-matching-btn></app-matching-btn>
+    </div>
   </div>
   <div class="content-middle">
     <table>
@@ -21,47 +24,93 @@
         </tr>
       </thead>
       <tbody>
-        <td></td>
-        <td></td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Filter" />
-          </mat-form-field>
-        </td>
+        <tr [formGroup]="candidateForm">
+          <td></td>
+          <td></td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="name"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="yob"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="phone"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="location"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="position"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="exp"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="Filter"
+                formControlName="languages"
+              />
+            </mat-form-field>
+          </td>
+        </tr>
       </tbody>
       <tbody *ngIf="listCandidate">
-
-        <tr
+        <tr (dblclick)="navigateToView(candidate)"
           *ngFor="
             let candidate of listCandidate
               | paginate
@@ -72,15 +121,15 @@
                   }
           "
         >
-          <td><input type="checkbox" /></td>
+          <td><input type="checkbox" (change)="selectedChange(candidate,$event)"/></td>
           <td>{{ candidate.id }}</td>
           <td>{{ candidate.name }}</td>
-          <td>{{ candidate.dob }}</td>
-          <td>{{ candidate.phone }}</td>
-          <td>{{ candidate.email }}</td>
-          <td>{{ candidate.location }}</td>
-          <td>{{ candidate.position }}</td>
-          <td>{{ candidate.yearExp }}</td>
+          <td>{{ candidate.yob }}</td>
+          <td>{{ candidate.phoneNumber }}</td>
+          <td class="px-2">{{ candidate.email }}</td>
+          <td class="px-2">{{ candidate.location }}</td>
+          <td>{{ candidate.lastestPosition }}</td>
+          <td>{{ candidate.experience }}</td>
           <td>{{ candidate.language }}</td>
         </tr>
       </tbody>

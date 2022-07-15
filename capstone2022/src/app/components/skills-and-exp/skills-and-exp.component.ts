@@ -126,7 +126,7 @@ export class SkillsAndExpComponent implements OnInit {
   ) {
     if (parent.listSkill.length > 0) {
       let obj: SkillList = {
-        typeSkill: 25,
+        typeSkill: 14,
         type: parent.id,
         level: 0,
         goal: '0',
@@ -166,9 +166,10 @@ export class SkillsAndExpComponent implements OnInit {
         this.listSkill = this.listSkill.filter((skill) => {
           return skill.level != select.options[select.selectedIndex].value;
         });
-       this.candidateService.skillList=this.candidateService.skillList.filter((o:any)=>{
-        return o.level!=select.options[select.selectedIndex].value;
-       })
+        this.candidateService.skillList =
+          this.candidateService.skillList.filter((o: any) => {
+            return o.level != select.options[select.selectedIndex].value;
+          });
         this.candidateService.detectChange.next(true);
       });
       this.renderer.listen(input, 'change', () => {
@@ -191,7 +192,7 @@ export class SkillsAndExpComponent implements OnInit {
       this.listSkill.push(obj);
       newObj.listSkill.push(a);
       this.candidateService.skillList = this.listSkill;
-      this.candidateService.otherList=this.skills
+      this.candidateService.otherList = this.skills;
 
       this.isFirst = false;
       skillSize.size--;
@@ -303,6 +304,38 @@ export class SkillsAndExpComponent implements OnInit {
       }
     }
   }
+  removeSkillSheet(obj: any) {
+    this.skillSheets.splice(
+      this.skillSheets.findIndex((a: any) => a.id == obj.id),
+      1
+    );
+    this.candidateSkill.splice(
+      this.candidateSkill.findIndex((a: any) => a.id == obj.id),
+      1
+    );
+    this.candidateService.skillSheet = this.candidateSkill;
+    this.candidateService.detectChange.next(true);
+  }
+  removeSkillSheetChild(skillChild: any) {
+    for (let i = 0; i < this.skillSheets.length; i++) {
+      for (let j = 0; j < this.skillSheets[i].listSkill.length; j++) {
+        if (this.skillSheets[i].listSkill[j].id == skillChild.id) {
+          this.skillSheets[i].listSkill.splice(j, 1);
+          break;
+        }
+      }
+    }
+    for (let i = 0; i < this.candidateSkill.length; i++) {
+      for (let j = 0; j < this.candidateSkill[i].listSkill.length; j++) {
+        if (this.candidateSkill[i].listSkill[j].id == skillChild.id) {
+          this.candidateSkill[i].listSkill.splice(j, 1);
+          break;
+        }
+      }
+    }
+    this.candidateService.skillSheet = this.candidateSkill;
+    this.candidateService.detectChange.next(true);
+  }
   //---------------FOR EXP----------------------
   getFromChild($event: any) {
     const result = this.expList.find((obj: any) => obj.id == $event.id);
@@ -347,34 +380,6 @@ export class SkillsAndExpComponent implements OnInit {
     this.candidateService.detectChange.next(true);
   }
 
-  removeSkillSheet(obj: any) {
-    this.skillSheets.splice(
-      this.skillSheets.findIndex((a: any) => a.id == obj.id),
-      1
-    );
-    this.candidateSkill.splice(
-      this.candidateSkill.findIndex((a: any) => a.id == obj.id),
-      1
-    );
-  }
-  removeSkillSheetChild(skillChild: any) {
-    for (let i = 0; i < this.skillSheets.length; i++) {
-      for (let j = 0; j < this.skillSheets[i].listSkill.length; j++) {
-        if (this.skillSheets[i].listSkill[j].id == skillChild.id) {
-          this.skillSheets[i].listSkill.splice(j, 1);
-          break;
-        }
-      }
-    }
-    for (let i = 0; i < this.candidateSkill.length; i++) {
-      for (let j = 0; j < this.candidateSkill[i].listSkill.length; j++) {
-        if (this.candidateSkill[i].listSkill[j].id == skillChild.id) {
-          this.candidateSkill[i].listSkill.splice(j, 1);
-          break;
-        }
-      }
-    }
-  }
   removeExp(exp: any) {
     this.expList.splice(
       this.expList.findIndex((a: any) => a.id == exp.id),

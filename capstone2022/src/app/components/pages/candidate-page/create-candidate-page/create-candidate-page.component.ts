@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Candidate } from 'src/app/models/Candidate';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
 import Swal from 'sweetalert2';
@@ -16,9 +17,9 @@ export class CreateCandidatePageComponent implements OnInit {
   pdfSrc = '';
   step = 1;
   candidate: any;
-  objForAPI = {
+  objForAPI: Candidate = {
     fullName: '',
-    dob: '',
+    dob: '1000-01-01T15:37:54.773Z',
     gender: 0,
     phone: '',
     zalo: '',
@@ -47,9 +48,9 @@ export class CreateCandidatePageComponent implements OnInit {
     listExp: [
       {
         typeID: 0,
-        firm: 'string',
-        positiob: 'string',
-        time: 'string',
+        firm: '',
+        positiob: '',
+        time: '',
       },
     ],
     recordStatus: 0,
@@ -71,10 +72,9 @@ export class CreateCandidatePageComponent implements OnInit {
   }
   onSubmit(action: string) {
     this.commonService.emitBahavior.next(true);
-
+    console.log(this.objForAPI);
     (this.objForAPI.fullName = this.candidate.name),
-      (this.objForAPI.dob = this.candidate.dob),
-      (this.objForAPI.gender = this.candidate.gender),
+      (this.objForAPI.gender = this.candidate.gender.value),
       (this.objForAPI.phone = this.candidate.phone),
       (this.objForAPI.zalo = ''),
       (this.objForAPI.email = this.candidate.email),
@@ -82,16 +82,20 @@ export class CreateCandidatePageComponent implements OnInit {
       (this.objForAPI.facebook = this.candidate.facebook),
       (this.objForAPI.twiter = this.candidate.twitter),
       (this.objForAPI.noiO = ''),
-      (this.objForAPI.nationLive = 1),
-      (this.objForAPI.porvinceLive = 2),
+      (this.objForAPI.nationLive = this.candidate.country.id),
+      (this.objForAPI.porvinceLive = this.candidate.city.id),
       (this.objForAPI.districtLive = 0),
       (this.objForAPI.wardLive = 0),
       (this.objForAPI.major = this.candidate.major),
-      (this.objForAPI.graduate = this.candidate.graduate),
       (this.objForAPI.school = this.candidate.university),
       (this.objForAPI.gpa = this.candidate.gpa),
       (this.objForAPI.awards = this.candidate.awards);
-
+    if (this.candidate.graduate != '') {
+      this.objForAPI.graduate = this.candidate.graduate;
+    }
+    if (this.candidate.dob != '') {
+      this.objForAPI.dob = this.candidate.dob;  
+    }
     if (action == 'submit') {
       this.objForAPI.recordStatus = 1;
     }
@@ -109,27 +113,34 @@ export class CreateCandidatePageComponent implements OnInit {
       confirmButtonText: 'Confirm',
       width: '380px',
     }).then((result) => {
-      this.candidateService.insertCandidate(this.objForAPI).subscribe(
-        (response: any) => {
-          if (response.status == true) {
-            this.commonService.popUpSuccess();
-          } else {
+      if(result.isConfirmed){
+        this.candidateService.insertCandidate(this.objForAPI).subscribe(
+          (response: any) => {
+            if (response.status == true) {
+              this.commonService.popUpSuccess();
+            } else {
+              this.commonService.popUpFailed('Insert failed!!!');
+            }
+          },
+          (err) => {
             this.commonService.popUpFailed('Insert failed!!!');
           }
-        },
-        (err) => {
-          this.commonService.popUpFailed('Insert failed!!!');
-        }
-      );
+        );
+      }
+      
     });
   }
   getCandidate($event: any) {
     this.candidate = $event;
   }
   getlistExp(arr: any) {
-    this.objForAPI.listExp = arr;
+    if(arr){
+      this.objForAPI.listExp = arr;
+
+    }
   }
   getSkill(arr: any) {
     this.objForAPI.listSkill = arr;
+    console.log(arr)
   }
 }

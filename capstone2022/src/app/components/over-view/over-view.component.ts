@@ -46,17 +46,24 @@ export class OverViewComponent implements OnInit, OnChanges, OnDestroy {
         this.listSkillSheet = this.candidateService.skillSheet;
 
         this.listExps = this.candidateService.expList;
-        newArr2 = this.convert2(this.listExps);
+        newArr2 = this.convert2(this.candidateService.skillSheet);
         newArr = this.convertTypeArray(this.listExps);
       }
     });
     this.commonService.emitBahavior.subscribe((change) => {
+      if (this.test) {
+        this.listSkill.emit(this.test);
+      }
       if (newArr2) {
+        this.listSkill.emit(newArr2);
+      }
+      if (this.listExp) {
+        this.listExp.emit(newArr);
+      }
+      if (newArr2 && this.test) {
         let concatArr = newArr2.concat(this.test);
         this.listSkill.emit(concatArr);
       }
-
-      this.listExp.emit(newArr);
     });
   }
   convertTypeArray(array: any) {

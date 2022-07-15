@@ -12,9 +12,8 @@ export class HomePageComponent implements OnInit {
   constructor(public auth:AuthorizeService, public readonly swalTargets: SwalPortalTargets,) { }
   department:any
   ngOnInit(): void {
-    
+    console.log('hehezo')
     this.auth.getUserInfo().subscribe((res:any)=>{
-      console.log(res)
     this.auth.user=res.data
     this.auth.userSubject.next(this.auth.user)
     })

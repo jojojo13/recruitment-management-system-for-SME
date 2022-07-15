@@ -41,7 +41,7 @@
     <div class="content-bottom-button">
       <button class="btn btn-danger">Back</button>
       <button class="btn btn-primary" (click)="onSubmit('draft')">Save draft</button>
-      <button [disabled]="!candidate.name" class="btn btn-success" (click)="onSubmit('submit')">Create</button>
+      <button [disabled]="!candidate.name||!candidate.phone||!candidate.email||!candidate.gender||!candidate.country||!candidate.city" class="btn btn-success" (click)="onSubmit('submit')">Create</button>
     </div>
   </div>
 </div>

@@ -6,13 +6,12 @@ import {
   OnDestroy,
   OnInit,
   Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
-import { AuthorizeService } from 'src/app/services/authorize.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounce, debounceTime } from 'rxjs';
-import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
-
+import { debounceTime } from 'rxjs';
+import { RequestFilter } from 'src/app/models/RequestFIlter';
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -26,34 +25,23 @@ export class GridComponent implements OnInit, OnDestroy {
   page: number = 1;
   isLoaded: boolean = false;
   filterForm!: FormGroup;
-  filterObj = {
-    code: '',
-    name: '',
-    orgName: '',
-    positionName: '',
-    quantity: 0,
-    createOn: '1000-01-01T15:37:54.773Z',
-    deadLine: '1000-01-01T15:37:54.773Z',
-    hrInchange: '',
-    status: '',
-    otherSkill: '',
-    index: this.page - 1,
-    size: this.itemsPerPage,
-  };
+  filterObj!: RequestFilter;
+  @ViewChild('containList') containList!: HTMLElement;
   constructor(
     public requestService: RequestService,
     private renderer: Renderer2,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
-    private auth: AuthorizeService,
     private fb: FormBuilder
   ) {}
   ngOnDestroy(): void {
     document.removeEventListener('click', this.fn, false);
+    this.requestService.selectedRequestForCandidate=undefined
   }
 
   ngOnInit() {
+    this.filterObj = new RequestFilter();
     this.isLoaded = false;
 
     this.page = this.activatedRoute.snapshot.queryParams['index'];
@@ -90,6 +78,9 @@ export class GridComponent implements OnInit, OnDestroy {
         this.filterObj.otherSkill =
           this.filterForm.controls['otherSkill'].value;
         this.clearData();
+        // this.removeAllChildNodes(
+        //   this.containList
+        // );
         this.checktoFormat();
         this.unSelectedRequest();
         this.loadData();
@@ -108,13 +99,13 @@ export class GridComponent implements OnInit, OnDestroy {
     this.checktoFormat();
     this.filterObj.index = this.page - 1;
     this.filterObj.size = this.itemsPerPage;
-    console.log(this.filterObj)
+
     this.requestService.filterRequest(this.filterObj).subscribe(
       (response: any) => {
-        console.log(response)
         this.isLoaded = true;
         this.totalItems = response.totalItem;
         this.requestList = response.data;
+        console.log(response.data);
       },
       (err) => {
         this.isLoaded = true;
@@ -199,7 +190,7 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   clearData() {
-    this.requestList = null;
+    this.requestList = [];
   }
 
   addClass(ele: ElementRef, className: string) {
@@ -245,14 +236,13 @@ export class GridComponent implements OnInit, OnDestroy {
 
       let otherSkillname = rq.otherSkillname;
       if (otherSkillname == null) {
-        otherSkillname = "";
+        otherSkillname = '';
       }
 
       let hrInchange = rq.hrInchange;
       if (hrInchange == null) {
-        hrInchange = "";
+        hrInchange = '';
       }
-
 
       this.renderer.appendChild(td0, input);
       this.renderer.listen(input, 'click', (e) => {
@@ -347,6 +337,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.requestService.selectedRequest = request;
     this.clearClass();
     clicked.classList.add('selected');
+    this.requestService.selectedRequestForCandidate = request.id;
   }
   clearClass() {
     let tr: any = document.querySelectorAll('tbody tr');
@@ -374,6 +365,15 @@ export class GridComponent implements OnInit, OnDestroy {
         (req: any) => req.id == request.id
       );
       this.requestService.listSelectedRequest.splice(index, 1);
+    }
+    // this.requestService.selectedRequestForCandidate = request.id;
+  }
+  removeAllChildNodes(parent: any) {
+    console.log(parent.nativeElement.childNodes[2].firstChild);
+    while (parent.nativeElement.childNodes[2].firstChild) {
+      parent.nativeElement.childNodes[2].removeChild(
+        parent.nativeElement.childNodes[2].firstChild
+      );
     }
   }
 }

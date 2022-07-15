@@ -84,6 +84,8 @@ import { ViewACandidatePageComponent } from './components/pages/candidate-page/v
 import { NavigationBarComponent } from './components/pages/candidate-page/view-a-candidate-page/navigation-bar/navigation-bar.component';
 import { GeneralInfCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/general-inf-candidate/general-inf-candidate.component';
 import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
+import { MatchingBtnComponent } from './components/matching-btn/matching-btn.component';
+import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-matching.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,6 +153,8 @@ import { CvCandidateComponent } from './components/pages/candidate-page/view-a-c
     NavigationBarComponent,
     GeneralInfCandidateComponent,
     CvCandidateComponent,
+    MatchingBtnComponent,
+    ConfirmMatchingComponent,
   ],
   imports: [
     BrowserModule,
