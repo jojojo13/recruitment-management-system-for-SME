@@ -54,7 +54,7 @@ export class FormRequestComponent implements OnInit {
       name: ['', [Validators.required]],
       type: [''],
       dep: ['', [Validators.required]],
-      projects: ['', [Validators.required]],
+      projects: [''],
       position: ['', [Validators.required]],
       quantity: [
         '',
@@ -62,10 +62,10 @@ export class FormRequestComponent implements OnInit {
       ],
       office: [{ value: '', disabled: true }],
       deadline: ['', [Validators.required]],
-      experience: ['', [Validators.required]],
-      level: ['', Validators.required],
-      skill: ['', Validators.required],
-      notes: ['', Validators.required],
+      experience: [''],
+      level: [''],
+      skill: [''],
+      notes: [''],
     });
     this.requestService
       .getRequestByID(parseInt(id))
