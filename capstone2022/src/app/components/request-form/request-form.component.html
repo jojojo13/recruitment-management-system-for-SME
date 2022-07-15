@@ -9,11 +9,11 @@
         action="">
     <div class="left">
       <div class="form-group">
-        <label for="requestID">Request Code</label>
+        <label for="requestID">Request Code<span>*</span></label>
         <input type="text" class="form-control" formControlName="requestCode" />
       </div>
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Name<span>*</span></label>
         <input type="text" class="form-control" formControlName="name" />
         <small class="text-danger"
                *ngIf="
@@ -22,7 +22,7 @@
           ">Please input name</small>
       </div>
       <div class="form-group">
-        <label for="name">Type</label>
+        <label for="name">Type<span>*</span></label>
         <select style="font-family: Poppins" name="dep" formControlName="type">
           <option style="font-family: Poppins"
                   *ngFor="let type of types"
@@ -37,7 +37,7 @@
         ">Please input level</small>
       </div>
       <div class="form-group">
-        <label for="name">Dep/Proj Name</label>
+        <label for="name">Department<span>*</span></label>
         <input type="text" class="form-control" formControlName="dep" />
         <p (click)="showPopUp()" class="poppup">Choose</p>
         <small class="text-danger"
@@ -49,18 +49,14 @@
       <div class="form-group">
         <label for="name">Projects</label>
         <select name="dep" formControlName="projects">
+          <option value="0"></option>
           <option [selected]="project.id==requestForm.controls['projects'].value" *ngFor="let project of projects" [ngValue]="project.id">
             {{ project.name }}
           </option>
         </select>
-        <small class="text-danger"
-               *ngIf="
-            requestForm.get('projects')?.hasError('required') &&
-            requestForm.get('projects')?.touched
-          ">Please choose projects</small>
       </div>
       <div class="form-group">
-        <label for="name">Position</label>
+        <label for="name">Position<span>*</span></label>
         <select name="position" formControlName="position">
           <option *ngFor="let position of listPosition" [ngValue]="position.id">
             {{ position.name }}
@@ -73,7 +69,7 @@
           ">Please choose position</small>
       </div>
       <div class="form-group">
-        <label for="name">Quantity</label>
+        <label for="name">Quantity<span>*</span></label>
         <input type="text" class="form-control" formControlName="quantity" />
         <small class="text-danger"
                *ngIf="
@@ -91,7 +87,7 @@
                formControlName="office" />
       </div>
       <div class="form-group">
-        <label for="name">Deadline</label>
+        <label for="name">Deadline<span>*</span></label>
         <input type="date"
                [min]="today"
                class="form-control"
@@ -103,8 +99,8 @@
         ">Please input deadline</small>
       </div>
       <div class="form-group">
-        <label for="name">Roadmap</label>
-        <p><a href="">Popup Roadmap</a></p>
+        <!--<label for="name">Roadmap</label>
+        <p><a href="">Popup Roadmap</a></p>-->
       </div>
     </div>
     <div class="right">

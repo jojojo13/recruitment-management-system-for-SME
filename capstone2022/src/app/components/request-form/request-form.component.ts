@@ -46,7 +46,7 @@ export class RequestFormComponent implements OnInit {
       name: ['', [Validators.required]],
       type: ['', [Validators.required]],
       dep: ['', [Validators.required]],
-      projects: ['', [Validators.required]],
+      projects: [''],
       position: ['', [Validators.required]],
       quantity: [
         '',
