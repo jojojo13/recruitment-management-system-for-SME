@@ -90,12 +90,16 @@
       font-size: 12px;
       cursor: pointer;
     }
-    
   }
-  .firm{
-   
+  .firm{  
       margin-left: 0;
-    
+  }
+  .exp{
+    &:last-of-type{
+      input{
+        width: 180px;
+      }
+    }
   }
 }
 input[type="number"]::-webkit-inner-spin-button,

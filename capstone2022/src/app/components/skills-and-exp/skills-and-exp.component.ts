@@ -47,7 +47,7 @@ export class SkillsAndExpComponent implements OnInit {
     } else {
       this.languageList.push({ id: data.id });
       this.isFirst = true;
-      let newObj = { name: data.name, listSkill: [] };
+      let newObj = { id: data.id, name: data.name, listSkill: [] };
       let skillSize = { size: data.listSkill.length };
       //create wrapper
       let parent = document.querySelector('.language-content') as HTMLElement;
@@ -98,6 +98,11 @@ export class SkillsAndExpComponent implements OnInit {
           this.candidateService.skillList.filter((i: any) => {
             return i.type != data.id;
           });
+
+        this.skills = this.skills.filter((i: any) => {
+          return i.id != data.id;
+        });
+        this.candidateService.otherList = this.skills;
         this.candidateService.skill = data;
         this.candidateService.detectChange.next(true);
         this.candidateService.skillBehaviour.next(true);
@@ -152,7 +157,7 @@ export class SkillsAndExpComponent implements OnInit {
         }
         this.renderer.appendChild(select, option);
       }
-      let a = { name: '', goal: 0 };
+      let a = {id:0, name: '', goal: 0 };
       this.renderer.listen(select, 'change', () => {
         value = select.options[select.selectedIndex].value;
         obj.level = value;
@@ -163,15 +168,22 @@ export class SkillsAndExpComponent implements OnInit {
         this.deleteItem(target, main);
         (wrapper as HTMLElement).style.display = 'block';
         skillSize.size += 1;
+        console.log(parent)
         this.listSkill = this.listSkill.filter((skill) => {
           return skill.level != select.options[select.selectedIndex].value;
         });
+
         this.candidateService.skillList =
           this.candidateService.skillList.filter((o: any) => {
             return o.level != select.options[select.selectedIndex].value;
           });
+          newObj.listSkill=newObj.listSkill.filter((obj:any)=>{
+            return obj.id!=select.options[select.selectedIndex].value;
+          })
         this.candidateService.detectChange.next(true);
       });
+
+
       this.renderer.listen(input, 'change', () => {
         a.goal = input.value;
         obj.goal = input.value;
@@ -179,6 +191,7 @@ export class SkillsAndExpComponent implements OnInit {
       });
       obj.level = select.options[select.selectedIndex].value;
       a.name = select.options[select.selectedIndex].text;
+      a.id=select.options[select.selectedIndex].value
       this.renderer.addClass(main, 'main');
       this.renderer.addClass(trash, 'far');
       this.renderer.addClass(trash, 'fa-trash-alt');
@@ -193,7 +206,7 @@ export class SkillsAndExpComponent implements OnInit {
       newObj.listSkill.push(a);
       this.candidateService.skillList = this.listSkill;
       this.candidateService.otherList = this.skills;
-
+      console.log(this.skills)
       this.isFirst = false;
       skillSize.size--;
       this.candidateService.detectChange.next(true);

@@ -86,6 +86,7 @@ import { GeneralInfCandidateComponent } from './components/pages/candidate-page/
 import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
 import { MatchingBtnComponent } from './components/matching-btn/matching-btn.component';
 import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-matching.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -174,7 +175,8 @@ import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-
     MatDatepickerModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ],
   providers: [
     {

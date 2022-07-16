@@ -17,6 +17,7 @@ export class CreateCandidatePageComponent implements OnInit {
   pdfSrc = '';
   step = 1;
   candidate: any;
+  formCandite:any
   objForAPI: Candidate = {
     fullName: '',
     dob: '1000-01-01T15:37:54.773Z',
@@ -46,12 +47,7 @@ export class CreateCandidatePageComponent implements OnInit {
       },
     ],
     listExp: [
-      {
-        typeID: 0,
-        firm: '',
-        positiob: '',
-        time: '',
-      },
+     
     ],
     recordStatus: 0,
   };
@@ -76,7 +72,7 @@ export class CreateCandidatePageComponent implements OnInit {
     (this.objForAPI.fullName = this.candidate.name),
       (this.objForAPI.gender = this.candidate.gender.value),
       (this.objForAPI.phone = this.candidate.phone),
-      (this.objForAPI.zalo = ''),
+      (this.objForAPI.zalo = this.candidate.zalo),
       (this.objForAPI.email = this.candidate.email),
       (this.objForAPI.linkedIn = this.candidate.linkedIn),
       (this.objForAPI.facebook = this.candidate.facebook),
@@ -131,7 +127,8 @@ export class CreateCandidatePageComponent implements OnInit {
     });
   }
   getCandidate($event: any) {
-    this.candidate = $event;
+    this.candidate = $event.value;
+    this.formCandite=$event
   }
   getlistExp(arr: any) {
     if(arr){

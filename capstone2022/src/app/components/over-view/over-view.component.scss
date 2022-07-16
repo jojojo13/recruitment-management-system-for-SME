@@ -4,7 +4,8 @@
   justify-content: space-between;
   margin-left: 9px;
   &-profile {
-    width: 33%;
+    width: 40%;
+    margin-right: 40px;
     &-heading {
       display: flex;
       .img-box {
@@ -19,6 +20,14 @@
         }
       }
       margin-bottom: 40px;
+      .title {
+        p {
+          max-width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
     &-middle {
       .group {
@@ -28,6 +37,10 @@
         }
         p {
           margin: 10px;
+          max-width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -43,13 +56,22 @@
   box-sizing: border-box;
 }
 .content-skill {
-  width: 100%;
+  width: 60%;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   font-family: "Poppins";
+  display: flex;
+  flex-wrap: wrap;
 }
 .language {
+  width: 60%;
+  &:first-of-type{
+    width: 40%;
+  }
+  &:last-of-type{
+    width: 100%;
+  }
   &-heading {
     display: flex;
     font-style: normal;
@@ -176,6 +198,6 @@ span {
   margin-right: 20px;
   margin-bottom: 20px;
 }
-p{
+p {
   margin-bottom: 20px;
 }
