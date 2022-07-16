@@ -129,7 +129,7 @@ export class CreateCandidatePageComponent implements OnInit {
         this.candidateService.CheckDuplicateCandidate(checkObj).subscribe(
           (response: any) => {
             let rq = response.data;
-            if (rq.check == true) {
+            if (rq.check == false) {
               this.commonService.popUpFailed(rq.mess);
             }
             else {
