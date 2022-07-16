@@ -181,9 +181,9 @@ export class DistrictListComponent implements OnInit {
     this.DistrictForm.controls['name'].setValue(item.name);
     this.DistrictForm.controls['note'].setValue(item.note);
     this.DistrictForm.controls['code'].setValue(item.code);
-    this.DistrictForm.controls['nation'].setValue(item.nationId);
-    this.renderProvince(item.nationId);
-    this.DistrictForm.controls['province'].setValue(item.provinceId);
+    this.DistrictForm.controls['nation'].setValue(item.nationID);
+    this.renderProvince(item.nationID);
+    this.DistrictForm.controls['province'].setValue(item.provinceID);
   }
 
   updateAllComplete($event: any, id: number) {

@@ -164,7 +164,7 @@ export class ProvinceListComponent implements OnInit {
     this.ProvinceForm.controls['name'].setValue(item.name);
     this.ProvinceForm.controls['note'].setValue(item.note);
     this.ProvinceForm.controls['code'].setValue(item.code);
-    this.ProvinceForm.controls['nation'].setValue(item.nationId);
+    this.ProvinceForm.controls['nation'].setValue(item.nationID);
   }
 
   updateAllComplete($event: any, id: number) {
