@@ -8,12 +8,12 @@
     <div class="action-item" (click)="deletePosition()">
       <p><i class="fa fa-trash"></i>Delete</p>
     </div>
-    <div class="action-item" (click)="activePosition()">
+    <!--<div class="action-item" (click)="activePosition()">
       <p><i class="fa fa-check"></i>Active</p>
     </div>
     <div class="action-item" (click)="deactivePosition()">
       <p><i class="fa fa-ban"></i>Deactive</p>
-    </div>
+    </div>-->
     <div class="action-item" (click)="exportExcel()">
       <p><i class="fa fa-download"></i>Export Excel</p>
     </div>
@@ -87,7 +87,7 @@
               <td>Basic salary (vnd)</td>
               <td>Other skill</td>
               <td>Note</td>
-              <td>Status</td>
+              <!--<td>Status</td>-->
               <td style="display:none;">id</td>
               <td style="display:none;">TitleID</td>
               <td style="display:none;">WorkFormID</td>
@@ -117,7 +117,7 @@
               <td>{{ item.basicSalary }}</td>
               <td>{{ item.otherSkill }}</td>
               <td>{{ item.note }}</td>
-              <td>{{ item.statusName }}</td>
+              <!--<td>{{ item.statusName }}</td>-->
               <td style="display:none;">{{ item.titleId }}</td>
               <td style="display:none;">{{ item.workFormID }}</td>
               <td style="display: none;">{{ item.id }}</td>

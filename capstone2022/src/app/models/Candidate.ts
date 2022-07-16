@@ -18,6 +18,8 @@ export interface Candidate {
   school: string;
   gpa: number;
   awards: string;
+  skype: string;
+  website: string;
   listSkill: Array<any>;
   listExp:Array<any>;
   recordStatus: number;

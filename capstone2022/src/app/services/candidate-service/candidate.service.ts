@@ -39,9 +39,16 @@ export class CandidateService {
       {}
     );
   }
+
   insertCandidate(obj: any) {
     return this.__http.post(
       'https://localhost:44376/api/CandidateAPI/InsertRcCandidate',
+      obj
+    );
+  }
+  CheckDuplicateCandidate(obj: any) {
+    return this.__http.post(
+      'https://localhost:44376/api/CandidateAPI/CheckDuplicateCandidate',
       obj
     );
   }
