@@ -13,6 +13,7 @@ import { FileUpload } from '../models/FileUpload';
   providedIn: 'root',
 })
 export class CommonService {
+  fileBehavior!:BehaviorSubject<boolean>;
   fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
@@ -44,6 +45,7 @@ export class CommonService {
     private db: AngularFireDatabase,
     private storage: AngularFireStorage
   ) {
+    this.fileBehavior=new BehaviorSubject<boolean>(false);
     this.dataChange = new BehaviorSubject<any>(null);
     this.emitBahavior = new BehaviorSubject<any>(null);
   }
@@ -145,6 +147,8 @@ export class CommonService {
           storageRef.getDownloadURL().subscribe((downloadURL) => {
             fileUpload.url = downloadURL;
             this.fileUrl=downloadURL
+            console.log(this.fileUrl)
+            this.fileBehavior.next(true)
             fileUpload.name = fileUpload.file.name;
             this.saveFileData(fileUpload);
           });

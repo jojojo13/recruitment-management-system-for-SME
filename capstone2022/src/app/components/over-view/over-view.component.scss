@@ -206,3 +206,16 @@ span {
 p {
   margin-bottom: 20px;
 }
+.customize{
+  display: initial;
+  h6{
+    font-family: "Poppins";
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 10px;
+    &:first-of-type{
+      font-size: 16px;
+      color: #0a24e9;
+    }
+  }
+}

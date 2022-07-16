@@ -39,7 +39,8 @@
             ></i>
           </div>
           <div class="language-content-item-main-category">
-            <div class="main" *ngFor="let skillChild of skillsheet.listSkill">
+            <div class="main" *ngFor="let skillChild of skillsheet.listSkill,let i=index">
+              
               <span>{{ skillChild.name }}</span>
               <select
                 #select
@@ -94,8 +95,10 @@
             _ngcontent-yxd-c87=""
             class="language-content-item-main-category"
           >
-            <div class="main cifu" *ngFor="let skillChild of exp.listSkill">
+            <div class="main cifu" *ngFor="let skillChild of exp.listSkill;let i =index">
               <div class="box">
+                <h6 class="title">{{i+1}}.</h6>
+
                 <div class="exp">
                   <label for="">Comp/Project</label>
                   <div class="err">

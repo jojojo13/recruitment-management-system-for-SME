@@ -27,7 +27,12 @@ export class AttachFileComponent implements OnInit {
     this.currentFileUpload = new FileUpload(file);
     this.commonService.pushFileToStorage(this.currentFileUpload).subscribe(
       (percentage: any) => {
-       this.pdfSrc.emit(this.commonService.fileUrl)
+        this.percentage = Math.round(percentage ? percentage : 0);
+        this.commonService.fileBehavior.subscribe((change: boolean) => {
+          if (change == true) {
+            this.pdfSrc.emit(this.commonService.fileUrl);
+          }
+        });
       },
       (error: any) => {
         console.log(error);

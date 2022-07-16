@@ -8,14 +8,12 @@
   box-sizing: border-box;
 }
 .wrapper {
-
   width: 100%;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   font-family: "Poppins";
   overflow-y: auto;
-  height: calc(100vh - 190px);
 
 }
 .language {
@@ -108,7 +106,7 @@
     display: flex;
     margin-bottom: 20px;
     align-items: center;
-    .err{
+    .err {
       width: calc(100% - (200px));
     }
     label {
@@ -123,14 +121,11 @@
       padding: 0;
       border: none;
       margin-right: 20px;
-
     }
     input {
       width: 100%;
     }
-   
   }
-  
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -192,7 +187,14 @@ span {
   }
 }
 
-.cifu{
+.cifu {
   display: flex;
   align-items: center;
+}
+.title {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 16px;
+  color: #0a24e9;
+  margin-bottom: 10px;
 }

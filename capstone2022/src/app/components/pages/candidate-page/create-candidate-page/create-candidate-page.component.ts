@@ -30,8 +30,6 @@ export class CreateCandidatePageComponent implements OnInit {
     skype: "",
     website: "",
     twiter: '',
-    skype: '',
-    website: '',
     noiO: '',
     nationLive: 0,
     porvinceLive: 0,
@@ -62,6 +60,7 @@ export class CreateCandidatePageComponent implements OnInit {
 
   ngOnInit(): void { }
   getPdfSrc(src: string) {
+    console.log(src)
     this.pdfSrc = src;
   }
   getStep(step: number) {

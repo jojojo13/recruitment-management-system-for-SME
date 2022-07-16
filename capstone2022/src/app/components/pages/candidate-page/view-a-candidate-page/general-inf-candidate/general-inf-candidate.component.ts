@@ -12,6 +12,7 @@ export class GeneralInfCandidateComponent implements OnInit {
   candidate: any;
   languageList: any;
   skillSheetList:any
+  isLoaded=false
   constructor(
     private activatedRoute: ActivatedRoute,
     private candidateService: CandidateService
@@ -22,12 +23,10 @@ export class GeneralInfCandidateComponent implements OnInit {
     this.candidateService
       .getCandidateById(this.id)
       .subscribe((response: any) => {
-        this.candidate = response.data[0]
-        console.log(response.data[0])
-      
+        this.candidate = response.data[0]  
             this.languageList=response.data[0].language[0].child
             this.skillSheetList=response.data[0].skillSheet
-         
+         this.isLoaded=true
         
   });
   }

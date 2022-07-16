@@ -116,10 +116,11 @@
               <p _ngcontent-yxd-c87="">{{ exp.name }}</p>
             </div>
             <div class="language-content-item-main-category">
-              <div class="main" *ngFor="let skillChild of exp.listSkill">
-                <span>Company/Project: {{ skillChild.firm }}</span>
-                <span>Position: {{ skillChild.position }}</span>
-                <span>Description: {{ skillChild.time }}</span>
+              <div class="main customize" *ngFor="let skillChild of exp.listSkill,let i=index">
+                <h6>{{i+1}}.</h6>
+                <h6>Company/Project: {{ skillChild.firm }}</h6>
+                <h6>Position: {{ skillChild.position }}</h6>
+                <h6>Description: {{ skillChild.time }}</h6>
               </div>
             </div>
           </div>

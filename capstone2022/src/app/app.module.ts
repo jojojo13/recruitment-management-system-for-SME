@@ -86,6 +86,7 @@ import { GeneralInfCandidateComponent } from './components/pages/candidate-page/
 import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
 import { MatchingBtnComponent } from './components/matching-btn/matching-btn.component';
 import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-matching.component';
+import { SafePipe } from './components/pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-
     CvCandidateComponent,
     MatchingBtnComponent,
     ConfirmMatchingComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
