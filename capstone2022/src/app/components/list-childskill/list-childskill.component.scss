@@ -10,12 +10,16 @@
 .alias {
   font-family: "Poppins";
   position: relative;
+  i{
+    font-size: 12px;
+  }
 }
 i {
   background-color: #ffc145;
   border-radius: 50%;
   padding: 3px 5px;
   margin-right: 5px;
+  font-size: 12px;
 }
 ol {
   border-radius: 15px;
@@ -26,12 +30,12 @@ ol {
   border-radius: 5px;
   border: 1px solid black;
   position: absolute;
-  z-index: 2;
+
+  right: 20px;
   background-color: #f1ffff;
   border: none;
   counter-reset: li;
   list-style: none;
- 
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   // li {
   //   list-style: none;
@@ -98,7 +102,7 @@ ol li:hover:after {
   background-color: initial;
   position: absolute;
   top: 2px;
-  right: -142px;
+  right: 32px;
   cursor: pointer;
   font-size: 20px;
 }
@@ -122,7 +126,7 @@ ol::-webkit-scrollbar-thumb {
   height: 0;
   transform: scaleY(0);
   transform-origin: 50% 0;
-  z-index: 3;
+z-index: 3;
 }
 .hide {
 

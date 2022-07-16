@@ -7,6 +7,8 @@ export interface Candidate {
   email: string;
   linkedIn: string;
   facebook: string;
+  skype: string,
+  website: string,
   twiter: string;
   noiO: string;
   nationLive: number;

@@ -9,22 +9,26 @@
 }
 .alias {
   font-family: "Poppins";
+  position: relative;
+  z-index: 1;
 }
+
 i {
   background-color: #ffc145;
   border-radius: 50%;
   padding: 3px 5px;
   margin-right: 5px;
+  font-size: 12px;
 }
 ol {
   padding: 20px;
   height: 160px;
   overflow-y: auto;
- 
   border-radius: 5px;
   border: 1px solid black;
   position: absolute;
-  z-index: 2;
+
+  right: 20px;
   background-color: #f1ffff;
   border: none;
   counter-reset: li;
@@ -92,7 +96,7 @@ ol::-webkit-scrollbar-thumb {
   background-color: #6c67fc;
 }
 .ada {
-  position: relative;
+
   transition: ease 0.32s;
   height: 0;
   transform: scaleY(0);
@@ -161,7 +165,7 @@ h6 {
   background-color: initial;
   position: absolute;
   top: 4px;
-  right: -146px;
+  right: 32px;
   left: auto;
   font-size: 20px;
 }

@@ -99,9 +99,9 @@
      
           <div class="info-middle-right-languages">
             <h6>1.Foreign language</h6>
-            <div class="box" *ngFor="let child of languageList.child" >
-              <p>{{ child.type }}</p>
-              <div class="box-item" *ngFor="let child of child.child" >
+            <div class="box" *ngFor="let language of languageList" >
+              <p>{{ language.type }}</p>
+              <div class="box-item" *ngFor="let child of language.child" >
                 <span>{{ child.level }}</span>
                 <span>{{ child.goal }}</span>
               </div>
@@ -109,11 +109,15 @@
           </div>
           <div class="info-middle-right-skillsheet">
             <h6>2.Skillsheets</h6>
-            <div class="box" *ngFor="let child of skillSheetList.child" >
-              <p>{{ child.type }}</p>
-              <div class="box-item" *ngFor="let child of child.child" >
-                <span>{{ child.level }}</span>
-                <span>{{ child.goal }}</span>
+            <div class="box" *ngFor="let skillsheet of skillSheetList" >
+              <p>{{ skillsheet.typeSkill }}</p>
+              <div class="box-item" *ngFor="let child of skillsheet.child" >
+                <span>{{ child.type }}</span>
+                <ng-container *ngFor="let c of child.child">  
+                  <span>{{ c.level }}</span>
+                  <span>{{ c.goal }}</span>
+                </ng-container>
+              
               </div>
             </div>
           </div>

@@ -22,17 +22,13 @@ export class GeneralInfCandidateComponent implements OnInit {
     this.candidateService
       .getCandidateById(this.id)
       .subscribe((response: any) => {
-        this.candidate = response.data[0];
-        for (let item of response.data[0].listSkill) {
-          if(item.id==14){
-            this.languageList=item
+        this.candidate = response.data[0]
+        console.log(response.data[0])
+      
+            this.languageList=response.data[0].language[0].child
+            this.skillSheetList=response.data[0].skillSheet
          
-          }
-          if(item.id==18){
-            this.skillSheetList=item
-            console.log(item)
-          }
-        }
-      });
+        
+  });
   }
 }

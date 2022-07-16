@@ -1,6 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
-import { SkillType } from 'src/app/models/ChildSkill';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
 export interface SkillList {
@@ -157,18 +156,37 @@ export class SkillsAndExpComponent implements OnInit {
         }
         this.renderer.appendChild(select, option);
       }
-      let a = {id:0, name: '', goal: 0 };
+      let a = { id: 0, name: '', goal: 0 };
+      let orig=-1;
+      this.renderer.listen(select,'focus',()=>{
+        orig=select.options[select.selectedIndex].value;
+        console.log(orig)
+      })
       this.renderer.listen(select, 'change', () => {
         value = select.options[select.selectedIndex].value;
-        obj.level = value;
-        a.name = select.options[select.selectedIndex].text;
-        this.candidateService.detectChange.next(true);
+        let elementPos = this.listSkill
+          .map(function (x: any) {
+            return x.level;
+          })
+          .indexOf(value);
+        if (elementPos > -1) {
+          this.commonService.popUpFailed(
+            select.options[select.selectedIndex].text + ' is exsisted'
+          );
+          select.value = orig;
+          console.log( select.options[select.selectedIndex].value )
+          return;
+        } else {
+          obj.level = value;
+          a.name = select.options[select.selectedIndex].text;
+          this.candidateService.detectChange.next(true);
+        }
       });
       this.renderer.listen(trash, 'click', () => {
         this.deleteItem(target, main);
         (wrapper as HTMLElement).style.display = 'block';
         skillSize.size += 1;
-        console.log(parent)
+        console.log(parent);
         this.listSkill = this.listSkill.filter((skill) => {
           return skill.level != select.options[select.selectedIndex].value;
         });
@@ -177,12 +195,11 @@ export class SkillsAndExpComponent implements OnInit {
           this.candidateService.skillList.filter((o: any) => {
             return o.level != select.options[select.selectedIndex].value;
           });
-          newObj.listSkill=newObj.listSkill.filter((obj:any)=>{
-            return obj.id!=select.options[select.selectedIndex].value;
-          })
+        newObj.listSkill = newObj.listSkill.filter((obj: any) => {
+          return obj.id != select.options[select.selectedIndex].value;
+        });
         this.candidateService.detectChange.next(true);
       });
-
 
       this.renderer.listen(input, 'change', () => {
         a.goal = input.value;
@@ -191,7 +208,7 @@ export class SkillsAndExpComponent implements OnInit {
       });
       obj.level = select.options[select.selectedIndex].value;
       a.name = select.options[select.selectedIndex].text;
-      a.id=select.options[select.selectedIndex].value
+      a.id = select.options[select.selectedIndex].value;
       this.renderer.addClass(main, 'main');
       this.renderer.addClass(trash, 'far');
       this.renderer.addClass(trash, 'fa-trash-alt');
@@ -206,7 +223,7 @@ export class SkillsAndExpComponent implements OnInit {
       newObj.listSkill.push(a);
       this.candidateService.skillList = this.listSkill;
       this.candidateService.otherList = this.skills;
-      console.log(this.skills)
+      console.log(this.skills);
       this.isFirst = false;
       skillSize.size--;
       this.candidateService.detectChange.next(true);

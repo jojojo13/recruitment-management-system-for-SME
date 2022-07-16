@@ -94,40 +94,49 @@
             _ngcontent-yxd-c87=""
             class="language-content-item-main-category"
           >
-            <div class="main" *ngFor="let skillChild of exp.listSkill">
-              <div class="exp">
-                <input
-                  class="firm"
-                  required
-                  #firm
-                  (change)="inputChangeFirm(skillChild, firm)"
-                  type="text"
-                />
-                
-                <small class="text-danger">Required</small>
-              </div>
-              <div class="exp">
-                <input
-                  required
-                  #pos
-                  (change)="inputChangePosition(skillChild, pos)"
-                  type="text"
-                />
-                <small class="text-danger">Required</small>
-              </div>
+            <div class="main cifu" *ngFor="let skillChild of exp.listSkill">
+              <div class="box">
+                <div class="exp">
+                  <label for="">Comp/Project</label>
+                  <div class="err">
+                    <input
+                      class="firm"
+                      required
+                      #firm
+                      (change)="inputChangeFirm(skillChild, firm)"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                  <div class="exp">
+                    <label for="">Position</label>
+                    <div class="err">
+                      <input
+                        required
+                        #pos
+                        (change)="inputChangePosition(skillChild, pos)"
+                        type="text"
+                      />
+                    </div>
+                  </div>
 
-              <div class="exp">
-                <input
-                  #time
-                  (change)="inputChangeTime(skillChild, time)"
-                  type="text"
-                />
-                <small class="text-danger">Required</small>
+                  <div class="exp">
+                    <label for="">Description</label>
+                    <div class="err">
+                      <input
+                        #time
+                        (change)="inputChangeTime(skillChild, time)"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+        
+              
               </div>
-              <i
-                (click)="removeExpChild(skillChild)"
-                class="far fa-trash-alt cus"
-              ></i>
+                <i
+                  (click)="removeExpChild(skillChild)"
+                  class="far fa-trash-alt cus"
+                ></i>
             </div>
           </div>
         </div>

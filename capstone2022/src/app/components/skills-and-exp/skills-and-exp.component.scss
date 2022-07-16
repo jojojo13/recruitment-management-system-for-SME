@@ -8,17 +8,22 @@
   box-sizing: border-box;
 }
 .wrapper {
+
   width: 100%;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   font-family: "Poppins";
+  overflow-y: auto;
+  height: calc(100vh - 190px);
+
 }
 .language {
   &-heading {
     display: flex;
     font-style: normal;
     margin-top: 20px;
+    width: 100%;
     &__ttl {
       font-weight: 600;
       font-size: 16px;
@@ -70,6 +75,7 @@
   display: flex;
   align-items: center;
   margin-top: 20px;
+  flex-wrap: wrap;
   p {
     font-family: "Poppins";
     font-style: normal;
@@ -91,16 +97,40 @@
       cursor: pointer;
     }
   }
-  .firm{  
-      margin-left: 0;
+  .firm {
+    margin-left: 0;
   }
-  .exp{
-    &:last-of-type{
-      input{
-        width: 180px;
-      }
+  .exp {
+    &:last-of-type {
+      margin-bottom: 0;
     }
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    .err{
+      width: calc(100% - (200px));
+    }
+    label {
+      font-size: 14px;
+      font-weight: 300;
+      width: 140px;
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+      padding: 0;
+      border: none;
+      margin-right: 20px;
+
+    }
+    input {
+      width: 100%;
+    }
+   
   }
+  
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -115,7 +145,7 @@ select {
   font-family: "Poppins";
   font-weight: 600;
   font-size: 12px;
-  
+
   border-radius: 10px;
   width: 100px;
   text-align: center;
@@ -145,7 +175,7 @@ span {
   font-family: "Poppins";
   font-weight: 600;
   font-size: 12px;
- 
+
   border-radius: 10px;
   width: 100px;
   text-align: center;
@@ -154,14 +184,15 @@ span {
   border-radius: 10px;
   margin-right: 20px;
 }
-.exp{
+.exp {
   margin-right: 20px;
   width: 100px;
-  input{
+  input {
     margin: 0;
   }
 }
-.cus{
-  align-self: baseline;
-  margin-top: 10px;
+
+.cifu{
+  display: flex;
+  align-items: center;
 }
