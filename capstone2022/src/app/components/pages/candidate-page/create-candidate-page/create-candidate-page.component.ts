@@ -17,7 +17,7 @@ export class CreateCandidatePageComponent implements OnInit {
   pdfSrc = '';
   step = 1;
   candidate: any;
-  formCandite:any
+  formCandite: any
   objForAPI: Candidate = {
     fullName: '',
     dob: '1000-01-01T15:37:54.773Z',
@@ -30,6 +30,8 @@ export class CreateCandidatePageComponent implements OnInit {
     skype: "",
     website: "",
     twiter: '',
+    skype: '',
+    website: '',
     noiO: '',
     nationLive: 0,
     porvinceLive: 0,
@@ -49,16 +51,16 @@ export class CreateCandidatePageComponent implements OnInit {
       },
     ],
     listExp: [
-     
+
     ],
     recordStatus: 0,
   };
   constructor(
     private commonService: CommonService,
     private candidateService: CandidateService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   getPdfSrc(src: string) {
     this.pdfSrc = src;
   }
@@ -81,6 +83,8 @@ export class CreateCandidatePageComponent implements OnInit {
       (this.objForAPI.skype = this.candidate.skype),
       (this.objForAPI.website = this.candidate.website),
       (this.objForAPI.twiter = this.candidate.twitter),
+      (this.objForAPI.skype = this.candidate.skype),
+      (this.objForAPI.website = this.candidate.website),
       (this.objForAPI.noiO = ''),
       (this.objForAPI.nationLive = this.candidate.country.id),
       (this.objForAPI.porvinceLive = this.candidate.city.id),
@@ -94,7 +98,7 @@ export class CreateCandidatePageComponent implements OnInit {
       this.objForAPI.graduate = this.candidate.graduate;
     }
     if (this.candidate.dob != '') {
-      this.objForAPI.dob = this.candidate.dob;  
+      this.objForAPI.dob = this.candidate.dob;
     }
     if (action == 'submit') {
       this.objForAPI.recordStatus = 1;
@@ -113,29 +117,51 @@ export class CreateCandidatePageComponent implements OnInit {
       confirmButtonText: 'Confirm',
       width: '380px',
     }).then((result) => {
-      if(result.isConfirmed){
-        this.candidateService.insertCandidate(this.objForAPI).subscribe(
+      if (result.isConfirmed) {
+
+        let checkObj = {
+          phone: this.candidate.phone,
+          zalo: this.candidate.zalo,
+          email: this.candidate.email,
+          linkIn: this.candidate.linkedIn,
+          faceBook: this.candidate.facebook,
+          twitter: this.candidate.twitter,
+          skype: this.candidate.skype,
+          website: this.candidate.website,
+        };
+
+        this.candidateService.CheckDuplicateCandidate(checkObj).subscribe(
           (response: any) => {
-            if (response.status == true) {
-              this.commonService.popUpSuccess();
-            } else {
-              this.commonService.popUpFailed('Insert failed!!!');
+            let rq = response.data;
+            if (rq.check == false) {
+              this.commonService.popUpFailed(rq.mess);
+            }
+            else {
+              this.candidateService.insertCandidate(this.objForAPI).subscribe(
+                (response: any) => {
+                  if (response.status == true) {
+                    this.commonService.popUpSuccess();
+                  } else {
+                    this.commonService.popUpFailed('Insert failed!!!');
+                  }
+                },
+                (err) => {
+                  this.commonService.popUpFailed('Insert failed!!!');
+                }
+              );
             }
           },
-          (err) => {
-            this.commonService.popUpFailed('Insert failed!!!');
-          }
         );
       }
-      
+
     });
   }
   getCandidate($event: any) {
     this.candidate = $event.value;
-    this.formCandite=$event
+    this.formCandite = $event
   }
   getlistExp(arr: any) {
-    if(arr){
+    if (arr) {
       this.objForAPI.listExp = arr;
 
     }
