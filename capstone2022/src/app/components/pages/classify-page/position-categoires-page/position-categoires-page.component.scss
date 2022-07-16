@@ -85,7 +85,7 @@
           label {
             margin-right: 20px;
             font-size: 14px;
-            width:70px;
+            width: 70px;
           }
 
           small {
@@ -97,6 +97,7 @@
 
         input {
           width: 260px;
+          height: 40px;
         }
       }
     }
@@ -162,9 +163,10 @@ h2 {
 
 select {
   cursor: pointer;
-  width: 280px;
+  width: 260px;
+  height:40px;
   padding: 8px 0 8px 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid rgb(197, 197, 197);
 
   option {
