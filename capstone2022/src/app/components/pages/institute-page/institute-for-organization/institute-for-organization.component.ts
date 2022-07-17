@@ -170,6 +170,7 @@ export class InstituteForOrganizationComponent implements OnInit {
       })
     }
     else {
+      obj.id = this.parentId
       this.organizationService.modifyOrg(obj).subscribe((response: any) => {
         if (response.status == true) {
           this.commonService.popUpSuccess()
