@@ -17,7 +17,7 @@ export class CreateCandidatePageComponent implements OnInit {
   pdfSrc = '';
   step = 1;
   candidate: any;
-  formCandite: any
+  formCandite: any;
   objForAPI: Candidate = {
     fullName: '',
     dob: '1000-01-01T15:37:54.773Z',
@@ -27,8 +27,8 @@ export class CreateCandidatePageComponent implements OnInit {
     email: '',
     linkedIn: '',
     facebook: '',
-    skype: "",
-    website: "",
+    skype: '',
+    website: '',
     twiter: '',
     noiO: '',
     nationLive: 0,
@@ -48,19 +48,17 @@ export class CreateCandidatePageComponent implements OnInit {
         goal: '',
       },
     ],
-    listExp: [
-
-    ],
+    listExp: [],
     recordStatus: 0,
   };
   constructor(
     private commonService: CommonService,
     private candidateService: CandidateService
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   getPdfSrc(src: string) {
-    console.log(src)
+    console.log(src);
     this.pdfSrc = src;
   }
   getStep(step: number) {
@@ -117,7 +115,6 @@ export class CreateCandidatePageComponent implements OnInit {
       width: '380px',
     }).then((result) => {
       if (result.isConfirmed) {
-
         let checkObj = {
           phone: this.candidate.phone,
           zalo: this.candidate.zalo,
@@ -129,13 +126,13 @@ export class CreateCandidatePageComponent implements OnInit {
           website: this.candidate.website,
         };
 
-        this.candidateService.CheckDuplicateCandidate(checkObj).subscribe(
-          (response: any) => {
+        this.candidateService
+          .CheckDuplicateCandidate(checkObj)
+          .subscribe((response: any) => {
             let rq = response.data;
             if (rq.check == false) {
               this.commonService.popUpFailed(rq.mess);
-            }
-            else {
+            } else {
               this.candidateService.insertCandidate(this.objForAPI).subscribe(
                 (response: any) => {
                   if (response.status == true) {
@@ -149,24 +146,23 @@ export class CreateCandidatePageComponent implements OnInit {
                 }
               );
             }
-          },
-        );
+          });
       }
-
     });
   }
   getCandidate($event: any) {
     this.candidate = $event.value;
-    this.formCandite = $event
+    this.formCandite = $event;
   }
   getlistExp(arr: any) {
     if (arr) {
+      console.log(arr);
       this.objForAPI.listExp = arr;
-
+      console.log(this.objForAPI.listExp);
     }
   }
   getSkill(arr: any) {
     this.objForAPI.listSkill = arr;
-    console.log(arr)
+    console.log(arr);
   }
 }
