@@ -9,7 +9,7 @@ export class LoaderComponent implements OnInit,OnChanges {
   @Input('isLoaded') isLoaded = false;
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
-   console.log(this.isLoaded)
+
   }
 
   ngOnInit(): void {}

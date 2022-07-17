@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class CreateCandidatePageComponent implements OnInit {
   @Input('name') name = 'Candidate';
+  isLoaded = true;
   route = { name: 'Create New Candidate', link: '/ungvien' };
   attach = { name: 'Attach CV' };
   attach2 = { name: 'Attach Portfolio' };
@@ -68,6 +69,9 @@ export class CreateCandidatePageComponent implements OnInit {
     this.name = name;
   }
   onSubmit(action: string) {
+    this.isLoaded = false;
+    (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'block';
     this.commonService.emitBahavior.next(true);
     console.log(this.objForAPI);
     (this.objForAPI.fullName = this.candidate.name),
@@ -131,17 +135,33 @@ export class CreateCandidatePageComponent implements OnInit {
           .subscribe((response: any) => {
             let rq = response.data;
             if (rq.check == false) {
+              this.isLoaded = true;
+              (
+                document?.querySelector('.overlay') as HTMLElement
+              ).style.display = 'none';
               this.commonService.popUpFailed(rq.mess);
             } else {
               this.candidateService.insertCandidate(this.objForAPI).subscribe(
                 (response: any) => {
                   if (response.status == true) {
+                    (
+                      document?.querySelector('.overlay') as HTMLElement
+                    ).style.display = 'none';
+                    this.isLoaded = true;
                     this.commonService.popUpSuccess();
                   } else {
+                    (
+                      document?.querySelector('.overlay') as HTMLElement
+                    ).style.display = 'none';
+                    this.isLoaded = true;
                     this.commonService.popUpFailed('Insert failed!!!');
                   }
                 },
                 (err) => {
+                  (
+                    document?.querySelector('.overlay') as HTMLElement
+                  ).style.display = 'none';
+                  this.isLoaded = true;
                   this.commonService.popUpFailed('Insert failed!!!');
                 }
               );
