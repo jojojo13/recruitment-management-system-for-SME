@@ -40,30 +40,38 @@ export class LoginPageComponent implements OnInit {
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
     this.auth.signIn(this.account).subscribe(
-      (data: any) => {
-        localStorage.setItem('token', data.data);
-        (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'none';
-        this.isLoaded = true;
-        let params = this.route.snapshot.queryParams;
-        if (params['redirectURL']) {
-          this.redirectURL = params['redirectURL'];
-        }
+      (obj: any) => {
+        let mess = obj.mess;
 
-        if (this.redirectURL) {
-          this.router
-            .navigateByUrl(this.redirectURL)
-            .catch(() => this.router.navigate(['/']));
-        } else {
-          this.router.navigate(['/']);
+        if (obj.status == true) {
+          localStorage.setItem('token', obj.data);
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
+          this.isLoaded = true;
+          let params = this.route.snapshot.queryParams;
+          if (params['redirectURL']) {
+            this.redirectURL = params['redirectURL'];
+          }
+
+          if (this.redirectURL) {
+            this.router
+              .navigateByUrl(this.redirectURL)
+              .catch(() => this.router.navigate(['/']));
+          } else {
+            this.router.navigate(['/']);
+          }
+        }
+        else {
+          (err: any) => {
+            this.isLoaded = true;
+            this.msg = mess;
+            (document?.querySelector('.overlay') as HTMLElement).style.display =
+              'none';
+          }
+
         }
       },
-      (err: any) => {
-        this.isLoaded = true;
-        this.msg = 'Wrong account or password';
-        (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'block';
-      }
+
     );
   }
 }
