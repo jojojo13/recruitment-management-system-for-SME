@@ -46,6 +46,7 @@ export class OverViewComponent implements OnInit, OnChanges, OnDestroy {
         this.listSkillSheet = this.candidateService.skillSheet;
 
         this.listExps = this.candidateService.expList;
+
         newArr2 = this.convert2(this.candidateService.skillSheet);
         newArr = this.convertTypeArray(this.listExps);
       }
@@ -58,6 +59,7 @@ export class OverViewComponent implements OnInit, OnChanges, OnDestroy {
         this.listSkill.emit(newArr2);
       }
       if (this.listExp) {
+        console.log(this.listExp);
         this.listExp.emit(newArr);
       }
       if (newArr2 && this.test) {
@@ -83,17 +85,23 @@ export class OverViewComponent implements OnInit, OnChanges, OnDestroy {
   }
   convert2(array: any) {
     let newArr = [];
-    for (let i = 0; i < array.length; i++) {
-      for (let j = 0; j < array[i].listSkill.length; j++) {
-        let newobj = {
-          typeSkill: array[i].id,
-          type: array[i].listSkill[j].id,
-          level: array[i].listSkill[j].level,
-          goal: array[i].listSkill[j].goal,
-        };
-        newArr.push(newobj);
+
+    if (array) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].listSkill.length > 0) {
+          for (let j = 0; j < array[i].listSkill.length; j++) {
+            let newobj = {
+              typeSkill: array[i].id,
+              type: array[i].listSkill[j].id,
+              level: array[i].listSkill[j].level,
+              goal: array[i].listSkill[j].goal,
+            };
+            newArr.push(newobj);
+          }
+        }
       }
     }
+
     return newArr;
   }
 }

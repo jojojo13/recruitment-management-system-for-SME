@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="info-heading-position">
-        <p>Position: BA Intern</p>
+        <p>Position: </p>
       </div>
     </div>
     <div class="info-middle">
@@ -113,26 +113,31 @@
 
         <div class="info-middle-right-languages">
           <h6 class="heading">1. Foreign language</h6>
-          <div class="box" *ngFor="let language of languageList">
-            <p>{{ language.type }}</p>
-            <div class="box-item" *ngFor="let child of language.child">
-              <span>{{ child.level }}</span>
-              <span>{{ child.goal }}</span>
+          <ng-container *ngIf="languageList">
+            <div class="box" *ngFor="let language of languageList">
+              <p>{{ language.type }}</p>
+              <div class="box-item" *ngFor="let child of language.child">
+                <span>{{ child.level }}</span>
+                <span>{{ child.goal }}</span>
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
         <div class="info-middle-right-skillsheet">
           <h6 class="heading">2. Skillsheets</h6>
-          <div class="box" *ngFor="let skillsheet of skillSheetList">
-            <p>{{ skillsheet.typeSkill }}</p>
-            <div class="box-item" *ngFor="let child of skillsheet.child">
-              <span>{{ child.type }}</span>
-              <ng-container *ngFor="let c of child.child">
-                <span>{{ c.level }}</span>
-                <span>{{ c.goal }}</span>
-              </ng-container>
+          <ng-container *ngIf="skillSheetList">
+            <div class="box" *ngFor="let skillsheet of skillSheetList">
+              <p>{{ skillsheet.typeSkill }}</p>
+              <div class="box-item" *ngFor="let child of skillsheet.child">
+                <span>{{ child.type }}</span>
+                <ng-container *ngFor="let c of child.child">
+                  <span>{{ c.level }}</span>
+                  <span>{{ c.goal }}</span>
+                </ng-container>
+              </div>
             </div>
-          </div>
+          </ng-container>
+    
         </div>
       </div>
     </div>

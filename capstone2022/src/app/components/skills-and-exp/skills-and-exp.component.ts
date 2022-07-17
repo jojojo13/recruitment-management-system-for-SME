@@ -408,6 +408,7 @@ export class SkillsAndExpComponent implements OnInit {
     skillChild.position = input.value;
     this.candidateService.expList = this.expList;
     this.candidateService.detectChange.next(true);
+    console.log(this.expList)
   }
 
   removeExp(exp: any) {

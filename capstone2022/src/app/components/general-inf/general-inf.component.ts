@@ -33,9 +33,9 @@ export class GeneralInfComponent implements OnInit, OnChanges {
   countries: any;
   selectedCountry: number = 0;
   provinces: any;
-  emailPattern = '([a-z]{1,10}\\.)?([a-z]){2,10}\\@(gmail.com)';
-  phonePattern = new RegExp('(84|0[3|5|7|8|9])+([0-9]{8})\\b');
-  zaloPattern =  new RegExp('(84|0[3|5|7|8|9])+([0-9]{8})\\b');
+  emailPattern = '([a-z0-9]{1,22}\\.)?([a-z0-9]){2,22}\\@(gmail.com)';
+  phonePattern = new RegExp('(84|0[0|1|2|3|4|5|6|7|8|9])+([0-9]{8})\\b');
+  zaloPattern =  new RegExp('(84|0[0|1|2|3|4|5|6|7|8|9])+([0-9]{8})\\b');
   namePattern = '\\w+([[:space:]])\\w+([[:space:]])\\w+$';
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,7 @@ export class GeneralInfComponent implements OnInit, OnChanges {
       twitter: [''],
       skype: [''],
       website: [''],
-      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$'),Validators.maxLength(26)]],
       dob: [''],
       gender: ['', [Validators.required]],
       major: [''],

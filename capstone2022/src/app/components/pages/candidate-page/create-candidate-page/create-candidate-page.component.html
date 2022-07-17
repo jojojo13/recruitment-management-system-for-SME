@@ -1,9 +1,10 @@
 <div class="content">
   <h5>Candidate</h5>
+  <app-loader [isLoaded]="isLoaded"></app-loader>
   <app-back-btn [route]="route"></app-back-btn>
   <app-step (step)="getStep($event)"></app-step>
-  <div class="content-middle">
-    <div class="content-middle-left">
+  <div class="content-middle" >
+    <div class="content-middle-left" [ngClass]="{ hide: step == 4, show: step != 4 }">
       <div>
         <app-profile
           class="profile"
@@ -57,3 +58,4 @@
     </div>
   </div>
 </div>
+<div class="overlay"></div>

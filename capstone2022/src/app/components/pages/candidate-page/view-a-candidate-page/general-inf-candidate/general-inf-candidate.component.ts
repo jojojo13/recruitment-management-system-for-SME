@@ -11,8 +11,8 @@ export class GeneralInfCandidateComponent implements OnInit {
   id!: number;
   candidate: any;
   languageList: any;
-  skillSheetList:any
-  isLoaded=false
+  skillSheetList: any;
+  isLoaded = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private candidateService: CandidateService
@@ -23,11 +23,15 @@ export class GeneralInfCandidateComponent implements OnInit {
     this.candidateService
       .getCandidateById(this.id)
       .subscribe((response: any) => {
-        this.candidate = response.data[0]  
-            this.languageList=response.data[0].language[0].child
-            this.skillSheetList=response.data[0].skillSheet
-         this.isLoaded=true
-        
-  });
+        console.log(response.data)
+        this.candidate = response.data[0];
+        if (response.data[0].language.length > 0) {
+          this.languageList = response.data[0].language[0].child;
+        }
+        if (response.data[0].skillSheet.length > 0) {
+          this.skillSheetList = response.data[0].skillSheet;
+        }
+        this.isLoaded = true;
+      });
   }
 }
