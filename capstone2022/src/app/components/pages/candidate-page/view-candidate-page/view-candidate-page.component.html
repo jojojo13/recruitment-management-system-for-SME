@@ -21,6 +21,7 @@
           <th>Position</th>
           <th>Experiences</th>
           <th>Language</th>
+          <th>Status record</th>
         </tr>
       </thead>
       <tbody>
@@ -111,7 +112,7 @@
       </tbody>
       <tbody *ngIf="listCandidate">
         <tr (dblclick)="navigateToView(candidate)"
-          *ngFor="
+            *ngFor="
             let candidate of listCandidate
               | paginate
                 : {
@@ -119,9 +120,8 @@
                     currentPage: page,
                     totalItems: totalItems
                   }
-          "
-        >
-          <td><input type="checkbox" (change)="selectedChange(candidate,$event)"/></td>
+          ">
+          <td><input type="checkbox" (change)="selectedChange(candidate,$event)" /></td>
           <td>{{ candidate.code }}</td>
           <td>{{ candidate.name }}</td>
           <td>{{ candidate.yob }}</td>
@@ -131,6 +131,7 @@
           <td>{{ candidate.lastestPosition }}</td>
           <td>{{ candidate.experience }}</td>
           <td>{{ candidate.language }}</td>
+          <td>{{ candidate.statusName }}</td>
         </tr>
       </tbody>
     </table>
