@@ -1,6 +1,6 @@
 export class CandidateFilter {
   name: string | undefined;
-  dob: number | undefined;
+  yob: number | undefined;
   phone: string | undefined;
   email: string | undefined;
   location: string | undefined;
@@ -12,7 +12,7 @@ export class CandidateFilter {
   status: number | undefined;
   constructor(
     name: string = '',
-    dob: number = 0,
+    yob: number = 0,
     phone: string = '',
     email: string = '',
     location: string = '',
@@ -24,7 +24,7 @@ export class CandidateFilter {
     status: number = 1
   ) {
     (this.name = name),
-      (this.dob = dob),
+      (this.yob = yob),
       (this.phone = phone),
       (this.email = email),
       (this.location = location),
