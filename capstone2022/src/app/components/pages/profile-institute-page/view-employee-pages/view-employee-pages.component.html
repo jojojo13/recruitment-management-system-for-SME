@@ -1,1 +1,116 @@
-<p>view-employee-pages works!</p>
+<div class="content">
+  <app-loader [isLoaded]="isLoaded"></app-loader>
+  <div class="content-heading">
+    <h5>View employees</h5>
+    <div class="d-flex justify-content-between">
+      <app-back-btn [route]="route"></app-back-btn>
+      <div style="display:flex">
+        <input type="text" id=" department" placeholder="Department" class="form-control" formControlName="dep" />
+        <p class="poppup">&nbsp;Choose&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="content-middle">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Orgnization</th>
+          <th>Title</th>
+          <th>Position</th>
+          <th>Join date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [formGroup]="employeeForm">
+          <td></td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="name" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="phone" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="email" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="location" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="position" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="exp" />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     placeholder="Filter"
+                     formControlName="languages" />
+            </mat-form-field>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="listemployee">
+        <tr (dblclick)="navigateToView(candidate)"
+            *ngFor="
+            let candidate of listemployee
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: page,
+                    totalItems: totalItems
+                  }
+          ">
+          <td><input type="checkbox"/></td>
+          <td>{{ candidate.code }}</td>
+          <td>{{ candidate.fullName }}</td>
+          <td>{{ candidate.orgnizationName }}</td>
+          <td>{{ candidate.titleName }}</td>
+          <td class="px-2">{{ candidate.positionName }}</td>
+          <td class="px-2">{{ candidate.joinDate }}</td>
+          <td>{{ candidate.statusName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-container *ngIf="listemployee">
+    <pagination-controls class="pagi"
+                         (pageChange)="gty((page = $event))"></pagination-controls>
+  </ng-container>
+</div>
