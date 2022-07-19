@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Candidate } from 'src/app/models/Candidate';
+import { FileUpload } from 'src/app/models/FileUpload';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
 import Swal from 'sweetalert2';
@@ -14,8 +16,9 @@ export class CreateCandidatePageComponent implements OnInit {
   isLoaded = true;
   route = { name: 'Create New Candidate', link: '/ungvien' };
   attach = { name: 'Attach CV' };
-  attach2 = { name: 'Attach Portfolio' };
+
   pdfSrc = '';
+  fileUpLoad!: FileUpload;
   step = 1;
   candidate: any;
   formCandite: any;
@@ -54,12 +57,13 @@ export class CreateCandidatePageComponent implements OnInit {
   };
   constructor(
     private commonService: CommonService,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    public sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {}
   getPdfSrc(src: string) {
-    console.log(src);
+    console.log('emit')
     this.pdfSrc = src;
   }
   getStep(step: number) {
@@ -69,9 +73,6 @@ export class CreateCandidatePageComponent implements OnInit {
     this.name = name;
   }
   onSubmit(action: string) {
-    this.isLoaded = false;
-    (document?.querySelector('.overlay') as HTMLElement).style.display =
-      'block';
     this.commonService.emitBahavior.next(true);
     console.log(this.objForAPI);
     (this.objForAPI.fullName = this.candidate.name),
@@ -107,7 +108,7 @@ export class CreateCandidatePageComponent implements OnInit {
     if (action == 'draft') {
       this.objForAPI.recordStatus = 0;
     }
-    console.log(this.objForAPI);
+    console.log(this.objForAPI)
     Swal.fire({
       text: 'Are you sure to edit this request?',
       iconHtml:
@@ -119,6 +120,9 @@ export class CreateCandidatePageComponent implements OnInit {
       width: '380px',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.isLoaded = false;
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'block';
         let checkObj = {
           phone: this.candidate.phone,
           zalo: this.candidate.zalo,
@@ -149,6 +153,15 @@ export class CreateCandidatePageComponent implements OnInit {
                     ).style.display = 'none';
                     this.isLoaded = true;
                     this.commonService.popUpSuccess();
+                    let folderCandidate = response.code;
+                    console.log(response);
+                    this.commonService
+                      .pushFileToStorage(this.fileUpLoad, folderCandidate)
+                      .subscribe(
+                        (percentage: any) => {},
+                        (error: any) => {}
+                      );
+                      this.commonService.deleteFile(this.commonService.fileUrl)
                   } else {
                     (
                       document?.querySelector('.overlay') as HTMLElement
@@ -184,5 +197,8 @@ export class CreateCandidatePageComponent implements OnInit {
   getSkill(arr: any) {
     this.objForAPI.listSkill = arr;
     console.log(arr);
+  }
+  getFileUpLoad($event: FileUpload) {
+    this.fileUpLoad = $event;
   }
 }

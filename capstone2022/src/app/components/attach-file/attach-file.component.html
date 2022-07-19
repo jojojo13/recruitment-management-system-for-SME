@@ -2,7 +2,8 @@
   <p (click)="fileInput.click()">
     <i class="far fa-paperclip"></i>{{ attach.name }}
   </p>
-  <input #fileInput type="file" (change)="selectFile($event)" />
+ 
+  <input #fileInput id="fileInput" type="file" (change)="selectFile($event)" />
   <div *ngIf="currentFileUpload" class="progress mt-2">
     <div
       class="progress-bar progress-bar-info"

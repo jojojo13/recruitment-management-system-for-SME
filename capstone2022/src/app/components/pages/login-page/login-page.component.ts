@@ -41,26 +41,34 @@ export class LoginPageComponent implements OnInit {
       'block';
     this.auth.signIn(this.account).subscribe(
       (data: any) => {
-        localStorage.setItem('token', data.data);
-        (document?.querySelector('.overlay') as HTMLElement).style.display =
+        if(data.status==true){
+          localStorage.setItem('token', data.data);
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
+            'none';
+          this.isLoaded = true;
+          let params = this.route.snapshot.queryParams;
+          if (params['redirectURL']) {
+            this.redirectURL = params['redirectURL'];
+          }
+  
+          if (this.redirectURL) {
+            this.router
+              .navigateByUrl(this.redirectURL)
+              .catch(() => this.router.navigate(['/']));
+          } else {
+            this.router.navigate(['/']);
+          }
+        }else{
+          (document?.querySelector('.overlay') as HTMLElement).style.display =
           'none';
-        this.isLoaded = true;
-        let params = this.route.snapshot.queryParams;
-        if (params['redirectURL']) {
-          this.redirectURL = params['redirectURL'];
+        this.isLoaded = true; 
+          this.msg = data.mess;
         }
-
-        if (this.redirectURL) {
-          this.router
-            .navigateByUrl(this.redirectURL)
-            .catch(() => this.router.navigate(['/']));
-        } else {
-          this.router.navigate(['/']);
-        }
+        
       },
       (err: any) => {
         this.isLoaded = true;
-        this.msg = 'Wrong account or password';
+    
         (document?.querySelector('.overlay') as HTMLElement).style.display =
           'block';
       }

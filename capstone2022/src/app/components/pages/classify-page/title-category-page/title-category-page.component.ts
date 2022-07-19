@@ -15,7 +15,7 @@ export class TitleCategoryPageComponent implements OnInit {
 
   disable = true;
   idSelected: any;
-  route = { name: 'Title categories', link: 'phanloaitochuc' };
+  route = { name: 'Title categories', link: '/phanloaitochuc' };
   titleForm!: FormGroup;
   action = 'Viewing';
   categories: any;

@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./institute-for-organization.component.scss']
 })
 export class InstituteForOrganizationComponent implements OnInit {
-  route = { name: 'Create Orgnization', link: 'phanloaitochuc' };
+  route = { name: 'Create Orgnization', link: '/thietlaptochuc' };
 
   orgForm!: FormGroup;
   parentId!: number;

@@ -15,7 +15,7 @@ import { OrganizationService } from 'src/app/services/organization-service/organ
 export class PositionCategoiresPageComponent implements OnInit {
   disable = true;
   idSelected: any;
-  route = { name: 'Position categories', link: 'phanloaitochuc' };
+  route = { name: 'Position categories', link: '/phanloaitochuc' };
   positionForm!: FormGroup;
   action = 'Viewing';
   titleList: any;

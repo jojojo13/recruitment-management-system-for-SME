@@ -6,14 +6,18 @@ import Swal from 'sweetalert2';
 import { BehaviorSubject, finalize, Observable } from 'rxjs';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import {
+  AngularFireDatabase,
+  AngularFireList,
+} from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FileUpload } from '../models/FileUpload';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
-  fileBehavior!:BehaviorSubject<boolean>;
+  fileBehavior!: BehaviorSubject<boolean>;
   fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
@@ -37,7 +41,7 @@ export class CommonService {
   dataChange: BehaviorSubject<boolean>;
   pdfSrc = '';
   emitBahavior: BehaviorSubject<boolean>;
-  fileUrl=''
+  fileUrl = '';
   constructor(
     private __http: HttpClient,
     private router: Router,
@@ -45,7 +49,7 @@ export class CommonService {
     private db: AngularFireDatabase,
     private storage: AngularFireStorage
   ) {
-    this.fileBehavior=new BehaviorSubject<boolean>(false);
+    this.fileBehavior = new BehaviorSubject<boolean>(false);
     this.dataChange = new BehaviorSubject<any>(null);
     this.emitBahavior = new BehaviorSubject<any>(null);
   }
@@ -136,8 +140,23 @@ export class CommonService {
 
   private basePath = '/uploads';
 
-  pushFileToStorage(fileUpload: FileUpload): Observable<number> {
-    const filePath = `${this.basePath}/ahihie/${fileUpload.file.name}`;
+
+
+  getFile(){
+    return this.db.list('/uploads/UV3', ref =>
+      ref.limitToLast(1));
+  }
+  pushFileToStorage(
+    fileUpload: FileUpload,
+    candidatePath: string = ''
+  ): Observable<number> {
+    let filePath = '';
+    if (candidatePath == '') {
+      filePath = `${this.basePath}/${fileUpload.file.name}`;
+    } else {
+      filePath = `${this.basePath}/${candidatePath}/${fileUpload.file.name}`;
+    }
+
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
     uploadTask
@@ -146,9 +165,9 @@ export class CommonService {
         finalize(() => {
           storageRef.getDownloadURL().subscribe((downloadURL) => {
             fileUpload.url = downloadURL;
-            this.fileUrl=downloadURL
-            console.log(this.fileUrl)
-            this.fileBehavior.next(true)
+            this.fileUrl = downloadURL;
+            console.log(this.fileUrl);
+            this.fileBehavior.next(true);
             fileUpload.name = fileUpload.file.name;
             this.saveFileData(fileUpload);
           });
@@ -160,8 +179,10 @@ export class CommonService {
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);
   }
-  getFiles(numberItems:number): AngularFireList<FileUpload> {
-    return this.db.list(this.basePath, ref =>
-      ref.limitToLast(numberItems));
+  getFiles(numberItems: number): AngularFireList<FileUpload> {
+    return this.db.list(this.basePath, (ref) => ref.limitToLast(numberItems));
+  }
+  deleteFile(downloadUrl: string) {
+    return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 }

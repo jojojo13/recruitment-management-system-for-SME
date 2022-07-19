@@ -14,7 +14,7 @@ export class PositionInOrgComponent implements OnInit {
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   disable = true;
   idSelected: any;
-  route = { name: 'Position categories', link: 'phanloaitochuc' };
+  route = { name: 'Position categories', link: '/thietlaptochuc' };
   positionOrgForm!: FormGroup;
   action = 'Viewing';
   positionList: any;

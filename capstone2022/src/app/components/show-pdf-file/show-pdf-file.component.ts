@@ -21,19 +21,10 @@ export class ShowPdfFileComponent implements OnInit, OnChanges {
     public sanitizer: DomSanitizer
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes')
-    console.log(this.pdfSrc)
     this.byPassSecurrityURL = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.pdfSrc
     );
-    console.log(
-      this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfSrc) + 'asdasd'
-    );
-    console.log('2')
   }
 
   ngOnInit(): void {}
-  getSrc(ele: any) {
-    console.log(ele.src);
-  }
 }

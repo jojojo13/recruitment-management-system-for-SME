@@ -10,7 +10,7 @@ import { RequestService } from 'src/app/services/request-service/request.service
   styleUrls: ['./view-one-request-page.component.scss'],
 })
 export class ViewOneRequestPageComponent implements OnInit {
-  route: any = { name: 'View any request', link: 'yeucautuyendung' };
+  route: any = { name: 'View any request', link: '/yeucautuyendung' };
   user: any;
   commentString: any;
   request: any;

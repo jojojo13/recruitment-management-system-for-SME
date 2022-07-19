@@ -8,7 +8,7 @@ import { OrganizationService } from 'src/app/services/organization-service/organ
   styleUrls: ['./view-organization.component.scss'],
 })
 export class ViewOrganizationComponent implements OnInit {
-  route = { name: 'View Organization', link: 'phanloaitochuc' };
+  route = { name: 'View Organization', link: '/thietlaptochuc' };
   isLoaded = false;
   organizationList!: any;
   constructor(

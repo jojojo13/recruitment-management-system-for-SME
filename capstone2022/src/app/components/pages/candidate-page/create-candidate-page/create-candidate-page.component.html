@@ -3,8 +3,11 @@
   <app-loader [isLoaded]="isLoaded"></app-loader>
   <app-back-btn [route]="route"></app-back-btn>
   <app-step (step)="getStep($event)"></app-step>
-  <div class="content-middle" >
-    <div class="content-middle-left" [ngClass]="{ hide: step == 4, show: step != 4 }">
+  <div class="content-middle">
+    <div
+      class="content-middle-left"
+      [ngClass]="{ hide: step == 4, show: step != 4 }"
+    >
       <div>
         <app-profile
           class="profile"
@@ -25,11 +28,14 @@
       [ngClass]="{ hide: step == 4, show: step != 4 }"
     >
       <div class="content-middle-right-attach">
-        <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach">
-        </app-attach-file>
-        <app-attach-file (pdfSrc)="getPdfSrc($event)" [attach]="attach2">
+        <app-attach-file
+          (fileUpload)="getFileUpLoad($event)"
+          (pdfSrc)="getPdfSrc($event)"
+          [attach]="attach"
+        >
         </app-attach-file>
       </div>
+      
       <div class="content-middle-right-show">
         <app-show-pdf-file [pdfSrc]="pdfSrc"></app-show-pdf-file>
       </div>
