@@ -151,3 +151,10 @@ button:disabled{
   z-index: 2;
   cursor: pointer;
 }  
+#dep{
+  width: 210px;
+  padding-right: 10px;
+}
+select:disabled{
+  background-color: #E9ECEF;
+}

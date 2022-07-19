@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class RejectBtnComponent implements OnInit {
   @Input('action') action: any;
   @Input('request') request: any;
+  isLoaded=true
   constructor(
     private reqService: RequestService,
     private commonService: CommonService
@@ -19,7 +20,7 @@ export class RejectBtnComponent implements OnInit {
   ngOnInit(): void {}
   reject() {
 
-      if (this.request.statusID==2) {
+      if (this.request.statusID==2||this.request.statusID==4) {
        
         Swal.fire({
           text: 'Are you sure to reject?',
@@ -32,17 +33,29 @@ export class RejectBtnComponent implements OnInit {
           width: '380px',
         }).then((result) => {
           if (result.isConfirmed) {
+            this.isLoaded=false;
+            (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'block';
             this.reqService.rejectRequest([this.request.id]).subscribe(
               (response: any) => {
                 if (response.status == true) {
+                  this.isLoaded=true;
+                  (document?.querySelector('.overlay') as HTMLElement).style.display =
+                  'none';
                   this.commonService.dataChange.next(true)
                   this.commonService.popUpSuccess();
                   this.commonService.reloadCurrentRoute()
                 } else {
+                  this.isLoaded=true;
+                  (document?.querySelector('.overlay') as HTMLElement).style.display =
+                  'none';
                   this.commonService.popUpFailed('Something wrong');
                 }
               },
               (err) => {
+                this.isLoaded=true;
+                (document?.querySelector('.overlay') as HTMLElement).style.display =
+                'none';
                 this.commonService.popUpFailed('Something wrong');
               }
             );
@@ -51,7 +64,7 @@ export class RejectBtnComponent implements OnInit {
       
       } else {
         this.commonService.popUpFailed(
-          'Only choose request has submitted status'
+          'Only choose request has submitted or approved status'
         );
       }
    

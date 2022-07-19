@@ -49,7 +49,7 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
           this.isLoaded = true;
           this.listCandidate = response.data;
           this.totalItems = response.totalItem;
-          console.log(response.data);
+       
         },
         (err) => {
           this.isLoaded = true;
@@ -89,7 +89,10 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
         if (this.candidateForm.controls['yob'].value != '') {
           this.candidateFilter.yob = this.candidateForm.controls['yob'].value;
         }
-
+        if (this.candidateForm.controls['yob'].value == '') {
+          this.candidateFilter.yob = 0;
+        }
+        console.log('subcribe')
         this.candidateFilter.phone = this.candidateForm.controls['phone'].value;
         this.candidateFilter.email = this.candidateForm.controls['email'].value;
         this.candidateFilter.location =this.candidateForm.controls['location'].value;
@@ -117,6 +120,6 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
       parent.classList.remove('selected')
       this.candidateService.listSelectedCandidate.splice(index, 1);
     }
-    console.log(this.candidateService.listSelectedCandidate)
+   
   }
 }

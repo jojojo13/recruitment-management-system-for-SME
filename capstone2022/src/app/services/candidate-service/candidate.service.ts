@@ -15,11 +15,11 @@ export class CandidateService {
   public detectChange: BehaviorSubject<boolean>;
   public otherList: any;
 
-   listSelectedCandidate:any
+  listSelectedCandidate: any;
   constructor(private __http: HttpClient) {
     this.skillBehaviour = new BehaviorSubject<boolean>(false);
     this.detectChange = new BehaviorSubject<boolean>(false);
-    this.listSelectedCandidate=[]
+    this.listSelectedCandidate = [];
   }
   getAllcandidateByFilter(obj: CandidateFilter) {
     return this.__http.post(
@@ -52,10 +52,23 @@ export class CandidateService {
       obj
     );
   }
-  getCandidateById(id:number){
-    return this.__http.post(`https://localhost:44376/api/CandidateAPI/GetOneInforCandidate?id=${id}`,{})
+  getCandidateById(id: number) {
+    return this.__http.post(
+      `https://localhost:44376/api/CandidateAPI/GetOneInforCandidate?id=${id}`,
+      {}
+    );
   }
-  matchingCandidate(obj:any){
-    return this.__http.post('https://localhost:44376/api/CandidateAPI/MatchingCandidate',obj)
+  matchingCandidate(obj: any) {
+    return this.__http.post(
+      'https://localhost:44376/api/CandidateAPI/MatchingCandidate',
+      obj
+    );
+  }
+
+  getCandidateByRequest(id: number) {
+    return this.__http.post(
+      `https://localhost:44376/api/CandidateAPI/GetCandidateByRequest?id=${id}`,
+      {}
+    );
   }
 }

@@ -29,6 +29,7 @@ export class RequestFormComponent implements OnInit {
   departmentID!: number;
   managerID!: number;
   isLoaded = false;
+  isChild = false;
   @ViewChild('orgPicker') orgPicker!: SwalComponent;
   constructor(
     private fb: UntypedFormBuilder,
@@ -139,7 +140,6 @@ export class RequestFormComponent implements OnInit {
         this.requestForm.controls['quantity'].value
       )
       .subscribe((response: any) => {
-      
         if (response.status == false) {
           this.isLoaded = true;
           Swal.fire(
@@ -178,7 +178,9 @@ export class RequestFormComponent implements OnInit {
       });
   }
   showPopUp() {
-    this.orgPicker.fire();
+   
+      this.orgPicker.fire();
+    
   }
   getDataFromPopup(department: any) {
     this.requestForm.controls['dep']?.setValue(department.name);
@@ -213,7 +215,9 @@ export class RequestFormComponent implements OnInit {
   }
   extendFromParent() {
     let parentRequest = this.requestService.selectedRequest;
-    if (parentRequest.id != 0) {
+    console.log(this.requestService.selectedRequest);
+    if (parentRequest.id > 0) {
+      this.isChild = true;
       this.requestForm.controls['dep'].setValue(parentRequest.orgnizationName);
       this.departmentID = parentRequest.orgnizationID;
       this.requestForm.controls['projects'].setValue(parentRequest.projectID);
@@ -223,7 +227,7 @@ export class RequestFormComponent implements OnInit {
         .subscribe((response: any) => {
           this.requestForm.controls['office'].setValue(response.data.office);
           this.managerID = response.data.managerID;
-          this.requestForm.controls['dep'].disable();
+          // this.requestForm.controls['dep'].disable();
           this.requestForm.controls['projects'].disable();
         });
     }

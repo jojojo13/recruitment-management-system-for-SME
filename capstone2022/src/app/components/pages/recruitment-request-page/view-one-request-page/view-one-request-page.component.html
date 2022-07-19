@@ -11,7 +11,7 @@
     <div class="content-middle-heading">
       <div class="content-middle-heading__ttl">
         <i class="fal fa-user"></i>
-        <p>2. Backend Dev</p>
+        <p>1. Request Information</p>
       </div>
       <p
         *ngIf="request"
@@ -33,7 +33,7 @@
         <ng-container *ngIf="user && user.rule == 1">
           <app-hr-inchange [req]="request"></app-hr-inchange>
         </ng-container>
- 
+        <app-candidate-in-request></app-candidate-in-request>
       </div>
     </div>
     <div class="content-middle-heading">

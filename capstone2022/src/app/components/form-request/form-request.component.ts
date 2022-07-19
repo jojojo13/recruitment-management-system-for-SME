@@ -46,7 +46,7 @@ export class FormRequestComponent implements OnInit {
 
   ngOnInit(): void {
     (document?.querySelector('.overlay') as HTMLElement).style.display =
-      'block';
+    'block';
 
     let id = this.route.snapshot.paramMap.get('id') as string;
     this.requestForm = this.fb.group({
@@ -73,7 +73,6 @@ export class FormRequestComponent implements OnInit {
         let rq = respone.data;
         this.isLoaded = true;
         this.request = rq;
-        console.log(rq);
         this.req.emit(rq);
         this.setDeadline = this.reformatDate(this.request.deadline);
         this.requestForm.controls['requestCode'].setValue(rq.code);
@@ -94,10 +93,12 @@ export class FormRequestComponent implements OnInit {
         this.managerID = rq.signID;
         this.renderPosition(this.departmentID);
         this.disableALL();
-        (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'none';
+       
       });
+   
 
+      (document?.querySelector('.overlay') as HTMLElement).style.display =
+      'none';
     this.loadData();
   }
   onSubmit() {

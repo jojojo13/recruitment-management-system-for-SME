@@ -140,10 +140,10 @@
         </div>
         <div class="info-middle-right-exp">
           <h6 class="heading">3. Experience</h6>
-          <ng-container *ngIf="expList">
+          <ng-container >
             <div class="box" >
               <p>Domain</p>
-              <div class="box-item exp" >
+              <div class="box-item exp" *ngIf="expList">
 
                 <div class="ss" *ngFor="let exp of expList;let i=index">
                   <h5>{{i+1}}.</h5>
@@ -151,6 +151,21 @@
                   <span>Company/Project: {{ exp.firm }}</span>
                   <span>Position: {{ exp.positiob }}</span>
                   <span>Description: {{ exp.time }}</span>
+                 </div>
+                 
+                </div>
+              </div>
+            </div>
+            <div class="box" >
+              <p>Outsource</p>
+              <div class="box-item exp" *ngIf="outSource">
+
+                <div class="ss" *ngFor="let outsource of outSource;let i=index">
+                  <h5>{{i+1}}.</h5>
+                 <div class="content">
+                  <span>Company/Project: {{ outsource.firm }}</span>
+                  <span>Position: {{ outsource.positiob }}</span>
+                  <span>Description: {{ outsource.time }}</span>
                  </div>
                  
                 </div>

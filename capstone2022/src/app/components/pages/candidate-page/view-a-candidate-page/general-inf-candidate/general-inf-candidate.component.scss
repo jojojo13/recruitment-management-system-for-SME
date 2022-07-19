@@ -185,12 +185,17 @@
 }
 p,
 span,h6 {
-  max-width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
+  max-width: 500px;
+  overflow-wrap: break-word;
   text-overflow: ellipsis;
 }
 .ss{
   display: flex;
   align-items: center;
+  .content{
+    span{
+      display: block;
+    width: 100%;
+    }
+  }
 }

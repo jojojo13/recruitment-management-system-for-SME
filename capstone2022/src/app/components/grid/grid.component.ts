@@ -62,9 +62,10 @@ export class GridComponent implements OnInit, OnDestroy {
       size: [this.itemsPerPage],
     });
     this.filterForm.valueChanges
-      .pipe(debounceTime(2000))
+      .pipe(debounceTime(1500))
       .subscribe((selectedValue) => {
         this.isLoaded = false;
+        console.log(this.filterForm.controls['name'].value)
         this.filterObj.name = this.filterForm.controls['name'].value;
         this.filterObj.orgName = this.filterForm.controls['department'].value;
         this.filterObj.positionName =
@@ -83,6 +84,7 @@ export class GridComponent implements OnInit, OnDestroy {
         // );
         this.checktoFormat();
         this.unSelectedRequest();
+        this.page=1;
         this.loadData();
       });
 
@@ -102,10 +104,11 @@ export class GridComponent implements OnInit, OnDestroy {
 
     this.requestService.filterRequest(this.filterObj).subscribe(
       (response: any) => {
+        console.log(response)
         this.isLoaded = true;
         this.totalItems = response.totalItem;
         this.requestList = response.data;
-        console.log(response.data);
+      
       },
       (err) => {
         this.isLoaded = true;

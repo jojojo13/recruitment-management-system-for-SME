@@ -39,67 +39,36 @@ export class LoginPageComponent implements OnInit {
     this.account = this.loginForm.value;
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
-    this.auth.signIn(this.account).subscribe(
-<<<<<<< HEAD
-      (data: any) => {
-        if(data.status==true){
-          localStorage.setItem('token', data.data);
-=======
-      (obj: any) => {
-        let mess = obj.mess;
-
-        if (obj.status == true) {
-          localStorage.setItem('token', obj.data);
->>>>>>> refs/remotes/origin/main
-          (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none';
-          this.isLoaded = true;
-          let params = this.route.snapshot.queryParams;
-          if (params['redirectURL']) {
-            this.redirectURL = params['redirectURL'];
-          }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> refs/remotes/origin/main
-          if (this.redirectURL) {
-            this.router
-              .navigateByUrl(this.redirectURL)
-              .catch(() => this.router.navigate(['/']));
-          } else {
-            this.router.navigate(['/']);
-          }
-<<<<<<< HEAD
-        }else{
-          (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'none';
-        this.isLoaded = true; 
-          this.msg = data.mess;
-=======
-        }
-        else {
-          (err: any) => {
-            this.isLoaded = true;
-            this.msg = mess;
-            (document?.querySelector('.overlay') as HTMLElement).style.display =
-              'none';
-          }
-
->>>>>>> refs/remotes/origin/main
-        }
-        
-      },
-<<<<<<< HEAD
-      (err: any) => {
-        this.isLoaded = true;
-    
+    this.auth.signIn(this.account).subscribe((obj: any) => {
+      if (obj.status == true) {
+        localStorage.setItem('token', obj.data);
         (document?.querySelector('.overlay') as HTMLElement).style.display =
-          'block';
-      }
-=======
+          'none';
+        this.isLoaded = true;
+        let params = this.route.snapshot.queryParams;
+        if (params['redirectURL']) {
+          this.redirectURL = params['redirectURL'];
+        }
 
->>>>>>> refs/remotes/origin/main
-    );
+        if (this.redirectURL) {
+          this.router
+            .navigateByUrl(this.redirectURL)
+            .catch(() => this.router.navigate(['/']));
+        } else {
+          this.router.navigate(['/']);
+        }
+      } else {
+        this.msg = obj.mess;
+        this.isLoaded = true;
+
+        (document?.querySelector('.overlay') as HTMLElement).style.display =
+          'none';
+      }
+    },  (err: any) => {
+      this.isLoaded = true;
+     
+      (document?.querySelector('.overlay') as HTMLElement).style.display =
+        'none';
+    });
   }
 }

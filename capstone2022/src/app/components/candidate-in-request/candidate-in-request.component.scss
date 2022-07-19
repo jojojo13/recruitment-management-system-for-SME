@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("../../../assets/DesignerVN-Poppins/DesignerVN-Poppins-Regular.ttf");
+  }
+  p{
+    font-family: "Poppins";
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    color: blue;
+    width: 30px;
+  }
