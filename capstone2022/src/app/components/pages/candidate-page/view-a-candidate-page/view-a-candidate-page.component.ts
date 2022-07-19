@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-a-candidate-page.component.scss']
 })
 export class ViewACandidatePageComponent implements OnInit {
-  route = { name: 'View Candidate', link: '' };
+  route = { name: 'View Candidate', link: '/ungvien' };
   constructor(private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -15,7 +15,7 @@ export class ViewACandidatePageComponent implements OnInit {
     .queryParams
     .subscribe(params => {
         let thing = params['id'];
-        console.log(params)
+      
     });
   }
 

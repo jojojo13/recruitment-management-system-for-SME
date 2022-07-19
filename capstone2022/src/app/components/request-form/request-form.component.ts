@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./request-form.component.scss'],
 })
 export class RequestFormComponent implements OnInit {
-  route = { name: 'Create request', link: 'yeucautuyendung' };
+  route = { name: 'Create request', link: '/yeucautuyendung' };
   listPosition: any;
   requestForm!: UntypedFormGroup;
   today: string = new Date().toISOString().slice(0, 10);

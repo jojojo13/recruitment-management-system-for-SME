@@ -137,12 +137,22 @@
         margin-bottom: 10px;
         color: #001246;
       }
+      &-exp{
+        .box{
+          &-item{
+            span{
+              margin: 0 20px;
+            }
+          }
+        }
+      
+      }
     }
   }
 }
 .box {
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 0;
   p {
     font-family: "Poppins";
     color: #565656;
@@ -151,8 +161,19 @@
   }
   &-item {
     span {
+      font-family: 'Poppins';
+      font-size: 14px;
       display: inline-block;
       margin: 10px 20px;
+      width: 140px;
+      &:first-of-type{
+        width: 80px;
+      }
+    }
+  }
+  .exp{
+    span{
+      width: 100%;
     }
   }
 }
@@ -164,8 +185,12 @@
 }
 p,
 span,h6 {
-  max-width: 220px;
+  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.ss{
+  display: flex;
+  align-items: center;
 }

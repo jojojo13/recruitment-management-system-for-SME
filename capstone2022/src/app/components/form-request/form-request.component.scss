@@ -55,6 +55,7 @@
       align-items: center;
       flex-wrap: wrap;
       width: 420px;
+    
       .poppup {
         position: absolute;
         right: 10px;
@@ -142,3 +143,8 @@ select:disabled {
   z-index: 2;
   cursor: pointer;
 }  
+
+#department{
+  width: 220px;
+  padding-right: 10px;
+}

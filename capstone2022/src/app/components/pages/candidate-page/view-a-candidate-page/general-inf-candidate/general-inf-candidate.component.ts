@@ -12,6 +12,7 @@ export class GeneralInfCandidateComponent implements OnInit {
   candidate: any;
   languageList: any;
   skillSheetList: any;
+  expList:any
   isLoaded = false;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,6 +31,10 @@ export class GeneralInfCandidateComponent implements OnInit {
         }
         if (response.data[0].skillSheet.length > 0) {
           this.skillSheetList = response.data[0].skillSheet;
+        }
+        if(response.data[0].domain.length > 0){
+          this.expList=response.data[0].domain;
+   
         }
         this.isLoaded = true;
       });

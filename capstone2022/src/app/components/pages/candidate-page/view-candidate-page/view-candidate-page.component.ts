@@ -103,7 +103,6 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
       });
   }
   navigateToView(candidate: any) {
-    console.log('navi');
     this.router.navigateByUrl(`ungvien/xemungvien/info?id=${candidate.id}`);
   }
   selectedChange(candidate: any, event: any) {

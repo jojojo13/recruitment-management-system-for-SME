@@ -3,9 +3,8 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
-  Input,
-  OnInit,
+ Input,
+
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -23,6 +22,6 @@ export class BackBtnComponent implements AfterViewInit {
   ngAfterViewInit(): void {}
 
   navigate(){
-   this.location.back()
+   this.router.navigateByUrl(this.route.link)
   }
 }

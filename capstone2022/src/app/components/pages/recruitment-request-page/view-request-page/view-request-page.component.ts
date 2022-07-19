@@ -9,7 +9,7 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
   styleUrls: ['./view-request-page.component.scss'],
 })
 export class ViewRequestPageComponent implements OnInit {
-  route={name:'View all request',link:'yeucautuyendung'}
+  route={name:'View all request',link:'/yeucautuyendung'}
 
   user:any
   constructor(private reqService:RequestService,private auth:AuthorizeService) {}

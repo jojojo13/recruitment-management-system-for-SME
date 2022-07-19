@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class AttachFileComponent implements OnInit {
   @Output() pdfSrc = new EventEmitter<string>();
+  @Output() fileUpload = new EventEmitter<FileUpload>();
   @Input('attach') attach: any;
   selectedFiles!: FileList;
   currentFileUpload!: FileUpload;
@@ -17,27 +18,37 @@ export class AttachFileComponent implements OnInit {
 
   ngOnInit(): void {}
   selectFile(event: any): void {
+    console.log((document.querySelector('#fileInput')as HTMLInputElement).value)
     this.selectedFiles = event.target.files;
+    console.log( this.selectedFiles)
     this.upload();
   }
-
+  getExtendsionFile(fileName: string) {
+    return fileName.slice(((fileName.lastIndexOf('.') - 1) >>> 0) + 2);
+  }
   upload(): void {
     const file = this.selectedFiles.item(0) as File;
 
-    this.currentFileUpload = new FileUpload(file);
-    console.log(file)
-    // this.commonService.pushFileToStorage(this.currentFileUpload).subscribe(
-    //   (percentage: any) => {
-    //     this.percentage = Math.round(percentage ? percentage : 0);
-    //     this.commonService.fileBehavior.subscribe((change: boolean) => {
-    //       if (change == true) {
-    //         this.pdfSrc.emit(this.commonService.fileUrl);
-    //       }
-    //     });
-    //   },
-    //   (error: any) => {
-    //     console.log(error);
-    //   }
-    // );
+    let typeFile = this.getExtendsionFile(file.name).toLowerCase();
+    if (typeFile == 'pdf') {
+      this.currentFileUpload = new FileUpload(file);
+      this.commonService.pushFileToStorage(this.currentFileUpload).subscribe(
+        (percentage: any) => {
+          this.percentage = Math.round(percentage ? percentage : 0);
+          this.commonService.fileBehavior.subscribe((change: boolean) => {
+            if (change == true) {
+              this.pdfSrc.emit(this.commonService.fileUrl);
+              this.fileUpload.emit(this.currentFileUpload)
+            }
+          });
+        },
+        (error: any) => {
+         
+        }
+      );
+    } else {
+      this.commonService.popUpFailed('Please choose pdf file');
+    }
   }
+
 }

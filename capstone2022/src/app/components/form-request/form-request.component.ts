@@ -80,6 +80,7 @@ export class FormRequestComponent implements OnInit {
         this.requestForm.controls['name'].setValue(rq.name);
         this.requestForm.controls['type'].setValue(rq.typeID);
         this.requestForm.controls['dep'].setValue(rq.orgnizationName);
+       
         this.requestForm.controls['projects'].setValue(rq.projectID);
         this.requestForm.controls['position'].setValue(rq.positionID);
         this.requestForm.controls['quantity'].setValue(rq.quantity);
@@ -245,6 +246,7 @@ export class FormRequestComponent implements OnInit {
       this.requestForm.controls['office'].setValue(response.data.office);
       this.managerID = response.data.managerID;
     });
+    console.log(this.requestForm)
   }
   renderPosition(id: number) {
     this.orgService.getPositionByOrgID(id).subscribe(

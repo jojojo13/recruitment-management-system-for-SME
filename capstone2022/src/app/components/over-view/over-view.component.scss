@@ -64,8 +64,9 @@
   font-family: "Poppins";
   display: flex;
   flex-wrap: wrap;
-  height: calc(100vh - 220px);
   overflow-y: auto;
+  height: 500px;
+
 }
 .language {
   width: 60%;

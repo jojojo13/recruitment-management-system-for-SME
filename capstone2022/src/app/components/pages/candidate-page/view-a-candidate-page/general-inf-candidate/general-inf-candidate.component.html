@@ -18,7 +18,7 @@
           <p>Facebook:</p>
           <a
             target="_blank"
-            href="https://codecary.com/pure-css-animated-tabs-with-slide-indicator/"
+            [href]="candidate.facebook"
             >{{ candidate.facebook }}</a
           >
         </div>
@@ -30,7 +30,7 @@
           <p>Skype:</p>
           <a
             target="_blank"
-            href="https://codecary.com/pure-css-animated-tabs-with-slide-indicator/"
+           [href]="candidate.skype"
             >{{ candidate.skype }}</a
           >
         </div>
@@ -38,13 +38,13 @@
           <p>Website:</p>
           <a
             target="_blank"
-            href="https://codecary.com/pure-css-animated-tabs-with-slide-indicator/"
+          [href]="candidate.website"
             >{{ candidate.website }}</a
           >
         </div>
       </div>
       <div class="info-heading-position">
-        <p>Position: </p>
+        <p>Position:</p>
       </div>
     </div>
     <div class="info-middle">
@@ -137,7 +137,26 @@
               </div>
             </div>
           </ng-container>
-    
+        </div>
+        <div class="info-middle-right-exp">
+          <h6 class="heading">3. Experience</h6>
+          <ng-container *ngIf="expList">
+            <div class="box" >
+              <p>Domain</p>
+              <div class="box-item exp" >
+
+                <div class="ss" *ngFor="let exp of expList;let i=index">
+                  <h5>{{i+1}}.</h5>
+                 <div class="content">
+                  <span>Company/Project: {{ exp.firm }}</span>
+                  <span>Position: {{ exp.positiob }}</span>
+                  <span>Description: {{ exp.time }}</span>
+                 </div>
+                 
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
