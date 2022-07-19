@@ -249,6 +249,16 @@ export class OrganizationService {
     return this.__http.post(this.baseUrl + `/InsertOrg`, request, httpOptions1);
   }
 
+  modifyOrg(request: any) {
+    let httpOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.__http.post(this.baseUrl + `/ModifyOrg`, request, httpOptions1);
+  }
+
   getEmployeeByOrgID(id: number, index: number, size: number) {
     return this.__http.post(
       `https://localhost:44376/api/ProfileAPI/GetListEmployeeByOrgID?id=${id}&index=${index}&size=${size}`,

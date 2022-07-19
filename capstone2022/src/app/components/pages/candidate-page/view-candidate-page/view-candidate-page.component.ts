@@ -87,17 +87,15 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
       .subscribe((selectedValue) => {
         this.candidateFilter.name = this.candidateForm.controls['name'].value;
         if (this.candidateForm.controls['yob'].value != '') {
-          this.candidateFilter.dob = this.candidateForm.controls['yob'].value;
+          this.candidateFilter.yob = this.candidateForm.controls['yob'].value;
         }
 
         this.candidateFilter.phone = this.candidateForm.controls['phone'].value;
         this.candidateFilter.email = this.candidateForm.controls['email'].value;
-        this.candidateFilter.location =
-          this.candidateForm.controls['location'].value;
-
+        this.candidateFilter.location =this.candidateForm.controls['location'].value;
+        this.candidateFilter.position = this.candidateForm.controls['position'].value;
         this.candidateFilter.yearExp = this.candidateForm.controls['exp'].value;
-        this.candidateFilter.language =
-          this.candidateForm.controls['languages'].value;
+        this.candidateFilter.language = this.candidateForm.controls['languages'].value;
           this.loadData()
       });
   }

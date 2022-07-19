@@ -40,9 +40,17 @@ export class LoginPageComponent implements OnInit {
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
     this.auth.signIn(this.account).subscribe(
+<<<<<<< HEAD
       (data: any) => {
         if(data.status==true){
           localStorage.setItem('token', data.data);
+=======
+      (obj: any) => {
+        let mess = obj.mess;
+
+        if (obj.status == true) {
+          localStorage.setItem('token', obj.data);
+>>>>>>> refs/remotes/origin/main
           (document?.querySelector('.overlay') as HTMLElement).style.display =
             'none';
           this.isLoaded = true;
@@ -50,7 +58,11 @@ export class LoginPageComponent implements OnInit {
           if (params['redirectURL']) {
             this.redirectURL = params['redirectURL'];
           }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> refs/remotes/origin/main
           if (this.redirectURL) {
             this.router
               .navigateByUrl(this.redirectURL)
@@ -58,20 +70,36 @@ export class LoginPageComponent implements OnInit {
           } else {
             this.router.navigate(['/']);
           }
+<<<<<<< HEAD
         }else{
           (document?.querySelector('.overlay') as HTMLElement).style.display =
           'none';
         this.isLoaded = true; 
           this.msg = data.mess;
+=======
+        }
+        else {
+          (err: any) => {
+            this.isLoaded = true;
+            this.msg = mess;
+            (document?.querySelector('.overlay') as HTMLElement).style.display =
+              'none';
+          }
+
+>>>>>>> refs/remotes/origin/main
         }
         
       },
+<<<<<<< HEAD
       (err: any) => {
         this.isLoaded = true;
     
         (document?.querySelector('.overlay') as HTMLElement).style.display =
           'block';
       }
+=======
+
+>>>>>>> refs/remotes/origin/main
     );
   }
 }

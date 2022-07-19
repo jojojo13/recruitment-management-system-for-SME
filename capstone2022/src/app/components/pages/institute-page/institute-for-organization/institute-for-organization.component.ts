@@ -12,11 +12,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./institute-for-organization.component.scss']
 })
 export class InstituteForOrganizationComponent implements OnInit {
+<<<<<<< HEAD
   route = { name: 'Create Orgnization', link: '/thietlaptochuc' };
 
+=======
+  route = { name: 'Create Orgnization', link: 'phanloaitochuc' };
+>>>>>>> refs/remotes/origin/main
   orgForm!: FormGroup;
   parentId!: number;
-  mode!: number;
+  mode!: string;
   nationList!: any;
   provinceList!: any;
   districtList!: any;
@@ -90,11 +94,13 @@ export class InstituteForOrganizationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.mode = this.activatedRoute.snapshot.queryParams["mode"];
     this.parentId = this.activatedRoute.snapshot.queryParams["orgId"];
     this.orgForm = this.fb.group({
       orgCode: [{ value: '', disabled: true }],
       name: ['', [Validators.required]],
       parentName: [{ value: '', disabled: true }],
+      dep: [{ value: '', disabled: true }],
       notes: [''],
       fax: [''],
       nations: [''],
@@ -109,14 +115,22 @@ export class InstituteForOrganizationComponent implements OnInit {
       effectdate: ['', [Validators.required]],
       dissdate: ['']
     });
-
-    this.extendFromParent();
-    this.innitCode();
-    this.getOrgParent();
-
     this.profileServices.getNationList().subscribe((res: any) => {
       this.nationList = res.data;
     });
+
+    if (this.mode == "new") {
+      this.extendFromParent();
+      this.innitCode();
+      this.getOrgParent();
+    }
+    else if (this.mode == "edit") {
+      this.getOrgInformation();
+    }
+
+
+
+
 
   }
   onSubmit() {
@@ -148,15 +162,31 @@ export class InstituteForOrganizationComponent implements OnInit {
       wardID: wardId,
       managerID: mngID
     };
-    this.organizationService.insertOrg(obj).subscribe((response: any) => {
-      if (response.status == true) {
-        this.commonService.popUpSuccess()
-      } else {
-        this.commonService.popUpFailed('Failed')
-      }
-    }, (err) => {
-      this.commonService.popUpFailed('Failed')
-    })
+
+    if (this.mode == "new") {
+      this.organizationService.insertOrg(obj).subscribe((response: any) => {
+        if (response.status == true) {
+          this.commonService.popUpSuccess()
+        } else {
+          this.commonService.popUpFailed('Insert Failed')
+        }
+      }, (err) => {
+          this.commonService.popUpFailed('Insert Failed')
+      })
+    }
+    else {
+      obj.id = this.parentId
+      this.organizationService.modifyOrg(obj).subscribe((response: any) => {
+        if (response.status == true) {
+          this.commonService.popUpSuccess()
+        } else {
+          this.commonService.popUpFailed('Modify Failed')
+        }
+      }, (err) => {
+          this.commonService.popUpFailed('Modify Failed')
+      })
+    }
+
   }
   showPopUp() {
     this.orgPicker.fire();
@@ -164,6 +194,9 @@ export class InstituteForOrganizationComponent implements OnInit {
 
   getDataFromPopup(department: any) {
     this.department = department;
+  }
+
+  getDataFromPopup2(department: any) {
   }
 
   getEmp(emp: any) {
@@ -176,6 +209,7 @@ export class InstituteForOrganizationComponent implements OnInit {
   }
   clearInputField() {
     if (this.requestService.selectedRequest.id != 0) {
+/*      chưa làm*/
     }
   }
   extendFromParent() {
@@ -183,6 +217,36 @@ export class InstituteForOrganizationComponent implements OnInit {
     if (parentRequest.id != 0) {
       this.orgForm.controls['dep'].setValue(parentRequest.orgnizationID);
     }
+  }
+
+
+  getOrgInformation() {
+    this.organizationService
+      .getOrgByID(this.parentId)
+      .subscribe((res: any) => {
+        this.orgForm.controls['orgCode'].setValue(res.data.code);
+        this.orgForm.controls['name'].setValue(res.data.name);
+        this.orgForm.controls['parentName'].setValue(res.data.parentName);
+        this.orgForm.controls['notes'].setValue(res.data.name);
+        this.orgForm.controls['fax'].setValue(res.data.fax);
+        this.orgForm.controls['nations'].setValue(res.data.nationID);
+        this.renderProvince(res.data.nationID);
+        this.orgForm.controls['email'].setValue(res.data.email);
+        this.orgForm.controls['numberBusiness'].setValue(res.data.numberBusiness);
+        this.orgForm.controls['provinces'].setValue(res.data.provinceID);
+        this.renderDistrict(res.data.provinceID);
+        this.orgForm.controls['manager'].setValue(res.data.managerName);
+        this.orgForm.controls['phone'].setValue(res.data.phoneNumber);
+        this.orgForm.controls['address'].setValue(res.data.address);
+        this.orgForm.controls['districts'].setValue(res.data.districtID);
+        this.renderWard(res.data.districtID);
+        this.orgForm.controls['wards'].setValue(res.data.wardID);
+        this.orgForm.controls['effectdate'].setValue(res.data.effectDate);
+        this.orgForm.controls['dissdate'].setValue(res.data.dissolutionDate);
+        this.orgForm.controls['note'].setValue(res.data.note);
+        this.managerId = res.data.managerID;
+
+      });
   }
 }
 
