@@ -89,6 +89,9 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
         if (this.candidateForm.controls['yob'].value != '') {
           this.candidateFilter.yob = this.candidateForm.controls['yob'].value;
         }
+        else {
+          this.candidateFilter.yob = 0;
+        }
 
         this.candidateFilter.phone = this.candidateForm.controls['phone'].value;
         this.candidateFilter.email = this.candidateForm.controls['email'].value;
