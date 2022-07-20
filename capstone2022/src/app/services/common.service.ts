@@ -140,11 +140,8 @@ export class CommonService {
 
   private basePath = '/uploads';
 
-
-
-  getFile(){
-    return this.db.list('/uploads/UV3', ref =>
-      ref.limitToLast(1));
+  getFile() {
+    
   }
   pushFileToStorage(
     fileUpload: FileUpload,
@@ -179,8 +176,9 @@ export class CommonService {
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);
   }
-  getFiles(numberItems: number): AngularFireList<FileUpload> {
-    return this.db.list(this.basePath, (ref) => ref.limitToLast(numberItems));
+  getFileUploads(numberItems:number): any {
+    return this.db.list(this.basePath, ref =>
+      ref.limitToLast(numberItems));
   }
   deleteFile(downloadUrl: string) {
     return this.storage.storage.refFromURL(downloadUrl).delete();

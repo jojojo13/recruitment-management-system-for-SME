@@ -32,6 +32,23 @@ export class CandidateInRequestComponent implements OnInit {
   ngOnInit(): void {
     this.candidateFilter = new CandidateFilter();
   }
+  // loadData() {
+  //   this.clearData()
+  //   console.log(this.candidateFilter);
+  //   this.candidateService
+  //     .getCandidateByRequest(this.candidateFilter)
+  //     .subscribe(
+  //       (response: any) => {
+  //         this.isLoaded = true;
+  //         this.listCandidate = response.data;
+  //         this.totalItems = response.totalItem;
+       
+  //       },
+  //       (err) => {
+  //         this.isLoaded = true;
+  //       }
+  //     );
+  // }
   gty(page: number) {
     this.isLoaded = false;
     // this.router.navigateByUrl(

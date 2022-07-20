@@ -63,7 +63,7 @@ export class CreateCandidatePageComponent implements OnInit {
 
   ngOnInit(): void {}
   getPdfSrc(src: string) {
-    console.log('emit')
+    console.log('emit');
     this.pdfSrc = src;
   }
   getStep(step: number) {
@@ -108,7 +108,7 @@ export class CreateCandidatePageComponent implements OnInit {
     if (action == 'draft') {
       this.objForAPI.recordStatus = 0;
     }
-    console.log(this.objForAPI)
+    console.log(this.objForAPI);
     Swal.fire({
       text: 'Are you sure to edit this request?',
       iconHtml:
@@ -154,14 +154,17 @@ export class CreateCandidatePageComponent implements OnInit {
                     this.isLoaded = true;
                     this.commonService.popUpSuccess();
                     let folderCandidate = response.code;
-                    console.log(response);
+                 
+                    if(!this.fileUpLoad){
+                      // let file:FileUpload =  new FileUpload();
+                    }
                     this.commonService
                       .pushFileToStorage(this.fileUpLoad, folderCandidate)
                       .subscribe(
                         (percentage: any) => {},
                         (error: any) => {}
                       );
-                      this.commonService.deleteFile(this.commonService.fileUrl)
+                    this.commonService.deleteFile(this.commonService.fileUrl);
                   } else {
                     (
                       document?.querySelector('.overlay') as HTMLElement

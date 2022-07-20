@@ -1,6 +1,6 @@
 <div class="content">
-  <div class="content-show">
+  <div class="content-show" *ngIf="pdfSrc">
     <iframe [src]="pdfSrc" width="100%" height="100%" safe> </iframe>
   </div>
 </div>
-<p (click)="getFile()">get fle</p>
+

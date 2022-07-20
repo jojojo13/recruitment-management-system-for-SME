@@ -3,6 +3,8 @@ import { map } from 'rxjs/operators';
 import { CommonService } from 'src/app/services/common.service';
 import { getStorage, ref, listAll } from 'firebase/storage';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import * as firebase from 'firebase/compat';
 @Component({
   selector: 'app-cv-candidate',
   templateUrl: './cv-candidate.component.html',
@@ -11,46 +13,33 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CvCandidateComponent implements OnInit {
   constructor(
     private commonService: CommonService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private storage: AngularFireStorage
   ) {}
   pdfSrc: any;
+  listFile: any;
   ngOnInit(): void {
-    const storage = getStorage();
+    var storageRef = this.storage.ref('uploads/UV3');
 
-    // Create a reference under which you want to list
-    const listRef = ref(storage, 'uploads/UV3');
-
-    listAll(listRef)
-      .then((res) => {
-        res.prefixes.forEach((folderRef) => {
-          // All the prefixes under listRef.
-          // You may call listAll() recursively on them.
-        });
-        res.items.forEach((itemRef: any) => {
-        console.log(itemRef);
-
-          this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-            itemRef.path_
+    // Now we get the references of these images
+    storageRef.listAll().subscribe(
+      (result: any) => {
+        result.items.forEach((imageRef: any) => {
+          // And finally display them
+          let extendsionFile = imageRef.name.slice(
+            ((imageRef.name.lastIndexOf('.') - 1) >>> 0) + 2
           );
-          // All the items under listRef.
+
+          if (extendsionFile == 'pdf') {
+            imageRef.getDownloadURL().then((url: any) => {
+              this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+            });
+          }
         });
-      })
-      .catch((error) => {
-        // Uh-oh, an error occurred!
-      });
-  }
-  getFile() {
-    this.commonService
-      .getFile()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          // store the key
-          changes.map((c) => ({ key: c.payload.key }))
-        )
-      )
-      .subscribe((fileUploads) => {
-        console.log(fileUploads);
-      });
+      },
+      (error) => {
+        // Handle any errors
+      }
+    );
   }
 }

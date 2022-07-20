@@ -32,6 +32,7 @@ import { LocationCategoriesPageComponent } from './components/pages/classify-pag
 import { ViewACandidatePageComponent } from './components/pages/candidate-page/view-a-candidate-page/view-a-candidate-page.component';
 import { GeneralInfCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/general-inf-candidate/general-inf-candidate.component';
 import { CvCandidateComponent } from './components/pages/candidate-page/view-a-candidate-page/cv-candidate/cv-candidate.component';
+import { EditCandidatePageComponent } from './components/pages/candidate-page/edit-candidate-page/edit-candidate-page.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,11 @@ const routes: Routes = [
       {
         path: 'ungvien/taoungvien',
         component: CreateCandidatePageComponent,
+        // canActivate: [AuthorizeGuard],
+      },
+      {
+        path: 'ungvien/suaungvien',
+        component: EditCandidatePageComponent,
         // canActivate: [AuthorizeGuard],
       },
       {

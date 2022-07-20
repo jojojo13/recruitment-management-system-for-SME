@@ -2,6 +2,8 @@
   <app-loader [isLoaded]="isLoaded"></app-loader>
   <ng-container *ngIf="candidate">
     <div class="info-heading">
+      <h6 routerLink="/ungvien/suaungvien" [queryParams]="{id:candidate.id}" class="edit"><i class="fas fa-user-edit"></i>Edit candidate</h6>
+
       <div class="info-heading-img">
         <img
           src="../../../../../../assets/images/anya-forger-la-ai-nhan-vat-anime-spy-x-family-5.jpg"
@@ -16,11 +18,9 @@
       <div class="info-heading-social">
         <div class="info-heading-social-item">
           <p>Facebook:</p>
-          <a
-            target="_blank"
-            [href]="candidate.facebook"
-            >{{ candidate.facebook }}</a
-          >
+          <a target="_blank" [href]="candidate.facebook">{{
+            candidate.facebook
+          }}</a>
         </div>
         <div class="info-heading-social-item">
           <p>Zalo:</p>
@@ -28,19 +28,13 @@
         </div>
         <div class="info-heading-social-item">
           <p>Skype:</p>
-          <a
-            target="_blank"
-           [href]="candidate.skype"
-            >{{ candidate.skype }}</a
-          >
+          <a target="_blank" [href]="candidate.skype">{{ candidate.skype }}</a>
         </div>
         <div class="info-heading-social-item">
           <p>Website:</p>
-          <a
-            target="_blank"
-          [href]="candidate.website"
-            >{{ candidate.website }}</a
-          >
+          <a target="_blank" [href]="candidate.website">{{
+            candidate.website
+          }}</a>
         </div>
       </div>
       <div class="info-heading-position">
@@ -140,34 +134,33 @@
         </div>
         <div class="info-middle-right-exp">
           <h6 class="heading">3. Experience</h6>
-          <ng-container >
-            <div class="box" >
+          <ng-container>
+            <div class="box">
               <p>Domain</p>
               <div class="box-item exp" *ngIf="expList">
-
-                <div class="ss" *ngFor="let exp of expList;let i=index">
-                  <h5>{{i+1}}.</h5>
-                 <div class="content">
-                  <span>Company/Project: {{ exp.firm }}</span>
-                  <span>Position: {{ exp.positiob }}</span>
-                  <span>Description: {{ exp.time }}</span>
-                 </div>
-                 
+                <div class="ss" *ngFor="let exp of expList; let i = index">
+                  <h5>{{ i + 1 }}.</h5>
+                  <div class="content">
+                    <span>Company/Project: {{ exp.firm }}</span>
+                    <span>Position: {{ exp.positiob }}</span>
+                    <span>Description: {{ exp.time }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="box" >
+            <div class="box">
               <p>Outsource</p>
               <div class="box-item exp" *ngIf="outSource">
-
-                <div class="ss" *ngFor="let outsource of outSource;let i=index">
-                  <h5>{{i+1}}.</h5>
-                 <div class="content">
-                  <span>Company/Project: {{ outsource.firm }}</span>
-                  <span>Position: {{ outsource.positiob }}</span>
-                  <span>Description: {{ outsource.time }}</span>
-                 </div>
-                 
+                <div
+                  class="ss"
+                  *ngFor="let outsource of outSource; let i = index"
+                >
+                  <h5>{{ i + 1 }}.</h5>
+                  <div class="content">
+                    <span>Company/Project: {{ outsource.firm }}</span>
+                    <span>Position: {{ outsource.positiob }}</span>
+                    <span>Description: {{ outsource.time }}</span>
+                  </div>
                 </div>
               </div>
             </div>

@@ -18,9 +18,9 @@ export class AttachFileComponent implements OnInit {
 
   ngOnInit(): void {}
   selectFile(event: any): void {
-    console.log((document.querySelector('#fileInput')as HTMLInputElement).value)
+
     this.selectedFiles = event.target.files;
-    console.log( this.selectedFiles)
+ 
     this.upload();
   }
   getExtendsionFile(fileName: string) {

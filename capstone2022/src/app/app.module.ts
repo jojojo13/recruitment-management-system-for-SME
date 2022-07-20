@@ -88,6 +88,7 @@ import { MatchingBtnComponent } from './components/matching-btn/matching-btn.com
 import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-matching.component';
 import { SafePipe } from './components/pipes/safe.pipe';
 import { CandidateInRequestComponent } from './components/candidate-in-request/candidate-in-request.component';
+import { EditCandidatePageComponent } from './components/pages/candidate-page/edit-candidate-page/edit-candidate-page.component';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { CandidateInRequestComponent } from './components/candidate-in-request/c
     ConfirmMatchingComponent,
     SafePipe,
     CandidateInRequestComponent,
+    EditCandidatePageComponent,
   ],
   imports: [
     BrowserModule,
