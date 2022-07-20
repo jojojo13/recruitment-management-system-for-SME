@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CandidateFilter } from 'src/app/models/CandidateFilter';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-view-candidate-page',
@@ -23,7 +24,8 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
     private activatedRoute: ActivatedRoute,
     private candidateService: CandidateService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private commonService: CommonService,
   ) {}
   ngOnDestroy(): void {
     this.candidateService.listSelectedCandidate=[]
@@ -49,12 +51,79 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
           this.isLoaded = true;
           this.listCandidate = response.data;
           this.totalItems = response.totalItem;
-       
         },
         (err) => {
           this.isLoaded = true;
         }
       );
+  }
+
+  addNewCandidate() {
+    this.router.navigateByUrl('ungvien/taoungvien')
+  }
+  deleteCandidate() {
+    if (this.candidateService.listSelectedCandidate.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.candidateService.deleteCandidate(this.candidateService.listSelectedCandidate).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData();
+            this.commonService.popUpSuccess();
+            this.candidateService.listSelectedCandidate = [];
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
+    }
+  }
+  active() {
+    if (this.candidateService.listSelectedCandidate.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.candidateService.activeCandidate(this.candidateService.listSelectedCandidate).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData();
+            this.commonService.popUpSuccess();
+            this.candidateService.listSelectedCandidate = [];
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
+    }
+  }
+  deactive() {
+    if (this.candidateService.listSelectedCandidate.length <= 0) {
+      this.commonService.popUpMessage('Choose at least one record!!!');
+    } else {
+      this.candidateService.deActiveCandidate(this.candidateService.listSelectedCandidate).subscribe(
+        (res: any) => {
+          if (res.status == true) {
+            this.loadData();
+            this.commonService.popUpSuccess();
+            this.candidateService.listSelectedCandidate = [];
+          } else {
+            this.commonService.popUpFailed('Some records have been appplied');
+          }
+        },
+        (err) => {
+          this.commonService.popUpFailed('Some records have been appplied');
+        }
+      );
+    }
+  }
+
+  exportExcel() {
+    this.commonService.exportExcel(this.listCandidate, "ListCandidate");
   }
   gty(page: number) {
     this.isLoaded = false;
