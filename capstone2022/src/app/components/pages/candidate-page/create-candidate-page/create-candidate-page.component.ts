@@ -5,6 +5,7 @@ import { FileUpload } from 'src/app/models/FileUpload';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-candidate-page',
@@ -58,7 +59,8 @@ export class CreateCandidatePageComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private candidateService: CandidateService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {}
@@ -110,7 +112,7 @@ export class CreateCandidatePageComponent implements OnInit {
     }
     console.log(this.objForAPI)
     Swal.fire({
-      text: 'Are you sure to edit this request?',
+      text: 'Are you sure to create candidate',
       iconHtml:
         ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
       showCancelButton: true,
@@ -161,7 +163,8 @@ export class CreateCandidatePageComponent implements OnInit {
                         (percentage: any) => {},
                         (error: any) => {}
                       );
-                      this.commonService.deleteFile(this.commonService.fileUrl)
+                    this.commonService.deleteFile(this.commonService.fileUrl)
+                    this.router.navigateByUrl('ungvien/xemungvien?index=1&size=20')
                   } else {
                     (
                       document?.querySelector('.overlay') as HTMLElement

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CandidateFilter } from 'src/app/models/CandidateFilter';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-view-candidate-page',
   templateUrl: './view-candidate-page.component.html',
@@ -65,20 +65,33 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
     if (this.candidateService.listSelectedCandidate.length <= 0) {
       this.commonService.popUpMessage('Choose at least one record!!!');
     } else {
-      this.candidateService.deleteCandidate(this.candidateService.listSelectedCandidate).subscribe(
-        (res: any) => {
-          if (res.status == true) {
-            this.loadData();
-            this.commonService.popUpSuccess();
-            this.candidateService.listSelectedCandidate = [];
-          } else {
-            this.commonService.popUpFailed('Some records have been appplied');
-          }
-        },
-        (err) => {
-          this.commonService.popUpFailed('Some records have been appplied');
+      Swal.fire({
+        text: 'Are you sure to delete candidate',
+        iconHtml:
+          ' <img src="../../../assets/images/icons/ques.jpg" width="100px" alt="">',
+        showCancelButton: true,
+        confirmButtonColor: '#309EFC',
+        cancelButtonColor: '#8B94B2',
+        confirmButtonText: 'Confirm',
+        width: '380px',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.candidateService.deleteCandidate(this.candidateService.listSelectedCandidate).subscribe(
+            (res: any) => {
+              if (res.status == true) {
+                this.loadData();
+                this.commonService.popUpSuccess();
+                this.candidateService.listSelectedCandidate = [];
+              } else {
+                this.commonService.popUpFailed('Some records have been appplied');
+              }
+            },
+            (err) => {
+              this.commonService.popUpFailed('Some records have been appplied');
+            }
+          );
         }
-      );
+      });
     }
   }
   active() {
@@ -121,7 +134,9 @@ export class ViewCandidatePageComponent implements OnInit,OnDestroy {
       );
     }
   }
-
+  editCandidate() {
+    this.router.navigateByUrl('ungvien/taoungvien')
+  }
   exportExcel() {
     this.commonService.exportExcel(this.listCandidate, "ListCandidate");
   }
