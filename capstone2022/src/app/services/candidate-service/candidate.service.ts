@@ -71,4 +71,24 @@ export class CandidateService {
       {}
     );
   }
+
+  deleteCandidate(arr: Array<number>) {
+    return this.__http.post(`https://localhost:44376/api/CandidateAPI/DeleteCandidate`,
+      arr
+    );
+  }
+
+  activeCandidate(arr: Array<number>) {
+    return this.__http.post(`https://localhost:44376/api/CandidateAPI/ActiveCandidate`,
+      arr
+    );
+  }
+
+  deActiveCandidate(arr: Array<number>) {
+    return this.__http.post(`https://localhost:44376/api/CandidateAPI/DeActiveCandidate`,
+      arr
+    );
+  }
+
+
 }
