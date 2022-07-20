@@ -7,10 +7,13 @@
       <div style="display: flex;">
         <app-matching-btn></app-matching-btn>
         <div class="content" (click)="addNewCandidate()">
-          <p><i class="far fa-plus circle-icon"></i>Add new candidate</p>
+          <p><i class="far fa-plus circle-icon"></i>Add new</p>
+        </div>
+        <div class="content" (click)="editCandidate()">
+          <p><i class="fa fa-pencil"></i>Edit</p>
         </div>
         <div class="content" (click)="deleteCandidate()">
-          <p><i class="fa fa-trash"></i>Delete Candidate</p>
+          <p><i class="fa fa-trash"></i>Delete</p>
         </div>
         <div class="content" (click)="active()">
           <p><i class="far fa-check"></i>Active</p>
@@ -34,7 +37,7 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Location</th>
-            <th>Position</th>
+            <th>Lastest position</th>
             <th>Experiences</th>
             <th>Language</th>
             <th>Status record</th>
