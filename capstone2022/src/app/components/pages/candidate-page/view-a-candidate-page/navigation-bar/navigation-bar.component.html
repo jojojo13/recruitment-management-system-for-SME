@@ -11,5 +11,10 @@
         <h6>CV</h6>
         <div class="indicator"></div>
     </div>
-    
+    <div class="navigation-item"   routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: false }"
+    routerLink="applications"  [queryParams]="{id:id}">
+        <h6>Applications</h6>
+        <div class="indicator"></div>
+    </div>
 </div>

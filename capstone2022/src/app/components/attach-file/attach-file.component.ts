@@ -18,9 +18,8 @@ export class AttachFileComponent implements OnInit {
 
   ngOnInit(): void {}
   selectFile(event: any): void {
-
     this.selectedFiles = event.target.files;
- 
+
     this.upload();
   }
   getExtendsionFile(fileName: string) {
@@ -28,8 +27,8 @@ export class AttachFileComponent implements OnInit {
   }
   upload(): void {
     const file = this.selectedFiles.item(0) as File;
-
     let typeFile = this.getExtendsionFile(file.name).toLowerCase();
+
     if (typeFile == 'pdf') {
       this.currentFileUpload = new FileUpload(file);
       this.commonService.pushFileToStorage(this.currentFileUpload).subscribe(
@@ -38,17 +37,16 @@ export class AttachFileComponent implements OnInit {
           this.commonService.fileBehavior.subscribe((change: boolean) => {
             if (change == true) {
               this.pdfSrc.emit(this.commonService.fileUrl);
-              this.fileUpload.emit(this.currentFileUpload)
+              this.fileUpload.emit(this.currentFileUpload);
+              this.commonService.fileBehavior.next(false);
+         
             }
           });
         },
-        (error: any) => {
-         
-        }
+        (error: any) => {}
       );
     } else {
       this.commonService.popUpFailed('Please choose pdf file');
     }
   }
-
 }

@@ -57,13 +57,13 @@ export class GeneralInfComponent implements OnInit, OnChanges {
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$'),Validators.maxLength(26)]],
       dob: [''],
       gender: ['', [Validators.required]],
-      major: [''],
-      university: [''],
+      major: ['',[Validators.maxLength(50)]],
+      university: ['',Validators.maxLength(50)],
       graduate: [''],
       gpa: [0,[Validators.min(0),Validators.max(10)]],
       country: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      awards: [''],
+      awards: ['',Validators.maxLength(80)],
     });
     this.commonService.emitBahavior.subscribe((change) => {
       this.candidate.emit(this.contactForm);

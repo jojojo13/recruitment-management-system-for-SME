@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Candidate } from 'src/app/models/Candidate';
 import { FileUpload } from 'src/app/models/FileUpload';
 import { CandidateService } from 'src/app/services/candidate-service/candidate.service';
 import { CommonService } from 'src/app/services/common.service';
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-candidate-page',
   templateUrl: './create-candidate-page.component.html',
   styleUrls: ['./create-candidate-page.component.scss'],
 })
-export class CreateCandidatePageComponent implements OnInit {
+export class CreateCandidatePageComponent implements OnInit, OnDestroy {
   @Input('name') name = 'Candidate';
   isLoaded = true;
   route = { name: 'Create New Candidate', link: '/ungvien' };
@@ -60,8 +60,11 @@ export class CreateCandidatePageComponent implements OnInit {
     private commonService: CommonService,
     private candidateService: CandidateService,
     public sanitizer: DomSanitizer,
-    private router: Router,
+    private router: Router
   ) {}
+  ngOnDestroy(): void {
+    this.commonService.deleteFile(this.commonService.fileUrl);
+  }
 
   ngOnInit(): void {}
   getPdfSrc(src: string) {
@@ -156,8 +159,7 @@ export class CreateCandidatePageComponent implements OnInit {
                     this.isLoaded = true;
                     this.commonService.popUpSuccess();
                     let folderCandidate = response.code;
-                 
-                    if(!this.fileUpLoad){
+                    if (!this.fileUpLoad) {
                       // let file:FileUpload =  new FileUpload();
                     }
                     this.commonService
@@ -166,8 +168,10 @@ export class CreateCandidatePageComponent implements OnInit {
                         (percentage: any) => {},
                         (error: any) => {}
                       );
-                    this.commonService.deleteFile(this.commonService.fileUrl)
-                    this.router.navigateByUrl('ungvien/xemungvien?index=1&size=20')
+
+                    this.router.navigateByUrl(
+                      'ungvien/xemungvien?index=1&size=20'
+                    );
                   } else {
                     (
                       document?.querySelector('.overlay') as HTMLElement

@@ -65,10 +65,10 @@ export class CandidateService {
     );
   }
 
-  getCandidateByRequest(id: number) {
+  getCandidateByRequest(obj:any) {
     return this.__http.post(
-      `https://localhost:44376/api/CandidateAPI/GetCandidateByRequest?id=${id}`,
-      {}
+      `https://localhost:44376/api/CandidateAPI/GetCandidateByRequest`,
+      obj
     );
   }
 

@@ -140,9 +140,7 @@ export class CommonService {
 
   private basePath = '/uploads';
 
-  getFile() {
-    
-  }
+  getFile() {}
   pushFileToStorage(
     fileUpload: FileUpload,
     candidatePath: string = ''
@@ -163,7 +161,6 @@ export class CommonService {
           storageRef.getDownloadURL().subscribe((downloadURL) => {
             fileUpload.url = downloadURL;
             this.fileUrl = downloadURL;
-            console.log(this.fileUrl);
             this.fileBehavior.next(true);
             fileUpload.name = fileUpload.file.name;
             this.saveFileData(fileUpload);
@@ -176,11 +173,11 @@ export class CommonService {
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);
   }
-  getFileUploads(numberItems:number): any {
-    return this.db.list(this.basePath, ref =>
-      ref.limitToLast(numberItems));
+  getFileUploads(numberItems: number): any {
+    return this.db.list(this.basePath, (ref) => ref.limitToLast(numberItems));
   }
   deleteFile(downloadUrl: string) {
+    // console.log(this.storage.storage.ref(downloadUrl))
     return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 }

@@ -24,6 +24,7 @@ export class ShowPdfFileComponent implements OnInit, OnChanges {
     this.byPassSecurrityURL = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.pdfSrc
     );
+        
   }
 
   ngOnInit(): void {}

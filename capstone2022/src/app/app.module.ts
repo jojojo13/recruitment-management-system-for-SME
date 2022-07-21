@@ -89,6 +89,7 @@ import { ConfirmMatchingComponent } from './components/confirm-matching/confirm-
 import { SafePipe } from './components/pipes/safe.pipe';
 import { CandidateInRequestComponent } from './components/candidate-in-request/candidate-in-request.component';
 import { EditCandidatePageComponent } from './components/pages/candidate-page/edit-candidate-page/edit-candidate-page.component';
+import { ApplicationsComponent } from './components/pages/candidate-page/view-a-candidate-page/applications/applications.component';
 
 @NgModule({
   declarations: [
@@ -162,6 +163,7 @@ import { EditCandidatePageComponent } from './components/pages/candidate-page/ed
     SafePipe,
     CandidateInRequestComponent,
     EditCandidatePageComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,
