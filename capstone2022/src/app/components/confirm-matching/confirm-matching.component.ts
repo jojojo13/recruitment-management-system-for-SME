@@ -20,8 +20,7 @@ export class ConfirmMatchingComponent implements OnInit {
     this.isLoaded = false;
     (document?.querySelector('.overlay') as HTMLElement).style.display =
       'block';
-    console.log(this.requestService.selectedRequestForCandidate);
-    console.log(this.candidateService.listSelectedCandidate);
+  
     if (!this.requestService.selectedRequestForCandidate) {
       this.commonService.popUpFailed('Please choose request!!!');
       return;
@@ -30,31 +29,41 @@ export class ConfirmMatchingComponent implements OnInit {
       this.commonService.popUpFailed('Please choose at least one candidate!!!');
       return;
     }
-
-    let obj = {
-      requestID: this.requestService.selectedRequestForCandidate,
-      lstCandidateID: this.candidateService.listSelectedCandidate,
-    };
-    this.candidateService.matchingCandidate(obj).subscribe(
-      (response: any) => {
-        if (response.status == true) {
-          this.isLoaded = true;
-          (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none';
-          this.commonService.popUpSuccess();
-        } else {
-          this.isLoaded = true;
-          (document?.querySelector('.overlay') as HTMLElement).style.display =
-            'none';
-          this.commonService.popUpFailed('Matching failed');
-        }
-      },
-      (err) => {
+    let obj={requestID:this.requestService.selectedRequestForCandidate,lstCandidateID:this.candidateService.listSelectedCandidate}
+    this.commonService.checkQuantityCandidate(obj).subscribe((response:any)=>{
+      if(response.status==true){
+        let obj = {
+          requestID: this.requestService.selectedRequestForCandidate,
+          lstCandidateID: this.candidateService.listSelectedCandidate,
+        };
+        this.candidateService.matchingCandidate(obj).subscribe(
+          (response: any) => {
+            if (response.status == true) {
+              this.isLoaded = true;
+              (document?.querySelector('.overlay') as HTMLElement).style.display =
+                'none';
+              this.commonService.popUpSuccess();
+            } else {
+              this.isLoaded = true;
+              (document?.querySelector('.overlay') as HTMLElement).style.display =
+                'none';
+              this.commonService.popUpFailed('Matching failed');
+            }
+          },
+          (err) => {
+            this.isLoaded = true;
+            (document?.querySelector('.overlay') as HTMLElement).style.display =
+              'none';
+            this.commonService.popUpFailed('Matching failed');
+          }
+        );
+      }else{
         this.isLoaded = true;
         (document?.querySelector('.overlay') as HTMLElement).style.display =
           'none';
-        this.commonService.popUpFailed('Matching failed');
+        this.commonService.popUpFailed('Candidates are greater than quantity of request')
       }
-    );
+    })
+  
   }
 }

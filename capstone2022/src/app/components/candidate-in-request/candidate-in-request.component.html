@@ -1,7 +1,12 @@
 <div class="content">
   <p (click)="showPopUP()">Candidates in request</p>
 </div>
-<swal #candidatePicker title="Candidates in request" width="1300px" tabindex="100">
+<swal
+  #candidatePicker
+  title="Candidates in request"
+  width="1300px"
+  tabindex="100"
+>
   <div *swalPortal="swalTargets.content" class="popup-content">
     <div class="content-middle">
       <table>
@@ -104,34 +109,39 @@
             </td>
           </tr>
         </tbody>
-        <tbody style="position: relative;">
+        <tbody style="position: relative">
           <app-loader [isLoaded]="isLoaded"></app-loader>
           <ng-container *ngIf="listCandidate">
-            <tr 
-            (dblclick)="navigateToView(candidate)"
-            *ngFor="
-              let candidate of listCandidate
-                | paginate
-                  : {
-                      itemsPerPage: itemsPerPage,
-                      currentPage: page,
-                      totalItems: totalItems
-                    }
-            "
-          >
-            <td>{{ candidate.code }}</td>
-            <td>{{ candidate.name }}</td>
-            <td>{{ candidate.yob }}</td>
-            <td>{{ candidate.phoneNumber }}</td>
-            <td class="px-2">{{ candidate.email }}</td>
-            <td class="px-2">{{ candidate.location }}</td>
-            <td>{{ candidate.lastestPosition }}</td>
-            <td>{{ candidate.experience }}</td>
-            <td>{{ candidate.language }}</td>
-            <td>{{ candidate.statusName }}</td>
-          </tr>
+            <tr
+              (dblclick)="navigateToView(candidate)"
+              *ngFor="
+                let candidate of listCandidate
+                  | paginate
+                    : {
+                        itemsPerPage: itemsPerPage,
+                        currentPage: page,
+                        totalItems: totalItems
+                      }
+              "
+            >
+              <td>{{ candidate.code }}</td>
+              <td>{{ candidate.name }}</td>
+              <td>{{ candidate.yob }}</td>
+              <td>{{ candidate.phoneNumber }}</td>
+              <td class="px-2">{{ candidate.email }}</td>
+              <td class="px-2">{{ candidate.location }}</td>
+              <td>{{ candidate.lastestPosition }}</td>
+              <td>{{ candidate.experience }}</td>
+              <td>{{ candidate.language }}</td>
+              <td>{{ candidate.statusName }}</td>
+            </tr>
           </ng-container>
-         
+          <tr style="width: 100%; position: relative;" *ngIf="isNull">
+            <td > 
+            <p style="width: 100%; position: absolute; margin: 0;" >NO CANDIDATE</p>
+
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

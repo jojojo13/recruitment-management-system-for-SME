@@ -55,7 +55,8 @@ export class CandidateService {
   getCandidateById(id: number) {
     return this.__http.post(
       `https://localhost:44376/api/CandidateAPI/GetOneInforCandidate?id=${id}`,
-      {}
+      {},
+      
     );
   }
   matchingCandidate(obj: any) {
@@ -68,7 +69,8 @@ export class CandidateService {
   getCandidateByRequest(obj:any) {
     return this.__http.post(
       `https://localhost:44376/api/CandidateAPI/GetCandidateByRequest`,
-      obj
+      obj,
+      // { responseType: 'text' }
     );
   }
 

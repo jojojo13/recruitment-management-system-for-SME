@@ -107,7 +107,10 @@ export class CommonService {
       arr
     );
   }
+  checkQuantityCandidate(obj:any){
 
+    return this.__http.post('https://localhost:44376/api/CandidateAPI/CheckQuantity',obj)
+  }
   popUpSuccess() {
     Swal.fire({
       icon: 'success',

@@ -21,6 +21,7 @@ export class CandidateInRequestComponent implements OnInit {
   page: number = 1;
   idRequest = 0;
   isLoaded: boolean = false;
+  isNull=false;
   candidateFilter = {
     name: '',
     yob: 0,
@@ -63,9 +64,13 @@ export class CandidateInRequestComponent implements OnInit {
         this.totalItems = response.totalItem;
       },
       (err) => {
-        this.commonService.popUpFailed('Failed');
-
         this.isLoaded = true;
+
+        // this.commonService.popUpFailed('Failed');
+        if(err.status==200){
+          this.isNull=true
+
+        }
       }
     );
   }
